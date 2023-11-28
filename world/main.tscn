@@ -16,16 +16,20 @@ render_priority = 0
 shader = ExtResource("1_kb3f1")
 shader_parameter/cell_size = 1.0
 shader_parameter/line_width = 0.025
-shader_parameter/line_color = Color(0, 0.937255, 0.937255, 1)
+shader_parameter/line_color = Color(1, 1, 1, 1)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/mouse_world_pos = null
 shader_parameter/mouse_circle_size = 1.5
-shader_parameter/mouse_circle_color = Color(0.137255, 0.372549, 1, 1)
+shader_parameter/mouse_circle_color = Color(0.894118, 0, 0.439216, 1)
+shader_parameter/ripple_ampl = 5.0
+shader_parameter/ripple_freq = 5.0
+shader_parameter/ripple_factor = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqn2p"]
 next_pass = SubResource("ShaderMaterial_wu5qk")
 diffuse_mode = 3
 specular_mode = 1
+albedo_color = Color(1, 0.992157, 0.94902, 1)
 roughness = 0.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_0wpca"]
