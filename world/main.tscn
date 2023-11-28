@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://cbgk1537m5sog"]
+
+[ext_resource type="Script" path="res://world/main.gd" id="1_8dagw"]
+[ext_resource type="Shader" path="res://library/shader/grid.gdshader" id="1_kb3f1"]
+[ext_resource type="Script" path="res://object/terrain.gd" id="2_dqac5"]
+
+[sub_resource type="Environment" id="Environment_khv8l"]
+ssao_enabled = true
+adjustment_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_d1wqf"]
+size = Vector2(32, 32)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wu5qk"]
+render_priority = 0
+shader = ExtResource("1_kb3f1")
+shader_parameter/cell_size = 1.0
+shader_parameter/line_width = 0.025
+shader_parameter/line_color = Color(0, 0.937255, 0.937255, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/mouse_world_pos = null
+shader_parameter/mouse_circle_size = 1.5
+shader_parameter/mouse_circle_color = Color(0.137255, 0.372549, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqn2p"]
+next_pass = SubResource("ShaderMaterial_wu5qk")
+diffuse_mode = 3
+specular_mode = 1
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_0wpca"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eopj6"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fj1y3"]
+size = Vector3(32, 1, 32)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_8dagw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_khv8l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.826963, -0.337245, 0.449887, 1.66415e-15, 0.800146, 0.599806, -0.562257, -0.496017, 0.661691, 2.08165e-12, 5, 3.54445)
+light_color = Color(1, 1, 0.992157, 1)
+light_energy = 0.9
+shadow_enabled = true
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_d1wqf")
+surface_material_override/0 = SubResource("StandardMaterial3D_cqn2p")
+script = ExtResource("2_dqac5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain"]
+mesh = SubResource("BoxMesh_0wpca")
+surface_material_override/0 = SubResource("StandardMaterial3D_eopj6")
+
+[node name="CameraAnchor" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
+unique_name_in_owner = true
+transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 2.08165e-12, 3, 2.08165e-12)
+current = true
+
+[node name="MouseCollider" type="Area3D" parent="CameraAnchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.5, 2.08165e-12)
+collision_layer = 4096
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraAnchor/MouseCollider"]
+shape = SubResource("BoxShape3D_fj1y3")
