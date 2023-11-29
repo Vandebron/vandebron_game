@@ -1,14 +1,25 @@
 extends Node3D
 
-
 const native_resolution := Vector2i(320, 180)
+
+var builder: Builder
 
 
 func _ready() -> void:
+	Events.build_initiated.connect(self._on_build_initiated)
+	
 	# TODO: We could turn this on to get a heavily pixelated aesthetic
 	#_resize_subviewport()
 	#get_tree().root.size_changed.connect(self._resize_subviewport)
-	pass
+
+
+func _on_build_initiated(building: BuildingDef) -> void:
+	if builder:
+		builder.queue_free()
+	
+	builder = preload("res://object/builder/builder.tscn").instantiate()
+	builder.building = building
+	%World.add_child(builder)
 
 
 func _resize_subviewport() -> void:

@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=3 uid="uid://5yby1xliao2j"]
+
+[ext_resource type="Script" path="res://library/model/model.gd" id="1_jtxf5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_psdtc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6yiwg"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0.854902, 0.690196, 1)
+roughness = 0.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_sb8vf"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3nfc7"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0.470588, 0.470588, 1)
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_5ebfq"]
+size = Vector3(0.2, 1, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ojcif"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.721569, 0.709804, 0.72549, 1)
+
+[sub_resource type="Curve" id="Curve_0yacr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3fvf2"]
+curve = SubResource("Curve_0yacr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n0xyu"]
+spread = 90.0
+initial_velocity_min = 0.2
+initial_velocity_max = 0.8
+gravity = Vector3(2.08165e-12, 9, 2.08165e-12)
+damping_min = 8.0
+damping_max = 9.0
+scale_min = 0.2
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_3fvf2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kfoa7"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.52549, 0.505882, 0.533333, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_rhgfd"]
+material = SubResource("StandardMaterial3D_kfoa7")
+radial_segments = 8
+rings = 4
+
+[node name="HouseModel" type="Node3D"]
+script = ExtResource("1_jtxf5")
+
+[node name="House" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.5, 2.08165e-12)
+mesh = SubResource("BoxMesh_psdtc")
+surface_material_override/0 = SubResource("StandardMaterial3D_6yiwg")
+
+[node name="Roof" type="MeshInstance3D" parent="House"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.75, 2.08165e-12)
+mesh = SubResource("PrismMesh_sb8vf")
+surface_material_override/0 = SubResource("StandardMaterial3D_3nfc7")
+
+[node name="Chimney" type="MeshInstance3D" parent="House"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.5, -0.2)
+mesh = SubResource("BoxMesh_5ebfq")
+surface_material_override/0 = SubResource("StandardMaterial3D_ojcif")
+
+[node name="SmokeParticles" type="GPUParticles3D" parent="House/Chimney"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.5, 2.08165e-12)
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_n0xyu")
+draw_pass_1 = SubResource("SphereMesh_rhgfd")

@@ -20,6 +20,21 @@ rings = 8
 [sub_resource type="PrismMesh" id="PrismMesh_ikeg0"]
 size = Vector3(0.2, 1, 0.1)
 
+[sub_resource type="Animation" id="Animation_lmytx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ControlRoom/Blades:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_n6f24"]
 resource_name = "spin"
 length = 3.0
@@ -37,62 +52,50 @@ tracks/0/keys = {
 "values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16), Vector3(3.48787e-16, 3.48787e-16, 6.28319)]
 }
 
-[sub_resource type="Animation" id="Animation_lmytx"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ControlRoom/Blades:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xlcd3"]
 _data = {
 "RESET": SubResource("Animation_lmytx"),
 "spin": SubResource("Animation_n6f24")
 }
 
-[node name="Windmill" type="MeshInstance3D"]
+[node name="WindmillModel" type="Node3D"]
+script = ExtResource("1_lpmrv")
+
+[node name="Windmill" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 2.08165e-12)
 mesh = SubResource("CylinderMesh_1sxy1")
 surface_material_override/0 = ExtResource("1_toorh")
-script = ExtResource("1_lpmrv")
 
-[node name="ControlRoom" type="MeshInstance3D" parent="."]
+[node name="ControlRoom" type="MeshInstance3D" parent="Windmill"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 2.08165e-12)
 mesh = SubResource("BoxMesh_vhqev")
 surface_material_override/0 = ExtResource("1_toorh")
 
-[node name="Blades" type="Node3D" parent="ControlRoom"]
+[node name="Blades" type="Node3D" parent="Windmill/ControlRoom"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0, 0.6)
 
-[node name="Knob" type="MeshInstance3D" parent="ControlRoom/Blades"]
+[node name="Knob" type="MeshInstance3D" parent="Windmill/ControlRoom/Blades"]
 transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("SphereMesh_md14m")
 surface_material_override/0 = ExtResource("1_toorh")
 
-[node name="Blade1" type="MeshInstance3D" parent="ControlRoom/Blades"]
+[node name="Blade1" type="MeshInstance3D" parent="Windmill/ControlRoom/Blades"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.6, 2.08165e-12)
 mesh = SubResource("PrismMesh_ikeg0")
 surface_material_override/0 = ExtResource("1_toorh")
 
-[node name="Blade2" type="MeshInstance3D" parent="ControlRoom/Blades"]
+[node name="Blade2" type="MeshInstance3D" parent="Windmill/ControlRoom/Blades"]
 transform = Transform3D(-0.5, -0.866025, 3.48787e-16, 0.866025, -0.5, -3.48787e-16, 4.76452e-16, 1.27665e-16, 1, -0.5, -0.3, 2.08165e-12)
 mesh = SubResource("PrismMesh_ikeg0")
 surface_material_override/0 = ExtResource("1_toorh")
 
-[node name="Blade3" type="MeshInstance3D" parent="ControlRoom/Blades"]
+[node name="Blade3" type="MeshInstance3D" parent="Windmill/ControlRoom/Blades"]
 transform = Transform3D(-0.5, 0.866025, 3.48787e-16, -0.866025, -0.5, -3.48787e-16, -1.27665e-16, -4.76452e-16, 1, 0.5, -0.3, 2.08165e-12)
 mesh = SubResource("PrismMesh_ikeg0")
 surface_material_override/0 = ExtResource("1_toorh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Windmill")
 libraries = {
 "": SubResource("AnimationLibrary_xlcd3")
 }

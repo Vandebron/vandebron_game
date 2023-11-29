@@ -14,5 +14,5 @@ func _ready() -> void:
 	model.get_animation_player().play("spin")
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	current_power = nominal_power

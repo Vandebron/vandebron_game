@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BuildingDef" load_steps=5 format=3 uid="uid://diejrlo4iciyb"]
+
+[ext_resource type="Script" path="res://library/building/building_def.gd" id="1_6vwfd"]
+[ext_resource type="PackedScene" uid="uid://5yby1xliao2j" path="res://object/consumer/house_model.tscn" id="1_mjwmw"]
+
+[sub_resource type="Gradient" id="Gradient_2gdk5"]
+offsets = PackedFloat32Array(0.00649351, 1)
+colors = PackedColorArray(0.859655, 0.548506, 0.235533, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1l38a"]
+gradient = SubResource("Gradient_2gdk5")
+
+[resource]
+script = ExtResource("1_6vwfd")
+cost = 2
+alias = "house"
+display_name = "House"
+image = SubResource("GradientTexture2D_1l38a")
+model = ExtResource("1_mjwmw")

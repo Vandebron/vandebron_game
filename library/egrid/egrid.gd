@@ -43,7 +43,7 @@ func get_demand() -> float:
 
 func get_producers() -> Array[EAsset]:
 	# TODO: Refactor after this is fixed: https://github.com/godotengine/godot/issues/72566
-	var result: Array[EAsset]
+	var result: Array[EAsset] = []
 	result.assign(producer_container.get_children()
 		.map(func(node: Node) -> EAsset: return node as EAsset))
 	return result
@@ -51,7 +51,7 @@ func get_producers() -> Array[EAsset]:
 
 func get_consumers() -> Array[Consumer]:
 	# TODO: Refactor after this is fixed: https://github.com/godotengine/godot/issues/72566	
-	var result: Array[Consumer]
+	var result: Array[Consumer] = []
 	result.assign(consumer_container.get_children()
 		.map(func(node: Node) -> Consumer: return node as Consumer))
 	return result

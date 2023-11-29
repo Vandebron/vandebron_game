@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BuildingDef" load_steps=5 format=3 uid="uid://b0r1cr25214g"]
+
+[ext_resource type="PackedScene" uid="uid://bxgfnp120gfmk" path="res://object/windmill/windmill_model.tscn" id="1_2sd7r"]
+[ext_resource type="Script" path="res://library/building/building_def.gd" id="1_747nt"]
+
+[sub_resource type="Gradient" id="Gradient_xdggp"]
+colors = PackedColorArray(0.489317, 0.587299, 0.480487, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hih47"]
+gradient = SubResource("Gradient_xdggp")
+
+[resource]
+script = ExtResource("1_747nt")
+cost = 10
+alias = "windmill"
+display_name = "Windmill"
+image = SubResource("GradientTexture2D_hih47")
+model = ExtResource("1_2sd7r")

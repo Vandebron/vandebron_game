@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cbgk1537m5sog"]
+[gd_scene load_steps=29 format=3 uid="uid://cbgk1537m5sog"]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_8dagw"]
 [ext_resource type="Shader" path="res://library/shader/grid.gdshader" id="1_kb3f1"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/easset/easset.tscn" id="6_jw3nt"]
 [ext_resource type="PackedScene" uid="uid://vjdf3kwb88ov" path="res://object/consumer/consumer.tscn" id="6_q1483"]
 [ext_resource type="PackedScene" uid="uid://bcm7rp6xri4cr" path="res://library/egrid/grid_balance_gauge.tscn" id="9_doxxx"]
+[ext_resource type="Script" path="res://library/ui/build_menu.gd" id="10_ka3ov"]
+[ext_resource type="Resource" uid="uid://diejrlo4iciyb" path="res://object/consumer/consumer_building_def.tres" id="11_l2stq"]
+[ext_resource type="Resource" uid="uid://b0r1cr25214g" path="res://object/windmill/windmill_building_def.tres" id="12_3u0jo"]
 
 [sub_resource type="Environment" id="Environment_khv8l"]
 ssao_enabled = true
@@ -99,7 +102,9 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 unique_name_in_owner = true
+handle_input_locally = false
 size = Vector2i(1152, 648)
+render_target_update_mode = 4
 
 [node name="CameraAnchor" type="Node3D" parent="SubViewportContainer/SubViewport"]
 script = ExtResource("4_vkf2q")
@@ -122,6 +127,7 @@ monitoring = false
 shape = SubResource("BoxShape3D_fj1y3")
 
 [node name="World" type="Node3D" parent="SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
 
 [node name="Terrain" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
 mesh = SubResource("PlaneMesh_d1wqf")
@@ -278,3 +284,5 @@ item_2/text = "Solar"
 item_2/icon = SubResource("GradientTexture2D_i817q")
 item_3/text = "Generator"
 item_3/icon = SubResource("GradientTexture2D_ft275")
+script = ExtResource("10_ka3ov")
+buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("11_l2stq"), ExtResource("12_3u0jo")])
