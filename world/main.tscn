@@ -80,10 +80,31 @@ script = ExtResource("1_8dagw")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_khv8l")
 
-[node name="CameraAnchor" type="Node3D" parent="."]
+[node name="SunAnchor" type="Node3D" parent="."]
+
+[node name="Sun" type="DirectionalLight3D" parent="SunAnchor"]
+transform = Transform3D(0.826963, -0.337245, 0.449887, 1.66415e-15, 0.800146, 0.599806, -0.562257, -0.496017, 0.661691, 2.08165e-12, 11, 9.54445)
+light_color = Color(1, 1, 0.992157, 1)
+light_energy = 0.9
+shadow_enabled = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+unique_name_in_owner = true
+size = Vector2i(1152, 648)
+
+[node name="CameraAnchor" type="Node3D" parent="SubViewportContainer/SubViewport"]
 script = ExtResource("4_vkf2q")
 
-[node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/CameraAnchor"]
 unique_name_in_owner = true
 transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 2.08165e-12, 5, 2.08165e-12)
 projection = 1
@@ -91,47 +112,47 @@ current = true
 size = 10.0
 far = 50.0
 
-[node name="MouseCollider" type="Area3D" parent="CameraAnchor"]
+[node name="MouseCollider" type="Area3D" parent="SubViewportContainer/SubViewport/CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.5, 2.08165e-12)
 collision_layer = 4096
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraAnchor/MouseCollider"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/CameraAnchor/MouseCollider"]
 shape = SubResource("BoxShape3D_fj1y3")
 
-[node name="World" type="Node3D" parent="."]
+[node name="World" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
-[node name="Terrain" type="MeshInstance3D" parent="World"]
+[node name="Terrain" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
 mesh = SubResource("PlaneMesh_d1wqf")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_cqn2p")
 script = ExtResource("2_dqac5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Terrain"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Terrain"]
 mesh = SubResource("BoxMesh_0wpca")
 surface_material_override/0 = SubResource("StandardMaterial3D_eopj6")
 
-[node name="EnergyGrid" type="Node3D" parent="World" node_paths=PackedStringArray("producer_container", "consumer_container")]
+[node name="EnergyGrid" type="Node3D" parent="SubViewportContainer/SubViewport/World" node_paths=PackedStringArray("producer_container", "consumer_container")]
 script = ExtResource("5_mqi84")
 producer_container = NodePath("Producers")
 consumer_container = NodePath("Consumers")
 balance_adj_rate = 4.71
 
-[node name="Producers" type="Node3D" parent="World/EnergyGrid"]
+[node name="Producers" type="Node3D" parent="SubViewportContainer/SubViewport/World/EnergyGrid"]
 
-[node name="EAsset" parent="World/EnergyGrid/Producers" instance=ExtResource("6_jw3nt")]
+[node name="EAsset" parent="SubViewportContainer/SubViewport/World/EnergyGrid/Producers" instance=ExtResource("6_jw3nt")]
 
-[node name="EAsset2" parent="World/EnergyGrid/Producers" instance=ExtResource("6_jw3nt")]
+[node name="EAsset2" parent="SubViewportContainer/SubViewport/World/EnergyGrid/Producers" instance=ExtResource("6_jw3nt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
 
-[node name="Consumers" type="Node3D" parent="World/EnergyGrid"]
+[node name="Consumers" type="Node3D" parent="SubViewportContainer/SubViewport/World/EnergyGrid"]
 
-[node name="Consumer2" parent="World/EnergyGrid/Consumers" instance=ExtResource("6_q1483")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2.08165e-12, 0.5)
+[node name="Consumer2" parent="SubViewportContainer/SubViewport/World/EnergyGrid/Consumers" instance=ExtResource("6_q1483")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2.08165e-12, 2.5)
 demand = 10.0
 
-[node name="Consumer" parent="World/EnergyGrid/Consumers" instance=ExtResource("6_q1483")]
+[node name="Consumer" parent="SubViewportContainer/SubViewport/World/EnergyGrid/Consumers" instance=ExtResource("6_q1483")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2.08165e-12, 0.5)
 demand = 10.0
 
@@ -253,11 +274,3 @@ item_2/text = "Solar"
 item_2/icon = SubResource("GradientTexture2D_i817q")
 item_3/text = "Generator"
 item_3/icon = SubResource("GradientTexture2D_ft275")
-
-[node name="Node3D" type="Node3D" parent="."]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
-transform = Transform3D(0.826963, -0.337245, 0.449887, 1.66415e-15, 0.800146, 0.599806, -0.562257, -0.496017, 0.661691, 2.08165e-12, 11, 9.54445)
-light_color = Color(1, 1, 0.992157, 1)
-light_energy = 0.9
-shadow_enabled = true

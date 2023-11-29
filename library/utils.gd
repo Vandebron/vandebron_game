@@ -17,8 +17,7 @@ func get_viewport_container() -> SubViewportContainer:
 
 
 func get_actual_viewport() -> Viewport:
-	#return get_node("/root/Main/%SubViewport")
-	return get_viewport()
+	return get_node("/root/Main/%SubViewport")
 	
 	
 func get_physics_layer(layer_name: String) -> int:
