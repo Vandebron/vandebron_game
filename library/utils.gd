@@ -25,6 +25,10 @@ func get_physics_layer(layer_name: String) -> int:
 	return physics_layers[layer_name]
 
 
+func sumf(accumulator: float, number: float) -> float:
+	return accumulator + number
+
+
 func _get_layers_by_name(type: String) -> Dictionary:
 	var layers: Dictionary = {}
 	for i in range(1, 33):

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://kplamygjx6ob"]
+
+[ext_resource type="PackedScene" uid="uid://bxgfnp120gfmk" path="res://object/windmill/windmill_model.tscn" id="1_fcoyg"]
+[ext_resource type="Script" path="res://object/easset/easset.gd" id="1_gk877"]
+
+[node name="EAsset" type="Node3D"]
+script = ExtResource("1_gk877")
+
+[node name="Model" parent="." instance=ExtResource("1_fcoyg")]

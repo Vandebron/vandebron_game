@@ -1,12 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbgk1537m5sog"]
+[gd_scene load_steps=24 format=3 uid="uid://cbgk1537m5sog"]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_8dagw"]
 [ext_resource type="Shader" path="res://library/shader/grid.gdshader" id="1_kb3f1"]
 [ext_resource type="Script" path="res://object/terrain.gd" id="2_dqac5"]
+[ext_resource type="Script" path="res://library/camera_anchor.gd" id="4_vkf2q"]
+[ext_resource type="Script" path="res://library/egrid/egrid.gd" id="5_mqi84"]
+[ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="6_27pu8"]
+[ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/easset/easset.tscn" id="6_jw3nt"]
+[ext_resource type="PackedScene" uid="uid://vjdf3kwb88ov" path="res://object/consumer/consumer.tscn" id="6_q1483"]
 
 [sub_resource type="Environment" id="Environment_khv8l"]
 ssao_enabled = true
 adjustment_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fj1y3"]
+size = Vector3(32, 1, 32)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d1wqf"]
 size = Vector2(32, 32)
@@ -38,8 +46,25 @@ size = Vector3(0.5, 0.5, 0.5)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eopj6"]
 albedo_color = Color(1, 0, 1, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_fj1y3"]
-size = Vector3(32, 1, 32)
+[sub_resource type="Gradient" id="Gradient_dlugj"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ga8vt"]
+gradient = SubResource("Gradient_dlugj")
+
+[sub_resource type="Gradient" id="Gradient_tgg4c"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gjaah"]
+gradient = SubResource("Gradient_tgg4c")
+
+[sub_resource type="Gradient" id="Gradient_1m72d"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i817q"]
+gradient = SubResource("Gradient_1m72d")
+
+[sub_resource type="Gradient" id="Gradient_niknj"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ft275"]
+gradient = SubResource("Gradient_niknj")
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_8dagw")
@@ -53,22 +78,16 @@ light_color = Color(1, 1, 0.992157, 1)
 light_energy = 0.9
 shadow_enabled = true
 
-[node name="Terrain" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_d1wqf")
-surface_material_override/0 = SubResource("StandardMaterial3D_cqn2p")
-script = ExtResource("2_dqac5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain"]
-mesh = SubResource("BoxMesh_0wpca")
-surface_material_override/0 = SubResource("StandardMaterial3D_eopj6")
-
 [node name="CameraAnchor" type="Node3D" parent="."]
-unique_name_in_owner = true
+script = ExtResource("4_vkf2q")
 
 [node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
 unique_name_in_owner = true
-transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 2.08165e-12, 3, 2.08165e-12)
+transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 2.08165e-12, 5, 2.08165e-12)
+projection = 1
 current = true
+size = 10.0
+far = 50.0
 
 [node name="MouseCollider" type="Area3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.5, 2.08165e-12)
@@ -78,3 +97,111 @@ monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CameraAnchor/MouseCollider"]
 shape = SubResource("BoxShape3D_fj1y3")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Terrain" type="MeshInstance3D" parent="World"]
+mesh = SubResource("PlaneMesh_d1wqf")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_cqn2p")
+script = ExtResource("2_dqac5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Terrain"]
+mesh = SubResource("BoxMesh_0wpca")
+surface_material_override/0 = SubResource("StandardMaterial3D_eopj6")
+
+[node name="EnergyGrid" type="Node3D" parent="World" node_paths=PackedStringArray("producer_container", "consumer_container")]
+script = ExtResource("5_mqi84")
+producer_container = NodePath("Producers")
+consumer_container = NodePath("Consumers")
+
+[node name="Producers" type="Node3D" parent="World/EnergyGrid"]
+
+[node name="EAsset" parent="World/EnergyGrid/Producers" instance=ExtResource("6_jw3nt")]
+
+[node name="EAsset2" parent="World/EnergyGrid/Producers" instance=ExtResource("6_jw3nt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
+
+[node name="Consumers" type="Node3D" parent="World/EnergyGrid"]
+
+[node name="Consumer" parent="World/EnergyGrid/Consumers" instance=ExtResource("6_q1483")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2.08165e-12, 0.5)
+demand = 10.0
+
+[node name="UICanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UICanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_27pu8")
+
+[node name="MarginContainer" type="MarginContainer" parent="UICanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/UI/MarginContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 200)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SupplyLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Supply: 10kW"
+fit_content = true
+scroll_active = false
+
+[node name="DemandLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Demand: 10kW"
+fit_content = true
+scroll_active = false
+
+[node name="FrequencyLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Frequency: 50.0Hz"
+fit_content = true
+scroll_active = false
+
+[node name="BuildItemList" type="ItemList" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+allow_search = false
+auto_height = true
+item_count = 4
+max_columns = 2
+same_column_width = true
+fixed_column_width = 100
+icon_mode = 0
+item_0/text = "House"
+item_0/icon = SubResource("GradientTexture2D_ga8vt")
+item_1/text = "Windmill"
+item_1/icon = SubResource("GradientTexture2D_gjaah")
+item_2/text = "Solar"
+item_2/icon = SubResource("GradientTexture2D_i817q")
+item_3/text = "Generator"
+item_3/icon = SubResource("GradientTexture2D_ft275")
