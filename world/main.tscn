@@ -181,35 +181,34 @@ theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/UI/MarginContainer"]
 layout_mode = 2
-alignment = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer"]
+[node name="TopPanelCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopPanelCtnr"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopPanelCtnr/VBoxContainer"]
 layout_mode = 2
 bbcode_enabled = true
 text = "[center]Grid Balance[center]"
 fit_content = true
 
-[node name="PanelContainer" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopPanelCtnr/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 80)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_loqhr")
 
-[node name="GridBalanceGauge" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer" instance=ExtResource("9_doxxx")]
+[node name="GridBalanceGauge" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopPanelCtnr/VBoxContainer/PanelContainer" instance=ExtResource("9_doxxx")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer/GridBalanceGauge"]
+[node name="MarginContainer" type="MarginContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopPanelCtnr/VBoxContainer/PanelContainer/GridBalanceGauge"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -224,10 +223,10 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer/GridBalanceGauge/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopPanelCtnr/VBoxContainer/PanelContainer/GridBalanceGauge/MarginContainer"]
 layout_mode = 2
 
-[node name="SupplyLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer/GridBalanceGauge/MarginContainer/HBoxContainer"]
+[node name="SupplyLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopPanelCtnr/VBoxContainer/PanelContainer/GridBalanceGauge/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -236,7 +235,7 @@ text = "Supply
 fit_content = true
 scroll_active = false
 
-[node name="FrequencyLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer/GridBalanceGauge/MarginContainer/HBoxContainer"]
+[node name="FrequencyLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopPanelCtnr/VBoxContainer/PanelContainer/GridBalanceGauge/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -246,7 +245,7 @@ Hz[center]"
 fit_content = true
 scroll_active = false
 
-[node name="DemandLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer2/PanelContainer/GridBalanceGauge/MarginContainer/HBoxContainer"]
+[node name="DemandLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopPanelCtnr/VBoxContainer/PanelContainer/GridBalanceGauge/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -256,7 +255,12 @@ text = "[right]Demand
 fit_content = true
 scroll_active = false
 
-[node name="BuildItemList" type="ItemList" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="BottomPanelCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="BuildItemList" type="ItemList" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/BottomPanelCtnr"]
 layout_mode = 2
 size_flags_horizontal = 3
 allow_search = false
