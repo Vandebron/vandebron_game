@@ -10,7 +10,7 @@ class_name EGrid # E=Energy
 @onready var supply_lbl: RichTextLabel = %SupplyLbl
 @onready var demand_lbl: RichTextLabel = %DemandLbl
 @onready var frequency_lbl: RichTextLabel = %FrequencyLbl
-
+@onready var grid_balance_gauge: ColorRect = %GridBalanceGauge
 
 # Too much energy generated: frequency goes up.
 # Demand for energy too high: frequency goes down.
@@ -19,7 +19,7 @@ class_name EGrid # E=Energy
 var supply: float
 var demand: float
 var balance: float = 1.0
-const balance_adj_rate: float = 0.01
+@export var balance_adj_rate: float = 0.01
 
 func _physics_process(delta: float) -> void:
 	supply = get_supply()
@@ -67,10 +67,17 @@ func get_consumers() -> Array[Consumer]:
 
 
 func _update_ui() -> void:
-	supply_lbl.text = str("Supply: ", supply, "kW")
-	demand_lbl.text = str("Demand: ", demand, "kW")
-	frequency_lbl.text = str("Frequency: ", _get_frequency(), "Hz")
+	supply_lbl.text = str("Supply\n", supply, "kW")
+	demand_lbl.text = str("[right]Demand\n", demand, "kW[/right]")
+	frequency_lbl.text = str("[center]", _frequency_to_string(_get_frequency()), "\nHz[/center]")
+	grid_balance_gauge.supply = supply
+	grid_balance_gauge.demand = demand
+	grid_balance_gauge.balance = balance
 
 
 func _get_frequency() -> float:
 	return balance * target_frequency
+
+
+func _frequency_to_string(freq: float) -> String:
+	return str(freq).pad_decimals(2)
