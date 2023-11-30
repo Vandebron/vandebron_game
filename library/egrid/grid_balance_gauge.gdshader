@@ -15,7 +15,7 @@ void fragment() {
 	if (UV.x > (balance * .5) - (0.01 * .5) && UV.x < (balance * .5) + (0.01 * .5)) {
 		const vec3 red = vec3(1.0, 0.0, 0.0);
 		const vec3 green = vec3(0.0, 1.0, 0.0);
-		COLOR.rgb = mix(green, red, abs(fract(1.0 - balance)) / freq_margin);
+		COLOR.rgb = mix(green, red, fract(abs(1.0 - balance)) / freq_margin);
 	} else if (UV.x > 0.5 - freq_margin - freq_margin_line_width * .5 && UV.x < 0.5 - freq_margin + freq_margin_line_width * .5) {
 		COLOR.rgb = freq_margin_line_color;
 	} else if (UV.x > 0.5 + freq_margin - freq_margin_line_width * .5 && UV.x < 0.5 + freq_margin + freq_margin_line_width * .5) {
