@@ -4,3 +4,8 @@
 
 [node name="Builder" type="Node3D"]
 script = ExtResource("1_lh082")
+
+[node name="PlacementDebounce" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+autostart = true

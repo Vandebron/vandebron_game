@@ -4,9 +4,9 @@ shader_type spatial;
 //#define RIPPLE_ON_SURFACE
 
 uniform float cell_size = 1.0;
+uniform vec2 offset = vec2(0.0);
 uniform float line_width = 0.1;
 uniform vec4 line_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform vec2 offset = vec2(0.0);
 uniform vec3 mouse_world_pos;
 uniform float mouse_circle_size = 1.5;
 uniform vec4 mouse_circle_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
@@ -17,14 +17,14 @@ uniform float ripple_factor = 10.0;
 varying vec2 fragment_world_pos;
 
 void vertex() {
-	fragment_world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz + offset;
+	fragment_world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz;
 }
 
 void fragment() {
 	float line_ratio = line_width / cell_size;
 	// The fractional part of the position within the current cell,
 	// adjusted by the line width.
-	vec2 pos_in_cell = fract(fragment_world_pos / cell_size + line_ratio / 2.0);
+	vec2 pos_in_cell = fract((fragment_world_pos + offset) / cell_size + line_ratio / 2.0);
 	// 1.0 if current fragment is a on line, 0.0 otherwise.
 	float is_line = step(line_ratio, pos_in_cell.x) * step(line_ratio, pos_in_cell.y);
 	

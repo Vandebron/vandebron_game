@@ -1,6 +1,5 @@
-extends Node
+extends Node3D
 class_name Model
 
-
-func get_animation_player() -> AnimationPlayer:
-	return get_node_or_null("AnimationPlayer")
+@export var mesh_nodes: Array[MeshInstance3D] # TODO: Think of a less hacky way to get all meshes; traverse scene tree?
+@export var animation_player: AnimationPlayer

@@ -13,4 +13,3 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var mouse_pos: Vector3 = InputUtil.get_mouse_world_position(_physics_space_state)
 	grid_material.set_shader_parameter("mouse_world_pos", mouse_pos)
-	$MeshInstance3D.global_position = mouse_pos

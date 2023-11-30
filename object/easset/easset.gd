@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 class_name EAsset # E=Energy
 
 @export var nominal_power: float = 10.0
@@ -10,8 +10,12 @@ class_name EAsset # E=Energy
 var current_power: float
 
 
+func _init() -> void:
+	add_to_group(Constants.GROUP_PRODUCER)
+
+
 func _ready() -> void:
-	model.get_animation_player().play("spin")
+	model.animation_player.play("spin")
 
 
 func _physics_process(_delta: float) -> void:

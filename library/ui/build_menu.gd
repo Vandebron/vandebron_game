@@ -17,3 +17,4 @@ func _ready() -> void:
 func _on_item_clicked(index: int, _pos: Vector2, _mouse_btn: int) -> void:
 	var building: BuildingDef = get_item_metadata(index)
 	Events.build_initiated.emit(building)
+	deselect_all() # TODO: Would feel better if we only did this after building is placed

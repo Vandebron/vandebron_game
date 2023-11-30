@@ -6,3 +6,4 @@ class_name BuildingDef
 @export var display_name: String
 @export var image: Texture2D
 @export var model: PackedScene
+@export var scene: PackedScene
