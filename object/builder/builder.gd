@@ -3,7 +3,6 @@ class_name Builder
 
 signal build_done(node: Node3D, at_position: Vector3)
 
-const grid_cell_size := Vector3(1.0, 1.0, 1.0)
 var good_placement_color := Color.hex(0x8ab060ff)
 var bad_placement_color := Color.hex(0xb45252ff)
 
@@ -19,7 +18,7 @@ var _shape: Model
 var _collider: Area3D
 var _build_confirmed: bool
 var _build_position: Vector3
-var _mouse_pos: Vector3
+var _pointer_pos: Vector3
 var _hover_tween: Tween
 
 
@@ -31,10 +30,10 @@ func _physics_process(delta: float) -> void:
 	if _build_confirmed:
 		return
 	
-	_mouse_pos = InputUtil.get_mouse_world_position(_physics_space_state)
-	_mouse_pos = snapped(_mouse_pos, grid_cell_size)
+	_pointer_pos = InputUtil.get_pointer_world_position(_physics_space_state)
+	_pointer_pos = snapped(_pointer_pos, Constants.GRID_CELL_SIZE)
 	
-	global_position = lerp(global_position, _mouse_pos, delta * 15.0)
+	global_position = lerp(global_position, _pointer_pos, delta * 15.0)
 	
 	_highlight_material.albedo_color =\
 		bad_placement_color if _collider.has_overlapping_areas() else good_placement_color
@@ -45,7 +44,7 @@ func confirm() -> void:
 		return
 	
 	_build_confirmed = true
-	_build_position = _mouse_pos
+	_build_position = _pointer_pos
 	
 	_shape.hide()
 	

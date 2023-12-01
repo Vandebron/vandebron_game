@@ -17,11 +17,10 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if builder && is_instance_valid(builder):
-		if event is InputEventMouseButton && event.is_released():
-			if event.button_index == MOUSE_BUTTON_LEFT:
-				builder.confirm()
-			elif event.button_index == MOUSE_BUTTON_RIGHT:
-				builder.cancel()
+		if event.is_action_released("build_confirm"):
+			return builder.confirm()
+		if event.is_action_released("build_cancel"):
+			return builder.cancel()
 
 
 func _on_build_initiated(building: BuildingDef) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cbgk1537m5sog"]
+[gd_scene load_steps=29 format=3 uid="uid://cbgk1537m5sog"]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_8dagw"]
 [ext_resource type="Shader" path="res://library/shader/grid.gdshader" id="1_kb3f1"]
@@ -27,12 +27,12 @@ size = Vector2(32, 32)
 render_priority = 0
 shader = ExtResource("1_kb3f1")
 shader_parameter/cell_size = 1.0
-shader_parameter/offset = Vector2(1.5, 1.5)
+shader_parameter/offset = Vector2(0.5, 0.5)
 shader_parameter/line_width = 0.025
 shader_parameter/line_color = Color(1, 1, 1, 1)
-shader_parameter/mouse_world_pos = null
-shader_parameter/mouse_circle_size = 1.5
-shader_parameter/mouse_circle_color = Color(0.894118, 0, 0.439216, 1)
+shader_parameter/pointer_world_pos = null
+shader_parameter/pointer_circle_size = 1.5
+shader_parameter/pointer_circle_color = Color(0.894118, 0, 0.439216, 1)
 shader_parameter/ripple_ampl = 5.0
 shader_parameter/ripple_freq = 5.0
 shader_parameter/ripple_factor = 10.0
@@ -43,6 +43,21 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(1, 0.992157, 0.94902, 1)
 roughness = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_8cux0"]
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_scrrx"]
+no_depth_test = true
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.415686, 0.32549, 0.431373, 1)
+roughness = 0.0
+disable_receive_shadows = true
+billboard_mode = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loqhr"]
 content_margin_left = 8.0
@@ -106,7 +121,7 @@ script = ExtResource("4_vkf2q")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/CameraAnchor"]
 unique_name_in_owner = true
-transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 2.08165e-12, 5, 2.08165e-12)
+transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0.5, 5, 0.5)
 projection = 1
 current = true
 size = 10.0
@@ -129,6 +144,13 @@ mesh = SubResource("PlaneMesh_d1wqf")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_cqn2p")
 script = ExtResource("2_dqac5")
+
+[node name="Crosshair" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Terrain"]
+unique_name_in_owner = true
+cast_shadow = 0
+mesh = SubResource("SphereMesh_8cux0")
+skeleton = NodePath("../../../CameraAnchor")
+surface_material_override/0 = SubResource("StandardMaterial3D_scrrx")
 
 [node name="EnergyGrid" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
 script = ExtResource("5_mqi84")

@@ -8,6 +8,7 @@ extends ItemList
 		for building in buildings:
 			var index: int = add_item(building.display_name, building.image)
 			set_item_metadata(index, building)
+			set_item_tooltip(index, str("Build a ", building.display_name))
 
 
 func _ready() -> void:
