@@ -7,3 +7,5 @@ class_name BuildingDef
 @export var image: Texture2D
 @export var model: PackedScene
 @export var scene: PackedScene
+@export var shape: PackedScene
+@export var collider: PackedScene

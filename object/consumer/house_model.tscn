@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://library/model/model.gd" id="1_jtxf5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_psdtc"]
+size = Vector3(0.8, 0.8, 0.8)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6yiwg"]
 diffuse_mode = 3
@@ -11,7 +12,7 @@ albedo_color = Color(1, 0.854902, 0.690196, 1)
 roughness = 0.0
 
 [sub_resource type="PrismMesh" id="PrismMesh_sb8vf"]
-size = Vector3(1, 0.5, 1)
+size = Vector3(0.8, 0.4, 0.8)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3nfc7"]
 diffuse_mode = 3
@@ -99,17 +100,17 @@ mesh_nodes = [NodePath("House"), NodePath("House/Roof"), NodePath("House/Chimney
 animation_player = NodePath("AnimationPlayer")
 
 [node name="House" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.5, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.4, 2.08165e-12)
 mesh = SubResource("BoxMesh_psdtc")
 surface_material_override/0 = SubResource("StandardMaterial3D_6yiwg")
 
 [node name="Roof" type="MeshInstance3D" parent="House"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.75, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.6, 2.08165e-12)
 mesh = SubResource("PrismMesh_sb8vf")
 surface_material_override/0 = SubResource("StandardMaterial3D_3nfc7")
 
 [node name="Chimney" type="MeshInstance3D" parent="House"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.5, -0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.4, -0.2)
 mesh = SubResource("BoxMesh_5ebfq")
 surface_material_override/0 = SubResource("StandardMaterial3D_ojcif")
 
