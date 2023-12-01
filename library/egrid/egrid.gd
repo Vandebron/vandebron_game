@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 
 func get_supply() -> float:
 	return get_producers()\
-		.map(func(a: EAsset) -> float: return a.current_power)\
+		.map(func(a: Producer) -> float: return a.current_power)\
 		.reduce(Utils.sumf, 0.0)
 
 
@@ -40,11 +40,11 @@ func get_demand() -> float:
 		.reduce(Utils.sumf, 0.0)
 
 
-func get_producers() -> Array[EAsset]:
+func get_producers() -> Array[Producer]:
 	# TODO: We do result.assign() because of this: https://github.com/godotengine/godot/issues/72566
-	var result: Array[EAsset] = []
+	var result: Array[Producer] = []
 	result.assign(producer_container.get_children()
-		.map(func(node: Node) -> EAsset: return node as EAsset))
+		.map(func(node: Node) -> Producer: return node as Producer))
 	return result
 
 
@@ -56,7 +56,7 @@ func get_consumers() -> Array[Consumer]:
 	return result
 
 
-func add_producer(producer: EAsset, at_position: Vector3) -> void:
+func add_producer(producer: Producer, at_position: Vector3) -> void:
 	producer_container.add_child(producer)
 	producer.global_position = at_position
 

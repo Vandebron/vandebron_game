@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bxgfnp120gfmk" path="res://object/windmill/windmill_model.tscn" id="1_2sd7r"]
 [ext_resource type="Script" path="res://library/building/building_def.gd" id="1_747nt"]
 [ext_resource type="PackedScene" uid="uid://dlwoabgf66r5s" path="res://object/windmill/windmill_collider.tscn" id="1_mp4yy"]
-[ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/easset/easset.tscn" id="2_y0x35"]
+[ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/windmill/windmill.tscn" id="2_y0x35"]
 [ext_resource type="PackedScene" uid="uid://dxqwmcbyqnwls" path="res://object/windmill/windmill_shape.tscn" id="4_oy3p0"]
 
 [sub_resource type="Gradient" id="Gradient_xdggp"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://5yby1xliao2j"]
 
-[ext_resource type="Script" path="res://library/model/model.gd" id="1_jtxf5"]
+[ext_resource type="Script" path="res://library/model/model.gd" id="1_bq0kq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_psdtc"]
 size = Vector3(0.8, 0.8, 0.8)
@@ -95,7 +95,7 @@ _data = {
 }
 
 [node name="HouseModel" type="Node3D" node_paths=PackedStringArray("mesh_nodes", "animation_player")]
-script = ExtResource("1_jtxf5")
+script = ExtResource("1_bq0kq")
 mesh_nodes = [NodePath("House"), NodePath("House/Roof"), NodePath("House/Chimney")]
 animation_player = NodePath("AnimationPlayer")
 
