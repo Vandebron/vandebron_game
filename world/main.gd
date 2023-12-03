@@ -2,7 +2,7 @@ extends Node3D
 
 const native_resolution := Vector2i(320, 180)
 
-@export var egrid: EGrid
+@export var energy_grid: EnergyGrid
 
 var builder: Builder
 
@@ -35,9 +35,9 @@ func _on_build_initiated(building: BuildingDef) -> void:
 
 func _add_new_building_to_world(node: Node3D, at_position: Vector3) -> void:
 	if node.is_in_group(Constants.GROUP_PRODUCER):
-		egrid.add_producer(node, at_position)
+		energy_grid.add_producer(node, at_position)
 	elif node.is_in_group(Constants.GROUP_CONSUMER):
-		egrid.add_consumer(node, at_position)
+		energy_grid.add_consumer(node, at_position)
 	else:
 		printerr("Trying to add unknown building type to world")
 

@@ -4,11 +4,11 @@
 [ext_resource type="Shader" path="res://library/shader/grid.gdshader" id="1_kb3f1"]
 [ext_resource type="Script" path="res://object/terrain.gd" id="2_dqac5"]
 [ext_resource type="Script" path="res://library/camera_anchor.gd" id="4_vkf2q"]
-[ext_resource type="Script" path="res://library/egrid/egrid.gd" id="5_mqi84"]
+[ext_resource type="Script" path="res://library/energy_grid/energy_grid.gd" id="5_mqi84"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="6_27pu8"]
 [ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/windmill/windmill.tscn" id="6_jw3nt"]
 [ext_resource type="PackedScene" uid="uid://vjdf3kwb88ov" path="res://object/house/house.tscn" id="6_q1483"]
-[ext_resource type="PackedScene" uid="uid://bcm7rp6xri4cr" path="res://library/egrid/grid_balance_gauge.tscn" id="9_doxxx"]
+[ext_resource type="PackedScene" uid="uid://bcm7rp6xri4cr" path="res://library/energy_grid/grid_balance_gauge.tscn" id="9_doxxx"]
 [ext_resource type="Script" path="res://library/ui/build_menu.gd" id="10_ka3ov"]
 [ext_resource type="Resource" uid="uid://diejrlo4iciyb" path="res://object/house/house_building_def.tres" id="11_l2stq"]
 [ext_resource type="Resource" uid="uid://b0r1cr25214g" path="res://object/windmill/windmill_building_def.tres" id="12_3u0jo"]
@@ -86,9 +86,9 @@ gradient = SubResource("Gradient_1m72d")
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ft275"]
 gradient = SubResource("Gradient_niknj")
 
-[node name="Main" type="Node3D" node_paths=PackedStringArray("egrid")]
+[node name="Main" type="Node3D" node_paths=PackedStringArray("energy_grid")]
 script = ExtResource("1_8dagw")
-egrid = NodePath("SubViewportContainer/SubViewport/World/EnergyGrid")
+energy_grid = NodePath("SubViewportContainer/SubViewport/World/EnergyGrid")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_khv8l")
@@ -154,7 +154,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_scrrx")
 
 [node name="EnergyGrid" type="Node3D" parent="SubViewportContainer/SubViewport/World"]
 script = ExtResource("5_mqi84")
-balance_adj_rate = 0.05
 
 [node name="Producers" type="Node3D" parent="SubViewportContainer/SubViewport/World/EnergyGrid"]
 unique_name_in_owner = true

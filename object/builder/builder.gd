@@ -12,7 +12,6 @@ var bad_placement_color := Color.hex(0xb45252ff)
 @onready var placement_debounce: Timer = $PlacementDebounce
 
 var _highlight_material: Material = preload("res://object/builder/highlight_material.tres")
-var _physics_space_state: PhysicsDirectSpaceState3D
 var _model: Model
 var _shape: Model
 var _collider: Area3D
@@ -22,16 +21,11 @@ var _pointer_pos: Vector3
 var _hover_tween: Tween
 
 
-func _ready() -> void:
-	_physics_space_state = get_world_3d().direct_space_state
-
-
 func _physics_process(delta: float) -> void:
 	if _build_confirmed:
 		return
 	
-	_pointer_pos = InputUtil.get_pointer_world_position(_physics_space_state)
-	_pointer_pos = snapped(_pointer_pos, Constants.GRID_CELL_SIZE)
+	_pointer_pos = snapped(InputUtil.pointer_world_pos, Constants.GRID_CELL_SIZE)
 	
 	global_position = lerp(global_position, _pointer_pos, delta * 15.0)
 	

@@ -12,7 +12,4 @@ var current_power: float
 
 func _init() -> void:
 	add_to_group(Constants.GROUP_PRODUCER)
-
-
-func _physics_process(_delta: float) -> void:
 	current_power = nominal_power

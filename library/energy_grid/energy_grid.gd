@@ -1,8 +1,11 @@
 extends Node
-class_name EGrid # E=Energy
+class_name EnergyGrid # EnergyGrid
 
 @export var target_frequency: float = 50.0
 @export var frequency_tolerance: float = 0.05
+@export var balance_adj_rate: float = 0.4
+@export var wind_variance: float = 0.1
+@export var wind_adj_rate: float = 0.1
 
 @onready var producer_container: Node3D = %Producers
 @onready var consumer_container: Node3D = %Consumers
@@ -17,13 +20,16 @@ class_name EGrid # E=Energy
 # Extreme power demand: blackout.
 var supply: float
 var demand: float
-var balance: float = 1.0
-@export var balance_adj_rate: float = 0.01
+var balance: float = 0.5 # Balance of 0.5 means perfectly balanced
+
 
 func _physics_process(delta: float) -> void:
 	supply = get_supply()
 	demand = get_demand() # TODO: What if demand is zero? We get division by zero
-	balance = lerpf(balance, supply / demand, delta * balance_adj_rate) # TODO: Apply ease-in-out
+	
+	var target: float = supply / (supply + demand)
+	var easing: float = ease(1.0 - abs(balance - target), 4.8) # Ease-in
+	balance = clampf(lerpf(balance, target, delta * easing * balance_adj_rate), 0.0, 1.0)
 	
 	_update_ui()
 
@@ -67,17 +73,17 @@ func add_consumer(consumer: Consumer, at_position: Vector3) -> void:
 
 
 func _update_ui() -> void:
-	supply_lbl.text = str("Supply\n", supply, "kW")
-	demand_lbl.text = str("[right]Demand\n", demand, "kW[/right]")
-	frequency_lbl.text = str("[center]", _frequency_to_string(_get_frequency()), "\nHz[/center]")
+	supply_lbl.text = str("Supply\n", _precision2(supply), "kW")
+	demand_lbl.text = str("[right]Demand\n", _precision2(demand), "kW[/right]")
+	frequency_lbl.text = str("[center]", _precision2(_get_frequency()), "\nHz[/center]")
 	grid_balance_gauge.supply = supply
 	grid_balance_gauge.demand = demand
 	grid_balance_gauge.balance = balance
 
 
 func _get_frequency() -> float:
-	return balance * target_frequency
+	return balance * target_frequency * 2.0
 
 
-func _frequency_to_string(freq: float) -> String:
-	return str(freq).pad_decimals(2)
+func _precision2(x: float) -> String:
+	return str(x).pad_decimals(2)

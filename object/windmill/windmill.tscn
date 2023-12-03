@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://kplamygjx6ob"]
+[gd_scene load_steps=7 format=3 uid="uid://kplamygjx6ob"]
 
 [ext_resource type="Script" path="res://object/windmill/windmill.gd" id="1_65461"]
 [ext_resource type="PackedScene" uid="uid://bxgfnp120gfmk" path="res://object/windmill/windmill_model.tscn" id="2_4fv1r"]
 [ext_resource type="PackedScene" uid="uid://dlwoabgf66r5s" path="res://object/windmill/windmill_collider.tscn" id="3_ckbnn"]
+[ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="4_87nqh"]
+[ext_resource type="Shader" path="res://library/energy_grid/gauge.gdshader" id="5_omjnx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ypfyx"]
+shader = ExtResource("5_omjnx")
+shader_parameter/current = 0.2
+shader_parameter/target = 0.7
+shader_parameter/line_width = 0.02
+shader_parameter/line_color = Color(0.635294, 0.862745, 0.780392, 1)
+shader_parameter/left_color = Color(0.227451, 0.219608, 0.345098, 1)
+shader_parameter/right_color = Color(0.94902, 0.941176, 0.898039, 1)
 
 [node name="Windmill" type="Node3D"]
 script = ExtResource("1_65461")
@@ -10,3 +21,33 @@ script = ExtResource("1_65461")
 [node name="Model" parent="." instance=ExtResource("2_4fv1r")]
 
 [node name="Collider" parent="." instance=ExtResource("3_ckbnn")]
+collision_layer = 8194
+
+[node name="VarianceTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="ProductionGaugeCtnr" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 160.0
+offset_bottom = 60.0
+mouse_filter = 2
+theme = ExtResource("4_87nqh")
+
+[node name="PanelContainer" type="PanelContainer" parent="ProductionGaugeCtnr"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -30.0
+offset_right = -80.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProductionGauge" type="ColorRect" parent="ProductionGaugeCtnr/PanelContainer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ypfyx")
+layout_mode = 2
