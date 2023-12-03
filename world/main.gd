@@ -15,6 +15,13 @@ func _ready() -> void:
 	#get_tree().root.size_changed.connect(self._resize_subviewport)
 
 
+func _physics_process(_delta: float) -> void:
+	$SunAnchor.rotation.z = PI * Weather.point_of_day
+	$SunAnchor/Sun.visible = !Weather.is_night()
+	$SunAnchor/Moon.visible = Weather.is_night()
+	#$WorldEnvironment.environment.fog_enabled = _is_night()
+
+
 func _input(event: InputEvent) -> void:
 	if builder && is_instance_valid(builder):
 		if event.is_action_released("build_confirm"):

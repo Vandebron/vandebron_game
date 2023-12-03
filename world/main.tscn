@@ -15,7 +15,8 @@
 
 [sub_resource type="Environment" id="Environment_khv8l"]
 ssao_enabled = true
-adjustment_enabled = true
+glow_enabled = true
+fog_density = 0.05
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fj1y3"]
 size = Vector3(32, 1, 32)
@@ -96,10 +97,18 @@ environment = SubResource("Environment_khv8l")
 [node name="SunAnchor" type="Node3D" parent="."]
 
 [node name="Sun" type="DirectionalLight3D" parent="SunAnchor"]
-transform = Transform3D(0.826963, -0.337245, 0.449887, 1.66415e-15, 0.800146, 0.599806, -0.562257, -0.496017, 0.661691, 2.08165e-12, 11, 9.54445)
+transform = Transform3D(0.829038, -0.336531, 0.446591, 2.78554e-16, 0.798636, 0.601815, -0.559193, -0.498927, 0.662099, 2.08165e-12, 11, 10)
 light_color = Color(1, 1, 0.992157, 1)
 light_energy = 0.9
 shadow_enabled = true
+shadow_opacity = 0.5
+
+[node name="Moon" type="DirectionalLight3D" parent="SunAnchor"]
+transform = Transform3D(0.829038, 0.336531, 0.446591, 2.78554e-16, 0.798636, -0.601815, -0.559193, 0.498927, 0.662099, 2.08165e-12, -11, 9)
+light_color = Color(0.262745, 0.262745, 0.415686, 1)
+light_energy = 0.7
+shadow_enabled = true
+shadow_opacity = 0.3
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 unique_name_in_owner = true
@@ -158,19 +167,20 @@ script = ExtResource("5_mqi84")
 [node name="Producers" type="Node3D" parent="SubViewportContainer/SubViewport/World/EnergyGrid"]
 unique_name_in_owner = true
 
-[node name="EAsset" parent="SubViewportContainer/SubViewport/World/EnergyGrid/Producers" instance=ExtResource("6_jw3nt")]
+[node name="Windmill" parent="SubViewportContainer/SubViewport/World/EnergyGrid/Producers" instance=ExtResource("6_jw3nt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
 
-[node name="EAsset2" parent="SubViewportContainer/SubViewport/World/EnergyGrid/Producers" instance=ExtResource("6_jw3nt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
+[node name="Windmill2" parent="SubViewportContainer/SubViewport/World/EnergyGrid/Producers" instance=ExtResource("6_jw3nt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
 
 [node name="Consumers" type="Node3D" parent="SubViewportContainer/SubViewport/World/EnergyGrid"]
 unique_name_in_owner = true
 
-[node name="Consumer2" parent="SubViewportContainer/SubViewport/World/EnergyGrid/Consumers" instance=ExtResource("6_q1483")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
-
 [node name="Consumer" parent="SubViewportContainer/SubViewport/World/EnergyGrid/Consumers" instance=ExtResource("6_q1483")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
+
+[node name="Consumer2" parent="SubViewportContainer/SubViewport/World/EnergyGrid/Consumers" instance=ExtResource("6_q1483")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
 
 [node name="UICanvasLayer" type="CanvasLayer" parent="."]
 

@@ -28,6 +28,23 @@ func sumf(accumulator: float, number: float) -> float:
 	return accumulator + number
 
 
+## Returns a value between -1 and 1, based on the current time.
+## It returns -1 at the start of the time time cycle, and 1 at the end.
+## Convenient for sampling points on a curve. Especially sine waves.
+func get_cycle_value(cycle_time_ms: int) -> float:
+	var current_time_ms: int = Time.get_ticks_msec()
+	return 1.0 - (2.0 * (current_time_ms % cycle_time_ms)) / cycle_time_ms
+
+
+## Returns a value between 0 and 1.
+## Input values work like this:
+##   -1 yields 0
+##    0 yields 1
+##    1 yields 0
+func sine_y(x: float) -> float:
+	return .5 * cos(x * PI) + .5
+
+
 func _get_layers_by_name(type: String) -> Dictionary:
 	var layers: Dictionary = {}
 	for i in range(1, 33):

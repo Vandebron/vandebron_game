@@ -1,11 +1,15 @@
 extends Node
 
-const wind_cycle_ms: int = 30000 # Dictates how long it takes for weather to repeat
+const day_night_cycle: Curve = preload("res://library/day_night_cycle.tres")
+const day_night_cycle_ms: int = 30_000 # Cycle of 30 seconds means day=15s, night=15s
+const wind_cycle_ms: int = 30_000 # Dictates how long it takes for weather to repeat
 
 var wind: float = 0.5 # Ranges from 0-1
 var sun: float = 0.5 # Ranges from 0-1
+var point_of_day: float = 0.0 # Ranges from 0-1; night is > 0.5
 
 var _target_wind: float = 1.0
+var _was_night: bool
 
 
 func _ready() -> void:
@@ -14,6 +18,14 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	wind = lerpf(wind, _target_wind, delta)
+	point_of_day = _get_point_of_day()
+	
+	if is_night() && !_was_night:
+		_was_night = true
+		Events.night_started.emit()
+	elif !is_night() && _was_night:
+		_was_night = false
+		Events.night_ended.emit()
 
 
 func _update_wind() -> void:
@@ -22,17 +34,16 @@ func _update_wind() -> void:
 	# This curve is a simple sine wave with no variance.
 	# TODO: We could use a Godot Curve (built-in) to have a deterministic weather pattern with some
 	#		variability to make it look random.
-	var x: float = _get_curve_x()
-	var y: float = _get_curve_y(x)
+	var x: float = Utils.get_cycle_value(wind_cycle_ms)
+	var y: float = Utils.sine_y(x)
 	_target_wind = y
 
 
-func _get_curve_x() -> float:
-	var current_time_ms: int = Time.get_ticks_msec()
-	return 1.0 - (2.0 * (current_time_ms % wind_cycle_ms)) / wind_cycle_ms
+func is_night() -> bool:
+	return point_of_day > 0.5
 
 
-## Returns a value between 0 and 1.
-## Input value of -1 yields 0, 0 yield 0.5, 1 yields 1.
-func _get_curve_y(x: float) -> float:
-	return .5 * cos(x * PI) + .5
+func _get_point_of_day() -> float:
+	# We rotate the sun based on PI, so we need to account for that here
+	var x: float = abs(Utils.get_cycle_value(day_night_cycle_ms * PI))
+	return day_night_cycle.sample(x)
