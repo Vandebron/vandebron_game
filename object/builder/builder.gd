@@ -77,6 +77,8 @@ func _add_twirl_animation() -> Tween:
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.tween_property(_model, "global_rotation:y", TAU, 0.4)
+	tween.parallel().tween_property(_model, "global_position:x", _build_position.x, 0.4)
+	tween.parallel().tween_property(_model, "global_position:z", _build_position.z, 0.4)
 	tween.parallel().tween_property(_model, "global_position:y", 0.8, 0.4)
 	# Fall and bounce
 	tween.chain()\
