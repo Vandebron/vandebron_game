@@ -39,6 +39,10 @@ func _update_wind() -> void:
 	_target_wind = y
 
 
+func is_day() -> bool:
+	return point_of_day <= 0.5
+
+
 func is_night() -> bool:
 	return point_of_day > 0.5
 

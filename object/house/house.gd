@@ -2,7 +2,8 @@ extends Consumer
 
 
 func _ready() -> void:
-	model.animation_player.play("consume")
+	if Weather.is_day():
+		model.animation_player.play("consume")
 	
 	Events.night_started.connect(func() -> void:
 		model.animation_player.play("night"))
