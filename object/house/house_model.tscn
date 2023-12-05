@@ -9,7 +9,7 @@ size = Vector3(0.8, 0.8, 0.8)
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(1, 0.854902, 0.690196, 1)
-roughness = 0.0
+roughness = 0.5
 
 [sub_resource type="PrismMesh" id="PrismMesh_sb8vf"]
 size = Vector3(0.8, 0.4, 0.8)
@@ -18,7 +18,7 @@ size = Vector3(0.8, 0.4, 0.8)
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(1, 0.470588, 0.470588, 1)
-roughness = 0.0
+roughness = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_rv7fx"]
 size = Vector3(0.1, 0.4, 0.4)
@@ -27,6 +27,7 @@ size = Vector3(0.1, 0.4, 0.4)
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.635294, 0.862745, 0.780392, 1)
+roughness = 0.5
 emission = Color(1, 1, 0, 1)
 emission_energy_multiplier = 4.0
 disable_receive_shadows = true
@@ -38,6 +39,7 @@ size = Vector3(0.2, 1, 0.2)
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.721569, 0.709804, 0.72549, 1)
+roughness = 0.5
 
 [sub_resource type="Curve" id="Curve_0yacr"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

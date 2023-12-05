@@ -4,6 +4,10 @@ const native_resolution := Vector2i(320, 180)
 
 @export var energy_grid: EnergyGrid
 
+@onready var sun_anchor: Node3D = $SunAnchor
+@onready var sun: DirectionalLight3D = $SunAnchor/Sun
+@onready var moon: DirectionalLight3D = $SunAnchor/Moon
+
 var builder: Builder
 
 
@@ -16,9 +20,16 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	$SunAnchor.rotation.z = PI * Weather.point_of_day
-	$SunAnchor/Sun.visible = !Weather.is_night()
-	$SunAnchor/Moon.visible = Weather.is_night()
+	sun_anchor.rotation.z = PI * Weather.point_of_day
+	sun_anchor.rotation.y = PI * Weather.point_of_day
+	sun.visible = Weather.is_day()
+	moon.visible = Weather.is_night()
+	sun.look_at(Vector3.ZERO)
+	moon.look_at(Vector3.ZERO)
+	
+	# TODO: Add dawn/dusk lighting style like this:
+	#sun.light_color = Color.hex(0xd3a068ff)
+	#sun.light_energy = 0.5
 	#$WorldEnvironment.environment.fog_enabled = _is_night()
 
 
