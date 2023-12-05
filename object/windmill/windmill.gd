@@ -4,6 +4,7 @@ extends Producer
 @export var acceleration: float = 10.0 # Determines how fast windmill adjusts to new wind speeds
 
 @onready var variance_timer: Timer = $VarianceTimer
+@onready var model: Model = $Model
 
 var _speed: float = 1.0
 var _target_speed: float = 1.0

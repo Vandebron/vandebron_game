@@ -1,5 +1,7 @@
 extends Consumer
 
+@onready var model: Model = $Model
+
 
 func _ready() -> void:
 	if Weather.is_day():
