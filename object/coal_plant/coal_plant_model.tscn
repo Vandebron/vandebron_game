@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://gyt1h2wqjrrb"]
+[gd_scene load_steps=21 format=3 uid="uid://gyt1h2wqjrrb"]
 
 [ext_resource type="Script" path="res://library/model/model.gd" id="1_jnec6"]
 [ext_resource type="Material" uid="uid://c4gqffaj8wqqs" path="res://object/coal_plant/coal_plant_chimney_mat.tres" id="2_5oery"]
@@ -75,8 +75,70 @@ roughness = 0.5
 left_to_right = 1.0
 size = Vector3(0.75, 0.75, 1.5)
 
-[node name="CoalPlantModel" type="Node3D"]
+[sub_resource type="Animation" id="Animation_jj0qw"]
+resource_name = "produce"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChimneyBase/Chimney/GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ChimneyBase/Chimney2/GPUParticles3D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_jafjo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChimneyBase/Chimney/GPUParticles3D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ChimneyBase/Chimney2/GPUParticles3D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qbc7k"]
+_data = {
+"RESET": SubResource("Animation_jafjo"),
+"produce": SubResource("Animation_jj0qw")
+}
+
+[node name="CoalPlantModel" type="Node3D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_jnec6")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="ChimneyBase" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0.4, 0)
@@ -92,6 +154,7 @@ surface_material_override/0 = ExtResource("2_5oery")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="ChimneyBase/Chimney"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = SubResource("StandardMaterial3D_tcdsx")
+emitting = false
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_pssjd")
 draw_pass_1 = SubResource("SphereMesh_mm3yp")
@@ -105,7 +168,9 @@ surface_material_override/0 = ExtResource("2_5oery")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="ChimneyBase/Chimney2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = SubResource("StandardMaterial3D_tcdsx")
-lifetime = 2.0
+emitting = false
+amount = 4
+lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_pssjd")
 draw_pass_1 = SubResource("SphereMesh_mm3yp")
 
@@ -125,3 +190,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.125, 0.625, 2.08165e-12)
 mesh = SubResource("PrismMesh_onb8r")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_pj1fi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qbc7k")
+}
