@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dym3ot1dpckil"]
+
+[ext_resource type="Material" uid="uid://bmo3pjsu8nm0w" path="res://object/builder/highlight_material.tres" id="1_1niij"]
+[ext_resource type="Script" path="res://library/model/model.gd" id="2_t7kgv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6wm4m"]
+size = Vector3(3.8, 0.1, 3.8)
+
+[node name="BuildShapeIndicator" type="Node3D"]
+script = ExtResource("2_t7kgv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.1, 2.08165e-12)
+mesh = SubResource("BoxMesh_6wm4m")
+surface_material_override/0 = ExtResource("1_1niij")

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="BuildingDef" load_steps=8 format=3 uid="uid://bd15ndqy0tgbi"]
+
+[ext_resource type="PackedScene" uid="uid://gyt1h2wqjrrb" path="res://object/coal_plant/coal_plant_model.tscn" id="1_7owfm"]
+[ext_resource type="PackedScene" uid="uid://dy4qywlx5s7b8" path="res://object/coal_plant/coal_plant_collider.tscn" id="1_6422b"]
+[ext_resource type="Script" path="res://library/building/building_def.gd" id="1_nm86t"]
+[ext_resource type="PackedScene" uid="uid://fwrp8f25a4dx" path="res://object/coal_plant/coal_plant.tscn" id="2_ic4yl"]
+[ext_resource type="PackedScene" uid="uid://dym3ot1dpckil" path="res://object/coal_plant/coal_plant_shape.tscn" id="5_xsola"]
+
+[sub_resource type="Gradient" id="Gradient_umulm"]
+colors = PackedColorArray(0.501961, 0.286275, 0.227451, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e8mg4"]
+gradient = SubResource("Gradient_umulm")
+
+[resource]
+script = ExtResource("1_nm86t")
+cost = 50
+alias = "coal_plant"
+display_name = "Coal Plant"
+image = SubResource("GradientTexture2D_e8mg4")
+model = ExtResource("1_7owfm")
+scene = ExtResource("2_ic4yl")
+shape = ExtResource("5_xsola")
+collider = ExtResource("1_6422b")
