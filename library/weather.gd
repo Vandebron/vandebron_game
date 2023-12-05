@@ -49,5 +49,5 @@ func is_night() -> bool:
 
 func _get_point_of_day() -> float:
 	# We rotate the sun based on PI, so we need to account for that here
-	var x: float = abs(Utils.get_cycle_value(day_night_cycle_ms * PI))
-	return day_night_cycle.sample(x)
+	var x: float = Utils.get_cycle_value(int(day_night_cycle_ms * PI))
+	return day_night_cycle.sample(absf(x))
