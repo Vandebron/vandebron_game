@@ -5,7 +5,7 @@ class_name Producer
 @export var active_capability_out: float
 @export var dmol: float = 0.0
 
-var current_power: float
+var current_power: float = 0.0
 
 
 func _init() -> void:

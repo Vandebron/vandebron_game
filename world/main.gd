@@ -7,6 +7,7 @@ const native_resolution := Vector2i(320, 180)
 @onready var sun_anchor: Node3D = $SunAnchor
 @onready var sun: DirectionalLight3D = $SunAnchor/Sun
 @onready var moon: DirectionalLight3D = $SunAnchor/Moon
+@onready var build_item_list: BuildMenu = %BuildItemList
 
 
 func _ready() -> void:
@@ -32,10 +33,16 @@ func _physics_process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_released("build_confirm"):
-		Events.build_confirmed.emit()
+	if event.is_action_released("build_initiate"):
+		build_item_list.select_current_item()
+	elif event.is_action_released("cycle_build_list_left"):
+		build_item_list.cycle_left()
+	elif event.is_action_released("cycle_build_list_right"):
+		build_item_list.cycle_right()
 	elif event.is_action_released("build_cancel"):
 		Events.build_cancelled.emit()
+	elif event.is_action_released("build_confirm"):
+		Events.build_confirmed.emit()
 
 
 func _create_builder(building: BuildingDef) -> void:
