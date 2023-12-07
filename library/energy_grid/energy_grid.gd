@@ -4,8 +4,6 @@ class_name EnergyGrid # EnergyGrid
 @export var target_frequency: float = 50.0
 @export var frequency_tolerance: float = 0.05
 @export var balance_adj_rate: float = 0.4
-@export var wind_variance: float = 0.1
-@export var wind_adj_rate: float = 0.1
 
 @onready var producer_container: Node3D = %Producers
 @onready var consumer_container: Node3D = %Consumers
@@ -20,7 +18,7 @@ class_name EnergyGrid # EnergyGrid
 # Extreme power demand: blackout.
 var supply: float
 var demand: float
-var balance: float = 0.5 # Balance of 0.5 means perfectly balanced
+var balance: float = 0.5 # Ranges between 0-1, so 0.5 means perfectly balanced.
 
 
 func _physics_process(delta: float) -> void:

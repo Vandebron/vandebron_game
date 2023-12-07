@@ -7,7 +7,7 @@
 shader = ExtResource("1_6clxp")
 shader_parameter/supply = 10.0
 shader_parameter/demand = 10.0
-shader_parameter/balance = 1.0
+shader_parameter/balance = 0.5
 shader_parameter/balance_line_width = 0.01
 shader_parameter/freq_margin = 0.05
 shader_parameter/freq_margin_line_width = 0.01
