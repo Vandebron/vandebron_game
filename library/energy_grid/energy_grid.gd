@@ -2,7 +2,7 @@ extends Node
 class_name EnergyGrid # EnergyGrid
 
 @export var target_frequency: float = 50.0
-@export var frequency_tolerance: float = 0.05: set=_set_frequence_tolerance
+@export var frequency_tolerance: float = 0.05: set=_set_frequency_tolerance
 @export var balance_adj_rate: float = 0.4
 
 @onready var producer_container: Node3D = %Producers
@@ -19,6 +19,10 @@ class_name EnergyGrid # EnergyGrid
 var supply: float
 var demand: float
 var balance: float = 0.5 # Ranges between 0-1, so 0.5 means perfectly balanced.
+
+
+func _ready() -> void:
+	grid_balance_gauge.frequency_tolerance = frequency_tolerance
 
 
 func _physics_process(delta: float) -> void:
@@ -87,6 +91,7 @@ func _precision2(x: float) -> String:
 	return str(x).pad_decimals(2)
 
 
-func _set_frequence_tolerance(value: float) -> void:
+func _set_frequency_tolerance(value: float) -> void:
 	frequency_tolerance = value
-	grid_balance_gauge.frequency_tolerance = frequency_tolerance
+	if grid_balance_gauge:
+		grid_balance_gauge.frequency_tolerance = frequency_tolerance
