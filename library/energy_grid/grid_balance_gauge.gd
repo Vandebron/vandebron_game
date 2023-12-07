@@ -1,4 +1,5 @@
 extends ColorRect
+class_name GridBalanceGauge
 
 
 @export var supply: float:
@@ -15,3 +16,8 @@ extends ColorRect
 	set(value):
 		balance = value
 		(material as ShaderMaterial).set_shader_parameter("balance", balance)
+
+@export var frequency_tolerance: float:
+	set(value):
+		frequency_tolerance = value
+		(material as ShaderMaterial).set_shader_parameter("freq_margin", frequency_tolerance)

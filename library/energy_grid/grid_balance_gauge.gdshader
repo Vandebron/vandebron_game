@@ -1,5 +1,7 @@
 shader_type canvas_item;
 
+const float balance_center = 0.5;
+
 uniform float supply = 10.0;
 uniform float demand = 10.0;
 uniform float balance = 0.5; // Ranges between 0-1, so 0.5 means perfectly balanced.
@@ -15,16 +17,15 @@ void fragment() {
 	if (UV.x > balance - (balance_line_width * 0.5)
 	 && UV.x < balance + (balance_line_width * 0.5)
 	) {
-		const float balance_center = 0.5;
 		const vec3 red = vec3(1.0, 0.0, 0.0);
 		const vec3 green = vec3(0.0, 1.0, 0.0);
 		COLOR.rgb = mix(green, red, fract(abs(balance_center - balance)) / freq_margin);
-	} else if (UV.x > 0.5 - freq_margin - freq_margin_line_width * 0.5
-			&& UV.x < 0.5 - freq_margin + freq_margin_line_width * 0.5
+	} else if (UV.x > balance_center - freq_margin - (freq_margin_line_width * 0.5)
+			&& UV.x < balance_center - freq_margin + (freq_margin_line_width * 0.5)
 	) {
 		COLOR.rgb = freq_margin_line_color;
-	} else if (UV.x > 0.5 + freq_margin - freq_margin_line_width * 0.5
-			&& UV.x < 0.5 + freq_margin + freq_margin_line_width * 0.5
+	} else if (UV.x > balance_center + freq_margin - (freq_margin_line_width * 0.5)
+			&& UV.x < balance_center + freq_margin + (freq_margin_line_width * 0.5)
 	) {
 		COLOR.rgb = freq_margin_line_color;
 	} else {
