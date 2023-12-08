@@ -12,12 +12,16 @@ class_name EnergyGrid # EnergyGrid
 @onready var frequency_lbl: RichTextLabel = %FrequencyLbl
 @onready var grid_balance_gauge: GridBalanceGauge = %GridBalanceGauge
 
-# Too much energy generated: frequency goes up.
-# Demand for energy too high: frequency goes down.
-# Extreme power supply: power plants disconnect.
-# Extreme power demand: blackout.
-var supply: float
+# Supply kW
+var fossil: float
+var solar: float
+var wind: float
+var supply: float # Total of fossil + solar + wind
+
+# Demand kW
 var demand: float
+
+# Supply / demand = balance (calculated as fraction, displayed as Hz)
 var balance: float = 0.5 # Ranges between 0-1, so 0.5 means perfectly balanced.
 
 
@@ -26,7 +30,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	supply = get_supply()
+	_update_supply()
 	demand = get_demand() # TODO: What if demand is zero? We get division by zero
 	
 	var target: float = supply / (supply + demand)
@@ -36,10 +40,21 @@ func _physics_process(delta: float) -> void:
 	_update_ui()
 
 
-func get_supply() -> float:
-	return get_producers()\
-		.map(func(a: Producer) -> float: return a.current_power)\
-		.reduce(Utils.sumf, 0.0)
+func _update_supply() -> void:
+	fossil = 0.0
+	solar = 0.0
+	wind = 0.0
+	
+	for producer in get_producers():
+		match producer.type:
+			Producer.Type.FOSSIL:
+				fossil += producer.current_power
+			Producer.Type.SOLAR:
+				solar += producer.current_power
+			Producer.Type.WIND:
+				wind += producer.current_power
+	
+	supply = fossil + solar + wind
 
 
 func get_demand() -> float:
@@ -78,7 +93,9 @@ func _update_ui() -> void:
 	supply_lbl.text = str("Supply\n", _precision2(supply), "kW")
 	demand_lbl.text = str("[right]Demand\n", _precision2(demand), "kW[/right]")
 	frequency_lbl.text = str("[center]", _precision2(_get_frequency()), "\nHz[/center]")
-	grid_balance_gauge.supply = supply
+	grid_balance_gauge.fossil = fossil
+	grid_balance_gauge.wind = wind
+	grid_balance_gauge.solar = solar
 	grid_balance_gauge.demand = demand
 	grid_balance_gauge.balance = balance
 

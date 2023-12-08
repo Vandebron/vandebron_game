@@ -13,7 +13,17 @@ func _ready() -> void:
 	_mouse_physics_layer = Utils.get_physics_layer("mouse")
 	_physics_space_state = get_world_3d().direct_space_state
 	
-	#_device_type = DeviceType.CONTROLLER # Turn on to debug non-pc input
+	if Input.get_connected_joypads().size() > 0:
+		_device_type = DeviceType.CONTROLLER
+	else:
+		_device_type = DeviceType.MOUSE_KEYBOARD
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey || event is InputEventMouseButton:
+		_device_type = DeviceType.MOUSE_KEYBOARD
+	elif event is InputEventJoypadButton:
+		_device_type = DeviceType.CONTROLLER
 
 
 func _physics_process(_delta: float) -> void:

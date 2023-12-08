@@ -17,6 +17,7 @@ shader_parameter/right_color = Color(0.94902, 0.941176, 0.898039, 1)
 
 [node name="Windmill" type="Node3D"]
 script = ExtResource("1_65461")
+type = 1
 
 [node name="Model" parent="." instance=ExtResource("2_4fv1r")]
 

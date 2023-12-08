@@ -2,18 +2,38 @@ shader_type canvas_item;
 
 const float balance_center = 0.5;
 
-uniform float supply = 10.0;
+uniform bool show_details;
+
+group_uniforms Energy;
+uniform float fossil = 10.0;
+uniform float solar = 10.0;
+uniform float wind = 10.0;
 uniform float demand = 10.0;
+group_uniforms;
+
+group_uniforms Colors;
+uniform vec3 fossil_color : source_color = vec3(1.0, 0.0, 0.0);
+uniform vec3 solar_color : source_color = vec3(0.0, 1.0, 0.0);
+uniform vec3 wind_color : source_color = vec3(0.0, 0.0, 1.0);
+uniform vec3 supply_color : source_color = vec3(0.0);
+uniform vec3 demand_color : source_color = vec3(1.0);
+group_uniforms;
+
+group_uniforms Balance;
 uniform float balance = 0.5; // Ranges between 0-1, so 0.5 means perfectly balanced.
 uniform float balance_line_width = 0.01;
+group_uniforms;
+
+group_uniforms FrequencyTolerance;
 uniform float freq_margin = 0.05;
 uniform float freq_margin_line_width = 0.01;
 uniform vec3 freq_margin_line_color : source_color = vec3(1.0, 0.0, 0.0);
-//uniform vec3 balance_line_color : source_color = vec3(1.0, 0.0, 0.0);
-uniform vec3 supply_color : source_color = vec3(0.0);
-uniform vec3 demand_color : source_color = vec3(1.0);
+group_uniforms;
 
 void fragment() {
+	float supply = fossil + solar + wind;
+	float total = supply + demand;
+	
 	if (UV.x > balance - (balance_line_width * 0.5)
 	 && UV.x < balance + (balance_line_width * 0.5)
 	) {
@@ -28,8 +48,19 @@ void fragment() {
 			&& UV.x < balance_center + freq_margin + (freq_margin_line_width * 0.5)
 	) {
 		COLOR.rgb = freq_margin_line_color;
+	} else if (show_details) {
+		float fossil_pct = fossil / total;
+		float solar_pct = solar / total;
+		float wind_pct = wind / total;
+		float demand_pct = demand / total;
+
+		vec3 final = vec3(0.0);
+		final = mix(fossil_color, final, step(UV.x, 0.0));
+		final = mix(solar_color, final, step(UV.x, fossil_pct));
+		final = mix(wind_color, final, step(UV.x, fossil_pct + solar_pct));
+		final = mix(demand_color, final, step(UV.x, fossil_pct + solar_pct + wind_pct));
+		COLOR.rgb = final;
 	} else {
-		float what_to_draw = step(supply / (supply + demand), UV.x);
-		COLOR.rgb = mix(supply_color, demand_color, what_to_draw);
+		COLOR.rgb = mix(supply_color, demand_color, step(supply / total, UV.x));
 	}
 }

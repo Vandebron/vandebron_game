@@ -5,15 +5,21 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ea8l7"]
 shader = ExtResource("1_6clxp")
-shader_parameter/supply = 10.0
+shader_parameter/show_details = null
+shader_parameter/fossil = 10.0
+shader_parameter/solar = 10.0
+shader_parameter/wind = 10.0
 shader_parameter/demand = 10.0
+shader_parameter/fossil_color = Color(0.501961, 0.286275, 0.227451, 1)
+shader_parameter/solar_color = Color(0.929412, 0.882353, 0.619608, 1)
+shader_parameter/wind_color = Color(0.294118, 0.501961, 0.792157, 1)
+shader_parameter/supply_color = Color(0.827451, 0.627451, 0.407843, 1)
+shader_parameter/demand_color = Color(0.262745, 0.262745, 0.415686, 1)
 shader_parameter/balance = 0.5
 shader_parameter/balance_line_width = 0.01
 shader_parameter/freq_margin = 0.05
 shader_parameter/freq_margin_line_width = 0.01
 shader_parameter/freq_margin_line_color = Color(0.207843, 0.168627, 0.258824, 1)
-shader_parameter/supply_color = Color(0.262745, 0.262745, 0.415686, 1)
-shader_parameter/demand_color = Color(0.827451, 0.627451, 0.407843, 1)
 
 [node name="GridBalanceGauge" type="ColorRect"]
 material = SubResource("ShaderMaterial_ea8l7")
