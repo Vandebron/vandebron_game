@@ -2,6 +2,7 @@ extends Producer
 
 @export var production_variance: float = 0.05
 @export var acceleration: float = 10.0 # Determines how fast windmill adjusts to new wind speeds
+@export var turn_rate: float = 0.01 # Just cosmetic
 
 @onready var variance_timer: Timer = $VarianceTimer
 @onready var model: Model = $Model
@@ -28,6 +29,8 @@ func _physics_process(delta: float) -> void:
 	current_power = clampf(_speed * active_capability_out, dmol, nominal_power)
 	
 	model.animation_player.speed_scale = _speed
+	model.global_rotation.y = lerpf(
+		model.global_rotation.y, Weather.wind_angle, delta * turn_rate * Weather.wind)
 	
 	if Input.is_action_pressed("show_info"):
 		show_info()

@@ -4,6 +4,7 @@ const day_night_cycle: Curve = preload("res://library/day_night_cycle.tres")
 const day_night_cycle_ms: int = 30_000 # Cycle of 30 seconds means day=15s, night=15s
 const wind_cycle_ms: int = 30_000 # Dictates how long it takes for weather to repeat
 
+var wind_angle: float = 1.0 # Direction of wind in radians. Cosmetic. does not affect wind power
 var wind: float = 0.5 # Ranges from 0-1
 var sun: float = 0.5 # Ranges from 0-1
 var point_of_day: float = 0.0 # Ranges from 0-1; night is > 0.5
@@ -37,6 +38,8 @@ func _update_wind() -> void:
 	var x: float = Utils.get_cycle_value(wind_cycle_ms)
 	var y: float = Utils.sine_y(x)
 	_target_wind = y
+	
+	wind_angle = PI * randf_range(-6.0, 6.0)
 
 
 func is_day() -> bool:
