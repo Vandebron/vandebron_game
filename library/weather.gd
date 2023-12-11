@@ -12,7 +12,7 @@ const max_temperature: float = 40.0
 var wind_angle: float = 1.0 # Direction of wind in radians. Cosmetic. does not affect wind power
 var wind: float = 0.5 # Ranges from 0-1
 var sun: float = 0.5 # Ranges from 0-1
-var point_of_day: float = 0.0 # Ranges from 0-1; night is > 0.5
+var point_of_day: float = 1.0 # Ranges from 0-1; night is < 0.5
 var temperature: float = 0.0 # Ranges from 0-1; let's say 0=-10, 1=40
 
 var _target_wind: float = 1.0

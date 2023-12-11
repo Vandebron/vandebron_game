@@ -128,7 +128,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 unique_name_in_owner = true
 handle_input_locally = false
-size = Vector2i(1152, 648)
+size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
 [node name="CameraAnchor" type="Node3D" parent="SubViewportContainer/SubViewport"]

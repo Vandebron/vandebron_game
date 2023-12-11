@@ -42,11 +42,17 @@ func _update_variance() -> void:
 
 
 func show_info() -> void:
-	$ProductionGauge.visible = true
-	$ProductionGauge.global_position = Utils.get_camera().unproject_position(global_position)
-	$ProductionGauge.current = _speed
-	$ProductionGauge.target = _target_speed
+	%ProductionGaugeCtnr.visible = true
+	%ProductionGaugeCtnr.global_position = Utils.get_camera().unproject_position(global_position)
+	%ProductionGaugeCtnr.position -= %ProductionGaugeCtnr.size / 2.0 # Center it based on its size
+	%ProductionGaugeCtnr.position.y -= 40.0 # Nudge it up a little
+	
+	%ProductionGauge.current = _speed
+	%ProductionGauge.target = _target_speed
+	%ProductionGauge.max_value = 1.0
+	
+	%kwLbl.text = str(current_power).pad_decimals(1) + "kW"
 
 
 func hide_info() -> void:
-	$ProductionGauge.visible = false
+	%ProductionGaugeCtnr.visible = false

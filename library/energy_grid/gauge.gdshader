@@ -26,6 +26,6 @@ void fragment() {
 	final = mix(final, line_color, is_current);
 	// Now decide whether to draw the "right" color, but make sure to not draw over the "current"
 	// line, which is what the 'abs(1.0 - is_current)' part does.
-	final = mix(final, right_color, step(target / max_value, UV.x) * abs(1.0 - is_current));
+	final = mix(final, right_color, step(target_normalized, UV.x) * abs(1.0 - is_current));
 	COLOR.rgb = final;
 }

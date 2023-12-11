@@ -45,12 +45,17 @@ func _update_variance() -> void:
 
 
 func show_info() -> void:
-	$ConsumptionGauge.visible = true
-	$ConsumptionGauge.global_position = Utils.get_camera().unproject_position(global_position)
-	$ConsumptionGauge.current = demand
-	$ConsumptionGauge.target = _target_demand
-	$ConsumptionGauge.max_value = max_demand
+	%ConsumptionGaugeCtnr.visible = true
+	%ConsumptionGaugeCtnr.global_position = Utils.get_camera().unproject_position(global_position)
+	%ConsumptionGaugeCtnr.position -= %ConsumptionGaugeCtnr.size / 2.0 # Center it based on its size
+	%ConsumptionGaugeCtnr.position.y -= 30.0 # Nudge it up a little
+	
+	%ConsumptionGauge.current = demand
+	%ConsumptionGauge.target = _target_demand
+	%ConsumptionGauge.max_value = max_demand
+	
+	%kwLbl.text = str(demand).pad_decimals(1) + "kW"
 
 
 func hide_info() -> void:
-	$ConsumptionGauge.visible = false
+	%ConsumptionGaugeCtnr.visible = false

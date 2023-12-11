@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://3uw8bcseb6e1"]
+[gd_scene load_steps=4 format=3 uid="uid://3uw8bcseb6e1"]
 
-[ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="1_0sm2a"]
 [ext_resource type="Script" path="res://library/energy_grid/gauge.gd" id="2_m28u1"]
 
 [sub_resource type="Shader" id="Shader_w8v2k"]
@@ -41,25 +40,22 @@ shader_parameter/line_color = Color(1, 0, 0, 1)
 shader_parameter/left_color = Color(0, 0, 0, 1)
 shader_parameter/right_color = Color(1, 1, 1, 1)
 
-[node name="Gauge" type="Control"]
-custom_minimum_size = Vector2(100, 40)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 100.0
-offset_bottom = 40.0
-mouse_filter = 2
-theme = ExtResource("1_0sm2a")
-script = ExtResource("2_m28u1")
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
+[node name="GaugeBar" type="ColorRect"]
+material = SubResource("ShaderMaterial_p47xe")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_m28u1")
 
-[node name="GaugeBar" type="ColorRect" parent="PanelContainer"]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_p47xe")
-layout_mode = 2
+[node name="Pip" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+rotation = 0.785398
+pivot_offset = Vector2(4, 4)
+color = Color(1, 0, 0, 1)
