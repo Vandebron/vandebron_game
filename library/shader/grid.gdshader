@@ -22,8 +22,7 @@ void vertex() {
 
 void fragment() {
 	float line_ratio = line_width / cell_size;
-	// The fractional part of the position within the current cell,
-	// adjusted by the line width.
+	// The fractional part of the position within the current cell, adjusted by the line width.
 	vec2 pos_in_cell = fract((fragment_world_pos + offset) / cell_size + line_ratio / 2.0);
 	// 1.0 if current fragment is a on line, 0.0 otherwise.
 	float is_line = step(line_ratio, pos_in_cell.x) * step(line_ratio, pos_in_cell.y);
