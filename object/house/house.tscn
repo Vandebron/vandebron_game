@@ -1,13 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://vjdf3kwb88ov"]
+[gd_scene load_steps=5 format=3 uid="uid://vjdf3kwb88ov"]
 
 [ext_resource type="Script" path="res://object/house/house.gd" id="1_03gka"]
 [ext_resource type="PackedScene" uid="uid://5yby1xliao2j" path="res://object/house/house_model.tscn" id="2_6frin"]
 [ext_resource type="PackedScene" uid="uid://b3bbpo64jnd2l" path="res://object/house/house_collider.tscn" id="3_pyalc"]
+[ext_resource type="PackedScene" uid="uid://3uw8bcseb6e1" path="res://library/energy_grid/gauge.tscn" id="4_2fkml"]
 
 [node name="House" type="Node3D"]
 script = ExtResource("1_03gka")
-demand = 10.0
+demand = 1.0
+max_demand = 10.0
 
 [node name="Model" parent="." instance=ExtResource("2_6frin")]
 
 [node name="Collider" parent="." instance=ExtResource("3_pyalc")]
+
+[node name="VarianceTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="ConsumptionGauge" parent="." instance=ExtResource("4_2fkml")]
+visible = false
+left_color = Color(0.262745, 0.262745, 0.415686, 1)
+right_color = Color(0.94902, 0.941176, 0.898039, 1)

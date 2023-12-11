@@ -1,6 +1,6 @@
 extends Producer
 
-@export var production_variance: float = 0.05
+@export var production_variance: float = 0.05 # Deviation from production
 @export var acceleration: float = 10.0 # Determines how fast windmill adjusts to new wind speeds
 @export var turn_rate: float = 0.01 # Just cosmetic
 
@@ -36,17 +36,17 @@ func _physics_process(delta: float) -> void:
 		show_info()
 
 
+## Introduces some randomness to production, so every windmill is a little bit different.
 func _update_variance() -> void:
 	_variance = randf() * production_variance
 
 
 func show_info() -> void:
-	$ProductionGaugeCtnr.visible = true
-	$ProductionGaugeCtnr.global_position = Utils.get_camera().unproject_position(global_position)
-	%ProductionGauge.material.set_shader_parameter("current", _speed)
-	%ProductionGauge.material.set_shader_parameter("target", _target_speed)
+	$ProductionGauge.visible = true
+	$ProductionGauge.global_position = Utils.get_camera().unproject_position(global_position)
+	$ProductionGauge.current = _speed
+	$ProductionGauge.target = _target_speed
 
 
 func hide_info() -> void:
-	$ProductionGaugeCtnr.visible = false
-	%ProductionGauge.material.set_shader_parameter("current", _target_speed)
+	$ProductionGauge.visible = false

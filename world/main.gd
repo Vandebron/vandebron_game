@@ -19,8 +19,8 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	sun_anchor.rotation.z = PI * Weather.point_of_day
-	sun_anchor.rotation.y = PI * Weather.point_of_day
+	sun_anchor.rotation.z = PI * (1.0 - Weather.point_of_day)
+	sun_anchor.rotation.y = PI * (1.0 - Weather.point_of_day)
 	sun.visible = Weather.is_day()
 	moon.visible = Weather.is_night()
 	sun.look_at(Vector3.ZERO)
