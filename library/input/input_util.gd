@@ -43,7 +43,7 @@ func _find_pointer_world_position() -> Vector3:
 
 
 func _find_mouse_world_position() -> Vector3:
-	var mouse_position: Vector2 = Utils.get_actual_viewport().get_mouse_position()
+	var mouse_position: Vector2 = get_viewport().get_mouse_position()
 	var camera: Camera3D = Utils.get_camera()
 	var ray_origin: Vector3 = camera.project_ray_origin(mouse_position)
 	var ray_target: Vector3 = ray_origin + camera.project_ray_normal(mouse_position) * 2000.0

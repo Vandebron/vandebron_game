@@ -18,6 +18,15 @@ func _init() -> void:
 	item_selected.connect(self._on_item_selected)
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_released("build_initiate"):
+		select_current_item()
+	elif event.is_action_released("cycle_build_list_left"):
+		cycle_left()
+	elif event.is_action_released("cycle_build_list_right"):
+		cycle_right()
+
+
 func cycle_left() -> void:
 	var new_index: int = wrapi(_get_current_index() - 1, 0, item_count)
 	_select_and_trigger(new_index)

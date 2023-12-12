@@ -10,14 +10,6 @@ func _init() -> void:
 
 func get_camera() -> Camera3D:
 	return get_node("/root/Main/%Camera3D")
-
-
-func get_viewport_container() -> SubViewportContainer:
-	return get_node("/root/Main/%SubViewportContainer")
-
-
-func get_actual_viewport() -> Viewport:
-	return get_node("/root/Main/%SubViewport")
 	
 	
 func get_physics_layer(layer_name: String) -> int:
