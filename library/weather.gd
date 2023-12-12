@@ -18,7 +18,7 @@ var temperature: float = 0.0 # Ranges from 0-1; let's say 0=-10, 1=40
 var _target_wind: float = 1.0
 var _was_night: bool
 var _days_passed: int
-var _season: Season
+var season: Season
 
 
 func _ready() -> void:
@@ -41,7 +41,9 @@ func _physics_process(delta: float) -> void:
 		_days_passed += 1
 		# Increment season every X days, and make sure it wraps around from summer to autumn.
 		if _days_passed % days_per_season == 0:
-			_season = wrapi(_season + 1, 0, Season.size()) as Season
+			Events.season_ended.emit(season)
+			season = wrapi(season + 1, 0, Season.size()) as Season
+			Events.season_started.emit(season)
 
 
 func _update_wind() -> void:
@@ -65,7 +67,7 @@ func _update_temperature() -> void:
 
 
 func _limit_temperature(temp: float) -> float:
-	match _season:
+	match season:
 		Season.AUTUMN:
 			return clampf(temp, celcius_to_temp(5.0), celcius_to_temp(15.0))
 		Season.WINTER:

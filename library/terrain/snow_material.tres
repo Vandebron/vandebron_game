@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://mgppjhssbew5"]
+
+[sub_resource type="Gradient" id="Gradient_ucx4f"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_av4mq"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g36sd"]
+color_ramp = SubResource("Gradient_ucx4f")
+noise = SubResource("FastNoiseLite_av4mq")
+
+[resource]
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_g36sd")

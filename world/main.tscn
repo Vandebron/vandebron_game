@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://cbgk1537m5sog"]
+[gd_scene load_steps=33 format=3 uid="uid://cbgk1537m5sog"]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_8dagw"]
-[ext_resource type="Shader" path="res://library/shader/grid.gdshader" id="1_kb3f1"]
 [ext_resource type="Script" path="res://object/terrain.gd" id="2_dqac5"]
+[ext_resource type="Shader" path="res://library/terrain/terrain.gdshader" id="3_otujp"]
+[ext_resource type="Material" uid="uid://11gkcqv58xup" path="res://library/terrain/grid_material.tres" id="3_w44ug"]
 [ext_resource type="Script" path="res://library/camera_anchor.gd" id="4_vkf2q"]
 [ext_resource type="Script" path="res://library/energy_grid/energy_grid.gd" id="5_mqi84"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="6_27pu8"]
@@ -20,9 +21,6 @@ ssao_enabled = true
 ssao_intensity = 4.0
 glow_enabled = true
 fog_density = 0.05
-adjustment_enabled = true
-adjustment_brightness = 0.9
-adjustment_saturation = 1.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fj1y3"]
 size = Vector3(32, 1, 32)
@@ -30,26 +28,20 @@ size = Vector3(32, 1, 32)
 [sub_resource type="PlaneMesh" id="PlaneMesh_d1wqf"]
 size = Vector2(32, 32)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wu5qk"]
-render_priority = 0
-shader = ExtResource("1_kb3f1")
-shader_parameter/cell_size = 1.0
-shader_parameter/offset = Vector2(0.5, 0.5)
-shader_parameter/line_width = 0.025
-shader_parameter/line_color = Color(1, 1, 1, 1)
-shader_parameter/pointer_world_pos = null
-shader_parameter/pointer_circle_size = 1.5
-shader_parameter/pointer_circle_color = Color(0.894118, 0, 0.439216, 1)
-shader_parameter/ripple_ampl = 5.0
-shader_parameter/ripple_freq = 5.0
-shader_parameter/ripple_factor = 10.0
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iuyta"]
+noise_type = 0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqn2p"]
-next_pass = SubResource("ShaderMaterial_wu5qk")
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(1, 0.992157, 0.94902, 1)
-roughness = 0.0
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2cr2i"]
+noise = SubResource("FastNoiseLite_iuyta")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uhkcm"]
+render_priority = 0
+next_pass = ExtResource("3_w44ug")
+shader = ExtResource("3_otujp")
+shader_parameter/snow_density = 0.0
+shader_parameter/ground_color = Color(0.698039, 0.705882, 0.494118, 1)
+shader_parameter/snow_color = Color(1, 1, 1, 1)
+shader_parameter/snow_splatmap = SubResource("NoiseTexture2D_2cr2i")
 
 [sub_resource type="SphereMesh" id="SphereMesh_8cux0"]
 radius = 0.1
@@ -157,7 +149,7 @@ unique_name_in_owner = true
 [node name="Terrain" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
 mesh = SubResource("PlaneMesh_d1wqf")
 skeleton = NodePath("../../../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_cqn2p")
+surface_material_override/0 = SubResource("ShaderMaterial_uhkcm")
 script = ExtResource("2_dqac5")
 
 [node name="Crosshair" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World/Terrain"]

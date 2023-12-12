@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://11gkcqv58xup"]
+
+[ext_resource type="Shader" path="res://library/terrain/grid.gdshader" id="1_68jc7"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_68jc7")
+shader_parameter/cell_size = 1.0
+shader_parameter/offset = Vector2(0.5, 0.5)
+shader_parameter/line_width = 0.025
+shader_parameter/line_color = Color(0.392157, 0.388235, 0.396078, 1)
+shader_parameter/pointer_world_pos = null
+shader_parameter/pointer_circle_size = 1.5
+shader_parameter/pointer_circle_color = Color(0.894118, 0, 0.439216, 1)
+shader_parameter/ripple_ampl = 5.0
+shader_parameter/ripple_freq = 5.0
+shader_parameter/ripple_factor = 10.0
