@@ -2,19 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://bl8ya00goeixh" path="res://object/solar/solar_plant_model.tscn" id="1_c5bq2"]
 [ext_resource type="Script" path="res://object/solar/solar_plant.gd" id="1_wvyjk"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_wryx6"]
-size = Vector3(1, 1, 1.01257)
+[ext_resource type="PackedScene" uid="uid://bgswlht5i417u" path="res://object/solar/solar_plant_collidor.tscn" id="3_0y2vm"]
 
 [node name="SolarPlant" type="Node3D"]
 script = ExtResource("1_wvyjk")
 
 [node name="SolarPanel" parent="." instance=ExtResource("1_c5bq2")]
 
-[node name="Collidor" type="Area3D" parent="."]
-collision_layer = 8194
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Collidor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.652865, 0.00628662)
-shape = SubResource("BoxShape3D_wryx6")
+[node name="Collidor" parent="." instance=ExtResource("3_0y2vm")]
