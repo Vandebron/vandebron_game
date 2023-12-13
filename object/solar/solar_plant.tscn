@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd8yf3cq0ju1c"]
+
+[ext_resource type="PackedScene" uid="uid://bl8ya00goeixh" path="res://object/solar/solar_plant_model.tscn" id="1_c5bq2"]
+[ext_resource type="Script" path="res://object/solar/solar_plant.gd" id="1_wvyjk"]
+[ext_resource type="PackedScene" uid="uid://bgswlht5i417u" path="res://object/solar/solar_plant_collidor.tscn" id="3_0y2vm"]
+
+[node name="SolarPlant" type="Node3D"]
+script = ExtResource("1_wvyjk")
+
+[node name="SolarPanel" parent="." instance=ExtResource("1_c5bq2")]
+
+[node name="Collidor" parent="." instance=ExtResource("3_0y2vm")]

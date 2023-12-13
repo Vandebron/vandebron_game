@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="BuildingDef" load_steps=8 format=3 uid="uid://dqq54jpgujq4j"]
+
+[ext_resource type="PackedScene" uid="uid://bgswlht5i417u" path="res://object/solar/solar_plant_collidor.tscn" id="1_s2ovn"]
+[ext_resource type="PackedScene" uid="uid://bl8ya00goeixh" path="res://object/solar/solar_plant_model.tscn" id="2_no6t0"]
+[ext_resource type="Script" path="res://library/building/building_def.gd" id="4_b2oqg"]
+[ext_resource type="PackedScene" uid="uid://cys8li1dnu0qi" path="res://object/solar/solar_plant_shape.tscn" id="5_4dfyc"]
+[ext_resource type="PackedScene" uid="uid://bd8yf3cq0ju1c" path="res://object/solar/solar_plant.tscn" id="5_o3mfn"]
+
+[sub_resource type="Gradient" id="Gradient_xdggp"]
+offsets = PackedFloat32Array(0, 0.997653, 1)
+colors = PackedColorArray(0.642762, 0.711303, 0.636585, 1, 0.78937, 0.184102, 0.0813196, 0.996078, 0.489317, 0.587299, 0.480487, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hih47"]
+gradient = SubResource("Gradient_xdggp")
+
+[resource]
+script = ExtResource("4_b2oqg")
+cost = 10
+alias = "solarplant"
+display_name = "SolarPlant"
+image = SubResource("GradientTexture2D_hih47")
+model = ExtResource("2_no6t0")
+scene = ExtResource("5_o3mfn")
+shape = ExtResource("5_4dfyc")
+collider = ExtResource("1_s2ovn")
