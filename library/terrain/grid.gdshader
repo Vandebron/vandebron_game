@@ -1,4 +1,5 @@
 shader_type spatial;
+render_mode diffuse_toon, blend_mix;
 
 //#define LINE_CONTRAST
 //#define RIPPLE_ON_SURFACE

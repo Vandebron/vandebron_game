@@ -1,10 +1,10 @@
-[gd_scene load_steps=36 format=3 uid="uid://cbgk1537m5sog"]
+[gd_scene load_steps=37 format=3 uid="uid://cbgk1537m5sog"]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_8dagw"]
-[ext_resource type="Script" path="res://object/terrain.gd" id="2_dqac5"]
 [ext_resource type="Script" path="res://object/sun_anchor.gd" id="2_hv10b"]
 [ext_resource type="Shader" path="res://library/terrain/terrain.gdshader" id="3_otujp"]
 [ext_resource type="Material" uid="uid://11gkcqv58xup" path="res://library/terrain/grid_material.tres" id="3_w44ug"]
+[ext_resource type="Script" path="res://world/world.gd" id="4_ayfnm"]
 [ext_resource type="Script" path="res://object/camera_anchor.gd" id="4_vkf2q"]
 [ext_resource type="Script" path="res://library/energy_grid/energy_grid.gd" id="5_mqi84"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="6_27pu8"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bd8yf3cq0ju1c" path="res://object/solar/solar_plant.tscn" id="10_xwsj5"]
 [ext_resource type="Resource" uid="uid://diejrlo4iciyb" path="res://object/house/house_building_def.tres" id="11_l2stq"]
 [ext_resource type="Resource" uid="uid://b0r1cr25214g" path="res://object/windmill/windmill_building_def.tres" id="12_3u0jo"]
+[ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="12_duwpa"]
 [ext_resource type="Resource" uid="uid://bd15ndqy0tgbi" path="res://object/coal_plant/coal_plant_building_def.tres" id="14_o1e36"]
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="18_c6tcf"]
 
@@ -134,12 +135,13 @@ shape = SubResource("BoxShape3D_fj1y3")
 
 [node name="World" type="Node3D" parent="."]
 unique_name_in_owner = true
+script = ExtResource("4_ayfnm")
 
 [node name="Terrain" type="MeshInstance3D" parent="World"]
+unique_name_in_owner = true
 mesh = SubResource("PlaneMesh_d1wqf")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_uhkcm")
-script = ExtResource("2_dqac5")
 
 [node name="Crosshair" type="MeshInstance3D" parent="World/Terrain"]
 unique_name_in_owner = true
@@ -173,6 +175,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
 
 [node name="Consumer2" parent="World/EnergyGrid/Consumers" instance=ExtResource("6_q1483")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
+
+[node name="Doodads" type="Node3D" parent="World"]
+
+[node name="Tree" parent="World/Doodads" instance=ExtResource("12_duwpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
 
 [node name="UICanvasLayer" type="CanvasLayer" parent="."]
 

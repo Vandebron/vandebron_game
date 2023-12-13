@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy1urxsffiqbg"]
+
+[ext_resource type="PackedScene" uid="uid://q7t5l8qe2bho" path="res://object/tree/tree_model.tscn" id="1_c7c2c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3e5um"]
+size = Vector3(0.9, 2, 0.9)
+
+[node name="Tree" type="Node3D"]
+
+[node name="TreeModel" parent="." instance=ExtResource("1_c7c2c")]
+
+[node name="Collider" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 2.08165e-12)
+shape = SubResource("BoxShape3D_3e5um")
