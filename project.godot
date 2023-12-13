@@ -107,3 +107,8 @@ cycle_build_list_right={
 3d_physics/layer_2="building"
 3d_physics/layer_13="mouse"
 3d_physics/layer_14="building_hover"
+
+[rendering]
+
+scaling_3d/mode=1
+scaling_3d/scale=0.5
