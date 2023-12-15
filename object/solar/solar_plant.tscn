@@ -6,6 +6,7 @@
 
 [node name="SolarPlant" type="Node3D"]
 script = ExtResource("1_wvyjk")
+type = 2
 
 [node name="SolarPanel" parent="." instance=ExtResource("1_c5bq2")]
 

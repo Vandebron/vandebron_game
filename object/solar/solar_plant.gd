@@ -1,10 +1,7 @@
 extends Producer
 
-var _speed: float = 1.0
-var _target_output: float = 1.0
-var _variance: float = 0.1 # Represents random production deviation per windmill
 
-func _physics_process(delta: float) -> void:
-	_target_output = clampf(Weather.sun - _variance, 0.0, 1.0)
-	active_capability_out = _target_output * nominal_power
-	current_power = clampf(_speed * active_capability_out, dmol, nominal_power)
+func _physics_process(_delta: float) -> void:
+	var production: float = Weather.sun
+	active_capability_out = production * nominal_power
+	current_power = clampf(active_capability_out, dmol, nominal_power)
