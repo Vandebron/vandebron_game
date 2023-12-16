@@ -1,7 +1,5 @@
 extends Node3D
 
-const native_resolution := Vector2i(320, 180)
-
 @export var energy_grid: EnergyGrid
 
 @onready var build_item_list: BuildMenu = %BuildItemList
@@ -34,6 +32,8 @@ func _on_build_done(node: Node3D, building: BuildingDef, at_position: Vector3) -
 		energy_grid.add_producer(node, at_position)
 	elif node.is_in_group(Constants.GROUP_CONSUMER):
 		energy_grid.add_consumer(node, at_position)
+	elif node.is_in_group(Constants.GROUP_BATTERY):
+		energy_grid.add_battery(node, at_position)
 	else:
 		printerr("Trying to add unknown building type to world")
 	

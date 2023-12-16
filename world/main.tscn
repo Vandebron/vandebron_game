@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cbgk1537m5sog"]
+[gd_scene load_steps=39 format=3 uid="uid://cbgk1537m5sog"]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_8dagw"]
 [ext_resource type="Script" path="res://object/sun_anchor.gd" id="2_hv10b"]
@@ -16,9 +16,11 @@
 [ext_resource type="PackedScene" uid="uid://bd8yf3cq0ju1c" path="res://object/solar/solar_plant.tscn" id="10_xwsj5"]
 [ext_resource type="Resource" uid="uid://diejrlo4iciyb" path="res://object/house/house_building_def.tres" id="11_l2stq"]
 [ext_resource type="Resource" uid="uid://b0r1cr25214g" path="res://object/windmill/windmill_building_def.tres" id="12_3u0jo"]
+[ext_resource type="PackedScene" uid="uid://bb3libciwo1ul" path="res://object/battery/battery.tscn" id="12_aranr"]
 [ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="12_duwpa"]
 [ext_resource type="Resource" uid="uid://bd15ndqy0tgbi" path="res://object/coal_plant/coal_plant_building_def.tres" id="14_o1e36"]
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="18_c6tcf"]
+[ext_resource type="Resource" uid="uid://cavurm67np4ko" path="res://object/battery/battery_building_def.tres" id="21_mqbig"]
 
 [sub_resource type="Environment" id="Environment_khv8l"]
 ssao_enabled = true
@@ -176,6 +178,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
 [node name="Consumer2" parent="World/EnergyGrid/Consumers" instance=ExtResource("6_q1483")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
 
+[node name="Batteries" type="Node3D" parent="World/EnergyGrid"]
+unique_name_in_owner = true
+
+[node name="Battery" parent="World/EnergyGrid/Batteries" instance=ExtResource("12_aranr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
+
+[node name="Battery2" parent="World/EnergyGrid/Batteries" instance=ExtResource("12_aranr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
+
+[node name="Battery3" parent="World/EnergyGrid/Batteries" instance=ExtResource("12_aranr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
+
 [node name="Doodads" type="Node3D" parent="World"]
 
 [node name="Tree" parent="World/Doodads" instance=ExtResource("12_duwpa")]
@@ -306,4 +320,4 @@ item_2/icon = SubResource("GradientTexture2D_i817q")
 item_3/text = "Generator"
 item_3/icon = SubResource("GradientTexture2D_ft275")
 script = ExtResource("10_ka3ov")
-buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("11_l2stq"), ExtResource("12_3u0jo"), ExtResource("14_o1e36"), ExtResource("18_c6tcf")])
+buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("11_l2stq"), ExtResource("12_3u0jo"), ExtResource("14_o1e36"), ExtResource("18_c6tcf"), ExtResource("21_mqbig")])
