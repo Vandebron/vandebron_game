@@ -7,6 +7,7 @@ class_name EnergyGrid # EnergyGrid
 
 @onready var producer_container: Node3D = %Producers
 @onready var consumer_container: Node3D = %Consumers
+@onready var battery_container: Node3D = %Batteries
 @onready var supply_lbl: RichTextLabel = %SupplyLbl
 @onready var demand_lbl: RichTextLabel = %DemandLbl
 @onready var frequency_lbl: RichTextLabel = %FrequencyLbl
@@ -32,6 +33,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_update_supply()
 	demand = get_demand() # TODO: What if demand is zero? We get division by zero
+	_update_batteries()
 	
 	var target: float = supply / (supply + demand)
 	var easing: float = ease(1.0 - abs(balance - target), 4.8) # Ease-in
@@ -57,6 +59,25 @@ func _update_supply() -> void:
 	supply = fossil + solar + wind
 
 
+func _update_batteries() -> void:
+	var diff_kw: float = supply - demand
+	if diff_kw >= 0.0:
+		for battery in get_batteries():
+			var stored_kw: float = battery.give(diff_kw)
+			supply -= stored_kw # TODO: Fix ugly side-effect
+			diff_kw -= stored_kw
+			if diff_kw <= 0.0:
+				break
+	else:
+		diff_kw = abs(diff_kw)
+		for battery in get_batteries():
+			var discharged_kw: float = battery.take(diff_kw)
+			supply += discharged_kw # TODO: Fix ugly side-effect
+			diff_kw -= discharged_kw
+			if diff_kw <= 0.0:
+				break
+
+
 func get_demand() -> float:
 	return get_consumers()\
 		.map(func(a: Consumer) -> float: return a.demand)\
@@ -79,6 +100,14 @@ func get_consumers() -> Array[Consumer]:
 	return result
 
 
+func get_batteries() -> Array[Battery]:
+	# TODO: We do result.assign() because of this: https://github.com/godotengine/godot/issues/72566
+	var result: Array[Battery] = []
+	result.assign(battery_container.get_children()
+		.map(func(node: Node) -> Battery: return node as Battery))
+	return result
+
+
 func add_producer(producer: Producer, at_position: Vector3) -> void:
 	producer_container.add_child(producer)
 	producer.global_position = at_position
@@ -87,6 +116,11 @@ func add_producer(producer: Producer, at_position: Vector3) -> void:
 func add_consumer(consumer: Consumer, at_position: Vector3) -> void:
 	consumer_container.add_child(consumer)
 	consumer.global_position = at_position
+
+
+func add_battery(battery: Battery, at_position: Vector3) -> void:
+	battery_container.add_child(battery)
+	battery.global_position = at_position
 
 
 func _update_ui() -> void:

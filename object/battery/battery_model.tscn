@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://c40nvy1ajl4b7"]
+
+[ext_resource type="Script" path="res://object/battery/battery_model.gd" id="1_y0g5r"]
+[ext_resource type="Material" uid="uid://lmi3yj05hjvm" path="res://object/battery/battery_gauge_material.tres" id="2_g7hjs"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5g6kx"]
+top_radius = 0.45
+bottom_radius = 0.45
+height = 1.2
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jq1p"]
+diffuse_mode = 3
+albedo_color = Color(0.898039, 0.807843, 0.705882, 1)
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fkbjo"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.15
+radial_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jf5e1"]
+diffuse_mode = 3
+albedo_color = Color(0.721569, 0.709804, 0.72549, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2vomj"]
+diffuse_mode = 3
+albedo_color = Color(0.270588, 0.266667, 0.309804, 1)
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2csqu"]
+material = SubResource("StandardMaterial3D_2vomj")
+height = 0.15
+radial_segments = 16
+
+[sub_resource type="BoxMesh" id="BoxMesh_n0gt2"]
+resource_local_to_scene = true
+material = ExtResource("2_g7hjs")
+size = Vector3(0.2, 0.8, 0.2)
+
+[node name="Battery" type="Node3D"]
+script = ExtResource("1_y0g5r")
+
+[node name="Cylinder" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.6, 2.08165e-12)
+mesh = SubResource("CylinderMesh_5g6kx")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7jq1p")
+
+[node name="Tip" type="MeshInstance3D" parent="Cylinder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.65, 2.08165e-12)
+mesh = SubResource("CylinderMesh_fkbjo")
+surface_material_override/0 = SubResource("StandardMaterial3D_jf5e1")
+
+[node name="RingTop" type="MeshInstance3D" parent="Cylinder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.55, 2.08165e-12)
+mesh = SubResource("CylinderMesh_2csqu")
+
+[node name="RingBottom" type="MeshInstance3D" parent="Cylinder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.55, 2.08165e-12)
+mesh = SubResource("CylinderMesh_2csqu")
+
+[node name="GaugeAnchor" type="Node3D" parent="Cylinder"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="Gauge" type="MeshInstance3D" parent="Cylinder/GaugeAnchor"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, -2.50325e-08, 0, 1, 0, -2.50325e-08, 0, 1, 2.08165e-12, 2.08165e-12, 0.4)
+mesh = SubResource("BoxMesh_n0gt2")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

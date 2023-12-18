@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="BuildingDef" load_steps=8 format=3 uid="uid://cavurm67np4ko"]
+
+[ext_resource type="PackedScene" uid="uid://c7jqevtf0ia5d" path="res://object/battery/battery_collider.tscn" id="1_7j330"]
+[ext_resource type="Script" path="res://library/building/building_def.gd" id="1_bhurv"]
+[ext_resource type="PackedScene" uid="uid://c40nvy1ajl4b7" path="res://object/battery/battery_model.tscn" id="2_kc15i"]
+[ext_resource type="PackedScene" uid="uid://bb3libciwo1ul" path="res://object/battery/battery.tscn" id="3_g15ek"]
+[ext_resource type="PackedScene" uid="uid://bm71gqce1cqwb" path="res://object/battery/battery_shape.tscn" id="5_pfg48"]
+
+[sub_resource type="Gradient" id="Gradient_kbgjm"]
+colors = PackedColorArray(0.415686, 0.32549, 0.431373, 1, 0.898039, 0.807843, 0.705882, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sbk5r"]
+gradient = SubResource("Gradient_kbgjm")
+
+[resource]
+script = ExtResource("1_bhurv")
+cost = 10
+alias = "battery"
+display_name = "Battery"
+image = SubResource("GradientTexture2D_sbk5r")
+model = ExtResource("2_kc15i")
+scene = ExtResource("3_g15ek")
+shape = ExtResource("5_pfg48")
+collider = ExtResource("1_7j330")
