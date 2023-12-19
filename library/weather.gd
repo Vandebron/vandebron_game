@@ -1,10 +1,11 @@
 extends Node
 
 enum Season {AUTUMN, WINTER, SPRING, SUMMER}
+enum DayPart {DAWN, NOON, DUSK, NIGHT}
 
 const days_per_season: int = 7
-const day_night_cycle: Curve = preload("res://library/day_night_cycle.tres")
 const day_night_cycle_ms: int = 30_000 # Cycle of 30 seconds means day=15s, night=15s
+const game_start_offset_ms: int = floori((6.0 / 24.0) * float(day_night_cycle_ms)) # Start the game at 6 'o clock
 const wind_cycle_ms: int = 30_000 # Dictates how long it takes for weather to repeat
 const min_temperature: float = -10.0
 const max_temperature: float = 40.0
@@ -12,13 +13,15 @@ const max_temperature: float = 40.0
 var wind_angle: float = 1.0 # Direction of wind in radians. Cosmetic. does not affect wind power
 var wind: float = 0.5 # Ranges from 0-1
 var sun: float = 0.5 # Ranges from 0-1
-var point_of_day: float = 1.0 # Ranges from 0-1; night is < 0.5
 var temperature: float = 0.0 # Ranges from 0-1; let's say 0=-10, 1=40
+var point_of_day: float = 1.0 # Ranges from 0-1; night is < 0.5
+var time_of_day: float = 0.0: get=_get_time_of_day # Ranges from 0-24
+var part_of_day: DayPart = DayPart.DAWN: get=_get_part_of_day
+var season: Season
 
 var _target_wind: float = 1.0
-var _was_night: bool
 var _days_passed: int
-var season: Season
+var _prev_part_of_day: DayPart = DayPart.DAWN
 
 
 func _ready() -> void:
@@ -27,23 +30,81 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	point_of_day = _get_point_of_day()
+	point_of_day = _get_point_of_day() # This gets sampled so much, so we cache it here
+	_handle_day_transitions()
 	wind = lerpf(wind, _target_wind, delta)
-	temperature = point_of_day
+
+
+func celcius_to_temp(celcius: float) -> float:
+	return (celcius + min_temperature) / (max_temperature - min_temperature)
+
+
+func temp_to_celcius(temp: float) -> float:
+	return (temp * (max_temperature - min_temperature)) - min_temperature
+
+
+func is_dawn() -> bool:
+	return part_of_day == DayPart.DAWN
+
+
+func is_noon() -> bool:
+	return part_of_day == DayPart.NOON
+
+
+func is_dusk() -> bool:
+	return part_of_day == DayPart.NOON
+
+
+func is_night() -> bool:
+	return part_of_day == DayPart.NIGHT
+
+
+func is_day() -> bool:
+	return !is_night()
+
+
+## Returns value in 0-24h range
+func _get_time_of_day() -> float:
+	return point_of_day * 24.0
+
+
+## Returns value in 0-1 range.
+func _get_point_of_day() -> float:
+	var t: float = Utils.get_cycle_value(int(day_night_cycle_ms), game_start_offset_ms)
+	return (1.0 - t) / 2.0
+
+
+func _get_part_of_day() -> DayPart:
+	var time: float = time_of_day
+	if time > 6.00 && time <= 12.00:
+		return DayPart.DAWN
+	if time > 12.00 && time <= 18.00:
+		return DayPart.NOON
+	if time > 18.00 && time <= 24.00:
+		return DayPart.DUSK
+	return DayPart.NIGHT
+
+
+func _handle_day_transitions() -> void:
+	if part_of_day == _prev_part_of_day:
+		return
 	
-	if is_night() && !_was_night:
-		_was_night = true
-		Events.night_started.emit()
-	elif !is_night() && _was_night:
-		_was_night = false
-		Events.night_ended.emit()
-		
-		_days_passed += 1
-		# Increment season every X days, and make sure it wraps around from summer to autumn.
-		if _days_passed % days_per_season == 0:
-			Events.season_ended.emit(season)
-			season = wrapi(season + 1, 0, Season.size()) as Season
-			Events.season_started.emit(season)
+	Events.part_of_day_ended.emit(_prev_part_of_day)
+	Events.part_of_day_started.emit(part_of_day)
+	_prev_part_of_day = part_of_day
+	
+	if part_of_day != DayPart.DAWN:
+		return
+	
+	_days_passed += 1
+	
+	if _days_passed % days_per_season > 0:
+		return
+	
+	# Increment season every X days, and make sure it wraps around from summer to autumn.
+	Events.season_ended.emit(season)
+	season = wrapi(season + 1, 0, Season.size()) as Season
+	Events.season_started.emit(season)
 
 
 func _update_wind() -> void:
@@ -78,25 +139,3 @@ func _limit_temperature(temp: float) -> float:
 			return clampf(temp, celcius_to_temp(12.0), celcius_to_temp(40.0))
 	printerr("Unknown season")
 	return 0.5
-
-
-func is_day() -> bool:
-	return point_of_day >= 0.5
-
-
-func is_night() -> bool:
-	return point_of_day < 0.5
-
-
-func celcius_to_temp(celcius: float) -> float:
-	return (celcius + min_temperature) / (max_temperature - min_temperature)
-
-
-func temp_to_celcius(temp: float) -> float:
-	return (temp * (max_temperature - min_temperature)) - min_temperature
-
-
-func _get_point_of_day() -> float:
-	# We rotate the sun based on PI, so we need to account for that here
-	var x: float = Utils.get_cycle_value(int(day_night_cycle_ms * PI))
-	return day_night_cycle.sample(absf(x))

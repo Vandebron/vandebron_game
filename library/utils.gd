@@ -23,8 +23,8 @@ func sumf(accumulator: float, number: float) -> float:
 ## Returns a value between -1 and 1, based on the current time.
 ## It returns -1 at the start of the time time cycle, and 1 at the end.
 ## Convenient for sampling points on a curve. Especially sine waves.
-func get_cycle_value(cycle_time_ms: int) -> float:
-	var current_time_ms: int = Time.get_ticks_msec()
+func get_cycle_value(cycle_time_ms: int, offset: int = 0) -> float:
+	var current_time_ms: int = Time.get_ticks_msec() + offset
 	return 1.0 - (2.0 * (current_time_ms % cycle_time_ms)) / cycle_time_ms
 
 

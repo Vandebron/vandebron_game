@@ -12,15 +12,12 @@ var _target_demand: float = 1.0
 
 func _ready() -> void:
 	variance_timer.timeout.connect(self._update_variance)
+	
+	Events.part_of_day_started.connect(self._on_part_of_day_started)
+	Events.part_of_day_ended.connect(self._on_part_of_day_ended)
 
 	if Weather.is_day():
 		model.animation_player.play("consume")
-	
-	Events.night_started.connect(func() -> void:
-		model.animation_player.play("night"))
-	
-	Events.night_ended.connect(func() -> void:
-		model.animation_player.play("consume"))
 
 
 func _physics_process(delta: float) -> void:
@@ -39,11 +36,6 @@ func _input(event: InputEvent) -> void:
 		hide_info()
 
 
-## Introduces some randomness to consumption, so every house is a little bit different.
-func _update_variance() -> void:
-	_variance = randf() * consumption_variance
-
-
 func show_info() -> void:
 	%ConsumptionGaugeCtnr.visible = true
 	%ConsumptionGaugeCtnr.global_position = Utils.get_camera().unproject_position(global_position)
@@ -59,3 +51,18 @@ func show_info() -> void:
 
 func hide_info() -> void:
 	%ConsumptionGaugeCtnr.visible = false
+
+
+## Introduces some randomness to consumption, so every house is a little bit different.
+func _update_variance() -> void:
+	_variance = randf() * consumption_variance
+
+
+func _on_part_of_day_started(part: Weather.DayPart) -> void:
+	if part == Weather.DayPart.DUSK:
+		model.animation_player.play("night")
+
+
+func _on_part_of_day_ended(part: Weather.DayPart) -> void:
+	if part == Weather.DayPart.DUSK:
+		model.animation_player.play("consume")

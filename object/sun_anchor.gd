@@ -1,20 +1,17 @@
 extends Node3D
 
+@export var sun_color_range: GradientTexture1D
+@export var sun_light_energy_range: Curve
+
 @onready var sun: DirectionalLight3D = $Sun
-@onready var moon: DirectionalLight3D = $Moon
 
 
 func _physics_process(_delta: float) -> void:
-	rotation.z = PI * (1.0 - Weather.point_of_day)
-	rotation.y = PI * (1.0 - Weather.point_of_day)
-	
-	sun.visible = Weather.is_day()
-	moon.visible = Weather.is_night()
+	# TODO: Fix sun rotation. It should not "jump" to a new orientation at break of dawn
+	rotation.z = -(PI * 0.5 * Weather.point_of_day)
+	rotation.y = (PI * 0.5 * Weather.point_of_day)
 	
 	sun.look_at(Vector3.ZERO)
-	moon.look_at(Vector3.ZERO)
 	
-	# TODO: Add dawn/dusk lighting style like this:
-	#sun.light_color = Color.hex(0xd3a068ff)
-	#sun.light_energy = 0.5
-	#$WorldEnvironment.environment.fog_enabled = _is_night()
+	sun.light_color = sun_color_range.gradient.sample(Weather.point_of_day)
+	sun.light_energy = sun_light_energy_range.sample(Weather.point_of_day)
