@@ -13,8 +13,9 @@ const max_temperature: float = 40.0
 var wind_angle: float = 1.0 # Direction of wind in radians. Cosmetic. does not affect wind power
 var wind: float = 0.5 # Ranges from 0-1
 var sun: float = 0.5 # Ranges from 0-1
+var sun_strength: float: get=_get_sun_strength # Ranges from 0-1
 var temperature: float = 0.0 # Ranges from 0-1; let's say 0=-10, 1=40
-var point_of_day: float = 1.0 # Ranges from 0-1; night is < 0.5
+var point_of_day: float = 1.0 # Ranges from 0-1; 0=night, 0.25=dawn, 0.5=noon, 0.75=dusk
 var time_of_day: float = 0.0: get=_get_time_of_day # Ranges from 0-24
 var part_of_day: DayPart = DayPart.DAWN: get=_get_part_of_day
 var season: Season
@@ -83,6 +84,14 @@ func _get_part_of_day() -> DayPart:
 	if time > 18.00 && time <= 24.00:
 		return DayPart.DUSK
 	return DayPart.NIGHT
+
+
+## Represents intensity of the sun light, which peaks at noon.
+## Returns value between 0-1, where 1 means the sun is strongest.
+func _get_sun_strength() -> float:
+	# Noon is represented by point_of_day=0.5.
+	# So what we do here is check the "distance" from 0.5 aka noon.
+	return 1.0 - abs(point_of_day - 0.5) / 0.5
 
 
 func _handle_day_transitions() -> void:
