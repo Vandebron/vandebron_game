@@ -1,22 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://c66mf81m2ysy7"]
+[gd_scene load_steps=4 format=3 uid="uid://cson7rvivcf3l"]
 
-[ext_resource type="Script" path="res://object/cloud/cloud.gd" id="1_uqf6s"]
+[ext_resource type="Script" path="res://object/clouds/cloud.gd" id="1_dqlsq"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ju0tb"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtw8m"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_c8kjv"]
+material = SubResource("StandardMaterial3D_mtw8m")
 
 [node name="Cloud" type="Node3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-script = ExtResource("1_uqf6s")
+script = ExtResource("1_dqlsq")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 1.93905e-24, -0.127185, -0.663858)
-mesh = SubResource("CapsuleMesh_ju0tb")
+mesh = SubResource("CapsuleMesh_c8kjv")
 skeleton = NodePath("../MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -0.623174, 0, -0.24929)
-mesh = SubResource("CapsuleMesh_ju0tb")
+mesh = SubResource("CapsuleMesh_c8kjv")
+skeleton = NodePath("../..")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -0.255455, 0.377596, -0.494307)
-mesh = SubResource("CapsuleMesh_ju0tb")
+mesh = SubResource("CapsuleMesh_c8kjv")
+skeleton = NodePath("../..")
+
+[node name="DeletionTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true

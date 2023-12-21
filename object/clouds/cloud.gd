@@ -10,3 +10,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	translate(Vector3.RIGHT * speed * delta)
+
+
+func _on_deletion_timer_timeout():
+	queue_free()
+
