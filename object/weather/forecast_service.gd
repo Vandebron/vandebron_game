@@ -26,16 +26,16 @@ func _output_forecast() -> void:
 	var num_forecasts = min(forecasts.size(), 7)
 	for i in range(forecasts.size() - num_forecasts, forecasts.size()):
 		var forecast: Forecast = forecasts[i]
-		print("Forecast - Cloudiness: ", forecast.get_cloudiness(), " Windiness: ", forecast.get_windiness())
-	print("-----------------------------")
+		print_verbose("Forecast - Cloudiness: ", forecast.cloudiness, " Windiness: ", forecast.windiness)
+	print_verbose("-----------------------------")
 
 
 func _affect_weather(latest_forecast: Forecast) -> void:
-	if latest_forecast.cloudiness_percentage > 0:
-		var scaled_percentage: float = 1.0 - latest_forecast.cloudiness_percentage / 100.0
+	if latest_forecast.cloudiness > 0:
+		var scaled_percentage: float = 1.0 - latest_forecast.cloudiness / 100.0
 		cloud_spawn_timer.wait_time = lerpf(0.4, 5.0, scaled_percentage)
 		cloud_spawn_timer.start()
-		print("cloud_spawn_timer.wait_time: ", cloud_spawn_timer.wait_time)
+		print_verbose("cloud_spawn_timer.wait_time: ", cloud_spawn_timer.wait_time)
 	else:
 		cloud_spawn_timer.stop()
 

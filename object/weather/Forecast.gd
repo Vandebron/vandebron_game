@@ -29,8 +29,11 @@ class_name Forecast
 #Hurricane / Typhoon:
 #Wind Speed: 250 km/h and above
 
-var cloudiness_percentage: int = 0 # Range from (0% to 100%)
-var windiness_kmh: float = 0.0 # Range from 0.0 to 1.0 (0% to 100%)
+var cloudiness: int: set=_set_cloudiness_percentage, get=_get_cloudiness_percentage
+var windiness: float: set=_set_windiness_kmh, get=_get_windiness_kmh
+
+var _cloudiness_percentage: int = 0 # Range from (0% to 100%)
+var _windiness_kmh: float = 0.0 # Range from 0.0 to 1.0 (0% to 100%)
 
 # Constants
 const CLOUDINESS_MAX: int = 100
@@ -39,28 +42,28 @@ const WINDINESS_MAX: int = 250
 # Methods
 func _ready() -> void:
 	# Ensure values are within valid range
-	cloudiness_percentage = clampi(cloudiness_percentage, 0, CLOUDINESS_MAX)
-	windiness_kmh = clampf(windiness_kmh, 0.0, WINDINESS_MAX)
+	cloudiness = clampi(cloudiness, 0, CLOUDINESS_MAX)
+	windiness = clampf(windiness, 0.0, WINDINESS_MAX)
 
 
 # Setter methods for cloudiness and windiness with range validation
-func set_cloudiness(value: float) -> void:
-	cloudiness_percentage = clampi(value, 0.0, CLOUDINESS_MAX)
+func _set_cloudiness_percentage(value: int) -> void:
+	_cloudiness_percentage = clampi(value, 0, CLOUDINESS_MAX)
 
 
-func set_windiness(value: float) -> void:
-	windiness_kmh = clampf(value, 0.0, WINDINESS_MAX)
+func _get_cloudiness_percentage() -> int:
+	return _cloudiness_percentage
 
 
-func get_cloudiness() -> float:
-	return cloudiness_percentage
+func _set_windiness_kmh(value: float) -> void:
+	_windiness_kmh = clampf(value, 0.0, WINDINESS_MAX)
 
 
-func get_windiness() -> float:
-	return windiness_kmh
+func _get_windiness_kmh() -> float:
+	return _windiness_kmh
 
 
 # Function to generate random forecast values
 func generate_random_forecast() -> void:
-	cloudiness_percentage = randi_range(0.0, CLOUDINESS_MAX)
-	windiness_kmh = randf_range(0.0, WINDINESS_MAX)
+	cloudiness = randi_range(0, CLOUDINESS_MAX)
+	windiness = randf_range(0.0, WINDINESS_MAX)
