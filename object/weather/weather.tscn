@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://bcpjahrk7du1b"]
+
+[ext_resource type="Script" path="res://object/weather/ForecastService.gd" id="1_ip16x"]
+[ext_resource type="Script" path="res://object/weather/CloudGenerator.gd" id="2_fsae1"]
+[ext_resource type="PackedScene" uid="uid://cson7rvivcf3l" path="res://object/clouds/cloud_varient1.tscn" id="3_3tras"]
+[ext_resource type="PackedScene" uid="uid://qnlil4tjh7ev" path="res://object/clouds/cloud_varient2.tscn" id="4_ns1d2"]
+[ext_resource type="PackedScene" uid="uid://ccbkxui0vmue4" path="res://object/clouds/cloud_varient3.tscn" id="5_8qmh3"]
+[ext_resource type="PackedScene" uid="uid://upnceht0ih05" path="res://object/clouds/cloud_varient4.tscn" id="6_5a573"]
+
+[sub_resource type="Curve3D" id="Curve3D_wm4pu"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -12, 5.5, -15, 0, 0, 0, 0, 0, 0, -12, 5.5, 15),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="Weather" type="Node3D"]
+
+[node name="Forecast" type="Node3D" parent="."]
+script = ExtResource("1_ip16x")
+
+[node name="ForecastTimer" type="Timer" parent="Forecast"]
+wait_time = 5.0
+autostart = true
+
+[node name="CloudGenerator" type="Node3D" parent="."]
+script = ExtResource("2_fsae1")
+cloud_scenes = Array[PackedScene]([ExtResource("3_3tras"), ExtResource("4_ns1d2"), ExtResource("5_8qmh3"), ExtResource("6_5a573")])
+
+[node name="SpawnPath" type="Path3D" parent="CloudGenerator"]
+transform = Transform3D(1, 0, 0, 0, 0.999634, 0.0270493, 0, -0.0270493, 0.999634, -7.86771, 0.397905, -0.377338)
+curve = SubResource("Curve3D_wm4pu")
+
+[node name="SpawnLocation" type="PathFollow3D" parent="CloudGenerator/SpawnPath"]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -12, 5.5, -15)
+
+[node name="SpawnCloud" type="Timer" parent="CloudGenerator"]
+
+[connection signal="timeout" from="Forecast/ForecastTimer" to="Forecast" method="_on_forecast_timer_timeout"]
+[connection signal="timeout" from="CloudGenerator/SpawnCloud" to="CloudGenerator" method="_on_spawn_cloud_timeout"]
