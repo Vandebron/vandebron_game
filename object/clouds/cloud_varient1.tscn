@@ -28,7 +28,3 @@ transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.3
 mesh = SubResource("CapsuleMesh_c8kjv")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_0t2nw")
-
-[node name="DeletionTimer" type="Timer" parent="."]
-wait_time = 30.0
-autostart = true

@@ -32,7 +32,3 @@ surface_material_override/0 = ExtResource("2_ykfxa")
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -0.255455, 0.618043, -0.494307)
 mesh = SubResource("CapsuleMesh_fv1cq")
 surface_material_override/0 = ExtResource("2_ykfxa")
-
-[node name="DeletionTimer" type="Timer" parent="."]
-wait_time = 30.0
-autostart = true
