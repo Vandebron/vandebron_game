@@ -124,9 +124,9 @@ func add_battery(battery: Battery, at_position: Vector3) -> void:
 
 
 func _update_ui() -> void:
-	supply_lbl.text = str("Supply\n", _precision2(supply), "kW")
-	demand_lbl.text = str("[right]Demand\n", _precision2(demand), "kW[/right]")
-	frequency_lbl.text = str("[center]", _precision2(_get_frequency()), "\nHz[/center]")
+	supply_lbl.text = str("[right]SUPPLY\n", _precision2(supply), " kW[/right]")
+	demand_lbl.text = str("DEMAND\n", _precision2(demand), " kW")
+	frequency_lbl.text = str("[center]", _precision2(_get_frequency()), " Hz[/center]")
 	grid_balance_gauge.fossil = fossil
 	grid_balance_gauge.wind = wind
 	grid_balance_gauge.solar = solar
