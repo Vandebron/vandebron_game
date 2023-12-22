@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bcpjahrk7du1b"]
 
-[ext_resource type="Script" path="res://object/weather/ForecastService.gd" id="1_ip16x"]
-[ext_resource type="Script" path="res://object/weather/CloudGenerator.gd" id="2_fsae1"]
+[ext_resource type="Script" path="res://object/weather/forecast_service.gd" id="1_ip16x"]
+[ext_resource type="Script" path="res://object/weather/cloud_generator.gd" id="2_fsae1"]
 [ext_resource type="PackedScene" uid="uid://cson7rvivcf3l" path="res://object/clouds/cloud_varient1.tscn" id="3_3tras"]
 [ext_resource type="PackedScene" uid="uid://qnlil4tjh7ev" path="res://object/clouds/cloud_varient2.tscn" id="4_ns1d2"]
 [ext_resource type="PackedScene" uid="uid://ccbkxui0vmue4" path="res://object/clouds/cloud_varient3.tscn" id="5_8qmh3"]
