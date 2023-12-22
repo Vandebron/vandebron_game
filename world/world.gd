@@ -26,7 +26,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var pointer_pos: Vector3 = InputUtil.pointer_world_pos
 	grid_material.set_shader_parameter("pointer_world_pos", pointer_pos)
-	crosshair.global_position = pointer_pos
+	crosshair.global_position = pointer_pos - Vector3(0.0, crosshair.mesh.radius, 0.0)
 
 
 func _physics_process(_delta: float) -> void:
