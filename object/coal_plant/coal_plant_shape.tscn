@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://library/model/model.gd" id="2_t7kgv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6wm4m"]
-size = Vector3(3.8, 0.1, 3.8)
+size = Vector3(3, 0.1, 3)
 
 [node name="BuildShapeIndicator" type="Node3D"]
 script = ExtResource("2_t7kgv")

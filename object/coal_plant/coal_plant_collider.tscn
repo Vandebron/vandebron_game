@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://dy4qywlx5s7b8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2ypik"]
-size = Vector3(3.8, 3, 3.8)
+size = Vector3(2.9, 3, 2.9)
 
 [node name="Collider" type="Area3D"]
 collision_layer = 2
