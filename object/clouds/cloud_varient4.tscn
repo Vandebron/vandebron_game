@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://upnceht0ih05"]
+[gd_scene load_steps=5 format=3 uid="uid://upnceht0ih05"]
 
 [ext_resource type="Script" path="res://object/clouds/cloud.gd" id="1_gr2na"]
+[ext_resource type="Material" uid="uid://dduxlydqgg1l4" path="res://object/clouds/cloud_material.tres" id="2_ykfxa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkylo"]
 
@@ -14,19 +15,23 @@ script = ExtResource("1_gr2na")
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.58506, -0.127185, -0.663858)
 mesh = SubResource("CapsuleMesh_fv1cq")
 skeleton = NodePath("../MeshInstance3D")
+surface_material_override/0 = ExtResource("2_ykfxa")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.37114e-08, 1, 4.37114e-08, 1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, -0.0889229, -0.04524, -0.206845)
 mesh = SubResource("CapsuleMesh_fv1cq")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_ykfxa")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -0.623174, 0, -0.865615)
 mesh = SubResource("CapsuleMesh_fv1cq")
+surface_material_override/0 = ExtResource("2_ykfxa")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -0.255455, 0.618043, -0.494307)
 mesh = SubResource("CapsuleMesh_fv1cq")
+surface_material_override/0 = ExtResource("2_ykfxa")
 
 [node name="DeletionTimer" type="Timer" parent="."]
 wait_time = 30.0

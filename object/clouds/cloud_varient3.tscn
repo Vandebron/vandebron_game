@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccbkxui0vmue4"]
+[gd_scene load_steps=5 format=3 uid="uid://ccbkxui0vmue4"]
 
 [ext_resource type="Script" path="res://object/clouds/cloud.gd" id="1_4ii02"]
+[ext_resource type="Material" uid="uid://dduxlydqgg1l4" path="res://object/clouds/cloud_material.tres" id="2_sisfb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtw8m"]
 
@@ -14,6 +15,7 @@ script = ExtResource("1_4ii02")
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -0.623174, 0, -0.24929)
 mesh = SubResource("CapsuleMesh_c8kjv")
 skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_sisfb")
 
 [node name="DeletionTimer" type="Timer" parent="."]
 wait_time = 30.0
