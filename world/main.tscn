@@ -23,9 +23,14 @@
 [ext_resource type="Resource" uid="uid://cavurm67np4ko" path="res://object/battery/battery_building_def.tres" id="21_mqbig"]
 
 [sub_resource type="Environment" id="Environment_khv8l"]
+background_energy_multiplier = 0.9
+ambient_light_source = 2
+ambient_light_color = Color(0.188235, 0.219608, 0.282353, 1)
 ssao_enabled = true
 ssao_intensity = 4.0
 glow_enabled = true
+fog_light_energy = 0.45
+fog_density = 0.18
 
 [sub_resource type="Gradient" id="Gradient_tg6a4"]
 interpolation_mode = 2
@@ -123,15 +128,15 @@ shadow_enabled = true
 shadow_opacity = 0.3
 
 [node name="CameraAnchor" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)
 script = ExtResource("4_vkf2q")
 
 [node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
 unique_name_in_owner = true
-transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0.5, 5, 0.5)
+transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 1, 10, 1)
 projection = 1
 current = true
 size = 10.0
-far = 50.0
 
 [node name="MouseCollider" type="Area3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.5, 2.08165e-12)
