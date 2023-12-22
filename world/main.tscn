@@ -305,6 +305,34 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="HzCtnr" type="ColorRect" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/GridBalanceCtnr/GridBalanceGauge"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 0
+offset_top = 40.0
+offset_right = 60.0
+offset_bottom = 60.0
+color = Color(0.2, 0.168627, 0.25098, 1)
+
+[node name="HzLbl" type="Label" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/GridBalanceCtnr/GridBalanceGauge/HzCtnr"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.5
+offset_top = -11.5
+offset_right = 24.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "50.00 Hz"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="DemandCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer"]
 custom_minimum_size = Vector2(80, 2.08165e-12)
 layout_mode = 2
@@ -319,17 +347,6 @@ theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 text = "DEMAND
 50 kW"
-fit_content = true
-
-[node name="HzCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr"]
-visible = false
-layout_mode = 2
-
-[node name="FrequencyLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/HzCtnr"]
-unique_name_in_owner = true
-layout_mode = 2
-bbcode_enabled = true
-text = "[center]50.00Hz[/center]"
 fit_content = true
 
 [node name="BottomPanelCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer"]

@@ -10,7 +10,8 @@ class_name EnergyGrid # EnergyGrid
 @onready var battery_container: Node3D = %Batteries
 @onready var supply_lbl: RichTextLabel = %SupplyLbl
 @onready var demand_lbl: RichTextLabel = %DemandLbl
-@onready var frequency_lbl: RichTextLabel = %FrequencyLbl
+@onready var hz_lbl: Label = %HzLbl
+@onready var hz_ctnr: ColorRect = %HzCtnr
 @onready var grid_balance_gauge: GridBalanceGauge = %GridBalanceGauge
 
 # Supply kW
@@ -126,7 +127,8 @@ func add_battery(battery: Battery, at_position: Vector3) -> void:
 func _update_ui() -> void:
 	supply_lbl.text = str("[right]SUPPLY\n", _precision2(supply), " kW[/right]")
 	demand_lbl.text = str("DEMAND\n", _precision2(demand), " kW")
-	frequency_lbl.text = str("[center]", _precision2(_get_frequency()), " Hz[/center]")
+	hz_lbl.text = str(_precision2(_get_frequency()), " Hz")
+	hz_ctnr.position.x = (balance * grid_balance_gauge.size.x) - (hz_ctnr.size.x / 2)
 	grid_balance_gauge.fossil = fossil
 	grid_balance_gauge.wind = wind
 	grid_balance_gauge.solar = solar
