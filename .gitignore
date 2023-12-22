@@ -3,3 +3,7 @@
 
 # Build output etc.
 target/
+
+# Other
+.DS_Store
+**/.DS_Store
