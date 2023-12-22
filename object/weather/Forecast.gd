@@ -1,4 +1,5 @@
 extends Node3D
+class_name Forecast
 
 #From ChatGpt
 #Calm:
@@ -28,35 +29,38 @@ extends Node3D
 #Hurricane / Typhoon:
 #Wind Speed: 250 km/h and above
 
-class_name Forecast
-
-var cloudinessPercentage : int = 0 # Range from (0% to 100%)
-var windinesskmH : float = 0.0 # Range from 0.0 to 1.0 (0% to 100%)
+var cloudiness_percentage: int = 0 # Range from (0% to 100%)
+var windiness_kmh: float = 0.0 # Range from 0.0 to 1.0 (0% to 100%)
 
 # Constants
-const CLOUDINESS_MAX = 100
-const WINDINESS_MAX = 250
+const CLOUDINESS_MAX: int = 100
+const WINDINESS_MAX: int = 250
 
 # Methods
-func _ready():
+func _ready() -> void:
 	# Ensure values are within valid range
-	cloudinessPercentage = clamp(cloudinessPercentage, 0, CLOUDINESS_MAX)
-	windinesskmH = clamp(windinesskmH, 0.0, WINDINESS_MAX)
+	cloudiness_percentage = clampi(cloudiness_percentage, 0, CLOUDINESS_MAX)
+	windiness_kmh = clampf(windiness_kmh, 0.0, WINDINESS_MAX)
+
 
 # Setter methods for cloudiness and windiness with range validation
 func set_cloudiness(value: float) -> void:
-	cloudinessPercentage = clamp(value, 0.0, CLOUDINESS_MAX)
+	cloudiness_percentage = clampi(value, 0.0, CLOUDINESS_MAX)
+
 
 func set_windiness(value: float) -> void:
-	windinesskmH = clamp(value, 0.0, WINDINESS_MAX)
+	windiness_kmh = clampf(value, 0.0, WINDINESS_MAX)
+
 
 func get_cloudiness() -> float:
-	return cloudinessPercentage
+	return cloudiness_percentage
+
 
 func get_windiness() -> float:
-	return windinesskmH
-	
+	return windiness_kmh
+
+
 # Function to generate random forecast values
 func generate_random_forecast() -> void:
-	cloudinessPercentage = randf_range(0.0, CLOUDINESS_MAX)
-	windinesskmH = randf_range(0.0, WINDINESS_MAX)
+	cloudiness_percentage = randi_range(0.0, CLOUDINESS_MAX)
+	windiness_kmh = randf_range(0.0, WINDINESS_MAX)

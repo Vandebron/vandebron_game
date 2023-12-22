@@ -1,17 +1,14 @@
 extends Node3D
+class_name Cloud
 
 #Have wind speed affect this
-var speed = 5  # Adjust the speed as needed
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
+var speed: float = 5.0 # Adjust the speed as needed
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	translate(Vector3.RIGHT * speed * delta)
 
 
 func _on_deletion_timer_timeout():
 	queue_free()
-
