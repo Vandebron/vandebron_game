@@ -23,10 +23,25 @@
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="18_c6tcf"]
 [ext_resource type="Resource" uid="uid://cavurm67np4ko" path="res://object/battery/battery_building_def.tres" id="21_mqbig"]
 
+[sub_resource type="Gradient" id="Gradient_7ektp"]
+colors = PackedColorArray(0.95, 0.929733, 0.798, 1, 0.92, 0.91218, 0.8924, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xe08p"]
+gradient = SubResource("Gradient_7ektp")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_wemny"]
+panorama = SubResource("GradientTexture1D_xe08p")
+
+[sub_resource type="Sky" id="Sky_qmya8"]
+sky_material = SubResource("PanoramaSkyMaterial_wemny")
+
 [sub_resource type="Environment" id="Environment_khv8l"]
-background_energy_multiplier = 0.9
-ambient_light_source = 2
-ambient_light_color = Color(0.188235, 0.219608, 0.282353, 1)
+background_mode = 2
+background_energy_multiplier = 0.8
+sky = SubResource("Sky_qmya8")
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.9
+tonemap_exposure = 0.9
 ssao_enabled = true
 ssao_intensity = 4.0
 glow_enabled = true
@@ -138,7 +153,7 @@ sun_light_energy_range = SubResource("Curve_j6r4g")
 transform = Transform3D(-0.819152, 0.345187, 0.458078, 6.98189e-08, -0.798636, 0.601815, 0.573576, 0.492978, 0.654204, -7, 11, 13.25)
 light_energy = 0.9
 shadow_enabled = true
-shadow_opacity = 0.3
+sky_mode = 1
 
 [node name="CameraAnchor" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)
