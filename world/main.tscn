@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cbgk1537m5sog"]
+[gd_scene load_steps=52 format=3 uid="uid://cbgk1537m5sog"]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_8dagw"]
 [ext_resource type="Script" path="res://object/sun_anchor.gd" id="2_hv10b"]
@@ -246,30 +246,30 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/UI/MarginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 2.08165e-12)
+custom_minimum_size = Vector2(520, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4
+
+[node name="TopVBoxCtnr" type="VBoxContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 2
 
-[node name="TopPanelCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="TopPanelCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bchmx")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/VBoxContainer/TopPanelCtnr"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SupplyCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/VBoxContainer/TopPanelCtnr/HBoxContainer"]
+[node name="SupplyCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer"]
 custom_minimum_size = Vector2(80, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_hh88i")
 
-[node name="SupplyLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/VBoxContainer/TopPanelCtnr/HBoxContainer/SupplyCtnr"]
+[node name="SupplyLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/SupplyCtnr"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 12
@@ -278,26 +278,26 @@ text = "[right]SUPPLY
 50 kW[/right]"
 fit_content = true
 
-[node name="GridBalanceCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/VBoxContainer/TopPanelCtnr/HBoxContainer"]
+[node name="GridBalanceCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer"]
 custom_minimum_size = Vector2(2.08165e-12, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_loqhr")
 
-[node name="GridBalanceGauge" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/VBoxContainer/TopPanelCtnr/HBoxContainer/GridBalanceCtnr" instance=ExtResource("9_doxxx")]
+[node name="GridBalanceGauge" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/GridBalanceCtnr" instance=ExtResource("9_doxxx")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DemandCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/VBoxContainer/TopPanelCtnr/HBoxContainer"]
+[node name="DemandCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer"]
 custom_minimum_size = Vector2(80, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_10pjr")
 
-[node name="DemandLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/VBoxContainer/TopPanelCtnr/HBoxContainer/DemandCtnr"]
+[node name="DemandLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/DemandCtnr"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 12
@@ -306,11 +306,11 @@ text = "DEMAND
 50 kW"
 fit_content = true
 
-[node name="HzCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="HzCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr"]
 visible = false
 layout_mode = 2
 
-[node name="FrequencyLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/VBoxContainer/HzCtnr"]
+[node name="FrequencyLbl" type="RichTextLabel" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/HzCtnr"]
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
@@ -318,21 +318,19 @@ text = "[center]50.00Hz[/center]"
 fit_content = true
 
 [node name="BottomPanelCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(600, 2.08165e-12)
 layout_mode = 2
-size_flags_horizontal = 4
 
 [node name="BuildItemList" type="ItemList" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/BottomPanelCtnr"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
 allow_reselect = true
 allow_search = false
 auto_height = true
 item_count = 5
 max_columns = 5
-fixed_column_width = 100
+fixed_column_width = 90
 icon_mode = 0
+fixed_icon_size = Vector2i(40, 40)
 item_0/text = "House"
 item_0/icon = SubResource("GradientTexture2D_ga8vt")
 item_1/text = "Windmill"
