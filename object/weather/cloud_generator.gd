@@ -7,9 +7,10 @@ extends Node3D
 
 func _on_spawn_cloud_timeout() -> void:
 	var random_index: int = randi_range(0, cloud_scenes.size() - 1)
-	var cloud = cloud_scenes[random_index].instantiate()
+	var cloud: Cloud = cloud_scenes[random_index].instantiate()
 	
 	# And give it a random offset.
 	cloud_spawn_location.progress_ratio = randf()
 	cloud.position = cloud_spawn_location.position
+	cloud.max_distance = 32.0
 	add_child(cloud)

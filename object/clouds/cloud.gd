@@ -1,14 +1,17 @@
 extends Node3D
 class_name Cloud
 
-#Have wind speed affect this
-var speed: float = 5.0 # Adjust the speed as needed
+# TODO: Have wind speed affect this
+@export var speed: float = 5.0 # Adjust the speed as needed
+@export var max_distance: float = 10.0
+
+var _distance_traveled: float
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	translate(Vector3.RIGHT * speed * delta)
-
-
-func _on_deletion_timer_timeout():
-	queue_free()
+func _physics_process(delta: float) -> void:
+	var move_delta: float = speed * delta
+	translate(Vector3.RIGHT * move_delta)
+	
+	_distance_traveled += move_delta
+	if _distance_traveled > max_distance:
+		queue_free()
