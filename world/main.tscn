@@ -204,14 +204,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 [node name="BuildManager" type="Node3D" parent="World"]
 script = ExtResource("13_vflgn")
 
-[node name="HealthManager" type="Node" parent="World" node_paths=PackedStringArray("grid", "health_bar")]
+[node name="HealthManager" type="Node" parent="World" node_paths=PackedStringArray("grid")]
 script = ExtResource("14_akp1n")
 grid = NodePath("../EnergyGrid")
-health_bar = NodePath("../../UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/HealthBar")
 
-[node name="UiManager" type="Node" parent="World" node_paths=PackedStringArray("energy_grid")]
+[node name="UiManager" type="Node" parent="World" node_paths=PackedStringArray("energy_grid", "health_manager")]
 script = ExtResource("7_4pa7t")
 energy_grid = NodePath("../EnergyGrid")
+health_manager = NodePath("../HealthManager")
 
 [node name="Terrain" type="MeshInstance3D" parent="World"]
 unique_name_in_owner = true

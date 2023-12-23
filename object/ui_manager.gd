@@ -2,6 +2,7 @@ extends Node
 class_name UiManager
 
 @export var energy_grid: EnergyGrid
+@export var health_manager: HealthManager
 
 @onready var health_bar: HealthBar = %HealthBar
 @onready var supply_lbl: RichTextLabel = %SupplyLbl
@@ -27,6 +28,8 @@ func _physics_process(_delta: float) -> void:
 	grid_balance_gauge.solar = energy_grid.solar
 	grid_balance_gauge.demand = energy_grid.demand
 	grid_balance_gauge.balance = energy_grid.balance
+	
+	health_bar.health = health_manager.health
 
 
 func _get_normalized_frequency_max_deviation() -> float:
