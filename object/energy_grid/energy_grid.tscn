@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcrcskfsjrybq"]
+
+[ext_resource type="Script" path="res://library/energy_grid/energy_grid.gd" id="1_vjsqc"]
+
+[node name="EnergyGrid" type="Node3D"]
+script = ExtResource("1_vjsqc")
+
+[node name="Producers" type="Node3D" parent="."]
+
+[node name="Consumers" type="Node3D" parent="."]
+
+[node name="Batteries" type="Node3D" parent="."]

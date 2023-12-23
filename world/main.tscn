@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://cbgk1537m5sog"]
+[gd_scene load_steps=56 format=3 uid="uid://cbgk1537m5sog"]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_8dagw"]
 [ext_resource type="Script" path="res://object/sun_anchor.gd" id="2_hv10b"]
@@ -6,12 +6,13 @@
 [ext_resource type="Material" uid="uid://11gkcqv58xup" path="res://library/terrain/grid_material.tres" id="3_w44ug"]
 [ext_resource type="Script" path="res://world/world.gd" id="4_ayfnm"]
 [ext_resource type="Script" path="res://object/camera_anchor.gd" id="4_vkf2q"]
-[ext_resource type="Script" path="res://library/energy_grid/energy_grid.gd" id="5_mqi84"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="6_27pu8"]
 [ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/windmill/windmill.tscn" id="6_jw3nt"]
 [ext_resource type="PackedScene" uid="uid://vjdf3kwb88ov" path="res://object/house/house.tscn" id="6_q1483"]
+[ext_resource type="Script" path="res://object/ui_manager.gd" id="7_4pa7t"]
 [ext_resource type="PackedScene" uid="uid://fwrp8f25a4dx" path="res://object/coal_plant/coal_plant.tscn" id="7_4quym"]
 [ext_resource type="PackedScene" uid="uid://bcm7rp6xri4cr" path="res://library/energy_grid/grid_balance_gauge.tscn" id="9_doxxx"]
+[ext_resource type="PackedScene" uid="uid://dcrcskfsjrybq" path="res://object/energy_grid/energy_grid.tscn" id="9_s4va2"]
 [ext_resource type="Script" path="res://library/ui/build_menu.gd" id="10_ka3ov"]
 [ext_resource type="PackedScene" uid="uid://bd8yf3cq0ju1c" path="res://object/solar/solar_plant.tscn" id="10_xwsj5"]
 [ext_resource type="Resource" uid="uid://diejrlo4iciyb" path="res://object/house/house_building_def.tres" id="11_l2stq"]
@@ -181,6 +182,37 @@ shape = SubResource("BoxShape3D_fj1y3")
 unique_name_in_owner = true
 script = ExtResource("4_ayfnm")
 
+[node name="EnergyGrid" parent="World" instance=ExtResource("9_s4va2")]
+
+[node name="House" parent="World/EnergyGrid" instance=ExtResource("6_q1483")]
+
+[node name="House2" parent="World/EnergyGrid" instance=ExtResource("6_q1483")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Windmill" parent="World/EnergyGrid" instance=ExtResource("6_jw3nt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
+
+[node name="CoalPlant" parent="World/EnergyGrid" instance=ExtResource("7_4quym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
+
+[node name="Battery" parent="World/EnergyGrid" instance=ExtResource("12_aranr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+
+[node name="SolarPlant" parent="World/EnergyGrid" instance=ExtResource("10_xwsj5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+
+[node name="BuildManager" type="Node3D" parent="World"]
+script = ExtResource("13_vflgn")
+
+[node name="HealthManager" type="Node" parent="World" node_paths=PackedStringArray("grid", "health_bar")]
+script = ExtResource("14_akp1n")
+grid = NodePath("../EnergyGrid")
+health_bar = NodePath("../../UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/HealthBar")
+
+[node name="UiManager" type="Node" parent="World" node_paths=PackedStringArray("energy_grid")]
+script = ExtResource("7_4pa7t")
+energy_grid = NodePath("../EnergyGrid")
+
 [node name="Terrain" type="MeshInstance3D" parent="World"]
 unique_name_in_owner = true
 mesh = SubResource("PlaneMesh_d1wqf")
@@ -193,52 +225,6 @@ cast_shadow = 0
 mesh = SubResource("SphereMesh_8cux0")
 skeleton = NodePath("../../../CameraAnchor")
 surface_material_override/0 = SubResource("StandardMaterial3D_scrrx")
-
-[node name="EnergyGrid" type="Node3D" parent="World"]
-script = ExtResource("5_mqi84")
-
-[node name="HealthManager" type="Node3D" parent="World/EnergyGrid" node_paths=PackedStringArray("health_bar")]
-script = ExtResource("14_akp1n")
-health_bar = NodePath("../../../UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/HealthBar")
-
-[node name="BuildManager" type="Node3D" parent="World/EnergyGrid" node_paths=PackedStringArray("energy_grid")]
-script = ExtResource("13_vflgn")
-energy_grid = NodePath("..")
-
-[node name="Producers" type="Node3D" parent="World/EnergyGrid"]
-unique_name_in_owner = true
-
-[node name="Windmill" parent="World/EnergyGrid/Producers" instance=ExtResource("6_jw3nt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
-
-[node name="Windmill2" parent="World/EnergyGrid/Producers" instance=ExtResource("6_jw3nt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
-
-[node name="CoalPlant" parent="World/EnergyGrid/Producers" instance=ExtResource("7_4quym")]
-
-[node name="SolarPlant" parent="World/EnergyGrid/Producers" instance=ExtResource("10_xwsj5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
-
-[node name="Consumers" type="Node3D" parent="World/EnergyGrid"]
-unique_name_in_owner = true
-
-[node name="Consumer" parent="World/EnergyGrid/Consumers" instance=ExtResource("6_q1483")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
-
-[node name="Consumer2" parent="World/EnergyGrid/Consumers" instance=ExtResource("6_q1483")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
-
-[node name="Batteries" type="Node3D" parent="World/EnergyGrid"]
-unique_name_in_owner = true
-
-[node name="Battery" parent="World/EnergyGrid/Batteries" instance=ExtResource("12_aranr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
-
-[node name="Battery2" parent="World/EnergyGrid/Batteries" instance=ExtResource("12_aranr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
-
-[node name="Battery3" parent="World/EnergyGrid/Batteries" instance=ExtResource("12_aranr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
 
 [node name="Doodads" type="Node3D" parent="World"]
 

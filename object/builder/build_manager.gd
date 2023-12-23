@@ -26,14 +26,7 @@ func _create_builder(building: BuildingDef) -> void:
 
 
 func _on_build_done(node: Node3D, building: BuildingDef, at_position: Vector3) -> void:
-	if node.is_in_group(Constants.GROUP_PRODUCER):
-		energy_grid.add_producer(node, at_position)
-	elif node.is_in_group(Constants.GROUP_CONSUMER):
-		energy_grid.add_consumer(node, at_position)
-	elif node.is_in_group(Constants.GROUP_BATTERY):
-		energy_grid.add_battery(node, at_position)
-	else:
-		printerr("Trying to add unknown building type to world")
+	energy_grid.add_building(node, at_position)
 	
 	# This is to prevent a case where the user selects a new building just after finishing another,
 	# which causes two builders to be present simultaneously.

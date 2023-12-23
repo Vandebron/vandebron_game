@@ -1,12 +1,13 @@
-extends Node3D
+extends Node
 class_name HealthManager
 
+@export var grid: EnergyGrid
 @export var health_bar: HealthBar
 @export var heal_factor: float = 0.01
 @export var hurt_factor: float = 0.01
 
 
-func update_health(grid: EnergyGrid) -> void:
+func _physics_process(_delta: float) -> void:
 	var balance_diff: float = abs(grid.BALANCE_CENTER - grid.balance)
 	var balance_diff_hz: float = balance_diff * grid.target_frequency_hz
 	var deviation: float = balance_diff_hz / grid.frequency_max_deviation_hz
