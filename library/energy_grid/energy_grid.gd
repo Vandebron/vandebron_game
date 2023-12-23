@@ -16,6 +16,7 @@ const BALANCE_CENTER: float = 0.5
 @onready var hz_ctnr: ColorRect = %HzCtnr
 @onready var grid_balance_gauge: GridBalanceGauge = %GridBalanceGauge
 @onready var health_bar: PanelContainer = %HealthBar
+@onready var health_manager: HealthManager = $HealthManager
 
 # Supply kW
 var fossil: float
@@ -43,7 +44,7 @@ func _physics_process(delta: float) -> void:
 	var easing: float = ease(1.0 - abs(balance - target), 4.8) # Ease-in
 	balance = clampf(lerpf(balance, target, delta * easing * balance_adj_rate), 0.0, 1.0)
 	
-	_update_health()
+	health_manager.update_health(self)
 	_update_ui()
 
 
@@ -81,24 +82,6 @@ func _update_batteries() -> void:
 			diff_kw -= discharged_kw
 			if diff_kw <= 0.0:
 				break
-
-
-func _update_health() -> void:
-	# TODO: Make this an @export
-	const heal_factor: float = 0.005
-	const hurt_factor: float = 0.01
-	
-	var balance_diff: float = abs(BALANCE_CENTER - balance)
-	var balance_diff_hz: float = balance_diff * target_frequency_hz
-	var deviation: float = balance_diff_hz / frequency_max_deviation_hz
-	
-	if balance_diff_hz < frequency_max_deviation_hz:
-		health_bar.health += 1.0 * heal_factor
-	else:
-		health_bar.health -= deviation * hurt_factor
-	
-	if is_zero_approx(health_bar.health):
-		pass # TODO: Game over
 
 
 func get_demand() -> float:
