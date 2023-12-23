@@ -1,6 +1,5 @@
-[gd_scene load_steps=58 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=52 format=3 uid="uid://ddaamq2qj5ewp"]
 
-[ext_resource type="Script" path="res://object/season_manager.gd" id="1_kuuws"]
 [ext_resource type="Script" path="res://world/default_game.gd" id="1_ukhqd"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_xd2nc"]
 [ext_resource type="PackedScene" uid="uid://4el7epeujqmf" path="res://object/health_bar/health_bar.tscn" id="3_p2l32"]
@@ -18,16 +17,19 @@
 [ext_resource type="PackedScene" uid="uid://bb3libciwo1ul" path="res://object/battery/battery.tscn" id="15_aeyws"]
 [ext_resource type="PackedScene" uid="uid://bd8yf3cq0ju1c" path="res://object/solar/solar_plant.tscn" id="16_61lux"]
 [ext_resource type="Script" path="res://object/builder/build_manager.gd" id="17_yp472"]
+[ext_resource type="Script" path="res://object/terrain_manager.gd" id="18_2lqje"]
 [ext_resource type="Script" path="res://object/health_bar/health_manager.gd" id="18_qiu7f"]
 [ext_resource type="Script" path="res://object/ui_manager.gd" id="19_n0n5j"]
 [ext_resource type="Material" uid="uid://11gkcqv58xup" path="res://library/terrain/grid_material.tres" id="20_874wh"]
 [ext_resource type="Shader" path="res://library/terrain/terrain.gdshader" id="21_3wvil"]
+[ext_resource type="Script" path="res://library/weather.gd" id="21_df1cl"]
 [ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="22_18nom"]
 [ext_resource type="Script" path="res://library/terrain/terrain.gd" id="22_e6dhh"]
 [ext_resource type="Script" path="res://object/crosshair.gd" id="22_ncsg7"]
 [ext_resource type="PackedScene" uid="uid://bcpjahrk7du1b" path="res://object/weather/weather.tscn" id="23_rxnc1"]
-[ext_resource type="Script" path="res://object/sun_anchor.gd" id="24_dnoyd"]
 [ext_resource type="Script" path="res://object/camera_anchor.gd" id="25_83m6t"]
+[ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/default_sun.tscn" id="27_x6kvx"]
+[ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://world/default_world_environment.tres" id="30_3whrn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bchmx"]
 bg_color = Color(0.207843, 0.168627, 0.258824, 1)
@@ -86,20 +88,6 @@ shader_parameter/ground_color = Color(0.698039, 0.705882, 0.494118, 1)
 shader_parameter/snow_color = Color(1, 1, 1, 1)
 shader_parameter/snow_splatmap = SubResource("NoiseTexture2D_2cr2i")
 
-[sub_resource type="Gradient" id="Gradient_tg6a4"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
-colors = PackedColorArray(0.262745, 0.262745, 0.415686, 1, 0.960784, 0.788235, 0.733333, 1, 1, 1, 1, 1, 0.85, 0.575875, 0.4845, 1, 0.262745, 0.262745, 0.415686, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ugm2t"]
-gradient = SubResource("Gradient_tg6a4")
-
-[sub_resource type="Curve" id="Curve_j6r4g"]
-min_value = 0.7
-max_value = 0.9
-_data = [Vector2(2.08165e-12, 0.7), 0.0, 0.0, 0, 0, Vector2(0.5, 0.9), 2.52989e-07, 2.52989e-07, 0, 0, Vector2(1, 0.7), 0.0, 0.0, 0, 0]
-point_count = 3
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_fj1y3"]
 size = Vector3(32, 1, 32)
 
@@ -117,31 +105,6 @@ albedo_color = Color(0.415686, 0.32549, 0.431373, 1)
 roughness = 0.0
 disable_receive_shadows = true
 billboard_mode = 2
-
-[sub_resource type="Gradient" id="Gradient_7ektp"]
-colors = PackedColorArray(0.95, 0.929733, 0.798, 1, 0.92, 0.91218, 0.8924, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_xe08p"]
-gradient = SubResource("Gradient_7ektp")
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_wemny"]
-panorama = SubResource("GradientTexture1D_xe08p")
-
-[sub_resource type="Sky" id="Sky_qmya8"]
-sky_material = SubResource("PanoramaSkyMaterial_wemny")
-
-[sub_resource type="Environment" id="Environment_khv8l"]
-background_mode = 2
-background_energy_multiplier = 0.8
-sky = SubResource("Sky_qmya8")
-ambient_light_source = 3
-ambient_light_sky_contribution = 0.9
-tonemap_exposure = 0.9
-ssao_enabled = true
-ssao_intensity = 4.0
-glow_enabled = true
-fog_light_energy = 0.45
-fog_density = 0.18
 
 [node name="DefaultGame" type="Node3D"]
 script = ExtResource("1_ukhqd")
@@ -289,7 +252,8 @@ item_4/icon = SubResource("GradientTexture2D_iio37")
 script = ExtResource("5_pa8nh")
 buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("6_hie5k"), ExtResource("7_j6abk"), ExtResource("8_mvyrg"), ExtResource("9_emw5f"), ExtResource("10_7sqdc")])
 
-[node name="EnergyGrid" parent="." instance=ExtResource("11_gsodt")]
+[node name="EnergyGrid" parent="." node_paths=PackedStringArray("weather") instance=ExtResource("11_gsodt")]
+weather = NodePath("../Weather")
 
 [node name="House" parent="EnergyGrid" instance=ExtResource("12_5qeit")]
 
@@ -312,9 +276,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 script = ExtResource("17_yp472")
 energy_grid = NodePath("../EnergyGrid")
 
-[node name="SeasonManager" type="Node3D" parent="." node_paths=PackedStringArray("terrain")]
-script = ExtResource("1_kuuws")
+[node name="TerrainManager" type="Node3D" parent="." node_paths=PackedStringArray("terrain", "weather")]
+script = ExtResource("18_2lqje")
 terrain = NodePath("../Terrain")
+weather = NodePath("../Weather")
 
 [node name="HealthManager" type="Node" parent="." node_paths=PackedStringArray("energy_grid")]
 unique_name_in_owner = true
@@ -325,6 +290,9 @@ energy_grid = NodePath("../EnergyGrid")
 script = ExtResource("19_n0n5j")
 energy_grid = NodePath("../EnergyGrid")
 health_manager = NodePath("../HealthManager")
+
+[node name="Weather" type="Node" parent="."]
+script = ExtResource("21_df1cl")
 
 [node name="Terrain" type="MeshInstance3D" parent="." node_paths=PackedStringArray("camera")]
 mesh = SubResource("PlaneMesh_d1wqf")
@@ -338,25 +306,16 @@ camera = NodePath("../CameraAnchor/Camera3D")
 [node name="Tree" parent="Doodads" instance=ExtResource("22_18nom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
 
-[node name="Weather" parent="." instance=ExtResource("23_rxnc1")]
+[node name="CloudWeather" parent="." instance=ExtResource("23_rxnc1")]
 
-[node name="SunAnchor" type="Node3D" parent="."]
-script = ExtResource("24_dnoyd")
-sun_color_range = SubResource("GradientTexture1D_ugm2t")
-sun_light_energy_range = SubResource("Curve_j6r4g")
-
-[node name="Sun" type="DirectionalLight3D" parent="SunAnchor"]
-transform = Transform3D(-0.819152, 0.345187, 0.458078, 6.98189e-08, -0.798636, 0.601815, 0.573576, 0.492978, 0.654204, -7, 11, 13.25)
-light_energy = 0.9
-shadow_enabled = true
-sky_mode = 1
+[node name="DefaultSun" parent="." node_paths=PackedStringArray("weather") instance=ExtResource("27_x6kvx")]
+weather = NodePath("../Weather")
 
 [node name="CameraAnchor" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)
 script = ExtResource("25_83m6t")
 
 [node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
-unique_name_in_owner = true
 transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 1, 10, 1)
 projection = 1
 current = true
@@ -380,4 +339,4 @@ script = ExtResource("22_ncsg7")
 camera = NodePath("../Camera3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_khv8l")
+environment = ExtResource("30_3whrn")

@@ -23,22 +23,17 @@ func _input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	_target_speed = clampf(Weather.wind - _variance, 0.0, 1.0)
+	_target_speed = clampf(weather.wind - _variance, 0.0, 1.0)
 	_speed = lerpf(_speed, _target_speed, delta * acceleration)
 	active_capability_out = _target_speed * nominal_power
 	current_power = clampf(_speed * active_capability_out, dmol, nominal_power)
 	
 	model.animation_player.speed_scale = _speed
 	model.global_rotation.y = lerpf(
-		model.global_rotation.y, Weather.wind_angle, delta * turn_rate * Weather.wind)
+		model.global_rotation.y, weather.wind_angle, delta * turn_rate * weather.wind)
 	
 	#if Input.is_action_pressed("show_info"):
 		#show_info()
-
-
-## Introduces some randomness to production, so every windmill is a little bit different.
-func _update_variance() -> void:
-	_variance = randf() * production_variance
 
 
 #func show_info() -> void:
@@ -56,3 +51,8 @@ func _update_variance() -> void:
 
 func hide_info() -> void:
 	%ProductionGaugeCtnr.visible = false
+
+
+## Introduces some randomness to production, so every windmill is a little bit different.
+func _update_variance() -> void:
+	_variance = randf() * production_variance

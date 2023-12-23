@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://bx87ivqvxe2t8"]
+
+[ext_resource type="PackedScene" uid="uid://dsuaueqo8705f" path="res://world/main_menu_game.tscn" id="1_odgb6"]
+[ext_resource type="Script" path="res://object/main_menu/main_menu.gd" id="1_pj8qk"]
+
+[sub_resource type="Gradient" id="Gradient_m0ds5"]
+colors = PackedColorArray(1, 1, 1, 0.784314, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_885ko"]
+gradient = SubResource("Gradient_m0ds5")
+
+[sub_resource type="FontVariation" id="FontVariation_qk7ai"]
+variation_embolden = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wt2l"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.262745, 0.262745, 0.415686, 1)
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1_pj8qk")
+
+[node name="MainMenuGame" parent="." instance=ExtResource("1_odgb6")]
+
+[node name="MainMenuCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="MainMenuCanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TransparentOverlay" type="TextureRect" parent="MainMenuCanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_885ko")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenuCanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainMenuCanvasLayer/UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuCanvasLayer/UI/HBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="GameTitle" type="Label" parent="MainMenuCanvasLayer/UI/HBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.262745, 0.262745, 0.415686, 1)
+theme_override_font_sizes/font_size = 64
+text = "Vandebron"
+
+[node name="StartGameBtn" type="Button" parent="MainMenuCanvasLayer/UI/HBoxContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_qk7ai")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_7wt2l")
+text = "Start Game"
+
+[node name="Spacer" type="Control" parent="MainMenuCanvasLayer/UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

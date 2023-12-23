@@ -1,4 +1,5 @@
 extends Node
+class_name Weather
 
 enum Season {AUTUMN, WINTER, SPRING, SUMMER}
 enum DayPart {DAWN, NOON, DUSK, NIGHT}

@@ -7,6 +7,7 @@ enum Type {FOSSIL, WIND, SOLAR}
 @export var active_capability_out: float
 @export var dmol: float = 0.0
 @export var type: Producer.Type
+@export var weather: Weather
 
 var current_power: float = 0.0
 
@@ -17,3 +18,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	current_power = nominal_power
+
+
+func on_added_to_grid() -> void:
+	pass

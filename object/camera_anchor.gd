@@ -3,7 +3,7 @@ extends Node3D
 @export var pan_speed: float = 8.0
 @export var snap_speed: float = 5.0
 
-@onready var camera: Camera3D = %Camera3D
+@onready var camera: Camera3D = $Camera3D
 
 
 func _physics_process(delta: float) -> void:

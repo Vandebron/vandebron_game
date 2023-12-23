@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbgk1537m5sog"]
+[gd_scene load_steps=4 format=3 uid="uid://cbgk1537m5sog"]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_8dagw"]
+[ext_resource type="PackedScene" uid="uid://bx87ivqvxe2t8" path="res://object/main_menu/main_menu.tscn" id="2_uay71"]
 [ext_resource type="PackedScene" uid="uid://wmfdl01v1vgo" path="res://object/game_over_popup/game_over_popup.tscn" id="27_ygsao"]
 
 [node name="Main" type="Node3D"]
@@ -8,28 +9,9 @@ script = ExtResource("1_8dagw")
 
 [node name="GameContainer" type="Node3D" parent="."]
 
-[node name="MainMenuCanvasLayer" type="CanvasLayer" parent="."]
+[node name="MainMenuContainer" type="Node3D" parent="."]
 
-[node name="UI" type="Control" parent="MainMenuCanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="MainMenuCanvasLayer/UI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="StartGameBtn" type="Button" parent="MainMenuCanvasLayer/UI/CenterContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Start Game"
+[node name="MainMenu" parent="MainMenuContainer" instance=ExtResource("2_uay71")]
 
 [node name="PopupCanvasLayer" type="CanvasLayer" parent="."]
 layer = 2

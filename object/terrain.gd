@@ -13,7 +13,7 @@ func _ready() -> void:
 	Events.season_started.connect(self._on_season_started)
 	Events.season_ended.connect(self._on_season_ended)
 	
-	_on_season_started(Weather.season)
+	_on_season_started(weather.season)
 
 
 func _process(_delta: float) -> void:

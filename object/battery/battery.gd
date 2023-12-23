@@ -2,6 +2,7 @@ extends Node3D
 class_name Battery
 
 @export var max_charge_kw: float = 1.0
+@export var weather: Weather
 
 @onready var model: BatteryModel = $Model
 
@@ -38,3 +39,7 @@ func take(kw: float) -> float:
 	else:
 		state_of_charge_kw -= kw
 		return kw
+
+
+func on_added_to_grid() -> void:
+	pass

@@ -4,6 +4,7 @@ const tree_wood_material: ShaderMaterial = preload("res://object/tree/tree_wood_
 const tree_leaves_material: ShaderMaterial = preload("res://object/tree/tree_leaves_material.tres")
 
 @export var terrain: MeshInstance3D
+@export var weather: Weather
 
 var terrain_material: ShaderMaterial
 var grid_material: ShaderMaterial
@@ -18,12 +19,12 @@ func _ready() -> void:
 	Events.season_started.connect(self._on_season_started)
 	Events.season_ended.connect(self._on_season_ended)
 	
-	_on_season_started(Weather.season)
+	_on_season_started(weather.season)
 
 
 func _physics_process(_delta: float) -> void:
-	tree_wood_material.set_shader_parameter("sway_radius", Weather.wind * 0.1)
-	tree_leaves_material.set_shader_parameter("sway_radius", Weather.wind * 0.1)
+	tree_wood_material.set_shader_parameter("sway_radius", weather.wind * 0.1)
+	tree_leaves_material.set_shader_parameter("sway_radius", weather.wind * 0.1)
 
 
 func _on_season_started(season: Weather.Season) -> void:
