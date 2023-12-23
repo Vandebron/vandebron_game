@@ -7,9 +7,10 @@ const BALANCE_CENTER: float = 0.5
 @export var frequency_max_deviation_hz: float = 0.1
 @export var balance_adj_rate: float = 0.4
 
-@onready var producer_container: Node3D = $Producers
-@onready var consumer_container: Node3D = $Consumers
-@onready var battery_container: Node3D = $Batteries
+# Buildings
+var _producers: Array[Producer] = []
+var _consumers: Array[Consumer] = []
+var _batteries: Array[Battery] = []
 
 # Supply kW
 var fossil: float
@@ -25,7 +26,7 @@ var balance: float = 0.5 # Ranges between 0-1, so 0.5 means perfectly balanced.
 
 
 func _ready() -> void:
-	_ingest_children()
+	_ingest_buildings()
 
 
 func _physics_process(delta: float) -> void:
@@ -39,62 +40,41 @@ func _physics_process(delta: float) -> void:
 
 
 func add_building(node: Node3D, at_position: Vector3) -> void:
-	if node.is_in_group(Constants.GROUP_PRODUCER):
+	if node is Producer:
 		add_producer(node, at_position)
-	elif node.is_in_group(Constants.GROUP_CONSUMER):
+	elif node is Consumer:
 		add_consumer(node, at_position)
-	elif node.is_in_group(Constants.GROUP_BATTERY):
+	elif node is Battery:
 		add_battery(node, at_position)
 	else:
 		printerr("Trying to add unknown building type to world")
 
 
-func get_producers() -> Array[Producer]:
-	# TODO: We do result.assign() because of this: https://github.com/godotengine/godot/issues/72566
-	var result: Array[Producer] = []
-	result.assign(producer_container.get_children()
-		.map(func(node: Node) -> Producer: return node as Producer))
-	return result
-
-
-func get_consumers() -> Array[Consumer]:
-	# TODO: We do result.assign() because of this: https://github.com/godotengine/godot/issues/72566
-	var result: Array[Consumer] = []
-	result.assign(consumer_container.get_children()
-		.map(func(node: Node) -> Consumer: return node as Consumer))
-	return result
-
-
-func get_batteries() -> Array[Battery]:
-	# TODO: We do result.assign() because of this: https://github.com/godotengine/godot/issues/72566
-	var result: Array[Battery] = []
-	result.assign(battery_container.get_children()
-		.map(func(node: Node) -> Battery: return node as Battery))
-	return result
-
-
 func add_producer(producer: Producer, at_position: Vector3) -> void:
 	if producer.owner:
-		producer.reparent(producer_container)
+		producer.reparent(self)
 	else:
-		producer_container.add_child(producer)
+		add_child(producer)
 	producer.global_position = at_position
+	_producers.append(producer)
 
 
 func add_consumer(consumer: Consumer, at_position: Vector3) -> void:
 	if consumer.owner:
-		consumer.reparent(consumer_container)
+		consumer.reparent(self)
 	else:
-		consumer_container.add_child(consumer)
+		add_child(consumer)
 	consumer.global_position = at_position
+	_consumers.append(consumer)
 
 
 func add_battery(battery: Battery, at_position: Vector3) -> void:
 	if battery.owner:
-		battery.reparent(battery_container)
+		battery.reparent(self)
 	else:
-		battery_container.add_child(battery)
+		add_child(battery)
 	battery.global_position = at_position
+	_batteries.append(battery)
 
 
 func _update_supply() -> void:
@@ -102,7 +82,7 @@ func _update_supply() -> void:
 	solar = 0.0
 	wind = 0.0
 	
-	for producer in get_producers():
+	for producer in _producers:
 		match producer.type:
 			Producer.Type.FOSSIL:
 				fossil += producer.current_power
@@ -117,7 +97,7 @@ func _update_supply() -> void:
 func _update_batteries() -> void:
 	var diff_kw: float = supply - demand
 	if diff_kw >= 0.0:
-		for battery in get_batteries():
+		for battery in _batteries:
 			var stored_kw: float = battery.give(diff_kw)
 			supply -= stored_kw # TODO: Fix ugly side-effect
 			diff_kw -= stored_kw
@@ -125,7 +105,7 @@ func _update_batteries() -> void:
 				break
 	else:
 		diff_kw = abs(diff_kw)
-		for battery in get_batteries():
+		for battery in _batteries:
 			var discharged_kw: float = battery.take(diff_kw)
 			supply += discharged_kw # TODO: Fix ugly side-effect
 			diff_kw -= discharged_kw
@@ -134,15 +114,12 @@ func _update_batteries() -> void:
 
 
 func _get_demand() -> float:
-	return get_consumers()\
+	return _consumers\
 		.map(func(a: Consumer) -> float: return a.demand)\
 		.reduce(Utils.sumf, 0.0)
 
 
-func _ingest_children() -> void:
-	var exclude: Array[Node] = [producer_container, consumer_container, battery_container]
+func _ingest_buildings() -> void:
 	for child: Node in get_children():
-		if child in exclude:
-			continue
 		var at_position: Vector3 = child.global_position
 		add_building(child, at_position)

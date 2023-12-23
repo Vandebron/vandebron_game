@@ -4,9 +4,3 @@
 
 [node name="EnergyGrid" type="Node3D"]
 script = ExtResource("1_vjsqc")
-
-[node name="Producers" type="Node3D" parent="."]
-
-[node name="Consumers" type="Node3D" parent="."]
-
-[node name="Batteries" type="Node3D" parent="."]
