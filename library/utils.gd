@@ -6,10 +6,6 @@ var physics_layers: Dictionary # [layer_name: String, layer_id: int]
 
 func _init() -> void:
 	physics_layers = _get_layers_by_name("3d_physics")
-
-
-func get_camera() -> Camera3D:
-	return get_node("/root/Main/%Camera3D")
 	
 	
 func get_physics_layer(layer_name: String) -> int:

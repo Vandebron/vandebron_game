@@ -3,9 +3,7 @@ extends Node3D
 const tree_wood_material: ShaderMaterial = preload("res://object/tree/tree_wood_material.tres")
 const tree_leaves_material: ShaderMaterial = preload("res://object/tree/tree_leaves_material.tres")
 
-# TODO: Crosshair should probably be on CameraAnchor, but I'm lazy
-@onready var crosshair: MeshInstance3D = %Crosshair
-@onready var terrain: MeshInstance3D = %Terrain
+@export var terrain: MeshInstance3D
 
 var terrain_material: ShaderMaterial
 var grid_material: ShaderMaterial
@@ -21,12 +19,6 @@ func _ready() -> void:
 	Events.season_ended.connect(self._on_season_ended)
 	
 	_on_season_started(Weather.season)
-
-
-func _process(_delta: float) -> void:
-	var pointer_pos: Vector3 = InputUtil.pointer_world_pos
-	grid_material.set_shader_parameter("pointer_world_pos", pointer_pos)
-	crosshair.global_position = pointer_pos - Vector3(0.0, crosshair.mesh.radius, 0.0)
 
 
 func _physics_process(_delta: float) -> void:

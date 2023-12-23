@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://wmfdl01v1vgo"]
+
+[ext_resource type="Script" path="res://object/game_over_popup/game_over_popup.gd" id="1_p1ika"]
+
+[node name="GameOverPopup" type="PanelContainer"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+theme_type_variation = &"PopupPanelContainer"
+script = ExtResource("1_p1ika")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="Reason" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+text = "The energy grid was imbalanced for too long."
+fit_content = true
+scroll_active = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ReturnToMenuBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Return to menu"
+
+[node name="ViewMapBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "View map"

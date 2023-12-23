@@ -1,8 +1,5 @@
 extends MeshInstance3D
 
-# TODO: Crosshair should probably be on CameraAnchor, but I'm lazy
-@onready var crosshair: MeshInstance3D = %Crosshair
-
 var terrain_material: ShaderMaterial
 var grid_material: ShaderMaterial
 
@@ -22,7 +19,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var pointer_pos: Vector3 = InputUtil.pointer_world_pos
 	grid_material.set_shader_parameter("pointer_world_pos", pointer_pos)
-	crosshair.global_position = pointer_pos
 
 
 func _on_season_started(season: Weather.Season) -> void:

@@ -2,8 +2,6 @@ extends Node3D
 
 enum DeviceType {MOUSE_KEYBOARD, CONTROLLER}
 
-var pointer_world_pos: Vector3
-
 var _device_type: DeviceType # TODO: Detect input device
 var _mouse_physics_layer: int
 var _physics_space_state: PhysicsDirectSpaceState3D
@@ -26,32 +24,22 @@ func _input(event: InputEvent) -> void:
 		_device_type = DeviceType.CONTROLLER
 
 
-func _physics_process(_delta: float) -> void:
-	pointer_world_pos = _find_pointer_world_position()
-
-
-func get_pointer_world_position() -> Vector3:
-	return pointer_world_pos
-
-
-func _find_pointer_world_position() -> Vector3:
+func get_pointer_world_position(camera: Camera3D) -> Vector3:
 	match _device_type:
 		DeviceType.MOUSE_KEYBOARD:
-			return _find_mouse_world_position()
+			return _get_mouse_world_position(camera)
 		_:
-			return _find_cursor_world_position()
+			return _get_cursor_world_position(camera)
 
 
-func _find_mouse_world_position() -> Vector3:
+func _get_mouse_world_position(camera: Camera3D) -> Vector3:
 	var mouse_position: Vector2 = get_viewport().get_mouse_position()
-	var camera: Camera3D = Utils.get_camera()
 	var ray_origin: Vector3 = camera.project_ray_origin(mouse_position)
 	var ray_target: Vector3 = ray_origin + camera.project_ray_normal(mouse_position) * 2000.0
 	return _raycast_for_pointer_position(ray_origin, ray_target)
 
 
-func _find_cursor_world_position() -> Vector3:
-	var camera: Camera3D = Utils.get_camera()
+func _get_cursor_world_position(camera: Camera3D) -> Vector3:
 	var ray_origin: Vector3 = camera.global_transform.origin
 	var ray_direction: Vector3 = -camera.global_transform.basis.z.normalized()
 	var ray_target: Vector3 = ray_origin + ray_direction * 1000.0

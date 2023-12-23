@@ -32,8 +32,8 @@ func _physics_process(delta: float) -> void:
 	model.global_rotation.y = lerpf(
 		model.global_rotation.y, Weather.wind_angle, delta * turn_rate * Weather.wind)
 	
-	if Input.is_action_pressed("show_info"):
-		show_info()
+	#if Input.is_action_pressed("show_info"):
+		#show_info()
 
 
 ## Introduces some randomness to production, so every windmill is a little bit different.
@@ -41,17 +41,17 @@ func _update_variance() -> void:
 	_variance = randf() * production_variance
 
 
-func show_info() -> void:
-	%ProductionGaugeCtnr.visible = true
-	%ProductionGaugeCtnr.global_position = Utils.get_camera().unproject_position(global_position)
-	%ProductionGaugeCtnr.position -= %ProductionGaugeCtnr.size / 2.0 # Center it based on its size
-	%ProductionGaugeCtnr.position.y -= 40.0 # Nudge it up a little
-	
-	%ProductionGauge.current = _speed
-	%ProductionGauge.target = _target_speed
-	%ProductionGauge.max_value = 1.0
-	
-	%kwLbl.text = str(current_power).pad_decimals(1) + "kW"
+#func show_info() -> void:
+	#%ProductionGaugeCtnr.visible = true
+	#%ProductionGaugeCtnr.global_position = Utils.get_camera().unproject_position(global_position)
+	#%ProductionGaugeCtnr.position -= %ProductionGaugeCtnr.size / 2.0 # Center it based on its size
+	#%ProductionGaugeCtnr.position.y -= 40.0 # Nudge it up a little
+	#
+	#%ProductionGauge.current = _speed
+	#%ProductionGauge.target = _target_speed
+	#%ProductionGauge.max_value = 1.0
+	#
+	#%kwLbl.text = str(current_power).pad_decimals(1) + "kW"
 
 
 func hide_info() -> void:
