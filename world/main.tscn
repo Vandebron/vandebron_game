@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cbgk1537m5sog"]
+[gd_scene load_steps=54 format=3 uid="uid://cbgk1537m5sog"]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_8dagw"]
 [ext_resource type="Script" path="res://object/sun_anchor.gd" id="2_hv10b"]
@@ -18,6 +18,7 @@
 [ext_resource type="Resource" uid="uid://b0r1cr25214g" path="res://object/windmill/windmill_building_def.tres" id="12_3u0jo"]
 [ext_resource type="PackedScene" uid="uid://bb3libciwo1ul" path="res://object/battery/battery.tscn" id="12_aranr"]
 [ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="12_duwpa"]
+[ext_resource type="Script" path="res://object/builder/build_manager.gd" id="13_vflgn"]
 [ext_resource type="Resource" uid="uid://bd15ndqy0tgbi" path="res://object/coal_plant/coal_plant_building_def.tres" id="14_o1e36"]
 [ext_resource type="PackedScene" uid="uid://bcpjahrk7du1b" path="res://object/weather/weather.tscn" id="14_yemwt"]
 [ext_resource type="PackedScene" uid="uid://4el7epeujqmf" path="res://object/health_bar/health_bar.tscn" id="16_whmca"]
@@ -138,9 +139,8 @@ gradient = SubResource("Gradient_niknj")
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_iio37"]
 gradient = SubResource("Gradient_hoym3")
 
-[node name="Main" type="Node3D" node_paths=PackedStringArray("energy_grid")]
+[node name="Main" type="Node3D"]
 script = ExtResource("1_8dagw")
-energy_grid = NodePath("World/EnergyGrid")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_khv8l")
@@ -230,6 +230,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
 
 [node name="Battery3" parent="World/EnergyGrid/Batteries" instance=ExtResource("12_aranr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
+
+[node name="BuildManager" type="Node3D" parent="World/EnergyGrid" node_paths=PackedStringArray("energy_grid")]
+script = ExtResource("13_vflgn")
+energy_grid = NodePath("..")
 
 [node name="Doodads" type="Node3D" parent="World"]
 
