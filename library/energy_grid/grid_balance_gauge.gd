@@ -26,10 +26,11 @@ class_name GridBalanceGauge
 		balance = value
 		(material as ShaderMaterial).set_shader_parameter("balance", balance)
 
-@export var frequency_tolerance: float:
+@export var frequency_max_deviation: float:
 	set(value):
-		frequency_tolerance = value
-		(material as ShaderMaterial).set_shader_parameter("freq_margin", frequency_tolerance)
+		frequency_max_deviation = value
+		(material as ShaderMaterial)\
+			.set_shader_parameter("freq_max_deviation", frequency_max_deviation)
 
 
 func _input(event: InputEvent) -> void:

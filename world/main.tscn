@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cbgk1537m5sog"]
+[gd_scene load_steps=53 format=3 uid="uid://cbgk1537m5sog"]
 
 [ext_resource type="Script" path="res://world/main.gd" id="1_8dagw"]
 [ext_resource type="Script" path="res://object/sun_anchor.gd" id="2_hv10b"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="12_duwpa"]
 [ext_resource type="Resource" uid="uid://bd15ndqy0tgbi" path="res://object/coal_plant/coal_plant_building_def.tres" id="14_o1e36"]
 [ext_resource type="PackedScene" uid="uid://bcpjahrk7du1b" path="res://object/weather/weather.tscn" id="14_yemwt"]
+[ext_resource type="PackedScene" uid="uid://4el7epeujqmf" path="res://object/health_bar/health_bar.tscn" id="16_whmca"]
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="18_c6tcf"]
 [ext_resource type="Resource" uid="uid://cavurm67np4ko" path="res://object/battery/battery_building_def.tres" id="21_mqbig"]
 
@@ -268,6 +269,10 @@ size_flags_horizontal = 4
 [node name="TopVBoxCtnr" type="VBoxContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 2
+
+[node name="HealthBar" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr" instance=ExtResource("16_whmca")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="TopPanelCtnr" type="PanelContainer" parent="UICanvasLayer/UI/MarginContainer/VBoxContainer/TopVBoxCtnr"]
 layout_mode = 2

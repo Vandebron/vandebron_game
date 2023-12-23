@@ -27,10 +27,10 @@ uniform float balance = 0.5; // Ranges between 0-1, so 0.5 means perfectly balan
 uniform float balance_line_width = 0.01;
 group_uniforms;
 
-group_uniforms FrequencyTolerance;
-uniform float freq_margin = 0.05;
-uniform float freq_margin_line_width = 0.01;
-uniform vec3 freq_margin_line_color : source_color = vec3(1.0, 0.0, 0.0);
+group_uniforms FrequencyDeviation;
+uniform float freq_max_deviation = 0.05;
+uniform float freq_max_deviation_line_width = 0.01;
+uniform vec3 freq_max_deviation_line_color : source_color = vec3(1.0, 0.0, 0.0);
 group_uniforms;
 
 void fragment() {
@@ -45,17 +45,17 @@ void fragment() {
 		// red otherwise.
 		const vec3 red = vec3(1.0, 0.0, 0.0);
 		const vec3 green = vec3(0.0, 1.0, 0.0);
-		COLOR.rgb = mix(green, red, fract(abs(balance_center - balance)) / freq_margin);
-	} else if (UV.x > balance_center - freq_margin - (freq_margin_line_width * 0.5)
-			&& UV.x < balance_center - freq_margin + (freq_margin_line_width * 0.5)
+		COLOR.rgb = mix(green, red, fract(abs(balance_center - balance)) / freq_max_deviation);
+	} else if (UV.x > balance_center - freq_max_deviation - (freq_max_deviation_line_width * 0.5)
+			&& UV.x < balance_center - freq_max_deviation + (freq_max_deviation_line_width * 0.5)
 	) {
 		// This line designates the grid frequency tolerance margin - lower bound.
-		COLOR.rgb = freq_margin_line_color;
-	} else if (UV.x > balance_center + freq_margin - (freq_margin_line_width * 0.5)
-			&& UV.x < balance_center + freq_margin + (freq_margin_line_width * 0.5)
+		COLOR.rgb = freq_max_deviation_line_color;
+	} else if (UV.x > balance_center + freq_max_deviation - (freq_max_deviation_line_width * 0.5)
+			&& UV.x < balance_center + freq_max_deviation + (freq_max_deviation_line_width * 0.5)
 	) {
 		// This line designates the grid frequency tolerance margin - upper bound.
-		COLOR.rgb = freq_margin_line_color;
+		COLOR.rgb = freq_max_deviation_line_color;
 	} else if (show_details) {
 		// When you turn on the show_details flag, the gauge will show all energy production as
 		// separate colors.

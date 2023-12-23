@@ -1,8 +1,10 @@
 extends Node
 class_name EnergyGrid # EnergyGrid
 
-@export var target_frequency: float = 50.0
-@export var frequency_tolerance: float = 0.05: set=_set_frequency_tolerance
+const BALANCE_CENTER: float = 0.5
+
+@export var target_frequency_hz: float = 50.0
+@export var frequency_max_deviation_hz: float = 0.1: set=_set_frequency_max_deviation_hz
 @export var balance_adj_rate: float = 0.4
 
 @onready var producer_container: Node3D = %Producers
@@ -13,6 +15,7 @@ class_name EnergyGrid # EnergyGrid
 @onready var hz_lbl: Label = %HzLbl
 @onready var hz_ctnr: ColorRect = %HzCtnr
 @onready var grid_balance_gauge: GridBalanceGauge = %GridBalanceGauge
+@onready var health_bar: PanelContainer = %HealthBar
 
 # Supply kW
 var fossil: float
@@ -28,7 +31,7 @@ var balance: float = 0.5 # Ranges between 0-1, so 0.5 means perfectly balanced.
 
 
 func _ready() -> void:
-	grid_balance_gauge.frequency_tolerance = frequency_tolerance
+	grid_balance_gauge.frequency_max_deviation = _get_normalized_frequency_max_deviation()
 
 
 func _physics_process(delta: float) -> void:
@@ -40,6 +43,7 @@ func _physics_process(delta: float) -> void:
 	var easing: float = ease(1.0 - abs(balance - target), 4.8) # Ease-in
 	balance = clampf(lerpf(balance, target, delta * easing * balance_adj_rate), 0.0, 1.0)
 	
+	_update_health()
 	_update_ui()
 
 
@@ -77,6 +81,24 @@ func _update_batteries() -> void:
 			diff_kw -= discharged_kw
 			if diff_kw <= 0.0:
 				break
+
+
+func _update_health() -> void:
+	# TODO: Make this an @export
+	const heal_factor: float = 0.005
+	const hurt_factor: float = 0.01
+	
+	var balance_diff: float = abs(BALANCE_CENTER - balance)
+	var balance_diff_hz: float = balance_diff * target_frequency_hz
+	var deviation: float = balance_diff_hz / frequency_max_deviation_hz
+	
+	if balance_diff_hz < frequency_max_deviation_hz:
+		health_bar.health += 1.0 * heal_factor
+	else:
+		health_bar.health -= deviation * hurt_factor
+	
+	if is_zero_approx(health_bar.health):
+		pass # TODO: Game over
 
 
 func get_demand() -> float:
@@ -127,7 +149,7 @@ func add_battery(battery: Battery, at_position: Vector3) -> void:
 func _update_ui() -> void:
 	supply_lbl.text = str("[right]SUPPLY\n", _precision2(supply), " kW[/right]")
 	demand_lbl.text = str("DEMAND\n", _precision2(demand), " kW")
-	hz_lbl.text = str(_precision2(_get_frequency()), " Hz")
+	hz_lbl.text = str(_precision2(_get_frequency_hz()), " Hz")
 	hz_ctnr.position.x = (balance * grid_balance_gauge.size.x) - (hz_ctnr.size.x / 2)
 	grid_balance_gauge.fossil = fossil
 	grid_balance_gauge.wind = wind
@@ -136,15 +158,19 @@ func _update_ui() -> void:
 	grid_balance_gauge.balance = balance
 
 
-func _get_frequency() -> float:
-	return balance * target_frequency * 2.0
+func _get_frequency_hz() -> float:
+	return balance * target_frequency_hz * 2.0
+
+
+func _set_frequency_max_deviation_hz(value: float) -> void:
+	frequency_max_deviation_hz = value
+	if grid_balance_gauge:
+		grid_balance_gauge.frequency_max_deviation = _get_normalized_frequency_max_deviation()
+
+
+func _get_normalized_frequency_max_deviation() -> float:
+	return frequency_max_deviation_hz / target_frequency_hz
 
 
 func _precision2(x: float) -> String:
 	return str(x).pad_decimals(2)
-
-
-func _set_frequency_tolerance(value: float) -> void:
-	frequency_tolerance = value
-	if grid_balance_gauge:
-		grid_balance_gauge.frequency_tolerance = frequency_tolerance
