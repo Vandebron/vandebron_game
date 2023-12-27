@@ -7,6 +7,7 @@ var good_placement_color := Color.hex(0x8ab060ff)
 var bad_placement_color := Color.hex(0xb45252ff)
 
 @export var building: BuildingDef: set=set_building
+@export var camera: Camera3D
 
 # This is so we don't immediately build the building after selecting it from the list
 @onready var placement_debounce: Timer = $PlacementDebounce
@@ -35,7 +36,7 @@ func _physics_process(delta: float) -> void:
 	if _build_confirmed:
 		return
 	
-	_pointer_pos = snapped(InputUtil.pointer_world_pos, Constants.GRID_CELL_SIZE)
+	_pointer_pos = snapped(InputUtil.get_pointer_world_position(camera), Constants.GRID_CELL_SIZE)
 	
 	global_position = lerp(global_position, _pointer_pos, delta * 15.0)
 	

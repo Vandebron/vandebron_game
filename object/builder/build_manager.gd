@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var energy_grid: EnergyGrid
+@export var camera: Camera3D
 
 
 func _ready() -> void:
@@ -21,6 +22,7 @@ func _create_builder(building: BuildingDef) -> void:
 	
 	var builder: Builder = preload("res://object/builder/builder.tscn").instantiate()
 	builder.building = building
+	builder.camera = camera
 	add_child(builder)
 	builder.build_done.connect(self._on_build_done)
 
