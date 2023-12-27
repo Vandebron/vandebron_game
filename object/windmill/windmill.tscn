@@ -6,7 +6,7 @@
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="4_87nqh"]
 [ext_resource type="PackedScene" uid="uid://3uw8bcseb6e1" path="res://library/energy_grid/gauge.tscn" id="4_t57sq"]
 
-[sub_resource type="Shader" id="Shader_w8v2k"]
+[sub_resource type="Shader" id="Shader_p0t78"]
 code = "shader_type canvas_item;
 
 uniform float current = 0.2;
@@ -35,7 +35,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_unty4"]
 resource_local_to_scene = true
-shader = SubResource("Shader_w8v2k")
+shader = SubResource("Shader_p0t78")
 shader_parameter/current = 0.2
 shader_parameter/target = 0.7
 shader_parameter/max_value = 1.0
