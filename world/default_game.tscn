@@ -160,17 +160,25 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_hh88i")
 
-[node name="SupplyLbl" type="RichTextLabel" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/SupplyCtnr"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/SupplyCtnr"]
+layout_mode = 2
+
+[node name="SupplyTitle" type="Label" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/SupplyCtnr/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Supply"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="SupplyLbl" type="Label" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/SupplyCtnr/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 12
-bbcode_enabled = true
-text = "[right]SUPPLY
-50 kW[/right]"
-fit_content = true
+theme_override_font_sizes/font_size = 12
+text = "50 kW"
+horizontal_alignment = 2
 
 [node name="GridBalanceCtnr" type="PanelContainer" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 40)
+custom_minimum_size = Vector2(2.08165e-12, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -216,14 +224,20 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_10pjr")
 
-[node name="DemandLbl" type="RichTextLabel" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/DemandCtnr"]
+[node name="VBoxContainer" type="VBoxContainer" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/DemandCtnr"]
+layout_mode = 2
+
+[node name="DemandTitle" type="Label" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/DemandCtnr/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Demand"
+uppercase = true
+
+[node name="DemandLbl" type="Label" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/DemandCtnr/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 12
-bbcode_enabled = true
-text = "DEMAND
-50 kW"
-fit_content = true
+theme_override_font_sizes/font_size = 12
+text = "50 kW"
 
 [node name="BottomPanelCtnr" type="PanelContainer" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer"]
 layout_mode = 2
