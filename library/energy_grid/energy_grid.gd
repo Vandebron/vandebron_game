@@ -30,13 +30,13 @@ func _ready() -> void:
 	_ingest_buildings()
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	_update_supply()
 	demand = _get_demand() # TODO: What if demand is zero? We get division by zero
 	_update_batteries()
 	
 	var target: float = supply / (supply + demand)
-	var easing: float = ease(1.0 - abs(balance - target), 4.8) # Ease-in
+	var easing: float = ease(1.0 - absf(balance - target), 4.8) # Ease-in
 	balance = clampf(lerpf(balance, target, delta * easing * balance_adj_rate), 0.0, 1.0)
 
 
@@ -111,7 +111,7 @@ func _update_batteries() -> void:
 			if diff_kw <= 0.0:
 				break
 	else:
-		diff_kw = abs(diff_kw)
+		diff_kw = absf(diff_kw)
 		for battery in _batteries:
 			var discharged_kw: float = battery.take(diff_kw)
 			supply += discharged_kw # TODO: Fix ugly side-effect

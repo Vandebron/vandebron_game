@@ -22,7 +22,7 @@ func _ready() -> void:
 	_on_season_started(weather.season)
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	tree_wood_material.set_shader_parameter("sway_radius", weather.wind * 0.1)
 	tree_leaves_material.set_shader_parameter("sway_radius", weather.wind * 0.1)
 

@@ -13,7 +13,7 @@ func _init() -> void:
 	add_to_group(Constants.GROUP_BATTERY)
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	model.charge_percentage = state_of_charge_kw / max_charge_kw
 
 
