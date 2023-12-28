@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix, specular_disabled, diffuse_toon, depth_prepass_alpha, cull_back;
+render_mode specular_disabled, diffuse_toon, cull_back;
 
 uniform vec3 albedo: source_color = vec3(1.0);
 uniform float transparency: hint_range(0.0, 1.0, 0.1) = 0.0;
