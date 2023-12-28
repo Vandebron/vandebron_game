@@ -16,8 +16,8 @@ func _ready() -> void:
 	grid_material = terrain.get_surface_override_material(0).next_pass as ShaderMaterial
 	grid_material.set_shader_parameter("cell_size", Constants.GRID_CELL_SIZE.x)
 	
-	Events.season_started.connect(self._on_season_started)
-	Events.season_ended.connect(self._on_season_ended)
+	weather.season_started.connect(self._on_season_started)
+	weather.season_ended.connect(self._on_season_ended)
 	
 	_on_season_started(weather.season)
 

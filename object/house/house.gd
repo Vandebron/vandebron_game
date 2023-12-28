@@ -29,8 +29,8 @@ func _input(event: InputEvent) -> void:
 func on_added_to_grid() -> void:
 	variance_timer.timeout.connect(self._update_variance)
 	
-	Events.part_of_day_started.connect(self._on_part_of_day_started)
-	Events.part_of_day_ended.connect(self._on_part_of_day_ended)
+	weather.part_of_day_started.connect(self._on_part_of_day_started)
+	weather.part_of_day_ended.connect(self._on_part_of_day_ended)
 
 	if weather.is_day():
 		model.animation_player.play("consume")

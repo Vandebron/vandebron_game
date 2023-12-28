@@ -1,6 +1,11 @@
 extends Node
 class_name Weather
 
+signal part_of_day_started(part: Weather.DayPart)
+signal part_of_day_ended(part: Weather.DayPart)
+signal season_started(season: Weather.Season)
+signal season_ended(season: Weather.Season)
+
 enum Season {AUTUMN, WINTER, SPRING, SUMMER}
 enum DayPart {DAWN, NOON, DUSK, NIGHT}
 
@@ -99,8 +104,8 @@ func _handle_day_transitions() -> void:
 	if part_of_day == _prev_part_of_day:
 		return
 	
-	Events.part_of_day_ended.emit(_prev_part_of_day)
-	Events.part_of_day_started.emit(part_of_day)
+	part_of_day_ended.emit(_prev_part_of_day)
+	part_of_day_started.emit(part_of_day)
 	_prev_part_of_day = part_of_day
 	
 	if part_of_day != DayPart.DAWN:
@@ -112,9 +117,9 @@ func _handle_day_transitions() -> void:
 		return
 	
 	# Increment season every X days, and make sure it wraps around from summer to autumn.
-	Events.season_ended.emit(season)
+	season_ended.emit(season)
 	season = wrapi(season + 1, 0, Season.size()) as Season
-	Events.season_started.emit(season)
+	season_started.emit(season)
 
 
 func _update_wind() -> void:
