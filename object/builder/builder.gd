@@ -30,9 +30,9 @@ func _physics_process(delta: float) -> void:
 	if _build_confirmed:
 		return
 	
-	_pointer_pos = snapped(InputUtil.get_pointer_world_position(camera), Constants.GRID_CELL_SIZE)
+	_pointer_pos = InputUtil.get_pointer_world_position(camera).snapped(Constants.GRID_CELL_SIZE)
 	
-	global_position = lerp(global_position, _pointer_pos, delta * 15.0)
+	global_position = global_position.lerp(_pointer_pos, delta * 15.0)
 	
 	_highlight_material.albedo_color =\
 		bad_placement_color if _collider.has_overlapping_areas() else good_placement_color

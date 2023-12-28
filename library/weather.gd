@@ -97,7 +97,7 @@ func _get_part_of_day() -> DayPart:
 func _get_sun_strength() -> float:
 	# Noon is represented by point_of_day=0.5.
 	# So what we do here is check the "distance" from 0.5 aka noon.
-	return 1.0 - abs(point_of_day - 0.5) / 0.5
+	return 1.0 - absf(point_of_day - 0.5) / 0.5
 
 
 func _handle_day_transitions() -> void:

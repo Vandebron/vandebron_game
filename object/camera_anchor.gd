@@ -12,8 +12,8 @@ func _physics_process(delta: float) -> void:
 	
 	# As soon as we stop giving camera input, snap to the nearest grid cell
 	if input.is_zero_approx():
-		var snapped_pos: Vector3 = snapped(global_position, Constants.GRID_CELL_SIZE)
-		global_position = lerp(global_position, snapped_pos, delta * snap_speed)
+		var snapped_pos: Vector3 = global_position.snapped(Constants.GRID_CELL_SIZE)
+		global_position = global_position.lerp(snapped_pos, delta * snap_speed)
 		return
 	
 	global_transform = global_transform\
