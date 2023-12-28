@@ -1,17 +1,9 @@
 extends ItemList
 class_name BuildMenu
 
-@export var buildings: Array[BuildingDef] = []:
-	set(value):
-		buildings = value
-		
-		clear()
-		for building in buildings:
-			var index: int = add_item(building.display_name, building.image)
-			set_item_metadata(index, building)
-			set_item_tooltip(index, str("Build a ", building.display_name))
-		
-		select_current_item()
+signal build_initiated(building: BuildingDef)
+
+@export var buildings: Array[BuildingDef] = []: set=_set_buildings
 
 
 func _init() -> void:
@@ -53,4 +45,16 @@ func _get_current_index() -> int:
 
 func _on_item_selected(index: int) -> void:
 	var building: BuildingDef = get_item_metadata(index)
-	Events.build_initiated.emit(building)
+	build_initiated.emit(building)
+
+
+func _set_buildings(value: Array[BuildingDef]) -> void:
+	buildings = value
+	
+	clear()
+	for building: BuildingDef in buildings:
+		var index: int = add_item(building.display_name, building.image)
+		set_item_metadata(index, building)
+		set_item_tooltip(index, str("Build a ", building.display_name))
+	
+	select(_get_current_index())

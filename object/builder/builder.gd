@@ -26,12 +26,6 @@ func _init() -> void:
 	add_to_group(Constants.GROUP_BUILDER)
 
 
-func _ready() -> void:
-	Events.build_initiated.connect(func(_x) -> void: self.cancel()) # Other building selected; abort
-	Events.build_cancelled.connect(self.cancel)
-	Events.build_confirmed.connect(self.confirm)
-
-
 func _physics_process(delta: float) -> void:
 	if _build_confirmed:
 		return

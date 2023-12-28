@@ -1,24 +1,22 @@
 extends Node3D
+class_name BuildManager
 
 @export var energy_grid: EnergyGrid
 @export var camera: Camera3D
-
-
-func _ready() -> void:
-	Events.build_initiated.connect(self._create_builder)
+@export var build_menu: BuildMenu: set=_set_build_menu
+@export var buildings: Array[BuildingDef] = []: set=_set_buildings
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("build_cancel"):
-		Events.build_cancelled.emit()
+		_cancel_all()
 	elif event.is_action_released("build_confirm"):
-		Events.build_confirmed.emit()
+		_confirm()
 
 
 func _create_builder(building: BuildingDef) -> void:
 	# Just make sure we cancel all other build actions so we don't place multiple with one click
-	for b: Builder in get_children():
-		b.cancel()
+	_cancel_all()
 	
 	var builder: Builder = preload("res://object/builder/builder.tscn").instantiate()
 	builder.building = building
@@ -35,3 +33,31 @@ func _on_build_done(node: Node3D, building: BuildingDef, at_position: Vector3) -
 	if get_child_count() == 1:
 		# Start another builder so we can place multiple buildings consecutively
 		_create_builder(building)
+
+
+func _confirm() -> void:
+	if get_child_count() == 0:
+		return
+	
+	var builder: Builder = get_child(0)
+	builder.confirm()
+
+
+func _cancel_all() -> void:
+	for b: Builder in get_children():
+		b.cancel()
+
+
+func _set_buildings(value: Array[BuildingDef]) -> void:
+	buildings = value
+	
+	if build_menu:
+		build_menu.buildings = value
+
+
+func _set_build_menu(value: BuildMenu) -> void:
+	build_menu = value
+	build_menu.build_initiated.connect(self._create_builder)
+	
+	if buildings:
+		build_menu.buildings = buildings
