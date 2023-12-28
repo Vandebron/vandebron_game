@@ -250,7 +250,6 @@ item_3/icon = SubResource("GradientTexture2D_ft275")
 item_4/text = "Battery"
 item_4/icon = SubResource("GradientTexture2D_iio37")
 script = ExtResource("5_pa8nh")
-buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("6_hie5k"), ExtResource("7_j6abk"), ExtResource("8_mvyrg"), ExtResource("9_emw5f"), ExtResource("10_7sqdc")])
 
 [node name="EnergyGrid" parent="." node_paths=PackedStringArray("weather") instance=ExtResource("11_gsodt")]
 weather = NodePath("../Weather")
@@ -272,10 +271,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
 [node name="SolarPlant" parent="EnergyGrid" instance=ExtResource("16_61lux")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 
-[node name="BuildManager" type="Node3D" parent="." node_paths=PackedStringArray("energy_grid", "camera")]
+[node name="BuildManager" type="Node3D" parent="." node_paths=PackedStringArray("energy_grid", "camera", "build_menu")]
 script = ExtResource("17_yp472")
 energy_grid = NodePath("../EnergyGrid")
 camera = NodePath("../CameraAnchor/Camera3D")
+build_menu = NodePath("../EnergyGridUI/UI/MarginContainer/VBoxContainer/BottomPanelCtnr/BuildItemList")
+buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("6_hie5k"), ExtResource("7_j6abk"), ExtResource("8_mvyrg"), ExtResource("9_emw5f"), ExtResource("10_7sqdc")])
 
 [node name="TerrainManager" type="Node3D" parent="." node_paths=PackedStringArray("terrain", "weather")]
 script = ExtResource("18_2lqje")
