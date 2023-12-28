@@ -23,7 +23,6 @@ config/icon="res://icon.svg"
 Constants="*res://library/constants.gd"
 Utils="*res://library/utils.gd"
 InputUtil="*res://library/input/input_util.gd"
-Events="*res://library/events.gd"
 
 [display]
 
