@@ -32,8 +32,8 @@ func on_added_to_grid() -> void:
 	weather.part_of_day_started.connect(self._on_part_of_day_started)
 	weather.part_of_day_ended.connect(self._on_part_of_day_ended)
 
-	if weather.is_day():
-		model.animation_player.play("consume")
+	#if weather.is_day():
+		#model.animation_player.play("consume")
 
 
 #func show_info() -> void:
@@ -64,5 +64,6 @@ func _on_part_of_day_started(part: Weather.DayPart) -> void:
 
 
 func _on_part_of_day_ended(part: Weather.DayPart) -> void:
-	if part == Weather.DayPart.DUSK:
-		model.animation_player.play("consume")
+	#if part == Weather.DayPart.DUSK:
+		#model.animation_player.play("consume")
+	pass
