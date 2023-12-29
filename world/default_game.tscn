@@ -29,7 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://bcpjahrk7du1b" path="res://object/weather/weather.tscn" id="23_rxnc1"]
 [ext_resource type="Script" path="res://object/camera_anchor.gd" id="25_83m6t"]
 [ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/default_sun.tscn" id="27_x6kvx"]
-[ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://world/default_world_environment.tres" id="30_3whrn"]
+[ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://world/default_world_environment.tres" id="30_acvvu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bchmx"]
 bg_color = Color(0.207843, 0.168627, 0.258824, 1)
@@ -355,4 +355,4 @@ script = ExtResource("22_ncsg7")
 camera = NodePath("../Camera3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("30_3whrn")
+environment = ExtResource("30_acvvu")
