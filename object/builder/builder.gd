@@ -26,7 +26,7 @@ func _init() -> void:
 	add_to_group(Constants.GROUP_BUILDER)
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if _build_confirmed:
 		return
 	
