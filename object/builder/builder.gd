@@ -3,18 +3,14 @@ class_name Builder
 
 signal build_done(node: Node3D, building: BuildingDef, at_position: Vector3)
 
-var good_placement_color := Color.hex(0x8ab060ff)
-var bad_placement_color := Color.hex(0xb45252ff)
-
 @export var building: BuildingDef: set=set_building
 @export var camera: Camera3D
 
 # This is so we don't immediately build the building after selecting it from the list
 @onready var placement_debounce: Timer = $PlacementDebounce
 
-var _highlight_material: Material = preload("res://object/builder/highlight_material.tres")
 var _model: Model
-var _shape: Model
+var _shape: BuildShapeIndicator
 var _collider: Area3D
 var _build_confirmed: bool
 var _build_position: Vector3
@@ -32,10 +28,9 @@ func _process(delta: float) -> void:
 	
 	_pointer_pos = InputUtil.get_pointer_world_position(camera).snapped(Constants.GRID_CELL_SIZE)
 	
-	global_position = global_position.lerp(_pointer_pos, delta * 15.0)
-	
-	_highlight_material.albedo_color =\
-		bad_placement_color if _collider.has_overlapping_areas() else good_placement_color
+	_model.global_position = _model.global_position.lerp(_pointer_pos, delta * 15.0)
+	_shape.global_position = _shape.global_position.lerp(_pointer_pos, delta * 15.0)
+	_collider.global_position = _pointer_pos
 
 
 func confirm() -> void:
@@ -105,9 +100,13 @@ func set_building(value: BuildingDef) -> void:
 	# TODO: Can we get this typed as Model in BuildingDef?
 	_model = building.model.instantiate() as Model
 	add_child(_model)
-	_shape = building.shape.instantiate() as Model
-	add_child(_shape)
+	
 	_collider = building.collider.instantiate()
 	add_child(_collider)
+	
+	_shape = building.shape.instantiate() as BuildShapeIndicator
+	_shape.ignore_visibility = true
+	_shape.collider = _collider
+	add_child(_shape)
 	
 	call_deferred("_add_hover_animation")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://vjdf3kwb88ov"]
+[gd_scene load_steps=9 format=3 uid="uid://vjdf3kwb88ov"]
 
 [ext_resource type="Script" path="res://object/house/house.gd" id="1_03gka"]
 [ext_resource type="PackedScene" uid="uid://5yby1xliao2j" path="res://object/house/house_model.tscn" id="2_6frin"]
 [ext_resource type="PackedScene" uid="uid://b3bbpo64jnd2l" path="res://object/house/house_collider.tscn" id="3_pyalc"]
 [ext_resource type="PackedScene" uid="uid://3uw8bcseb6e1" path="res://library/energy_grid/gauge.tscn" id="4_2fkml"]
+[ext_resource type="PackedScene" uid="uid://5pmepuisqp78" path="res://object/house/house_shape.tscn" id="4_26ej8"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="4_lmm4h"]
 
 [sub_resource type="Shader" id="Shader_w8v2k"]
@@ -50,6 +51,10 @@ demand = 1.0
 max_demand = 10.0
 
 [node name="Model" parent="." instance=ExtResource("2_6frin")]
+
+[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider") instance=ExtResource("4_26ej8")]
+visible = false
+collider = NodePath("../Collider")
 
 [node name="Collider" parent="." instance=ExtResource("3_pyalc")]
 

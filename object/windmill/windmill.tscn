@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://kplamygjx6ob"]
+[gd_scene load_steps=9 format=3 uid="uid://kplamygjx6ob"]
 
 [ext_resource type="Script" path="res://object/windmill/windmill.gd" id="1_65461"]
 [ext_resource type="PackedScene" uid="uid://bxgfnp120gfmk" path="res://object/windmill/windmill_model.tscn" id="2_4fv1r"]
 [ext_resource type="PackedScene" uid="uid://dlwoabgf66r5s" path="res://object/windmill/windmill_collider.tscn" id="3_ckbnn"]
+[ext_resource type="PackedScene" uid="uid://dxqwmcbyqnwls" path="res://object/windmill/windmill_shape.tscn" id="3_myyvd"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="4_87nqh"]
 [ext_resource type="PackedScene" uid="uid://3uw8bcseb6e1" path="res://library/energy_grid/gauge.tscn" id="4_t57sq"]
 
-[sub_resource type="Shader" id="Shader_p0t78"]
+[sub_resource type="Shader" id="Shader_w8v2k"]
 code = "shader_type canvas_item;
 
 uniform float current = 0.2;
@@ -35,7 +36,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_unty4"]
 resource_local_to_scene = true
-shader = SubResource("Shader_p0t78")
+shader = SubResource("Shader_w8v2k")
 shader_parameter/current = 0.2
 shader_parameter/target = 0.7
 shader_parameter/max_value = 1.0
@@ -49,6 +50,11 @@ script = ExtResource("1_65461")
 type = 1
 
 [node name="Model" parent="." instance=ExtResource("2_4fv1r")]
+
+[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider") instance=ExtResource("3_myyvd")]
+visible = false
+toggle_visibility = true
+collider = NodePath("../Collider")
 
 [node name="Collider" parent="." instance=ExtResource("3_ckbnn")]
 collision_layer = 8194

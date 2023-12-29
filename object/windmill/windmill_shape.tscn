@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://dxqwmcbyqnwls"]
 
-[ext_resource type="Script" path="res://library/model/model.gd" id="1_pxxyq"]
+[ext_resource type="Script" path="res://library/building/build_shape_indicator.gd" id="1_qj1sh"]
 [ext_resource type="Material" uid="uid://bmo3pjsu8nm0w" path="res://object/builder/highlight_material.tres" id="2_hgwtw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3p726"]
 size = Vector3(1.5, 0.1, 1.5)
 
 [node name="BuildShapeIndicator" type="Node3D" node_paths=PackedStringArray("mesh_nodes")]
-script = ExtResource("1_pxxyq")
+script = ExtResource("1_qj1sh")
 mesh_nodes = [NodePath("MeshInstance3D")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

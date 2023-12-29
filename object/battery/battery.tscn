@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bb3libciwo1ul"]
+[gd_scene load_steps=5 format=3 uid="uid://bb3libciwo1ul"]
 
 [ext_resource type="Script" path="res://object/battery/battery.gd" id="1_wuwbg"]
 [ext_resource type="PackedScene" uid="uid://c7jqevtf0ia5d" path="res://object/battery/battery_collider.tscn" id="2_bueyi"]
 [ext_resource type="PackedScene" uid="uid://c40nvy1ajl4b7" path="res://object/battery/battery_model.tscn" id="2_rboua"]
+[ext_resource type="PackedScene" uid="uid://bm71gqce1cqwb" path="res://object/battery/battery_shape.tscn" id="3_e3aey"]
 
 [node name="Battery" type="Node3D"]
 script = ExtResource("1_wuwbg")
@@ -10,6 +11,8 @@ max_charge_kw = 10000.0
 
 [node name="Model" parent="." instance=ExtResource("2_rboua")]
 
+[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider") instance=ExtResource("3_e3aey")]
+visible = false
+collider = NodePath("../Collider")
+
 [node name="Collider" parent="." instance=ExtResource("2_bueyi")]
-collision_layer = 2
-collision_mask = 2

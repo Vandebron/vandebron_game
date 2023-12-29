@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://fwrp8f25a4dx"]
+[gd_scene load_steps=5 format=3 uid="uid://fwrp8f25a4dx"]
 
 [ext_resource type="PackedScene" uid="uid://gyt1h2wqjrrb" path="res://object/coal_plant/coal_plant_model.tscn" id="1_crd40"]
 [ext_resource type="Script" path="res://object/coal_plant/coal_plant.gd" id="1_pdb65"]
+[ext_resource type="PackedScene" uid="uid://dym3ot1dpckil" path="res://object/coal_plant/coal_plant_shape.tscn" id="3_ss3u1"]
 [ext_resource type="PackedScene" uid="uid://dy4qywlx5s7b8" path="res://object/coal_plant/coal_plant_collider.tscn" id="4_tnxg0"]
 
 [node name="CoalPlant" type="Node3D"]
@@ -9,5 +10,10 @@ script = ExtResource("1_pdb65")
 nominal_power = 100.0
 
 [node name="Model" parent="." instance=ExtResource("1_crd40")]
+
+[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider") instance=ExtResource("3_ss3u1")]
+visible = false
+toggle_visibility = true
+collider = NodePath("../Collider")
 
 [node name="Collider" parent="." instance=ExtResource("4_tnxg0")]
