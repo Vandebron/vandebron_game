@@ -274,49 +274,49 @@ weather = NodePath("../Weather")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="House3" parent="EnergyGrid" instance=ExtResource("12_5qeit")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
 [node name="House4" parent="EnergyGrid" instance=ExtResource("12_5qeit")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
 
 [node name="House5" parent="EnergyGrid" instance=ExtResource("12_5qeit")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04796, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
 
 [node name="House6" parent="EnergyGrid" instance=ExtResource("12_5qeit")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.048, 2.08165e-12, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
 
 [node name="House7" parent="EnergyGrid" instance=ExtResource("12_5qeit")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.048, 2.08165e-12, -2.00237)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 
 [node name="House8" parent="EnergyGrid" instance=ExtResource("12_5qeit")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.048, 2.08165e-12, -3.05692)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
 [node name="House9" parent="EnergyGrid" instance=ExtResource("12_5qeit")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.03838, 2.08165e-12, -3.05692)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
 
 [node name="House10" parent="EnergyGrid" instance=ExtResource("12_5qeit")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.03838, 2.08165e-12, -2.01193)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 
 [node name="House11" parent="EnergyGrid" instance=ExtResource("12_5qeit")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.038, 2.08165e-12, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 
 [node name="House12" parent="EnergyGrid" instance=ExtResource("12_5qeit")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.038, 2.08165e-12, 0.0078752)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="Windmill" parent="EnergyGrid" instance=ExtResource("13_lftvy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 
 [node name="CoalPlant" parent="EnergyGrid" instance=ExtResource("14_nbt83")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
 
 [node name="Battery" parent="EnergyGrid" instance=ExtResource("15_aeyws")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
 [node name="Battery2" parent="EnergyGrid" instance=ExtResource("15_aeyws")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.08165e-12, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
 
 [node name="SolarPlant" parent="EnergyGrid" instance=ExtResource("16_61lux")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
 
 [node name="BuildManager" type="Node3D" parent="." node_paths=PackedStringArray("energy_grid", "camera", "build_menu")]
 script = ExtResource("17_yp472")
