@@ -5,14 +5,13 @@
 [sub_resource type="CylinderMesh" id="CylinderMesh_7xwgc"]
 top_radius = 2.0
 bottom_radius = 2.0
-height = 0.1
+height = 0.25
 radial_segments = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_th1cp"]
-transparency = 1
 cull_mode = 1
-no_depth_test = true
 diffuse_mode = 3
+albedo_color = Color(0.94902, 0.941176, 0.898039, 1)
 disable_receive_shadows = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_u568o"]
@@ -22,14 +21,13 @@ radius = 2.0
 script = ExtResource("1_wuq60")
 
 [node name="ShapeIndicator" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.1, 2.08165e-12)
-transparency = 0.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.15, 2.08165e-12)
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_7xwgc")
 surface_material_override/0 = SubResource("StandardMaterial3D_th1cp")
 
 [node name="Collider" type="Area3D" parent="."]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Collider"]

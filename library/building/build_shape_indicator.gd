@@ -11,11 +11,12 @@ var BAD_COLOR := Color.hex(0xb45252ff)
 var highlight_material: StandardMaterial3D = preload("res://object/builder/highlight_material.tres")
 
 
-func _process(_delta: float) -> void:
-	if collider.has_overlapping_areas():
-		set_bad()
-	else:
-		set_good()
+# TODO: Something in this whole class is broken; things are randomly using GOOD_COLOR sometimes
+#func _physics_process(_delta: float) -> void:
+	#if collider.has_overlapping_areas():
+		#set_bad()
+	#else:
+		#set_good()
 
 
 func set_good() -> void:

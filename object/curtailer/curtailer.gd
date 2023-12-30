@@ -5,8 +5,9 @@ signal done
 
 enum Mode {DISABLE, ENABLE}
 
+@export var mode: Mode = Mode.DISABLE
+@export var radius: float = 2.0: set=_set_radius
 @export var camera: Camera3D
-@export var mode: Mode
 
 @onready var shape_indicator: MeshInstance3D = $ShapeIndicator
 @onready var collider: Area3D = $Collider
@@ -20,9 +21,11 @@ func _physics_process(_delta: float) -> void:
 
 
 func _process(delta: float) -> void:
-	_pointer_pos = InputUtil.get_pointer_world_position(camera).snapped(Constants.GRID_CELL_SIZE)
+	_pointer_pos = InputUtil.get_pointer_world_position(camera)
+	var shape_pos: Vector3 = shape_indicator.global_position.lerp(_pointer_pos, delta * 15.0)
 	
-	shape_indicator.global_position = shape_indicator.global_position.lerp(_pointer_pos, delta * 15.0)
+	shape_indicator.global_position.x = shape_pos.x
+	shape_indicator.global_position.z = shape_pos.z
 	collider.global_position = _pointer_pos
 
 
@@ -47,3 +50,12 @@ func confirm() -> void:
 func cancel() -> void:
 	done.emit()
 	queue_free()
+
+
+func _set_radius(value: float) -> void:
+	radius = value
+	
+	$ShapeIndicator.mesh.top_radius = radius
+	$ShapeIndicator.mesh.bottom_radius = radius
+	
+	$Collider/CollisionShape3D.shape.radius = radius
