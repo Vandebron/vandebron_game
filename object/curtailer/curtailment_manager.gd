@@ -7,12 +7,14 @@ const curtailer_scn: PackedScene = preload("res://object/curtailer/curtailer.tsc
 
 
 func _ready() -> void:
+	Events.builder_initiated.connect(_cancel_all)
 	action_menu.item_selected.connect(_on_action_selected)
 
 
 func _on_action_selected(index: int) -> void:
-	for c: Curtailer in get_children():
-		c.cancel()
+	Events.curtailer_initiated.emit()
+	
+	_cancel_all()
 	
 	var curtailer: Curtailer = curtailer_scn.instantiate()
 	curtailer.camera = camera
@@ -27,6 +29,11 @@ func _on_action_selected(index: int) -> void:
 			curtailer.mode = Curtailer.Mode.DISABLE
 	
 	add_child(curtailer)
+
+
+func _cancel_all() -> void:
+	for c: Curtailer in get_children():
+		c.cancel()
 
 
 func _on_curtailment_done() -> void:

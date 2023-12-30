@@ -366,15 +366,15 @@ camera = NodePath("../CameraAnchor/Camera3D")
 build_menu = NodePath("../GameUI/UI/MarginContainer/VBoxContainer/BottomPanelCtnr/BuildMenuCtnr/BuildMenu")
 buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("6_hie5k"), ExtResource("7_j6abk"), ExtResource("8_mvyrg"), ExtResource("9_emw5f"), ExtResource("10_7sqdc")])
 
-[node name="TerrainManager" type="Node3D" parent="." node_paths=PackedStringArray("terrain", "weather")]
-script = ExtResource("18_2lqje")
-terrain = NodePath("../Terrain")
-weather = NodePath("../Weather")
-
 [node name="CurtailmentManager" type="Node3D" parent="." node_paths=PackedStringArray("action_menu", "camera")]
 script = ExtResource("19_ocx7e")
 action_menu = NodePath("../GameUI/UI/MarginContainer/VBoxContainer/BottomPanelCtnr/ActionMenuCtnr/ActionMenu")
 camera = NodePath("../CameraAnchor/Camera3D")
+
+[node name="TerrainManager" type="Node3D" parent="." node_paths=PackedStringArray("terrain", "weather")]
+script = ExtResource("18_2lqje")
+terrain = NodePath("../Terrain")
+weather = NodePath("../Weather")
 
 [node name="HealthManager" type="Node" parent="." node_paths=PackedStringArray("energy_grid")]
 unique_name_in_owner = true

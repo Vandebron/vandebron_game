@@ -7,6 +7,10 @@ class_name BuildManager
 @export var buildings: Array[BuildingDef] = []: set=_set_buildings
 
 
+func _ready() -> void:
+	Events.curtailer_initiated.connect(_cancel_all)
+
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("build_cancel"):
 		_cancel_all()
@@ -15,6 +19,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _create_builder(building: BuildingDef) -> void:
+	Events.builder_initiated.emit()
+	
 	# Just make sure we cancel all other build actions so we don't place multiple with one click
 	_cancel_all()
 	
