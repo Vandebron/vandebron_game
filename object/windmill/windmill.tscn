@@ -53,11 +53,13 @@ type = 1
 
 [node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider") instance=ExtResource("3_myyvd")]
 visible = false
-toggle_visibility = true
 collider = NodePath("../Collider")
 
 [node name="Collider" parent="." instance=ExtResource("3_ckbnn")]
 collision_layer = 8194
+
+[node name="UpdateTimer" type="Timer" parent="."]
+autostart = true
 
 [node name="VarianceTimer" type="Timer" parent="."]
 autostart = true

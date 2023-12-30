@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://2ewnmkpjsnx7"]
+
+[sub_resource type="Gradient" id="Gradient_56ueg"]
+colors = PackedColorArray(0.705882, 0.321569, 0.321569, 1, 0.705882, 0.321569, 0.321569, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j04vx"]
+gradient = SubResource("Gradient_56ueg")
+
+[node name="DisableIcon" type="Sprite3D"]
+billboard = 1
+transparent = false
+double_sided = false
+no_depth_test = true
+texture = SubResource("GradientTexture2D_j04vx")

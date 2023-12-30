@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=57 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://world/default_game.gd" id="1_ukhqd"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_xd2nc"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://object/terrain_manager.gd" id="18_2lqje"]
 [ext_resource type="Script" path="res://object/health_bar/health_manager.gd" id="18_qiu7f"]
 [ext_resource type="Script" path="res://object/ui_manager.gd" id="19_n0n5j"]
+[ext_resource type="Script" path="res://object/curtailer/curtailment_manager.gd" id="19_ocx7e"]
 [ext_resource type="Material" uid="uid://11gkcqv58xup" path="res://library/terrain/grid_material.tres" id="20_874wh"]
 [ext_resource type="Shader" path="res://library/terrain/terrain.gdshader" id="21_3wvil"]
 [ext_resource type="Script" path="res://library/weather.gd" id="21_df1cl"]
@@ -70,6 +71,18 @@ gradient = SubResource("Gradient_niknj")
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_iio37"]
 gradient = SubResource("Gradient_hoym3")
 
+[sub_resource type="Gradient" id="Gradient_jnnnt"]
+colors = PackedColorArray(0.541176, 0.690196, 0.376471, 1, 0.541176, 0.690196, 0.376471, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xp4jv"]
+gradient = SubResource("Gradient_jnnnt")
+
+[sub_resource type="Gradient" id="Gradient_rlvia"]
+colors = PackedColorArray(0.705882, 0.321569, 0.321569, 1, 0.705882, 0.321569, 0.321569, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ufu7g"]
+gradient = SubResource("Gradient_rlvia")
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_d1wqf"]
 size = Vector2(32, 32)
 
@@ -109,9 +122,9 @@ billboard_mode = 2
 [node name="DefaultGame" type="Node3D"]
 script = ExtResource("1_ukhqd")
 
-[node name="EnergyGridUI" type="CanvasLayer" parent="."]
+[node name="GameUI" type="CanvasLayer" parent="."]
 
-[node name="UI" type="Control" parent="EnergyGridUI"]
+[node name="UI" type="Control" parent="GameUI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -120,7 +133,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_xd2nc")
 
-[node name="MarginContainer" type="MarginContainer" parent="EnergyGridUI/UI"]
+[node name="MarginContainer" type="MarginContainer" parent="GameUI/UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -132,64 +145,65 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EnergyGridUI/UI/MarginContainer"]
-custom_minimum_size = Vector2(520, 2.08165e-12)
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/UI/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TopVBoxCtnr" type="VBoxContainer" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer"]
+[node name="TopVBoxCtnr" type="VBoxContainer" parent="GameUI/UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 2.08165e-12)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 2
 
-[node name="HealthBar" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr" instance=ExtResource("3_p2l32")]
+[node name="HealthBar" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr" instance=ExtResource("3_p2l32")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TopPanelCtnr" type="PanelContainer" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr"]
+[node name="TopPanelCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bchmx")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SupplyCtnr" type="PanelContainer" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer"]
+[node name="SupplyCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer"]
 custom_minimum_size = Vector2(80, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_hh88i")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/SupplyCtnr"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/SupplyCtnr"]
 layout_mode = 2
 
-[node name="SupplyTitle" type="Label" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/SupplyCtnr/VBoxContainer"]
+[node name="SupplyTitle" type="Label" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/SupplyCtnr/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Supply"
 horizontal_alignment = 2
 uppercase = true
 
-[node name="SupplyLbl" type="Label" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/SupplyCtnr/VBoxContainer"]
+[node name="SupplyLbl" type="Label" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/SupplyCtnr/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "50 kW"
 horizontal_alignment = 2
 
-[node name="GridBalanceCtnr" type="PanelContainer" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer"]
+[node name="GridBalanceCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer"]
 custom_minimum_size = Vector2(2.08165e-12, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_loqhr")
 
-[node name="GridBalanceGauge" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/GridBalanceCtnr" instance=ExtResource("4_cspsk")]
+[node name="GridBalanceGauge" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/GridBalanceCtnr" instance=ExtResource("4_cspsk")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HzCtnr" type="ColorRect" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/GridBalanceCtnr/GridBalanceGauge"]
+[node name="HzCtnr" type="ColorRect" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/GridBalanceCtnr/GridBalanceGauge"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 20)
 layout_mode = 0
@@ -198,7 +212,7 @@ offset_right = 60.0
 offset_bottom = 60.0
 color = Color(0.2, 0.168627, 0.25098, 1)
 
-[node name="HzLbl" type="Label" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/GridBalanceCtnr/GridBalanceGauge/HzCtnr"]
+[node name="HzLbl" type="Label" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/GridBalanceCtnr/GridBalanceGauge/HzCtnr"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -217,34 +231,40 @@ text = "50.00 Hz"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DemandCtnr" type="PanelContainer" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer"]
+[node name="DemandCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer"]
 custom_minimum_size = Vector2(80, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_10pjr")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/DemandCtnr"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/DemandCtnr"]
 layout_mode = 2
 
-[node name="DemandTitle" type="Label" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/DemandCtnr/VBoxContainer"]
+[node name="DemandTitle" type="Label" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/DemandCtnr/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Demand"
 uppercase = true
 
-[node name="DemandLbl" type="Label" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/DemandCtnr/VBoxContainer"]
+[node name="DemandLbl" type="Label" parent="GameUI/UI/MarginContainer/VBoxContainer/TopVBoxCtnr/TopPanelCtnr/HBoxContainer/DemandCtnr/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "50 kW"
 
-[node name="BottomPanelCtnr" type="PanelContainer" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer"]
+[node name="BottomPanelCtnr" type="HBoxContainer" parent="GameUI/UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(760, 2.08165e-12)
 layout_mode = 2
 
-[node name="BuildItemList" type="ItemList" parent="EnergyGridUI/UI/MarginContainer/VBoxContainer/BottomPanelCtnr"]
+[node name="BuildMenuCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/BottomPanelCtnr"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BuildMenu" type="ItemList" parent="GameUI/UI/MarginContainer/VBoxContainer/BottomPanelCtnr/BuildMenuCtnr"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 allow_reselect = true
 allow_search = false
 auto_height = true
@@ -264,6 +284,27 @@ item_3/icon = SubResource("GradientTexture2D_ft275")
 item_4/text = "Battery"
 item_4/icon = SubResource("GradientTexture2D_iio37")
 script = ExtResource("5_pa8nh")
+
+[node name="ActionMenuCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/BottomPanelCtnr"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="ActionMenu" type="ItemList" parent="GameUI/UI/MarginContainer/VBoxContainer/BottomPanelCtnr/ActionMenuCtnr"]
+unique_name_in_owner = true
+layout_mode = 2
+allow_reselect = true
+allow_search = false
+auto_height = true
+item_count = 2
+max_columns = 2
+fixed_column_width = 90
+icon_mode = 0
+fixed_icon_size = Vector2i(40, 40)
+item_0/text = "Enable"
+item_0/icon = SubResource("GradientTexture2D_xp4jv")
+item_1/text = "Disable"
+item_1/icon = SubResource("GradientTexture2D_ufu7g")
 
 [node name="EnergyGrid" parent="." node_paths=PackedStringArray("weather") instance=ExtResource("11_gsodt")]
 weather = NodePath("../Weather")
@@ -322,13 +363,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
 script = ExtResource("17_yp472")
 energy_grid = NodePath("../EnergyGrid")
 camera = NodePath("../CameraAnchor/Camera3D")
-build_menu = NodePath("../EnergyGridUI/UI/MarginContainer/VBoxContainer/BottomPanelCtnr/BuildItemList")
+build_menu = NodePath("../GameUI/UI/MarginContainer/VBoxContainer/BottomPanelCtnr/BuildMenuCtnr/BuildMenu")
 buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("6_hie5k"), ExtResource("7_j6abk"), ExtResource("8_mvyrg"), ExtResource("9_emw5f"), ExtResource("10_7sqdc")])
 
 [node name="TerrainManager" type="Node3D" parent="." node_paths=PackedStringArray("terrain", "weather")]
 script = ExtResource("18_2lqje")
 terrain = NodePath("../Terrain")
 weather = NodePath("../Weather")
+
+[node name="CurtailmentManager" type="Node3D" parent="." node_paths=PackedStringArray("action_menu", "camera")]
+script = ExtResource("19_ocx7e")
+action_menu = NodePath("../GameUI/UI/MarginContainer/VBoxContainer/BottomPanelCtnr/ActionMenuCtnr/ActionMenu")
+camera = NodePath("../CameraAnchor/Camera3D")
 
 [node name="HealthManager" type="Node" parent="." node_paths=PackedStringArray("energy_grid")]
 unique_name_in_owner = true

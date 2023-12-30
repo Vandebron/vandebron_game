@@ -13,7 +13,6 @@ type = 2
 
 [node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider") instance=ExtResource("3_51dca")]
 visible = false
-toggle_visibility = true
 collider = NodePath("../Collidor")
 
 [node name="Collidor" parent="." instance=ExtResource("3_0y2vm")]
