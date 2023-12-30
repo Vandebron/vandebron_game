@@ -30,7 +30,7 @@ func on_added_to_grid() -> void:
 	variance_timer.timeout.connect(self._update_variance)
 	
 	weather.part_of_day_started.connect(self._on_part_of_day_started)
-	weather.part_of_day_ended.connect(self._on_part_of_day_ended)
+	#weather.part_of_day_ended.connect(self._on_part_of_day_ended)
 
 	#if weather.is_day():
 		#model.animation_player.play("consume")
@@ -63,7 +63,6 @@ func _on_part_of_day_started(part: Weather.DayPart) -> void:
 		model.animation_player.play("night")
 
 
-func _on_part_of_day_ended(part: Weather.DayPart) -> void:
+#func _on_part_of_day_ended(part: Weather.DayPart) -> void:
 	#if part == Weather.DayPart.DUSK:
 		#model.animation_player.play("consume")
-	pass

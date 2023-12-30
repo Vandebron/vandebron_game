@@ -14,7 +14,7 @@ enum Mode {DISABLE, ENABLE}
 var _pointer_pos: Vector3
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_pressed("build_confirm"):
 		confirm()
 
