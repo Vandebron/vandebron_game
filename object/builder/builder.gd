@@ -12,6 +12,7 @@ signal build_done(node: Node3D, building: BuildingDef, at_position: Vector3)
 var _model: Model
 var _shape: BuildShapeIndicator
 var _collider: Area3D
+var _terrain_collider: Area3D
 var _build_confirmed: bool
 var _build_position: Vector3
 var _pointer_pos: Vector3
@@ -31,6 +32,12 @@ func _process(delta: float) -> void:
 	_model.global_position = _model.global_position.lerp(_pointer_pos, delta * 15.0)
 	_shape.global_position = _shape.global_position.lerp(_pointer_pos, delta * 15.0)
 	_collider.global_position = _pointer_pos
+	_terrain_collider.global_position = _pointer_pos
+	
+	if _can_place():
+		_shape.set_good()
+	else:
+		_shape.set_bad()
 
 
 func confirm() -> void:
@@ -91,7 +98,8 @@ func _add_twirl_animation() -> Tween:
 func _can_place() -> bool:
 	return !_build_confirmed\
 		&& placement_debounce.time_left == 0\
-		&& !_collider.has_overlapping_areas()
+		&& !_collider.has_overlapping_areas()\
+		&& _terrain_collider.has_overlapping_areas() # i.e. don't be out-of-bounds
 
 
 func set_building(value: BuildingDef) -> void:
@@ -103,6 +111,11 @@ func set_building(value: BuildingDef) -> void:
 	
 	_collider = building.collider.instantiate()
 	add_child(_collider)
+	
+	_terrain_collider = building.collider.instantiate()
+	_terrain_collider.collision_layer = 0
+	_terrain_collider.collision_mask = Utils.get_physics_layer("terrain")
+	add_child(_terrain_collider)
 	
 	_shape = building.shape.instantiate() as BuildShapeIndicator
 	_shape.ignore_visibility = true

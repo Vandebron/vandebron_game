@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=59 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://world/default_game.gd" id="1_ukhqd"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_xd2nc"]
@@ -101,6 +101,9 @@ shader_parameter/snow_density = 0.0
 shader_parameter/ground_color = Color(0.698039, 0.705882, 0.494118, 1)
 shader_parameter/snow_color = Color(1, 1, 1, 1)
 shader_parameter/snow_splatmap = SubResource("NoiseTexture2D_2cr2i")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bfkny"]
+size = Vector3(31, 1, 31)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fj1y3"]
 size = Vector3(32, 1, 32)
@@ -396,6 +399,13 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_uhkcm")
 script = ExtResource("22_e6dhh")
 camera = NodePath("../CameraAnchor/Camera3D")
+
+[node name="Area3D" type="Area3D" parent="Terrain"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Area3D"]
+shape = SubResource("BoxShape3D_bfkny")
 
 [node name="Doodads" type="Node3D" parent="."]
 
