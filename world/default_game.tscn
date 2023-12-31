@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=65 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://world/default_game.gd" id="1_ukhqd"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_xd2nc"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/default_sun.tscn" id="27_x6kvx"]
 [ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://world/default_world_environment.tres" id="30_acvvu"]
 [ext_resource type="PackedScene" uid="uid://ceevy66ar1stu" path="res://object/camera/default_camera.tscn" id="30_dstnb"]
+[ext_resource type="Shader" path="res://object/water/water.gdshader" id="33_dglco"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bchmx"]
 bg_color = Color(0.207843, 0.168627, 0.258824, 1)
@@ -104,6 +105,35 @@ shader_parameter/snow_splatmap = SubResource("NoiseTexture2D_2cr2i")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bfkny"]
 size = Vector3(31, 1, 31)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n0fdt"]
+size = Vector2(64, 64)
+
+[sub_resource type="Gradient" id="Gradient_hjwa4"]
+offsets = PackedFloat32Array(0.0204918, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wjs8k"]
+noise_type = 3
+frequency = 0.03
+fractal_type = 3
+fractal_gain = 2.08165e-12
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wye3w"]
+seamless = true
+color_ramp = SubResource("Gradient_hjwa4")
+noise = SubResource("FastNoiseLite_wjs8k")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_665ug"]
+render_priority = 0
+shader = ExtResource("33_dglco")
+shader_parameter/color_a = Color(1, 1, 1, 1)
+shader_parameter/color_b = Color(0.294118, 0.501961, 0.792157, 1)
+shader_parameter/edge_min = 0.1
+shader_parameter/edge_max = 0.2
+shader_parameter/wave_speed = 0.002
+shader_parameter/wave_direction = Vector2(1, 0.5)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/albedo = SubResource("NoiseTexture2D_wye3w")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fj1y3"]
 size = Vector3(32, 1, 32)
@@ -406,6 +436,11 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Area3D"]
 shape = SubResource("BoxShape3D_bfkny")
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.1, 2.08165e-12)
+mesh = SubResource("PlaneMesh_n0fdt")
+surface_material_override/0 = SubResource("ShaderMaterial_665ug")
 
 [node name="Doodads" type="Node3D" parent="."]
 
