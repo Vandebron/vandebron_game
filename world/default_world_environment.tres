@@ -10,6 +10,7 @@ radiance_size = 0
 background_mode = 2
 sky = SubResource("Sky_w3fip")
 sky_custom_fov = 70.0
+ambient_light_source = 3
 ssao_enabled = true
 ssao_intensity = 4.0
 glow_enabled = true
