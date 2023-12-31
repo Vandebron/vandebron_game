@@ -417,9 +417,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
 [node name="DefaultSun" parent="." node_paths=PackedStringArray("weather") instance=ExtResource("27_x6kvx")]
 weather = NodePath("../Weather")
 
-[node name="CameraAnchor" type="Node3D" parent="."]
+[node name="CameraAnchor" type="Node3D" parent="." node_paths=PackedStringArray("terrain")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)
 script = ExtResource("25_83m6t")
+terrain = NodePath("../Terrain")
 
 [node name="Camera3D" parent="CameraAnchor" instance=ExtResource("30_dstnb")]
 

@@ -27,19 +27,19 @@ func _input(event: InputEvent) -> void:
 func get_pointer_world_position(camera: Camera3D) -> Vector3:
 	match _device_type:
 		DeviceType.MOUSE_KEYBOARD:
-			return _get_mouse_world_position(camera)
+			return get_mouse_world_position(camera)
 		_:
-			return _get_cursor_world_position(camera)
+			return get_cursor_world_position(camera)
 
 
-func _get_mouse_world_position(camera: Camera3D) -> Vector3:
+func get_mouse_world_position(camera: Camera3D) -> Vector3:
 	var mouse_position: Vector2 = get_viewport().get_mouse_position()
 	var ray_origin: Vector3 = camera.project_ray_origin(mouse_position)
 	var ray_target: Vector3 = ray_origin + camera.project_ray_normal(mouse_position) * 2000.0
 	return _raycast_for_pointer_position(ray_origin, ray_target)
 
 
-func _get_cursor_world_position(camera: Camera3D) -> Vector3:
+func get_cursor_world_position(camera: Camera3D) -> Vector3:
 	var ray_origin: Vector3 = camera.global_transform.origin
 	var ray_direction: Vector3 = -camera.global_transform.basis.z.normalized()
 	var ray_target: Vector3 = ray_origin + ray_direction * 1000.0
