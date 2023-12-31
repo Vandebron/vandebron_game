@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=58 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://world/default_game.gd" id="1_ukhqd"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_xd2nc"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" path="res://object/camera_anchor.gd" id="25_83m6t"]
 [ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/default_sun.tscn" id="27_x6kvx"]
 [ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://world/default_world_environment.tres" id="30_acvvu"]
+[ext_resource type="PackedScene" uid="uid://ceevy66ar1stu" path="res://object/camera/default_camera.tscn" id="30_dstnb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bchmx"]
 bg_color = Color(0.207843, 0.168627, 0.258824, 1)
@@ -410,11 +411,7 @@ weather = NodePath("../Weather")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)
 script = ExtResource("25_83m6t")
 
-[node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
-transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 1, 10, 1)
-projection = 1
-current = true
-size = 10.0
+[node name="Camera3D" parent="CameraAnchor" instance=ExtResource("30_dstnb")]
 
 [node name="MouseCollider" type="Area3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.5, 2.08165e-12)

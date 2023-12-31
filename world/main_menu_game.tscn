@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dsuaueqo8705f"]
+[gd_scene load_steps=12 format=3 uid="uid://dsuaueqo8705f"]
 
 [ext_resource type="Script" path="res://library/game/game.gd" id="1_odu5n"]
 [ext_resource type="PackedScene" uid="uid://dcrcskfsjrybq" path="res://object/energy_grid/energy_grid.tscn" id="2_8k3ws"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="5_1pvk0"]
 [ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://world/default_world_environment.tres" id="5_iip4w"]
 [ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/default_sun.tscn" id="5_uhpso"]
+[ext_resource type="PackedScene" uid="uid://ceevy66ar1stu" path="res://object/camera/default_camera.tscn" id="8_xhumt"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_43t6d"]
 size = Vector2(32, 32)
@@ -61,11 +62,7 @@ weather = NodePath("../Weather")
 [node name="CameraAnchor" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)
 
-[node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
-transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 1, 10, 1)
-projection = 1
-current = true
-size = 10.0
+[node name="Camera3D" parent="CameraAnchor" instance=ExtResource("8_xhumt")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("5_iip4w")
