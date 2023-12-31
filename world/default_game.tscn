@@ -85,7 +85,7 @@ colors = PackedColorArray(0.705882, 0.321569, 0.321569, 1, 0.705882, 0.321569, 0
 gradient = SubResource("Gradient_rlvia")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d1wqf"]
-size = Vector2(32, 32)
+size = Vector2(31, 31)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_iuyta"]
 noise_type = 0
