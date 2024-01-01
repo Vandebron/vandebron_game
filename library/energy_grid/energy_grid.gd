@@ -6,6 +6,7 @@ const BALANCE_CENTER: float = 0.5
 @export var target_frequency_hz: float = 50.0
 @export var frequency_max_deviation_hz: float = 0.1
 @export var balance_adj_rate: float = 0.4
+@export var clock: Clock
 @export var weather: Weather
 
 # Buildings
@@ -57,6 +58,7 @@ func add_producer(producer: Producer, at_position: Vector3) -> void:
 	else:
 		add_child(producer)
 	producer.global_position = at_position
+	producer.clock = clock
 	producer.weather = weather
 	producer.on_added_to_grid()
 	_producers.append(producer)
@@ -68,6 +70,7 @@ func add_consumer(consumer: Consumer, at_position: Vector3) -> void:
 	else:
 		add_child(consumer)
 	consumer.global_position = at_position
+	consumer.clock = clock
 	consumer.weather = weather
 	consumer.on_added_to_grid()
 	_consumers.append(consumer)
@@ -79,7 +82,6 @@ func add_battery(battery: Battery, at_position: Vector3) -> void:
 	else:
 		add_child(battery)
 	battery.global_position = at_position
-	battery.weather = weather
 	battery.on_added_to_grid()
 	_batteries.append(battery)
 

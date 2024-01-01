@@ -2,7 +2,6 @@ extends Node3D
 class_name Battery
 
 @export var max_charge_kw: float = 1.0
-@export var weather: Weather
 
 @onready var model: BatteryModel = $Model
 

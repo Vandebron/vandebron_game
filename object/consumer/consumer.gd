@@ -3,6 +3,7 @@ class_name Consumer
 
 @export var demand: float
 @export var max_demand: float
+@export var clock: Clock
 @export var weather: Weather
 
 

@@ -9,6 +9,7 @@ enum Type {FOSSIL, WIND, SOLAR}
 @export var active_capability_out: float
 @export var dmol: float = 0.0
 @export var type: Producer.Type
+@export var clock: Clock
 @export var weather: Weather
 
 var disable_icon: Node3D

@@ -6,7 +6,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if weather.is_night():
+	if clock.is_night():
 		active_capability_out = 0.0
 		current_power = 0.0
 	else:

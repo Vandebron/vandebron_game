@@ -1,14 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://dsuaueqo8705f"]
+[gd_scene load_steps=13 format=3 uid="uid://dsuaueqo8705f"]
 
-[ext_resource type="Script" path="res://library/game/game.gd" id="1_odu5n"]
-[ext_resource type="PackedScene" uid="uid://dcrcskfsjrybq" path="res://object/energy_grid/energy_grid.tscn" id="2_8k3ws"]
-[ext_resource type="PackedScene" uid="uid://vjdf3kwb88ov" path="res://object/house/house.tscn" id="3_uda23"]
-[ext_resource type="Script" path="res://library/weather.gd" id="4_rscvm"]
-[ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/windmill/windmill.tscn" id="4_xvwuv"]
-[ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="5_1pvk0"]
-[ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://library/default_world_environment.tres" id="5_iip4w"]
-[ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/default_sun.tscn" id="5_uhpso"]
-[ext_resource type="PackedScene" uid="uid://ceevy66ar1stu" path="res://object/camera/default_camera.tscn" id="8_xhumt"]
+[ext_resource type="Script" path="res://library/game/game.gd" id="1_3tth7"]
+[ext_resource type="PackedScene" uid="uid://dcrcskfsjrybq" path="res://object/energy_grid/energy_grid.tscn" id="2_yqwxt"]
+[ext_resource type="PackedScene" uid="uid://vjdf3kwb88ov" path="res://object/house/house.tscn" id="3_vj4r7"]
+[ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/windmill/windmill.tscn" id="4_3fpm7"]
+[ext_resource type="Script" path="res://library/clock.gd" id="5_g26tn"]
+[ext_resource type="Script" path="res://library/weather.gd" id="6_swx6p"]
+[ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="7_padue"]
+[ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/default_sun.tscn" id="8_lr1mk"]
+[ext_resource type="PackedScene" uid="uid://ceevy66ar1stu" path="res://object/camera/default_camera.tscn" id="9_8cjko"]
+[ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://library/default_world_environment.tres" id="10_gs782"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_43t6d"]
 size = Vector2(32, 32)
@@ -19,28 +20,33 @@ albedo_color = Color(0.760784, 0.827451, 0.407843, 1)
 roughness = 0.5
 
 [node name="MainMenuGame" type="Node3D"]
-script = ExtResource("1_odu5n")
+script = ExtResource("1_3tth7")
 
-[node name="EnergyGrid" parent="." node_paths=PackedStringArray("weather") instance=ExtResource("2_8k3ws")]
+[node name="EnergyGrid" parent="." node_paths=PackedStringArray("clock", "weather") instance=ExtResource("2_yqwxt")]
+clock = NodePath("../Clock")
 weather = NodePath("../Weather")
 
-[node name="House" parent="EnergyGrid" instance=ExtResource("3_uda23")]
+[node name="House" parent="EnergyGrid" instance=ExtResource("3_vj4r7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -1.5)
 
-[node name="House2" parent="EnergyGrid" instance=ExtResource("3_uda23")]
+[node name="House2" parent="EnergyGrid" instance=ExtResource("3_vj4r7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -2.5)
 
-[node name="House3" parent="EnergyGrid" instance=ExtResource("3_uda23")]
+[node name="House3" parent="EnergyGrid" instance=ExtResource("3_vj4r7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -1.5)
 
-[node name="House4" parent="EnergyGrid" instance=ExtResource("3_uda23")]
+[node name="House4" parent="EnergyGrid" instance=ExtResource("3_vj4r7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -2.5)
 
-[node name="Windmill" parent="EnergyGrid" instance=ExtResource("4_xvwuv")]
+[node name="Windmill" parent="EnergyGrid" instance=ExtResource("4_3fpm7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2.08165e-12, 1)
 
-[node name="Weather" type="Node" parent="."]
-script = ExtResource("4_rscvm")
+[node name="Clock" type="Node" parent="."]
+script = ExtResource("5_g26tn")
+
+[node name="Weather" type="Node" parent="." node_paths=PackedStringArray("clock")]
+script = ExtResource("6_swx6p")
+clock = NodePath("../Clock")
 
 [node name="Terrain" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_43t6d")
@@ -48,21 +54,21 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jvaal")
 
 [node name="Doodads" type="Node3D" parent="."]
 
-[node name="Tree" parent="Doodads" instance=ExtResource("5_1pvk0")]
+[node name="Tree" parent="Doodads" instance=ExtResource("7_padue")]
 
-[node name="Tree2" parent="Doodads" instance=ExtResource("5_1pvk0")]
+[node name="Tree2" parent="Doodads" instance=ExtResource("7_padue")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.08165e-12, -1)
 
-[node name="Tree3" parent="Doodads" instance=ExtResource("5_1pvk0")]
+[node name="Tree3" parent="Doodads" instance=ExtResource("7_padue")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.08165e-12, -3)
 
-[node name="SunAnchor" parent="." node_paths=PackedStringArray("weather") instance=ExtResource("5_uhpso")]
-weather = NodePath("../Weather")
+[node name="SunAnchor" parent="." node_paths=PackedStringArray("clock") instance=ExtResource("8_lr1mk")]
+clock = NodePath("../Clock")
 
 [node name="CameraAnchor" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)
 
-[node name="Camera3D" parent="CameraAnchor" instance=ExtResource("8_xhumt")]
+[node name="Camera3D" parent="CameraAnchor" instance=ExtResource("9_8cjko")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("5_iip4w")
+environment = ExtResource("10_gs782")

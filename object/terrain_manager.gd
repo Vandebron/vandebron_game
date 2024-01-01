@@ -4,6 +4,7 @@ const tree_wood_material: ShaderMaterial = preload("res://object/tree/tree_wood_
 const tree_leaves_material: ShaderMaterial = preload("res://object/tree/tree_leaves_material.tres")
 
 @export var terrain: MeshInstance3D
+@export var clock: Clock
 @export var weather: Weather
 
 var terrain_material: ShaderMaterial
@@ -16,10 +17,10 @@ func _ready() -> void:
 	grid_material = terrain.get_surface_override_material(0).next_pass as ShaderMaterial
 	grid_material.set_shader_parameter("cell_size", Constants.GRID_CELL_SIZE.x)
 	
-	weather.season_started.connect(self._on_season_started)
-	weather.season_ended.connect(self._on_season_ended)
+	clock.season_started.connect(_on_season_started)
+	clock.season_ended.connect(_on_season_ended)
 	
-	_on_season_started(weather.season)
+	_on_season_started(clock.season)
 
 
 func _process(_delta: float) -> void:
@@ -27,25 +28,25 @@ func _process(_delta: float) -> void:
 	tree_leaves_material.set_shader_parameter("sway_radius", weather.wind * 0.1)
 
 
-func _on_season_started(season: Weather.Season) -> void:
+func _on_season_started(season: Clock.Season) -> void:
 	match season:
-		Weather.Season.AUTUMN:
+		Clock.Season.AUTUMN:
 			_set_ground_color(Color.hex(0xd3a068ff))
 			tree_leaves_material.set_shader_parameter("albedo", Color.hex(0xa77b5bff))
-		Weather.Season.WINTER:
+		Clock.Season.WINTER:
 			_set_snow_density(0.65)
 			_set_ground_color(Color.hex(0xa77b5bff))
 			_set_tree_leaves_transparency(1.0)
-		Weather.Season.SPRING:
+		Clock.Season.SPRING:
 			tree_leaves_material.set_shader_parameter("albedo", Color.hex(0x8ab060ff))
 			_set_ground_color(Color.hex(0xc2d368ff))
-		Weather.Season.SUMMER:
+		Clock.Season.SUMMER:
 			_set_ground_color(Color.hex(0x8ab060ff))
 
 
-func _on_season_ended(season: Weather.Season) -> void:
+func _on_season_ended(season: Clock.Season) -> void:
 	match season:
-		Weather.Season.WINTER:
+		Clock.Season.WINTER:
 			_set_snow_density(0.0)
 			_set_tree_leaves_transparency(0.0)
 

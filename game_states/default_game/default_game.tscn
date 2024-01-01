@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=66 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" path="res://object/terrain_manager.gd" id="19_7oal0"]
 [ext_resource type="Script" path="res://ui/health_bar/health_manager.gd" id="20_qve12"]
 [ext_resource type="Script" path="res://ui/ui_manager.gd" id="21_vf5eu"]
+[ext_resource type="Script" path="res://library/clock.gd" id="22_3yy4o"]
 [ext_resource type="Script" path="res://library/weather.gd" id="22_ukc0y"]
 [ext_resource type="Material" uid="uid://11gkcqv58xup" path="res://object/terrain/grid_material.tres" id="23_bqdcy"]
 [ext_resource type="Shader" path="res://object/terrain/terrain.gdshader" id="24_3e43e"]
@@ -340,7 +341,8 @@ item_0/icon = SubResource("GradientTexture2D_xp4jv")
 item_1/text = "Disable"
 item_1/icon = SubResource("GradientTexture2D_ufu7g")
 
-[node name="EnergyGrid" parent="." node_paths=PackedStringArray("weather") instance=ExtResource("6_c18pg")]
+[node name="EnergyGrid" parent="." node_paths=PackedStringArray("clock", "weather") instance=ExtResource("6_c18pg")]
+clock = NodePath("../Clock")
 weather = NodePath("../Weather")
 
 [node name="House" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
@@ -392,6 +394,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
 
 [node name="SolarPlant" parent="EnergyGrid" instance=ExtResource("11_vym13")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+nominal_power = null
+active_capability_out = null
+dmol = null
 
 [node name="BuildManager" type="Node3D" parent="." node_paths=PackedStringArray("energy_grid", "camera", "build_menu")]
 script = ExtResource("12_4igyb")
@@ -405,9 +410,10 @@ script = ExtResource("18_yxou4")
 action_menu = NodePath("../GameUI/UI/MarginContainer/VBoxContainer/BottomPanelCtnr/ActionMenuCtnr/ActionMenu")
 camera = NodePath("../CameraAnchor/Camera3D")
 
-[node name="TerrainManager" type="Node3D" parent="." node_paths=PackedStringArray("terrain", "weather")]
+[node name="TerrainManager" type="Node3D" parent="." node_paths=PackedStringArray("terrain", "clock", "weather")]
 script = ExtResource("19_7oal0")
 terrain = NodePath("../Terrain")
+clock = NodePath("../Clock")
 weather = NodePath("../Weather")
 
 [node name="HealthManager" type="Node" parent="." node_paths=PackedStringArray("energy_grid")]
@@ -420,8 +426,12 @@ script = ExtResource("21_vf5eu")
 energy_grid = NodePath("../EnergyGrid")
 health_manager = NodePath("../HealthManager")
 
-[node name="Weather" type="Node" parent="."]
+[node name="Clock" type="Node" parent="."]
+script = ExtResource("22_3yy4o")
+
+[node name="Weather" type="Node" parent="." node_paths=PackedStringArray("clock")]
 script = ExtResource("22_ukc0y")
+clock = NodePath("../Clock")
 
 [node name="Terrain" type="MeshInstance3D" parent="." node_paths=PackedStringArray("camera")]
 mesh = SubResource("PlaneMesh_d1wqf")
@@ -449,8 +459,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
 
 [node name="CloudWeather" parent="." instance=ExtResource("28_aoxuo")]
 
-[node name="DefaultSun" parent="." node_paths=PackedStringArray("weather") instance=ExtResource("29_0mita")]
-weather = NodePath("../Weather")
+[node name="DefaultSun" parent="." node_paths=PackedStringArray("clock") instance=ExtResource("29_0mita")]
+clock = NodePath("../Clock")
 
 [node name="CameraAnchor" type="Node3D" parent="." node_paths=PackedStringArray("terrain")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)
