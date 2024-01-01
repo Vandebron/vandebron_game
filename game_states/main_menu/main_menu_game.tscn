@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://library/weather.gd" id="4_rscvm"]
 [ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/windmill/windmill.tscn" id="4_xvwuv"]
 [ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="5_1pvk0"]
-[ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://world/default_world_environment.tres" id="5_iip4w"]
+[ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://library/default_world_environment.tres" id="5_iip4w"]
 [ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/default_sun.tscn" id="5_uhpso"]
 [ext_resource type="PackedScene" uid="uid://ceevy66ar1stu" path="res://object/camera/default_camera.tscn" id="8_xhumt"]
 

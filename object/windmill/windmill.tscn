@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dlwoabgf66r5s" path="res://object/windmill/windmill_collider.tscn" id="3_ckbnn"]
 [ext_resource type="PackedScene" uid="uid://dxqwmcbyqnwls" path="res://object/windmill/windmill_shape.tscn" id="3_myyvd"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="4_87nqh"]
-[ext_resource type="PackedScene" uid="uid://3uw8bcseb6e1" path="res://library/energy_grid/gauge.tscn" id="4_t57sq"]
+[ext_resource type="PackedScene" uid="uid://3uw8bcseb6e1" path="res://ui/energy/gauge.tscn" id="4_t57sq"]
 
 [sub_resource type="Shader" id="Shader_w8v2k"]
 code = "shader_type canvas_item;

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://object/house/house.gd" id="1_03gka"]
 [ext_resource type="PackedScene" uid="uid://5yby1xliao2j" path="res://object/house/house_model.tscn" id="2_6frin"]
 [ext_resource type="PackedScene" uid="uid://b3bbpo64jnd2l" path="res://object/house/house_collider.tscn" id="3_pyalc"]
-[ext_resource type="PackedScene" uid="uid://3uw8bcseb6e1" path="res://library/energy_grid/gauge.tscn" id="4_2fkml"]
+[ext_resource type="PackedScene" uid="uid://3uw8bcseb6e1" path="res://ui/energy/gauge.tscn" id="4_2fkml"]
 [ext_resource type="PackedScene" uid="uid://5pmepuisqp78" path="res://object/house/house_shape.tscn" id="4_26ej8"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="4_lmm4h"]
 

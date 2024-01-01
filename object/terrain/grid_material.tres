@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://11gkcqv58xup"]
 
-[ext_resource type="Shader" path="res://library/terrain/grid.gdshader" id="1_68jc7"]
+[ext_resource type="Shader" path="res://object/terrain/grid.gdshader" id="1_68jc7"]
 
 [resource]
 render_priority = 0

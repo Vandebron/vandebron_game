@@ -1,7 +1,7 @@
 extends Node3D
 
-const DEFAULT_GAME: PackedScene = preload("res://world/default_game.tscn")
-const MAIN_MENU: PackedScene = preload("res://object/main_menu/main_menu.tscn")
+const DEFAULT_GAME: PackedScene = preload("res://game_states/default_game/default_game.tscn")
+const MAIN_MENU: PackedScene = preload("res://game_states/main_menu/main_menu.tscn")
 
 @onready var game_container: Node3D = $GameContainer
 @onready var main_menu_container: Node3D = $MainMenuContainer

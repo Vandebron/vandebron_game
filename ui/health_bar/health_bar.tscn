@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://4el7epeujqmf"]
 
-[ext_resource type="Script" path="res://object/health_bar/health_bar.gd" id="1_jeanw"]
+[ext_resource type="Script" path="res://ui/health_bar/health_bar.gd" id="1_jeanw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ijrk"]
 content_margin_left = 4.0

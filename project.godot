@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Vandebron"
-run/main_scene="res://world/main.tscn"
+run/main_scene="res://game_states/main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 run/max_fps=60
 boot_splash/bg_color=Color(0.2, 0.239216, 0.278431, 1)
@@ -35,6 +35,17 @@ window/stretch/aspect="expand"
 [editor]
 
 movie_writer/movie_file="./target/video.avi"
+
+[file_customization]
+
+folder_colors={
+"res://export/": "gray",
+"res://game_states/": "orange",
+"res://library/": "pink",
+"res://object/": "green",
+"res://target/": "purple",
+"res://ui/": "blue"
+}
 
 [gui]
 

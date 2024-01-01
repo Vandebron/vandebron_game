@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbgk1537m5sog"]
 
-[ext_resource type="Script" path="res://world/main.gd" id="1_8dagw"]
-[ext_resource type="PackedScene" uid="uid://bx87ivqvxe2t8" path="res://object/main_menu/main_menu.tscn" id="2_uay71"]
-[ext_resource type="PackedScene" uid="uid://wmfdl01v1vgo" path="res://object/game_over_popup/game_over_popup.tscn" id="27_ygsao"]
+[ext_resource type="Script" path="res://game_states/main.gd" id="1_8dagw"]
+[ext_resource type="PackedScene" uid="uid://bx87ivqvxe2t8" path="res://game_states/main_menu/main_menu.tscn" id="2_uay71"]
+[ext_resource type="PackedScene" uid="uid://wmfdl01v1vgo" path="res://ui/game_over_popup/game_over_popup.tscn" id="27_ygsao"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_8dagw")

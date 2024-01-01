@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bx87ivqvxe2t8"]
 
-[ext_resource type="PackedScene" uid="uid://dsuaueqo8705f" path="res://world/main_menu_game.tscn" id="1_odgb6"]
-[ext_resource type="Script" path="res://object/main_menu/main_menu.gd" id="1_pj8qk"]
+[ext_resource type="PackedScene" uid="uid://dsuaueqo8705f" path="res://game_states/main_menu/main_menu_game.tscn" id="1_odgb6"]
+[ext_resource type="Script" path="res://game_states/main_menu/main_menu.gd" id="1_pj8qk"]
 
 [sub_resource type="Gradient" id="Gradient_m0ds5"]
 colors = PackedColorArray(1, 1, 1, 0.784314, 1, 1, 1, 0)
