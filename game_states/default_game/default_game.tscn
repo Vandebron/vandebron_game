@@ -362,6 +362,7 @@ size_flags_vertical = 4
 [node name="WeatherList" type="ItemList" parent="GameUI/UI/MarginContainer/VBoxContainerRight/VBoxContainer"]
 custom_minimum_size = Vector2(2.08165e-12, 55)
 layout_mode = 2
+allow_search = false
 item_count = 7
 max_columns = 7
 icon_mode = 0

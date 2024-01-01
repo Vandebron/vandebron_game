@@ -15,7 +15,7 @@ func _ready():
 	for i in range(0, 7):
 		var icon = weather_icons.pick_random()
 		current_weather_forecast.append(icon)
-		add_item("", icon)
+		add_item("", icon, false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -26,7 +26,7 @@ func update_forecast():
 	current_weather_forecast.push_back(weather_icons.pick_random())
 	clear()
 	for icon in current_weather_forecast:
-		add_item("", icon)
+		add_item("", icon, false)
 	
 
 func _on_timer_timeout():
