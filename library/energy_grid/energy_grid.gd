@@ -35,10 +35,7 @@ func _process(delta: float) -> void:
 	_update_supply()
 	demand = _get_demand() # TODO: What if demand is zero? We get division by zero
 	_update_batteries()
-	
-	var target: float = supply / (supply + demand)
-	var easing: float = ease(1.0 - absf(balance - target), 4.8) # Ease-in
-	balance = clampf(lerpf(balance, target, delta * easing * balance_adj_rate), 0.0, 1.0)
+	balance = _calculate_balance(delta)
 
 
 func add_building(node: Node3D, at_position: Vector3) -> void:
@@ -86,6 +83,10 @@ func add_battery(battery: Battery, at_position: Vector3) -> void:
 	_batteries.append(battery)
 
 
+func get_frequency_hz() -> float:
+	return balance * target_frequency_hz * 2.0
+
+
 func _update_supply() -> void:
 	fossil = 0.0
 	solar = 0.0
@@ -126,6 +127,23 @@ func _get_demand() -> float:
 	return _consumers\
 		.map(func(a: Consumer) -> float: return a.demand)\
 		.reduce(Utils.sumf, 0.0)
+
+
+func _calculate_balance(delta: float) -> float:
+	var supply_demand_ratio: float = supply / (supply + demand)
+	# This formula produces a bucket-shaped graph.
+	# We do this so our frequency doesn't fluctuate wildly as soon as we have imbalance.
+	# If supply=100%, demand=0%, the result is 1.0.
+	# If supply=50%, demand=50%, the result is 0.5.
+	# If supply=0%, demand=100%, the result is 1.0.
+	var target: float = 0.5 * (1.0 + pow(1.0 - 2.0 * supply_demand_ratio, 4.0))
+	
+	# Because pow() only produces positive numbers, we have a special case for negative imbalance.
+	# There's probably a way to get rid of this if-statement. But I'm not good at math.
+	if supply_demand_ratio < BALANCE_CENTER:
+		target = BALANCE_CENTER - (target - BALANCE_CENTER)
+	
+	return clampf(lerpf(balance, target, delta * balance_adj_rate), 0.0, 1.0)
 
 
 func _ingest_buildings() -> void:

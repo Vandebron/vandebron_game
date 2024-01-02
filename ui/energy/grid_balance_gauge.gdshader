@@ -3,8 +3,6 @@ shader_type canvas_item;
  * Specific UI bar that displays current and potential energy produced/consumed by the energy grid
  */
 
-const float balance_center = 0.5;
-
 uniform bool show_details;
 
 group_uniforms Energy;
@@ -22,13 +20,15 @@ uniform vec3 supply_color : source_color = vec3(0.0);
 uniform vec3 demand_color : source_color = vec3(1.0);
 group_uniforms;
 
-group_uniforms Balance;
-uniform float balance = 0.5; // Ranges between 0-1, so 0.5 means perfectly balanced.
+group_uniforms Frequency;
+uniform float current_hz = 50.0;
+uniform float target_hz = 50.0;
+uniform float gauge_range_hz = 0.5; // If 0.5, the gauge will show values between 49.5 and 50.5 Hz
 uniform float balance_line_width = 0.01;
 group_uniforms;
 
 group_uniforms FrequencyDeviation;
-uniform float freq_max_deviation = 0.05;
+uniform float freq_max_deviation = 0.1;
 uniform float freq_max_deviation_line_width = 0.01;
 uniform vec3 freq_max_deviation_line_color : source_color = vec3(1.0, 0.0, 0.0);
 group_uniforms;
@@ -36,23 +36,24 @@ group_uniforms;
 void fragment() {
 	float supply = fossil + solar + wind;
 	float total = supply + demand;
+	float current_freq_hz = clamp(current_hz, target_hz - gauge_range_hz, target_hz + gauge_range_hz);
+	float x = UV.x + (target_hz - gauge_range_hz);
 	
-	if (UV.x > balance - (balance_line_width * 0.5)
-	 && UV.x < balance + (balance_line_width * 0.5)
+	if (x > current_freq_hz - (balance_line_width * 0.5)
+	 && x < current_freq_hz + (balance_line_width * 0.5)
 	) {
-		// If we end up here, we're drawing the line that represents the current grid frequence,
-		// a.k.a. "balance". When the balance is within the tolerance margins, it will be green,
-		// red otherwise.
+		// If we end up here, we're drawing the line that represents the current grid frequency.
+		// When the current_freq_hz is within the tolerance margins, it will be green; red otherwise.
 		const vec3 red = vec3(1.0, 0.0, 0.0);
 		const vec3 green = vec3(0.0, 1.0, 0.0);
-		COLOR.rgb = mix(green, red, fract(abs(balance_center - balance)) / freq_max_deviation);
-	} else if (UV.x > balance_center - freq_max_deviation - (freq_max_deviation_line_width * 0.5)
-			&& UV.x < balance_center - freq_max_deviation + (freq_max_deviation_line_width * 0.5)
+		COLOR.rgb = mix(green, red, fract(abs(target_hz - current_freq_hz)) / freq_max_deviation);
+	} else if (x > target_hz - freq_max_deviation - (freq_max_deviation_line_width * 0.5)
+			&& x < target_hz - freq_max_deviation + (freq_max_deviation_line_width * 0.5)
 	) {
 		// This line designates the grid frequency tolerance margin - lower bound.
 		COLOR.rgb = freq_max_deviation_line_color;
-	} else if (UV.x > balance_center + freq_max_deviation - (freq_max_deviation_line_width * 0.5)
-			&& UV.x < balance_center + freq_max_deviation + (freq_max_deviation_line_width * 0.5)
+	} else if (x > target_hz + freq_max_deviation - (freq_max_deviation_line_width * 0.5)
+			&& x < target_hz + freq_max_deviation + (freq_max_deviation_line_width * 0.5)
 	) {
 		// This line designates the grid frequency tolerance margin - upper bound.
 		COLOR.rgb = freq_max_deviation_line_color;

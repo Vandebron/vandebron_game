@@ -15,9 +15,11 @@ shader_parameter/solar_color = Color(0.929412, 0.882353, 0.619608, 1)
 shader_parameter/wind_color = Color(0.294118, 0.501961, 0.792157, 1)
 shader_parameter/supply_color = Color(0.827451, 0.627451, 0.407843, 1)
 shader_parameter/demand_color = Color(0.262745, 0.262745, 0.415686, 1)
-shader_parameter/balance = 0.5
+shader_parameter/current_hz = 50.0
+shader_parameter/target_hz = 50.0
+shader_parameter/gauge_range_hz = 0.5
 shader_parameter/balance_line_width = 0.01
-shader_parameter/freq_max_deviation = 0.05
+shader_parameter/freq_max_deviation = 0.1
 shader_parameter/freq_max_deviation_line_width = 0.01
 shader_parameter/freq_max_deviation_line_color = Color(1, 1, 1, 1)
 

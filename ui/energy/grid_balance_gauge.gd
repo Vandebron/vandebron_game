@@ -21,16 +21,21 @@ class_name GridBalanceGauge
 		demand = value
 		(material as ShaderMaterial).set_shader_parameter("demand", demand)
 
-@export var balance: float:
+@export var current_frequency_hz: float:
 	set(value):
-		balance = value
-		(material as ShaderMaterial).set_shader_parameter("balance", balance)
+		current_frequency_hz = value
+		(material as ShaderMaterial).set_shader_parameter("current_hz", current_frequency_hz)
 
 @export var frequency_max_deviation: float:
 	set(value):
 		frequency_max_deviation = value
 		(material as ShaderMaterial)\
 			.set_shader_parameter("freq_max_deviation", frequency_max_deviation)
+
+@export var gauge_range_hz: float:
+	set(value):
+		gauge_range_hz = value
+		(material as ShaderMaterial).set_shader_parameter("gauge_range_hz", gauge_range_hz)
 
 
 func _input(event: InputEvent) -> void:

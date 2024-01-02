@@ -13,31 +13,30 @@ class_name UiManager
 
 
 func _ready() -> void:
-	grid_balance_gauge.frequency_max_deviation = _get_normalized_frequency_max_deviation()
+	grid_balance_gauge.frequency_max_deviation = energy_grid.frequency_max_deviation_hz
+	grid_balance_gauge.gauge_range_hz = 0.5
 
 
 func _process(_delta: float) -> void:
+	var frequency_hz: float = energy_grid.get_frequency_hz()
+	var gauge_min_hz: float = energy_grid.target_frequency_hz - grid_balance_gauge.gauge_range_hz
+	
+	var hz_pip_position: float = clampf(frequency_hz - 1.0 * gauge_min_hz, 0.0, 1.0)
+	hz_pip_position = hz_pip_position * grid_balance_gauge.size.x - (hz_ctnr.size.x / 2)
+	
 	supply_lbl.text = str(_precision2(energy_grid.supply), " kW")
 	demand_lbl.text = str(_precision2(energy_grid.demand), " kW")
 	
-	hz_lbl.text = str(_precision2(_get_frequency_hz()), " Hz")
-	hz_ctnr.position.x = (energy_grid.balance * grid_balance_gauge.size.x) - (hz_ctnr.size.x / 2)
+	hz_lbl.text = str(_precision2(frequency_hz), " Hz")
+	hz_ctnr.position.x = hz_pip_position
 	
 	grid_balance_gauge.fossil = energy_grid.fossil
 	grid_balance_gauge.wind = energy_grid.wind
 	grid_balance_gauge.solar = energy_grid.solar
 	grid_balance_gauge.demand = energy_grid.demand
-	grid_balance_gauge.balance = energy_grid.balance
+	grid_balance_gauge.current_frequency_hz = frequency_hz
 	
 	health_bar.health = health_manager.health
-
-
-func _get_normalized_frequency_max_deviation() -> float:
-	return energy_grid.frequency_max_deviation_hz / energy_grid.target_frequency_hz
-
-
-func _get_frequency_hz() -> float:
-	return energy_grid.balance * energy_grid.target_frequency_hz * 2.0
 
 
 func _precision2(x: float) -> String:

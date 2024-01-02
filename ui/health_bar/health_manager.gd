@@ -25,13 +25,12 @@ func update() -> void:
 	if _done:
 		return # Hack - so we don't keep spamming the signal
 	
-	var balance_diff: float = absf(energy_grid.BALANCE_CENTER - energy_grid.balance)
-	var balance_diff_hz: float = balance_diff * energy_grid.target_frequency_hz
-	var deviation: float = balance_diff_hz / energy_grid.frequency_max_deviation_hz
+	var frequency_diff_hz: float = absf(energy_grid.get_frequency_hz() - energy_grid.target_frequency_hz)
 	
-	if balance_diff_hz < energy_grid.frequency_max_deviation_hz:
+	if frequency_diff_hz < energy_grid.frequency_max_deviation_hz:
 		health += heal_factor
 	else:
+		var deviation: float = frequency_diff_hz / energy_grid.frequency_max_deviation_hz
 		health -= deviation * hurt_factor
 	
 	if health <= 0.0:
