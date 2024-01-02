@@ -1,17 +1,24 @@
-[gd_scene load_steps=66 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=73 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
 [ext_resource type="PackedScene" uid="uid://4el7epeujqmf" path="res://ui/health_bar/health_bar.tscn" id="3_ghfge"]
 [ext_resource type="PackedScene" uid="uid://bcm7rp6xri4cr" path="res://ui/energy/grid_balance_gauge.tscn" id="4_jq4ur"]
 [ext_resource type="Script" path="res://library/ui/build_menu.gd" id="5_gu83v"]
+[ext_resource type="Texture2D" uid="uid://cks46ttbegfj3" path="res://library/ui/weather_icons/sunny_icon.png" id="6_ajilk"]
 [ext_resource type="PackedScene" uid="uid://dcrcskfsjrybq" path="res://object/energy_grid/energy_grid.tscn" id="6_c18pg"]
+[ext_resource type="Texture2D" uid="uid://ds5s1id25nxg3" path="res://library/ui/weather_icons/windy_icon.png" id="7_digia"]
 [ext_resource type="PackedScene" uid="uid://vjdf3kwb88ov" path="res://object/house/house.tscn" id="7_l6f6m"]
+[ext_resource type="Script" path="res://library/ui/weather_forecast.gd" id="7_v63yt"]
 [ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/windmill/windmill.tscn" id="8_a621a"]
+[ext_resource type="Texture2D" uid="uid://bpevx3w1o7skl" path="res://library/ui/weather_icons/night_icon.png" id="8_acl4e"]
 [ext_resource type="PackedScene" uid="uid://fwrp8f25a4dx" path="res://object/coal_plant/coal_plant.tscn" id="9_0t1up"]
+[ext_resource type="Texture2D" uid="uid://cg2edph50ky6q" path="res://library/ui/weather_icons/cloudy_and_windy_icon.png" id="9_8140p"]
 [ext_resource type="PackedScene" uid="uid://bb3libciwo1ul" path="res://object/battery/battery.tscn" id="10_y8i4t"]
 [ext_resource type="PackedScene" uid="uid://bd8yf3cq0ju1c" path="res://object/solar/solar_plant.tscn" id="11_vym13"]
+[ext_resource type="Texture2D" uid="uid://b63dwlb4koj2o" path="res://library/ui/weather_icons/cloudy_icon.png" id="11_xls8m"]
 [ext_resource type="Script" path="res://object/builder/build_manager.gd" id="12_4igyb"]
+[ext_resource type="Texture2D" uid="uid://ds8cxf4onm38m" path="res://library/ui/weather_icons/lightly_cloudly.png" id="12_s32nf"]
 [ext_resource type="Resource" uid="uid://diejrlo4iciyb" path="res://object/house/house_building_def.tres" id="13_ouwj3"]
 [ext_resource type="Resource" uid="uid://b0r1cr25214g" path="res://object/windmill/windmill_building_def.tres" id="14_2mtcw"]
 [ext_resource type="Resource" uid="uid://bd15ndqy0tgbi" path="res://object/coal_plant/coal_plant_building_def.tres" id="15_eth4k"]
@@ -341,6 +348,56 @@ item_0/icon = SubResource("GradientTexture2D_xp4jv")
 item_1/text = "Disable"
 item_1/icon = SubResource("GradientTexture2D_ufu7g")
 
+[node name="VBoxContainerRight" type="VBoxContainer" parent="GameUI/UI/MarginContainer"]
+custom_minimum_size = Vector2(335, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/UI/MarginContainer/VBoxContainerRight"]
+custom_minimum_size = Vector2(355, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="WeatherList" type="ItemList" parent="GameUI/UI/MarginContainer/VBoxContainerRight/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 55)
+layout_mode = 2
+allow_search = false
+item_count = 7
+max_columns = 7
+icon_mode = 0
+icon_scale = 0.08
+item_0/text = ""
+item_0/icon = ExtResource("6_ajilk")
+item_0/selectable = false
+item_1/text = ""
+item_1/icon = ExtResource("7_digia")
+item_1/selectable = false
+item_2/text = ""
+item_2/icon = ExtResource("8_acl4e")
+item_2/selectable = false
+item_3/text = ""
+item_3/icon = ExtResource("6_ajilk")
+item_3/selectable = false
+item_4/text = ""
+item_4/icon = ExtResource("9_8140p")
+item_4/selectable = false
+item_5/text = ""
+item_5/icon = ExtResource("7_digia")
+item_5/selectable = false
+item_6/text = ""
+item_6/icon = ExtResource("7_digia")
+script = ExtResource("7_v63yt")
+sunny_icon = ExtResource("6_ajilk")
+night_icon = ExtResource("8_acl4e")
+cloudy_icon = ExtResource("11_xls8m")
+light_cloud_icon = ExtResource("12_s32nf")
+windy_icon = ExtResource("7_digia")
+
+[node name="Timer" type="Timer" parent="GameUI/UI/MarginContainer/VBoxContainerRight/VBoxContainer/WeatherList"]
+wait_time = 2.0
+autostart = true
+
 [node name="EnergyGrid" parent="." node_paths=PackedStringArray("clock", "weather") instance=ExtResource("6_c18pg")]
 clock = NodePath("../Clock")
 weather = NodePath("../Weather")
@@ -488,3 +545,5 @@ camera = NodePath("../Camera3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("33_gbyox")
+
+[connection signal="timeout" from="GameUI/UI/MarginContainer/VBoxContainerRight/VBoxContainer/WeatherList/Timer" to="GameUI/UI/MarginContainer/VBoxContainerRight/VBoxContainer/WeatherList" method="_on_timer_timeout"]
