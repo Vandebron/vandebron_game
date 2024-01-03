@@ -1,24 +1,18 @@
-[gd_resource type="Resource" script_class="BuildingDef" load_steps=8 format=3 uid="uid://diejrlo4iciyb"]
+[gd_resource type="Resource" script_class="BuildingDef" load_steps=7 format=3 uid="uid://diejrlo4iciyb"]
 
 [ext_resource type="Script" path="res://library/building/building_def.gd" id="1_6vwfd"]
 [ext_resource type="PackedScene" uid="uid://b3bbpo64jnd2l" path="res://object/house/house_collider.tscn" id="1_ksac2"]
 [ext_resource type="PackedScene" uid="uid://5yby1xliao2j" path="res://object/house/house_model.tscn" id="1_mjwmw"]
+[ext_resource type="Texture2D" uid="uid://bgs2vowkhqw1d" path="res://object/house/house.svg" id="2_4bldt"]
 [ext_resource type="PackedScene" uid="uid://vjdf3kwb88ov" path="res://object/house/house.tscn" id="2_c5yd1"]
 [ext_resource type="PackedScene" uid="uid://5pmepuisqp78" path="res://object/house/house_shape.tscn" id="5_6sw2s"]
-
-[sub_resource type="Gradient" id="Gradient_2gdk5"]
-offsets = PackedFloat32Array(0.00649351, 1)
-colors = PackedColorArray(0.859655, 0.548506, 0.235533, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1l38a"]
-gradient = SubResource("Gradient_2gdk5")
 
 [resource]
 script = ExtResource("1_6vwfd")
 cost = 2
 alias = "house"
 display_name = "House"
-image = SubResource("GradientTexture2D_1l38a")
+image = ExtResource("2_4bldt")
 model = ExtResource("1_mjwmw")
 scene = ExtResource("2_c5yd1")
 shape = ExtResource("5_6sw2s")

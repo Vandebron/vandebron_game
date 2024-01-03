@@ -1,12 +1,11 @@
-[gd_scene load_steps=76 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=72 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
+[ext_resource type="PackedScene" uid="uid://5vttqyyjyekj" path="res://ui/energy/energy_makeup_gauge.tscn" id="3_0i7so"]
 [ext_resource type="PackedScene" uid="uid://4el7epeujqmf" path="res://ui/health_bar/health_bar.tscn" id="3_ghfge"]
 [ext_resource type="PackedScene" uid="uid://bcm7rp6xri4cr" path="res://ui/energy/grid_balance_gauge.tscn" id="4_jq4ur"]
 [ext_resource type="Script" path="res://library/ui/build_menu.gd" id="5_gu83v"]
-[ext_resource type="Script" path="res://ui/energy/energy_makeup_gauge.gd" id="5_jwb57"]
-[ext_resource type="Shader" path="res://ui/energy/energy_makeup_gauge.gdshader" id="5_q8bue"]
 [ext_resource type="Texture2D" uid="uid://cks46ttbegfj3" path="res://library/ui/weather_icons/sunny_icon.png" id="6_ajilk"]
 [ext_resource type="PackedScene" uid="uid://dcrcskfsjrybq" path="res://object/energy_grid/energy_grid.tscn" id="6_c18pg"]
 [ext_resource type="Texture2D" uid="uid://ds5s1id25nxg3" path="res://library/ui/weather_icons/windy_icon.png" id="7_digia"]
@@ -50,21 +49,6 @@ content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
 bg_color = Color(0.176471, 0.145098, 0.219608, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hh88i"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0b4mf"]
-shader = ExtResource("5_q8bue")
-shader_parameter/fossil = 10.0
-shader_parameter/solar = 10.0
-shader_parameter/wind = 10.0
-shader_parameter/demand = 30.0
-shader_parameter/fossil_color = Color(0.392157, 0.388235, 0.396078, 1)
-shader_parameter/solar_color = Color(0.929412, 0.882353, 0.619608, 1)
-shader_parameter/wind_color = Color(0.407843, 0.760784, 0.827451, 1)
-shader_parameter/demand_color = Color(0.415686, 0.32549, 0.431373, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_10pjr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loqhr"]
 content_margin_left = 4.0
@@ -210,128 +194,9 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_oppax")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer"]
-layout_mode = 2
-
-[node name="SupplyCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(80, 2.08165e-12)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxEmpty_hh88i")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/HBoxContainer/SupplyCtnr"]
-layout_mode = 2
-
-[node name="SupplyTitle" type="Label" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/HBoxContainer/SupplyCtnr/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"SmallCapsLabel"
-text = "Supply"
-horizontal_alignment = 2
-uppercase = true
-
-[node name="SupplyLbl" type="Label" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/HBoxContainer/SupplyCtnr/VBoxContainer"]
+[node name="EnergyMakeupGauge" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr" instance=ExtResource("3_0i7so")]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"SmallCapsLabel"
-text = "50 kW"
-horizontal_alignment = 2
-
-[node name="EnergyMakeupGauge" type="ColorRect" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_0b4mf")
-custom_minimum_size = Vector2(2.08165e-12, 22)
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("5_jwb57")
-
-[node name="CenterLine" type="ColorRect" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/HBoxContainer/EnergyMakeupGauge"]
-custom_minimum_size = Vector2(2, 22)
-layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -1.0
-offset_right = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.156863, 0.12549, 0.192157, 1)
-
-[node name="DemandCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(80, 2.08165e-12)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxEmpty_10pjr")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/HBoxContainer/DemandCtnr"]
-layout_mode = 2
-
-[node name="DemandTitle" type="Label" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/HBoxContainer/DemandCtnr/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"SmallCapsLabel"
-text = "Demand"
-uppercase = true
-
-[node name="DemandLbl" type="Label" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/HBoxContainer/DemandCtnr/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_type_variation = &"SmallCapsLabel"
-text = "50 kW"
-
-[node name="Legend" type="HBoxContainer" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="FossilColor" type="ColorRect" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/Legend"]
-custom_minimum_size = Vector2(20, 2.08165e-12)
-layout_mode = 2
-color = Color(0.392157, 0.388235, 0.396078, 1)
-
-[node name="Fossil" type="Label" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/Legend"]
-layout_mode = 2
-theme_type_variation = &"SmallCapsLabel"
-text = "Fossil"
-uppercase = true
-
-[node name="SolarColor" type="ColorRect" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/Legend"]
-custom_minimum_size = Vector2(20, 2.08165e-12)
-layout_mode = 2
-color = Color(0.901961, 0.886275, 0.584314, 1)
-
-[node name="Solar" type="Label" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/Legend"]
-layout_mode = 2
-theme_type_variation = &"SmallCapsLabel"
-text = "Solar"
-uppercase = true
-
-[node name="WindColor" type="ColorRect" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/Legend"]
-custom_minimum_size = Vector2(20, 2.08165e-12)
-layout_mode = 2
-color = Color(0.407843, 0.760784, 0.827451, 1)
-
-[node name="Wind" type="Label" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/Legend"]
-layout_mode = 2
-theme_type_variation = &"SmallCapsLabel"
-text = "Wind"
-uppercase = true
-
-[node name="DemandColor" type="ColorRect" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/Legend"]
-custom_minimum_size = Vector2(20, 2.08165e-12)
-layout_mode = 2
-color = Color(0.415686, 0.32549, 0.431373, 1)
-
-[node name="Demand" type="Label" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr/VBoxContainer/Legend"]
-layout_mode = 2
-theme_type_variation = &"SmallCapsLabel"
-text = "Demand"
-uppercase = true
 
 [node name="TopPanelCtnr" type="VBoxContainer" parent="GameUI/UI/MarginContainer"]
 custom_minimum_size = Vector2(300, 2.08165e-12)
@@ -384,19 +249,32 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BottomPanelCtnr" type="HBoxContainer" parent="GameUI/UI/MarginContainer"]
-custom_minimum_size = Vector2(760, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="BuildMenuCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr"]
+[node name="BuildCtnr" type="VBoxContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="BuildMenu" type="ItemList" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/BuildMenuCtnr"]
+[node name="PanelContainer" type="PanelContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr"]
+layout_mode = 2
+
+[node name="Buildings" type="Label" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/PanelContainer"]
+layout_mode = 2
+theme_type_variation = &"SmallCapsLabel"
+text = "Build"
+uppercase = true
+
+[node name="BuildMenuCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr"]
+layout_mode = 2
+
+[node name="BuildMenu" type="ItemList" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(502, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 allow_reselect = true
 allow_search = false
 auto_height = true
@@ -417,14 +295,27 @@ item_4/text = "Battery"
 item_4/icon = SubResource("GradientTexture2D_iio37")
 script = ExtResource("5_gu83v")
 
-[node name="ActionMenuCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr"]
+[node name="ManageCtnr" type="VBoxContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
 
-[node name="ActionMenu" type="ItemList" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/ActionMenuCtnr"]
-unique_name_in_owner = true
+[node name="PanelContainer" type="PanelContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/ManageCtnr"]
 layout_mode = 2
+
+[node name="Manage" type="Label" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/ManageCtnr/PanelContainer"]
+layout_mode = 2
+theme_type_variation = &"SmallCapsLabel"
+text = "Manage"
+uppercase = true
+
+[node name="ManageMenuCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/ManageCtnr"]
+layout_mode = 2
+
+[node name="ManageMenu" type="ItemList" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/ManageCtnr/ManageMenuCtnr"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(208, 2.08165e-12)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
 allow_reselect = true
 allow_search = false
 auto_height = true
@@ -433,9 +324,9 @@ max_columns = 2
 fixed_column_width = 90
 icon_mode = 0
 fixed_icon_size = Vector2i(40, 40)
-item_0/text = "Enable"
+item_0/text = "Enable Asset"
 item_0/icon = SubResource("GradientTexture2D_xp4jv")
-item_1/text = "Disable"
+item_1/text = "Disable Asset"
 item_1/icon = SubResource("GradientTexture2D_ufu7g")
 
 [node name="WeatherList" type="ItemList" parent="GameUI/UI/MarginContainer"]
@@ -537,12 +428,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
 script = ExtResource("12_4igyb")
 energy_grid = NodePath("../EnergyGrid")
 camera = NodePath("../CameraAnchor/Camera3D")
-build_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/BuildMenuCtnr/BuildMenu")
+build_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr/BuildMenu")
 buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("13_ouwj3"), ExtResource("14_2mtcw"), ExtResource("15_eth4k"), ExtResource("16_d4vit"), ExtResource("17_4bs8w")])
 
-[node name="CurtailmentManager" type="Node3D" parent="." node_paths=PackedStringArray("action_menu", "camera")]
+[node name="CurtailmentManager" type="Node3D" parent="." node_paths=PackedStringArray("manage_menu", "camera")]
 script = ExtResource("18_yxou4")
-action_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/ActionMenuCtnr/ActionMenu")
+manage_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/ManageCtnr/ManageMenuCtnr/ManageMenu")
 camera = NodePath("../CameraAnchor/Camera3D")
 
 [node name="TerrainManager" type="Node3D" parent="." node_paths=PackedStringArray("terrain", "clock", "weather")]
