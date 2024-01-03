@@ -14,3 +14,5 @@ bg_color = Color(0.2, 0.168627, 0.25098, 1)
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_xycxk")
 PopupPanelContainer/base_type = &"PanelContainer"
 PopupPanelContainer/styles/panel = SubResource("StyleBoxFlat_7joou")
+SmallCapsLabel/base_type = &"Label"
+SmallCapsLabel/font_sizes/font_size = 12
