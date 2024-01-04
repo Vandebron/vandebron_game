@@ -1,5 +1,4 @@
-extends Node
-class_name Clock
+class_name Clock extends Node
 
 signal part_of_day_started(part: Clock.DayPart)
 signal part_of_day_ended(part: Clock.DayPart)

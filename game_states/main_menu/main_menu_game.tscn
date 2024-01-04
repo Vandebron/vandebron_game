@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsuaueqo8705f"]
+[gd_scene load_steps=14 format=3 uid="uid://dsuaueqo8705f"]
 
 [ext_resource type="Script" path="res://library/game/game.gd" id="1_3tth7"]
 [ext_resource type="PackedScene" uid="uid://dcrcskfsjrybq" path="res://object/energy_grid/energy_grid.tscn" id="2_yqwxt"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/default_sun.tscn" id="8_lr1mk"]
 [ext_resource type="PackedScene" uid="uid://ceevy66ar1stu" path="res://object/camera/default_camera.tscn" id="9_8cjko"]
 [ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://library/default_world_environment.tres" id="10_gs782"]
+[ext_resource type="PackedScene" uid="uid://bcpjahrk7du1b" path="res://object/weather/forecaster.tscn" id="11_22e7i"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_43t6d"]
 size = Vector2(32, 32)
@@ -44,9 +45,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2.08165e-12, 1)
 [node name="Clock" type="Node" parent="."]
 script = ExtResource("5_g26tn")
 
-[node name="Weather" type="Node" parent="." node_paths=PackedStringArray("clock")]
+[node name="Weather" type="Node" parent="." node_paths=PackedStringArray("clock", "forecaster")]
 script = ExtResource("6_swx6p")
 clock = NodePath("../Clock")
+forecaster = NodePath("../Forecaster")
 
 [node name="Terrain" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_43t6d")
@@ -72,3 +74,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("10_gs782")
+
+[node name="Forecaster" parent="." node_paths=PackedStringArray("clock") instance=ExtResource("11_22e7i")]
+clock = NodePath("../Clock")

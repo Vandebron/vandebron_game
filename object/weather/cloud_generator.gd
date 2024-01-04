@@ -4,6 +4,8 @@ extends Node3D
 
 @onready var cloud_spawn_location: PathFollow3D = $SpawnPath/SpawnLocation
 
+func _ready() -> void:
+	_on_spawn_cloud_timeout()
 
 func _on_spawn_cloud_timeout() -> void:
 	var random_index: int = randi_range(0, cloud_scenes.size() - 1)

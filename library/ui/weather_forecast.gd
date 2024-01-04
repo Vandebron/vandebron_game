@@ -17,10 +17,6 @@ func _ready():
 		current_weather_forecast.append(icon)
 		add_item("", icon, false)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func update_forecast():
 	current_weather_forecast.pop_front()
 	current_weather_forecast.push_back(weather_icons.pick_random())

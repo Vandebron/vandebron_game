@@ -1,20 +1,20 @@
-extends Node
-class_name Weather
+class_name Weather extends Node
 
 const wind_cycle_ms: int = 30_000 # Dictates how long it takes for weather to repeat
 const min_temperature: float = -10.0
 const max_temperature: float = 40.0
 
 @export var clock: Clock
+@export var forecaster: Forecaster
 
 var wind_angle: float = 1.0 # Direction of wind in radians. Cosmetic. does not affect wind power
 var wind: float = 0.5 # Ranges from 0-1
 var sun: float = 0.5 # Ranges from 0-1
+var cloud_coverage: float = 0.5
 var sun_strength: float: get=_get_sun_strength # Ranges from 0-1
 var temperature: float = 0.0 # Ranges from 0-1; let's say 0=-10, 1=40
 
 var _target_wind: float = 1.0
-
 
 func _ready() -> void:
 	_update_wind()
@@ -33,24 +33,29 @@ func temp_to_celcius(temp: float) -> float:
 	return (temp * (max_temperature - min_temperature)) - min_temperature
 
 
+##TODO: Rethink this to incoporate the forecaster
 ## Represents intensity of the sun light, which peaks at noon.
 ## Returns value between 0-1, where 1 means the sun is strongest.
 func _get_sun_strength() -> float:
 	# Noon is represented by point_of_day=0.5.
 	# So what we do here is check the "distance" from 0.5 aka noon.
-	return 1.0 - absf(clock.point_of_day - 0.5) / 0.5
+	var sun_factor = 1.0 - absf(clock.point_of_day - 0.5) / 0.5
+	return clampf(sun_factor - forecaster.get_current_forecast().cloud_coverage, 0, 1)
 
 
 func _update_wind() -> void:
 	get_tree().create_timer(1.0).timeout.connect(self._update_wind)
 	
-	# This curve is a simple sine wave with no variance.
-	# TODO: We could use a Godot Curve (built-in) to have a deterministic weather pattern with some
-	#		variability to make it look random.
-	var x: float = Utils.get_cycle_value(wind_cycle_ms)
-	var y: float = Utils.sine_y(x)
-	_target_wind = y
+	## This curve is a simple sine wave with no variance.
+	## TODO: We could use a Godot Curve (built-in) to have a deterministic weather pattern with some
+	##		variability to make it look random.
+	#var x: float = Utils.get_cycle_value(wind_cycle_ms)
+	#var y: float = Utils.sine_y(x)
+	#_target_wind = y
 	
+	var forecast: Forecast = forecaster.get_current_forecast()
+	
+	_target_wind = forecast.wind_speed
 	wind_angle = PI * randf_range(-6.0, 6.0)
 
 
