@@ -1,14 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://2ewnmkpjsnx7"]
+[gd_scene load_steps=2 format=3 uid="uid://2ewnmkpjsnx7"]
 
-[sub_resource type="Gradient" id="Gradient_56ueg"]
-colors = PackedColorArray(0.705882, 0.321569, 0.321569, 1, 0.705882, 0.321569, 0.321569, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_j04vx"]
-gradient = SubResource("Gradient_56ueg")
+[ext_resource type="Texture2D" uid="uid://blaixeojmneu0" path="res://object/producer/disabled.svg" id="1_4uo6h"]
 
 [node name="DisableIcon" type="Sprite3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.75, 1.25, 0.75)
 billboard = 1
-transparent = false
 double_sided = false
 no_depth_test = true
-texture = SubResource("GradientTexture2D_j04vx")
+render_priority = 10
+texture = ExtResource("1_4uo6h")
