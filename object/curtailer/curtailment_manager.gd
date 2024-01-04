@@ -23,10 +23,12 @@ func _on_action_selected(index: int) -> void:
 	var action_text: String = manage_menu.get_item_text(index)
 	
 	match action_text:
-		"Enable":
+		"Enable Assets":
 			curtailer.mode = Curtailer.Mode.ENABLE
-		"Disable":
+		"Disable Assets":
 			curtailer.mode = Curtailer.Mode.DISABLE
+		_: 
+			printerr("Invalid action mode")
 	
 	add_child(curtailer)
 
