@@ -77,3 +77,8 @@ environment = ExtResource("10_gs782")
 
 [node name="Forecaster" parent="." node_paths=PackedStringArray("clock") instance=ExtResource("11_22e7i")]
 clock = NodePath("../Clock")
+
+[node name="ForecastTimer" parent="Forecaster" index="1"]
+autostart = false
+
+[editable path="Forecaster"]
