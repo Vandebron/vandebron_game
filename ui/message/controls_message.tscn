@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8k6w2r6a5vqa"]
+
+[ext_resource type="PackedScene" uid="uid://b06xrkgbe8rdv" path="res://ui/message/message.tscn" id="1_b7ip5"]
+
+[node name="Message" instance=ExtResource("1_b7ip5")]
+
+[node name="Title" parent="VBoxContainer/TitlePanelCtnr/HBoxContainer" index="1"]
+text = "Controls"
+
+[node name="Description" parent="VBoxContainer" index="1"]
+text = "Use the arrow keys to move the camera.
+
+Click the icons at the bottom of the screen to place buildings."
+
+[node name="Timer" parent="." index="1"]
+wait_time = 30.0

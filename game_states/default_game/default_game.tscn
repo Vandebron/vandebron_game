@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=73 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" path="res://object/builder/build_manager.gd" id="12_4igyb"]
 [ext_resource type="Texture2D" uid="uid://ds8cxf4onm38m" path="res://library/ui/weather_icons/lightly_cloudly.png" id="12_s32nf"]
 [ext_resource type="Resource" uid="uid://diejrlo4iciyb" path="res://object/house/house_building_def.tres" id="13_ouwj3"]
+[ext_resource type="PackedScene" uid="uid://b8k6w2r6a5vqa" path="res://ui/message/controls_message.tscn" id="14_2am8o"]
 [ext_resource type="Resource" uid="uid://b0r1cr25214g" path="res://object/windmill/windmill_building_def.tres" id="14_2mtcw"]
 [ext_resource type="Resource" uid="uid://bd15ndqy0tgbi" path="res://object/coal_plant/coal_plant_building_def.tres" id="15_eth4k"]
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="16_d4vit"]
@@ -376,6 +377,9 @@ custom_minimum_size = Vector2(300, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+
+[node name="Message" parent="GameUI/UI/MarginContainer/MessageCtnr" instance=ExtResource("14_2am8o")]
+layout_mode = 2
 
 [node name="EnergyGrid" parent="." node_paths=PackedStringArray("clock", "weather") instance=ExtResource("6_c18pg")]
 clock = NodePath("../Clock")
