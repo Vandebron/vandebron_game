@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
-[ext_resource type="PackedScene" uid="uid://5vttqyyjyekj" path="res://ui/energy/energy_makeup_gauge.tscn" id="3_0i7so"]
+[ext_resource type="PackedScene" path="res://ui/energy/energy_makeup_gauge.tscn" id="3_0i7so"]
 [ext_resource type="PackedScene" uid="uid://4el7epeujqmf" path="res://ui/health_bar/health_bar.tscn" id="3_ghfge"]
 [ext_resource type="PackedScene" uid="uid://bcm7rp6xri4cr" path="res://ui/energy/grid_balance_gauge.tscn" id="4_jq4ur"]
 [ext_resource type="Script" path="res://library/ui/build_menu.gd" id="5_gu83v"]
