@@ -330,7 +330,7 @@ item_0/icon = SubResource("GradientTexture2D_xp4jv")
 item_1/text = "Disable Assets"
 item_1/icon = SubResource("GradientTexture2D_ufu7g")
 
-[node name="WeatherList" type="ItemList" parent="GameUI/UI/MarginContainer"]
+[node name="WeatherForecastList" type="ItemList" parent="GameUI/UI/MarginContainer"]
 custom_minimum_size = Vector2(355, 55)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -366,8 +366,9 @@ night_icon = ExtResource("8_acl4e")
 cloudy_icon = ExtResource("11_xls8m")
 light_cloud_icon = ExtResource("12_s32nf")
 windy_icon = ExtResource("7_digia")
+cloudy_windy_icon = ExtResource("9_8140p")
 
-[node name="Timer" type="Timer" parent="GameUI/UI/MarginContainer/WeatherList"]
+[node name="Timer" type="Timer" parent="GameUI/UI/MarginContainer/WeatherForecastList"]
 wait_time = 2.0
 autostart = true
 
@@ -495,8 +496,9 @@ surface_material_override/0 = SubResource("ShaderMaterial_665ug")
 [node name="Tree" parent="Doodads" instance=ExtResource("27_fm1n8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
 
-[node name="Forecaster" parent="." node_paths=PackedStringArray("clock") instance=ExtResource("37_ltx7w")]
+[node name="Forecaster" parent="." node_paths=PackedStringArray("clock", "forecast_list_comp") instance=ExtResource("37_ltx7w")]
 clock = NodePath("../Clock")
+forecast_list_comp = NodePath("../GameUI/UI/MarginContainer/WeatherForecastList")
 
 [node name="DefaultSun" parent="." node_paths=PackedStringArray("clock") instance=ExtResource("29_0mita")]
 clock = NodePath("../Clock")
@@ -528,4 +530,4 @@ camera = NodePath("../Camera3D")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("33_gbyox")
 
-[connection signal="timeout" from="GameUI/UI/MarginContainer/WeatherList/Timer" to="GameUI/UI/MarginContainer/WeatherList" method="_on_timer_timeout"]
+[connection signal="timeout" from="GameUI/UI/MarginContainer/WeatherForecastList/Timer" to="GameUI/UI/MarginContainer/WeatherForecastList" method="_on_timer_timeout"]
