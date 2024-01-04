@@ -11,6 +11,3 @@ text = "Controls"
 text = "Use the arrow keys to move the camera.
 
 Click the icons at the bottom of the screen to place buildings."
-
-[node name="Timer" parent="." index="1"]
-wait_time = 30.0

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
-[ext_resource type="PackedScene" uid="uid://5vttqyyjyekj" path="res://ui/energy/energy_makeup_gauge.tscn" id="3_0i7so"]
+[ext_resource type="PackedScene" path="res://ui/energy/energy_makeup_gauge.tscn" id="3_0i7so"]
 [ext_resource type="PackedScene" uid="uid://4el7epeujqmf" path="res://ui/health_bar/health_bar.tscn" id="3_ghfge"]
 [ext_resource type="PackedScene" uid="uid://bcm7rp6xri4cr" path="res://ui/energy/grid_balance_gauge.tscn" id="4_jq4ur"]
 [ext_resource type="Script" path="res://library/ui/build_menu.gd" id="5_gu83v"]
@@ -37,12 +37,12 @@
 [ext_resource type="Script" path="res://object/terrain/terrain.gd" id="25_pttxh"]
 [ext_resource type="Shader" path="res://object/water/water.gdshader" id="26_f84nc"]
 [ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="27_fm1n8"]
-[ext_resource type="PackedScene" uid="uid://bcpjahrk7du1b" path="res://object/weather/weather.tscn" id="28_aoxuo"]
 [ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/default_sun.tscn" id="29_0mita"]
 [ext_resource type="Script" path="res://object/camera_anchor.gd" id="30_jl8f5"]
 [ext_resource type="PackedScene" uid="uid://ceevy66ar1stu" path="res://object/camera/default_camera.tscn" id="31_lw6e3"]
 [ext_resource type="Script" path="res://object/crosshair.gd" id="32_i5yqs"]
 [ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://library/default_world_environment.tres" id="33_gbyox"]
+[ext_resource type="PackedScene" uid="uid://bcpjahrk7du1b" path="res://object/weather/forecaster.tscn" id="37_ltx7w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oppax"]
 content_margin_left = 4.0
@@ -330,7 +330,7 @@ item_0/icon = SubResource("GradientTexture2D_xp4jv")
 item_1/text = "Disable Assets"
 item_1/icon = SubResource("GradientTexture2D_ufu7g")
 
-[node name="WeatherList" type="ItemList" parent="GameUI/UI/MarginContainer"]
+[node name="WeatherForecastList" type="ItemList" parent="GameUI/UI/MarginContainer"]
 custom_minimum_size = Vector2(355, 55)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -366,8 +366,9 @@ night_icon = ExtResource("8_acl4e")
 cloudy_icon = ExtResource("11_xls8m")
 light_cloud_icon = ExtResource("12_s32nf")
 windy_icon = ExtResource("7_digia")
+cloudy_windy_icon = ExtResource("9_8140p")
 
-[node name="Timer" type="Timer" parent="GameUI/UI/MarginContainer/WeatherList"]
+[node name="Timer" type="Timer" parent="GameUI/UI/MarginContainer/WeatherForecastList"]
 wait_time = 2.0
 autostart = true
 
@@ -466,9 +467,10 @@ health_manager = NodePath("../HealthManager")
 [node name="Clock" type="Node" parent="."]
 script = ExtResource("22_3yy4o")
 
-[node name="Weather" type="Node" parent="." node_paths=PackedStringArray("clock")]
+[node name="Weather" type="Node" parent="." node_paths=PackedStringArray("clock", "forecaster")]
 script = ExtResource("22_ukc0y")
 clock = NodePath("../Clock")
+forecaster = NodePath("../Forecaster")
 
 [node name="Terrain" type="MeshInstance3D" parent="." node_paths=PackedStringArray("camera")]
 mesh = SubResource("PlaneMesh_d1wqf")
@@ -494,7 +496,9 @@ surface_material_override/0 = SubResource("ShaderMaterial_665ug")
 [node name="Tree" parent="Doodads" instance=ExtResource("27_fm1n8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
 
-[node name="CloudWeather" parent="." instance=ExtResource("28_aoxuo")]
+[node name="Forecaster" parent="." node_paths=PackedStringArray("clock", "forecast_list_comp") instance=ExtResource("37_ltx7w")]
+clock = NodePath("../Clock")
+forecast_list_comp = NodePath("../GameUI/UI/MarginContainer/WeatherForecastList")
 
 [node name="DefaultSun" parent="." node_paths=PackedStringArray("clock") instance=ExtResource("29_0mita")]
 clock = NodePath("../Clock")
@@ -526,4 +530,4 @@ camera = NodePath("../Camera3D")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("33_gbyox")
 
-[connection signal="timeout" from="GameUI/UI/MarginContainer/WeatherList/Timer" to="GameUI/UI/MarginContainer/WeatherList" method="_on_timer_timeout"]
+[connection signal="timeout" from="GameUI/UI/MarginContainer/WeatherForecastList/Timer" to="GameUI/UI/MarginContainer/WeatherForecastList" method="_on_timer_timeout"]
