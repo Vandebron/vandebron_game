@@ -1,4 +1,4 @@
-extends Node3D
+extends EnergyAsset
 class_name Consumer
 
 @export var demand: float

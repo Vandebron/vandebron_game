@@ -1,4 +1,4 @@
-extends Node3D
+extends EnergyAsset
 class_name Battery
 
 @export var max_charge_kw: float = 1.0

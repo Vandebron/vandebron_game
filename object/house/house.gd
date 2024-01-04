@@ -16,14 +16,6 @@ func _physics_process(delta: float) -> void:
 	
 	_target_demand = heating # TODO: Should be "_target_demand = heating + appliances + car + etc"
 	demand = lerpf(demand, _target_demand, delta * demand_adj_rate)
-	
-	#if Input.is_action_pressed("show_info"):
-		#show_info()
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_released("show_info"):
-		hide_info()
 
 
 func on_added_to_grid() -> void:
@@ -31,26 +23,6 @@ func on_added_to_grid() -> void:
 	
 	clock.part_of_day_started.connect(self._on_part_of_day_started)
 	clock.part_of_day_ended.connect(self._on_part_of_day_ended)
-
-	#if clock.is_day():
-		#model.animation_player.play("consume")
-
-
-#func show_info() -> void:
-	#%ConsumptionGaugeCtnr.visible = true
-	#%ConsumptionGaugeCtnr.global_position = Utils.get_camera().unproject_position(global_position)
-	#%ConsumptionGaugeCtnr.position -= %ConsumptionGaugeCtnr.size / 2.0 # Center it based on its size
-	#%ConsumptionGaugeCtnr.position.y -= 30.0 # Nudge it up a little
-	#
-	#%ConsumptionGauge.current = demand
-	#%ConsumptionGauge.target = _target_demand
-	#%ConsumptionGauge.max_value = max_demand
-	#
-	#%kwLbl.text = str(demand).pad_decimals(1) + "kW"
-
-
-func hide_info() -> void:
-	%ConsumptionGaugeCtnr.visible = false
 
 
 ## Introduces some randomness to consumption, so every house is a little bit different.

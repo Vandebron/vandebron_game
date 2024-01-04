@@ -58,6 +58,7 @@ func add_producer(producer: Producer, at_position: Vector3) -> void:
 	producer.clock = clock
 	producer.weather = weather
 	producer.on_added_to_grid()
+	producer.removed.connect(_remove_producer)
 	_producers.append(producer)
 
 
@@ -70,6 +71,7 @@ func add_consumer(consumer: Consumer, at_position: Vector3) -> void:
 	consumer.clock = clock
 	consumer.weather = weather
 	consumer.on_added_to_grid()
+	consumer.removed.connect(_remove_consumer)
 	_consumers.append(consumer)
 
 
@@ -80,6 +82,7 @@ func add_battery(battery: Battery, at_position: Vector3) -> void:
 		add_child(battery)
 	battery.global_position = at_position
 	battery.on_added_to_grid()
+	battery.removed.connect(_remove_battery)
 	_batteries.append(battery)
 
 
@@ -144,6 +147,18 @@ func _calculate_balance(delta: float) -> float:
 		target = BALANCE_CENTER - (target - BALANCE_CENTER)
 	
 	return clampf(lerpf(balance, target, delta * balance_adj_rate), 0.0, 1.0)
+
+
+func _remove_producer(producer: Producer) -> void:
+	_producers.erase(producer)
+
+
+func _remove_consumer(consumer: Consumer) -> void:
+	_consumers.erase(consumer)
+
+
+func _remove_battery(battery: Battery) -> void:
+	_batteries.erase(battery)
 
 
 func _ingest_buildings() -> void:

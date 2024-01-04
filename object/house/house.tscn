@@ -1,49 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://vjdf3kwb88ov"]
+[gd_scene load_steps=5 format=3 uid="uid://vjdf3kwb88ov"]
 
 [ext_resource type="Script" path="res://object/house/house.gd" id="1_03gka"]
 [ext_resource type="PackedScene" uid="uid://5yby1xliao2j" path="res://object/house/house_model.tscn" id="2_6frin"]
 [ext_resource type="PackedScene" uid="uid://b3bbpo64jnd2l" path="res://object/house/house_collider.tscn" id="3_pyalc"]
-[ext_resource type="PackedScene" uid="uid://3uw8bcseb6e1" path="res://ui/energy/gauge.tscn" id="4_2fkml"]
 [ext_resource type="PackedScene" uid="uid://5pmepuisqp78" path="res://object/house/house_shape.tscn" id="4_26ej8"]
-[ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="4_lmm4h"]
-
-[sub_resource type="Shader" id="Shader_w8v2k"]
-code = "shader_type canvas_item;
-
-uniform float current = 0.2;
-uniform float target = 0.7;
-uniform float max_value = 1.0;
-uniform float line_width = 0.02;
-
-uniform vec3 line_color : source_color = vec3(1.0, 0.0, 0.0);
-uniform vec3 left_color : source_color = vec3(0.0);
-uniform vec3 right_color : source_color = vec3(1.0);
-
-void fragment() {
-	float current_normalized = current / max_value;
-	float target_normalized = target / max_value;
-	float half_line_width = (line_width * 0.5);
-	float is_current =
-		step(UV.x, current_normalized + half_line_width)
-		- step(UV.x, current_normalized - half_line_width);
-	
-	vec3 final = left_color;
-	final = mix(final, line_color, is_current);
-	final = mix(final, right_color, step(target / max_value, UV.x) * abs(1.0 - is_current));
-	COLOR.rgb = final;
-}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dff6o"]
-resource_local_to_scene = true
-shader = SubResource("Shader_w8v2k")
-shader_parameter/current = 0.2
-shader_parameter/target = 0.7
-shader_parameter/max_value = 1.0
-shader_parameter/line_width = 0.02
-shader_parameter/line_color = Color(1, 0, 0, 1)
-shader_parameter/left_color = Color(0, 0, 0, 1)
-shader_parameter/right_color = Color(1, 1, 1, 1)
 
 [node name="House" type="Node3D"]
 script = ExtResource("1_03gka")
@@ -60,32 +20,3 @@ collider = NodePath("../Collider")
 
 [node name="VarianceTimer" type="Timer" parent="."]
 autostart = true
-
-[node name="ConsumptionGaugeCtnr" type="PanelContainer" parent="."]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(100, 55)
-offset_left = -50.0
-offset_top = -25.0
-offset_right = 50.0
-offset_bottom = 30.0
-rotation = -1.5708
-pivot_offset = Vector2(50, 25)
-theme = ExtResource("4_lmm4h")
-
-[node name="ConsumptionGauge" parent="ConsumptionGaugeCtnr" instance=ExtResource("4_2fkml")]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_dff6o")
-layout_mode = 2
-left_color = Color(0.262745, 0.262745, 0.415686, 1)
-right_color = Color(0.94902, 0.941176, 0.898039, 1)
-
-[node name="kwLbl" type="Label" parent="ConsumptionGaugeCtnr"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.207843, 0.168627, 0.258824, 1)
-theme_override_colors/font_outline_color = Color(0.94902, 0.941176, 0.898039, 1)
-theme_override_constants/outline_size = 8
-text = "10kW"
-horizontal_alignment = 1
-vertical_alignment = 1

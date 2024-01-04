@@ -1,4 +1,4 @@
-extends Node3D
+extends EnergyAsset
 class_name Producer
 
 const disable_icon_scn: PackedScene = preload("res://object/producer/disable_icon.tscn")
