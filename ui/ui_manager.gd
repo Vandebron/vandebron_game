@@ -35,6 +35,8 @@ func _process(_delta: float) -> void:
 			hz_ctnr.color = BAD_COLOR
 		else:
 			hz_ctnr.color = DEFAULT_COLOR
+	else:
+			hz_ctnr.color = DEFAULT_COLOR
 	
 	energy_makeup_gauge.fossil = energy_grid.fossil
 	energy_makeup_gauge.wind = energy_grid.wind
