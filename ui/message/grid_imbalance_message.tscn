@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://w63fj7pkp8cf"]
+
+[ext_resource type="PackedScene" uid="uid://b06xrkgbe8rdv" path="res://ui/message/message.tscn" id="1_mtoqc"]
+
+[node name="GridImbalanceMessage" instance=ExtResource("1_mtoqc")]
+
+[node name="Title" parent="VBoxContainer/TitlePanelCtnr/HBoxContainer" index="1"]
+text = "Grid Imbalance"
+
+[node name="Description" parent="VBoxContainer" index="1"]
+text = "Too much energy is being produced! Consider disabling assets or building batteries."
