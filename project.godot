@@ -35,6 +35,7 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/stretch/mode.web="viewport"
 
 [editor]
 
@@ -135,6 +136,8 @@ cycle_build_list_right={
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
 scaling_3d/mode=1
 scaling_3d/scale=0.5
-anti_aliasing/quality/use_debanding=true
+environment/defaults/default_environment="res://library/world_env/default_world_env.tres"
+environment/defaults/default_environment.web="res://library/world_env/web_world_env.tres"

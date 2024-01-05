@@ -8,6 +8,7 @@ radiance_size = 0
 
 [resource]
 background_mode = 2
+background_energy_multiplier = 0.5
 sky = SubResource("Sky_w3fip")
 sky_custom_fov = 70.0
 ambient_light_source = 3
