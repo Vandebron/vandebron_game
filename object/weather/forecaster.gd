@@ -21,7 +21,7 @@ func _predict_next_forecast() -> void:
 	var new_forecast: Forecast = Forecast.generate_random_forecast()
 	forecasts.append(new_forecast)
 	_output_forecast()
-	forecast_list_comp.update_forecast(new_forecast)
+	forecast_list_comp.update_forecast(new_forecast, clock)
 	_affect_cloud_spawn_rate(new_forecast)
 
 func _output_forecast() -> void:

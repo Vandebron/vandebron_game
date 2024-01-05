@@ -53,13 +53,17 @@ func is_day() -> bool:
 ## Returns value in 0-24h range
 func _get_time_of_day() -> float:
 	return point_of_day * 24.0
-
+	
+## Returns value in 0-24h range for a given point in the future
+func get_part_of_day_plus(offset_time_ms: int) -> float:
+	var t: float = Utils.get_cycle_value(int(day_night_cycle_ms), game_start_offset_ms + offset_time_ms)
+	var point_of_day_in_future = (1.0 - t) / 2.0
+	return point_of_day_in_future * 24.0
 
 ## Returns value in 0-1 range.
 func _get_point_of_day() -> float:
 	var t: float = Utils.get_cycle_value(int(day_night_cycle_ms), game_start_offset_ms)
 	return (1.0 - t) / 2.0
-
 
 func _get_part_of_day() -> DayPart:
 	var time: float = time_of_day
@@ -70,7 +74,6 @@ func _get_part_of_day() -> DayPart:
 	if time > 18.00 && time <= 24.00:
 		return DayPart.DUSK
 	return DayPart.NIGHT
-
 
 func _handle_day_transitions() -> void:
 	if part_of_day == _prev_part_of_day:
