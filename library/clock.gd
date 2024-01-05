@@ -24,11 +24,15 @@ var season: Season
 var _days_passed: int
 var _prev_part_of_day: DayPart = DayPart.DAWN
 
+var current_tick_ms: int
+
 
 func _physics_process(_delta: float) -> void:
 	point_of_day = _get_point_of_day() # This gets sampled so much, so we cache it here
 	_handle_day_transitions()
 
+func _process(delta: float) -> void:
+	current_tick_ms += int(delta * 1000)
 
 func is_dawn() -> bool:
 	return part_of_day == DayPart.DAWN
@@ -56,13 +60,17 @@ func _get_time_of_day() -> float:
 	
 ## Returns value in 0-24h range for a given point in the future
 func get_part_of_day_plus(offset_time_ms: int) -> float:
-	var t: float = Utils.get_cycle_value(int(day_night_cycle_ms), game_start_offset_ms + offset_time_ms)
+	var t: float = _get_cycle_value(int(day_night_cycle_ms), game_start_offset_ms + offset_time_ms)
 	var point_of_day_in_future = (1.0 - t) / 2.0
 	return point_of_day_in_future * 24.0
+	
+func _get_cycle_value(cycle_time_ms: int, offset: int = 0) -> float:
+	var current_time_ms: int = current_tick_ms + offset
+	return 1.0 - (2.0 * (current_time_ms % cycle_time_ms)) / cycle_time_ms
 
 ## Returns value in 0-1 range.
 func _get_point_of_day() -> float:
-	var t: float = Utils.get_cycle_value(int(day_night_cycle_ms), game_start_offset_ms)
+	var t: float = _get_cycle_value(int(day_night_cycle_ms), game_start_offset_ms)
 	return (1.0 - t) / 2.0
 
 func _get_part_of_day() -> DayPart:

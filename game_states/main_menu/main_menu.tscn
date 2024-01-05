@@ -25,6 +25,7 @@ script = ExtResource("1_lgriw")
 [node name="MainMenuGame" parent="." instance=ExtResource("2_orw71")]
 
 [node name="MainMenuCanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="UI" type="Control" parent="MainMenuCanvasLayer"]
 layout_mode = 3

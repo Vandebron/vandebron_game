@@ -16,8 +16,6 @@ script = ExtResource("1_8dagw")
 
 [node name="PopupCanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 2
-layer = 2
-visible = false
 
 [node name="UI" type="Control" parent="PopupCanvasLayer"]
 layout_mode = 3
@@ -39,3 +37,14 @@ grow_vertical = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+
+[node name="PausePopup" type="PanelContainer" parent="PopupCanvasLayer/UI/CenterContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PopupCanvasLayer/UI/CenterContainer/PausePopup"]
+layout_mode = 2
+text = "Paused"
+horizontal_alignment = 1
