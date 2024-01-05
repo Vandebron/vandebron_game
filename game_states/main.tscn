@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://wmfdl01v1vgo" path="res://ui/game_over_popup/game_over_popup.tscn" id="27_ygsao"]
 
 [node name="Main" type="Node3D"]
+process_mode = 3
 script = ExtResource("1_8dagw")
 
 [node name="GameContainer" type="Node3D" parent="."]
@@ -14,6 +15,7 @@ script = ExtResource("1_8dagw")
 [node name="MainMenu" parent="MainMenuContainer" instance=ExtResource("2_uay71")]
 
 [node name="PopupCanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 2
 layer = 2
 visible = false
 

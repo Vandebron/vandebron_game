@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://5vttqyyjyekj"]
+[gd_scene load_steps=6 format=3 uid="uid://c6dbxx5a11eu5"]
 
 [ext_resource type="Shader" path="res://ui/energy/energy_makeup_gauge.gdshader" id="1_sc4pk"]
 [ext_resource type="Script" path="res://ui/energy/energy_makeup_gauge.gd" id="2_rkyeh"]
