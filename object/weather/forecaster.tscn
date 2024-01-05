@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://bcpjahrk7du1b"]
+
+[ext_resource type="Script" path="res://object/weather/forecaster.gd" id="1_jypoc"]
+[ext_resource type="Script" path="res://object/weather/cloud_generator.gd" id="2_dmp3f"]
+[ext_resource type="PackedScene" uid="uid://cson7rvivcf3l" path="res://object/clouds/cloud_varient1.tscn" id="3_uflu1"]
+[ext_resource type="PackedScene" uid="uid://qnlil4tjh7ev" path="res://object/clouds/cloud_varient2.tscn" id="4_oacw0"]
+[ext_resource type="PackedScene" uid="uid://ccbkxui0vmue4" path="res://object/clouds/cloud_varient3.tscn" id="5_46mxy"]
+[ext_resource type="PackedScene" uid="uid://upnceht0ih05" path="res://object/clouds/cloud_varient4.tscn" id="6_cqg6a"]
+
+[sub_resource type="Curve3D" id="Curve3D_wm4pu"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -12, 5.5, -15, 0, 0, 0, 0, 0, 0, -12, 5.5, 15),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="Forecaster" type="Node3D"]
+script = ExtResource("1_jypoc")
+
+[node name="SpawnCloud" type="Timer" parent="."]
+
+[node name="ForecastTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="CloudGenerator" type="Node3D" parent="."]
+script = ExtResource("2_dmp3f")
+cloud_scenes = Array[PackedScene]([ExtResource("3_uflu1"), ExtResource("4_oacw0"), ExtResource("5_46mxy"), ExtResource("6_cqg6a")])
+
+[node name="SpawnPath" type="Path3D" parent="CloudGenerator"]
+transform = Transform3D(1, 0, 0, 0, 0.999634, 0.0270493, 0, -0.0270493, 0.999634, -7.86771, 0.397905, -0.377338)
+curve = SubResource("Curve3D_wm4pu")
+
+[node name="SpawnLocation" type="PathFollow3D" parent="CloudGenerator/SpawnPath"]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -12, 5.5, -15)
+
+[connection signal="timeout" from="SpawnCloud" to="CloudGenerator" method="_on_spawn_cloud_timeout"]
