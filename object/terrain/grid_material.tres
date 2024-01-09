@@ -3,13 +3,13 @@
 [ext_resource type="Shader" path="res://object/terrain/grid.gdshader" id="1_68jc7"]
 
 [resource]
-render_priority = 0
+render_priority = -1
 shader = ExtResource("1_68jc7")
 shader_parameter/cell_size = 1.0
 shader_parameter/offset = Vector2(0.5, 0.5)
 shader_parameter/line_width = 0.025
 shader_parameter/line_color = Color(0.52549, 0.505882, 0.533333, 1)
-shader_parameter/pointer_world_pos = null
+shader_parameter/pointer_world_pos = Vector3(1, 1, 1)
 shader_parameter/pointer_circle_size = 1.5
 shader_parameter/pointer_circle_color = Color(0.721569, 0.709804, 0.72549, 1)
 shader_parameter/ripple_ampl = 5.0
