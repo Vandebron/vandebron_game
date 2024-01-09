@@ -1,8 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://gyt1h2wqjrrb"]
+[gd_scene load_steps=19 format=3 uid="uid://gyt1h2wqjrrb"]
 
 [ext_resource type="Script" path="res://library/model/model.gd" id="1_jnec6"]
 [ext_resource type="Material" uid="uid://c4gqffaj8wqqs" path="res://object/coal_plant/coal_plant_chimney_mat.tres" id="2_5oery"]
 [ext_resource type="Material" uid="uid://xlovbvsf5yg4" path="res://object/coal_plant/coal_plant_factory_mat.tres" id="2_pj1fi"]
+[ext_resource type="Material" uid="uid://d087n56l1itnp" path="res://object/smoke_particles/smoke_particles.tres" id="3_0fwx8"]
+[ext_resource type="Material" uid="uid://cnehc1pyvlwh2" path="res://object/smoke_particles/smoke_mat.tres" id="4_b7e0b"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_hdlsp"]
 size = Vector3(1.4, 0.8, 2.7)
@@ -17,50 +19,19 @@ roughness = 0.5
 top_radius = 0.4
 radial_segments = 16
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcdsx"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.270588, 0.266667, 0.309804, 1)
-
-[sub_resource type="Curve" id="Curve_8uusl"]
-_data = [Vector2(0, 0.212), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_hu4fc"]
-curve_y = SubResource("Curve_8uusl")
-
-[sub_resource type="Curve" id="Curve_a3ema"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.503597, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_g6l06"]
-curve = SubResource("Curve_a3ema")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pssjd"]
-emission_shape_scale = Vector3(0.3, 2.08165e-12, 0.3)
-emission_shape = 2
-emission_sphere_radius = 1.0
-direction = Vector3(1, 1, 2.08165e-12)
-spread = 180.0
-initial_velocity_min = 0.1
-initial_velocity_max = 0.2
-directional_velocity_min = 0.05
-directional_velocity_max = 0.1
-directional_velocity_curve = SubResource("CurveXYZTexture_hu4fc")
-gravity = Vector3(2.08165e-12, 1, 2.08165e-12)
-scale_min = 0.4
-scale_max = 0.7
-scale_curve = SubResource("CurveTexture_g6l06")
-
-[sub_resource type="SphereMesh" id="SphereMesh_mm3yp"]
-radial_segments = 8
-rings = 4
+[sub_resource type="QuadMesh" id="QuadMesh_wvlmn"]
+material = ExtResource("4_b7e0b")
+size = Vector2(0.7, 0.7)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_4e5cq"]
 top_radius = 0.3
 bottom_radius = 0.4
 height = 1.5
 radial_segments = 16
+
+[sub_resource type="QuadMesh" id="QuadMesh_1bhs2"]
+material = ExtResource("4_b7e0b")
+size = Vector2(0.4, 0.4)
 
 [sub_resource type="BoxMesh" id="BoxMesh_0r0uj"]
 size = Vector3(2.2, 0.5, 1.5)
@@ -156,11 +127,11 @@ surface_material_override/0 = ExtResource("2_5oery")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="ChimneyBase/Chimney"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_tcdsx")
 emitting = false
+amount = 16
 lifetime = 2.0
-process_material = SubResource("ParticleProcessMaterial_pssjd")
-draw_pass_1 = SubResource("SphereMesh_mm3yp")
+process_material = ExtResource("3_0fwx8")
+draw_pass_1 = SubResource("QuadMesh_wvlmn")
 
 [node name="Chimney2" type="MeshInstance3D" parent="ChimneyBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0.75)
@@ -169,13 +140,11 @@ skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_5oery")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="ChimneyBase/Chimney2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_tcdsx")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 emitting = false
-amount = 4
 lifetime = 1.5
-process_material = SubResource("ParticleProcessMaterial_pssjd")
-draw_pass_1 = SubResource("SphereMesh_mm3yp")
+process_material = ExtResource("3_0fwx8")
+draw_pass_1 = SubResource("QuadMesh_1bhs2")
 
 [node name="FactoryBase" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.25, -0.5)

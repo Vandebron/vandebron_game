@@ -13,7 +13,6 @@ nominal_power = 100.0
 
 [node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider") instance=ExtResource("3_ss3u1")]
 visible = false
-toggle_visibility = true
 collider = NodePath("../Collider")
 
 [node name="Collider" parent="." instance=ExtResource("4_tnxg0")]

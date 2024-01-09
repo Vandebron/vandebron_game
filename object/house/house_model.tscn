@@ -1,6 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://5yby1xliao2j"]
+[gd_scene load_steps=17 format=3 uid="uid://5yby1xliao2j"]
 
 [ext_resource type="Script" path="res://library/model/model.gd" id="1_bq0kq"]
+[ext_resource type="Material" uid="uid://d087n56l1itnp" path="res://object/smoke_particles/smoke_particles.tres" id="2_5qdn5"]
+[ext_resource type="Material" uid="uid://cnehc1pyvlwh2" path="res://object/smoke_particles/smoke_mat.tres" id="3_q2gif"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_psdtc"]
 size = Vector3(0.8, 0.8, 0.8)
@@ -41,34 +43,8 @@ specular_mode = 1
 albedo_color = Color(0.721569, 0.709804, 0.72549, 1)
 roughness = 0.5
 
-[sub_resource type="Curve" id="Curve_0yacr"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_3fvf2"]
-curve = SubResource("Curve_0yacr")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n0xyu"]
-direction = Vector3(1, 1, 1)
-spread = 90.0
-initial_velocity_min = 0.5
-initial_velocity_max = 0.6
-gravity = Vector3(2.08165e-12, 9.8, 2.08165e-12)
-damping_min = 9.0
-damping_max = 9.5
-scale_min = 0.2
-scale_max = 0.3
-scale_curve = SubResource("CurveTexture_3fvf2")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kfoa7"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.52549, 0.505882, 0.533333, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_rhgfd"]
-material = SubResource("StandardMaterial3D_kfoa7")
-radial_segments = 8
-rings = 4
+[sub_resource type="QuadMesh" id="QuadMesh_j8tjv"]
+material = ExtResource("3_q2gif")
 
 [sub_resource type="Animation" id="Animation_eaci6"]
 length = 0.001
@@ -224,10 +200,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ojcif")
 
 [node name="SmokeParticles" type="GPUParticles3D" parent="House/Chimney"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.5, 2.08165e-12)
+visible = false
 emitting = false
 lifetime = 2.0
-process_material = SubResource("ParticleProcessMaterial_n0xyu")
-draw_pass_1 = SubResource("SphereMesh_rhgfd")
+process_material = ExtResource("2_5qdn5")
+draw_pass_1 = SubResource("QuadMesh_j8tjv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
