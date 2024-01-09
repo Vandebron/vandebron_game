@@ -41,7 +41,7 @@
 [ext_resource type="Script" path="res://object/camera_anchor.gd" id="30_jl8f5"]
 [ext_resource type="PackedScene" uid="uid://ceevy66ar1stu" path="res://object/camera/default_camera.tscn" id="31_lw6e3"]
 [ext_resource type="Script" path="res://object/crosshair.gd" id="32_i5yqs"]
-[ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://library/default_world_environment.tres" id="33_gbyox"]
+[ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://library/world_env/default_world_env.tres" id="33_gbyox"]
 [ext_resource type="PackedScene" uid="uid://bcpjahrk7du1b" path="res://object/weather/forecaster.tscn" id="37_ltx7w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oppax"]
