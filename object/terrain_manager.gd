@@ -1,7 +1,8 @@
 extends Node3D
 
-const tree_wood_material: ShaderMaterial = preload("res://object/tree/tree_wood_material.tres")
-const tree_leaves_material: ShaderMaterial = preload("res://object/tree/tree_leaves_material.tres")
+const TREE_WOOD_MAT: ShaderMaterial = preload("res://object/tree/tree_wood_material.tres")
+const TREE_LEAVES_MAT: ShaderMaterial = preload("res://object/tree/tree_leaves_material.tres")
+const TREE_UPDATE_INTERVAL_SEC: float = 0.5
 
 @export var terrain: MeshInstance3D
 @export var clock: Clock
@@ -21,24 +22,20 @@ func _ready() -> void:
 	clock.season_ended.connect(_on_season_ended)
 	
 	_on_season_started(clock.season)
-
-
-func _process(_delta: float) -> void:
-	tree_wood_material.set_shader_parameter("sway_radius", weather.wind * 0.1)
-	tree_leaves_material.set_shader_parameter("sway_radius", weather.wind * 0.1)
+	_update_tree_sway()
 
 
 func _on_season_started(season: Clock.Season) -> void:
 	match season:
 		Clock.Season.AUTUMN:
 			_set_ground_color(Color.hex(0xd3a068ff))
-			tree_leaves_material.set_shader_parameter("albedo", Color.hex(0xa77b5bff))
+			TREE_LEAVES_MAT.set_shader_parameter("albedo", Color.hex(0xa77b5bff))
 		Clock.Season.WINTER:
 			_set_snow_density(0.65)
 			_set_ground_color(Color.hex(0xa77b5bff))
 			_set_tree_leaves_transparency(1.0)
 		Clock.Season.SPRING:
-			tree_leaves_material.set_shader_parameter("albedo", Color.hex(0x8ab060ff))
+			TREE_LEAVES_MAT.set_shader_parameter("albedo", Color.hex(0x8ab060ff))
 			_set_ground_color(Color.hex(0xc2d368ff))
 		Clock.Season.SUMMER:
 			_set_ground_color(Color.hex(0x8ab060ff))
@@ -66,4 +63,10 @@ func _set_snow_density(density: float) -> void:
 func _set_tree_leaves_transparency(transparency: float) -> void:
 	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_ELASTIC)
-	tween.tween_property(tree_leaves_material, "shader_parameter/transparency", transparency, 2.0)
+	tween.tween_property(TREE_LEAVES_MAT, "shader_parameter/transparency", transparency, 2.0)
+
+
+func _update_tree_sway() -> void:
+	get_tree().create_timer(TREE_UPDATE_INTERVAL_SEC).timeout.connect(_update_tree_sway)
+	TREE_WOOD_MAT.set_shader_parameter("sway_radius", weather.wind * 0.1)
+	TREE_LEAVES_MAT.set_shader_parameter("sway_radius", weather.wind * 0.1)

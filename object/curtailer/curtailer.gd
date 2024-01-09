@@ -15,11 +15,6 @@ enum Mode {DISABLE, ENABLE}
 var _pointer_pos: Vector3
 
 
-func _physics_process(_delta: float) -> void:
-	if Input.is_action_pressed("build_confirm"):
-		confirm()
-
-
 func _process(delta: float) -> void:
 	_pointer_pos = InputUtil.get_pointer_world_position(camera)
 	var shape_pos: Vector3 = shape_indicator.global_position.lerp(_pointer_pos, delta * 15.0)
@@ -27,6 +22,9 @@ func _process(delta: float) -> void:
 	shape_indicator.global_position.x = shape_pos.x
 	shape_indicator.global_position.z = shape_pos.z
 	collider.global_position = _pointer_pos
+	
+	if Input.is_action_pressed("build_confirm"):
+		confirm()
 
 
 func _input(event: InputEvent) -> void:

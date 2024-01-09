@@ -10,7 +10,7 @@ var _variance: float = 0.1 # Represents random consumption deviation per house
 var _target_demand: float = 1.0
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	# TODO: Maybe houses turn down heating during the night to save power?
 	var heating: float = clampf(1.0 - weather.temperature - _variance, 0.0, 1.0) * max_demand
 	

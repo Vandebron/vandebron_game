@@ -7,7 +7,7 @@ extends Node3D
 @onready var sun: DirectionalLight3D = $Sun
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	# TODO: Fix sun rotation. It should not "jump" to a new orientation at break of dawn
 	rotation.z = -(PI * 0.5 * clock.point_of_day)
 	rotation.y = (PI * 0.5 * clock.point_of_day)

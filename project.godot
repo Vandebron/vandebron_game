@@ -134,6 +134,10 @@ cycle_build_list_right={
 3d_physics/layer_3="terrain"
 3d_physics/layer_13="mouse"
 
+[physics]
+
+common/physics_ticks_per_second=20
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

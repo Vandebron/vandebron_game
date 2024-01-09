@@ -12,7 +12,7 @@ func _ready() -> void:
 	current_power = nominal_power
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	current_power = lerpf(current_power, _target_power, delta * 0.1)
 
 

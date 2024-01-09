@@ -10,7 +10,7 @@ var _bounds: Rect2
 var _last_valid_position: Vector3
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	var input_raw: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var input := Vector3(input_raw.x, 0.0, input_raw.y)
 	

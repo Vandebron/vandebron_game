@@ -8,7 +8,7 @@ class_name Cloud
 var _distance_traveled: float
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	var move_delta: float = speed * delta
 	translate(Vector3.RIGHT * move_delta)
 	
