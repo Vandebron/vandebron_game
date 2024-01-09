@@ -4,3 +4,7 @@
 
 [node name="EnergyGrid" type="Node3D"]
 script = ExtResource("1_vjsqc")
+
+[node name="PowerUpdateTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true

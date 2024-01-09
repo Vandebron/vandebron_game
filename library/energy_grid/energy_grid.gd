@@ -5,9 +5,11 @@ const BALANCE_CENTER: float = 0.5
 
 @export var target_frequency_hz: float = 50.0
 @export var frequency_max_deviation_hz: float = 0.1
-@export var balance_adj_rate: float = 0.4
+@export var balance_adj_rate: float = 1.0
 @export var clock: Clock
 @export var weather: Weather
+
+@onready var power_update_timer: Timer = $PowerUpdateTimer
 
 # Buildings
 var _producers: Array[Producer] = []
@@ -29,13 +31,19 @@ var balance: float = 0.5 # Ranges between 0-1, so 0.5 means perfectly balanced.
 
 func _ready() -> void:
 	_ingest_buildings()
+	_update_power(power_update_timer.wait_time)
+	
+	power_update_timer.timeout.connect(_update_power.bind(power_update_timer.wait_time))
 
 
 func _process(delta: float) -> void:
-	_update_supply()
-	demand = _get_demand() # TODO: What if demand is zero? We get division by zero
-	_update_batteries()
 	balance = _calculate_balance(delta)
+
+
+func _update_power(delta: float) -> void:
+	_update_supply()
+	demand = _get_demand()
+	_update_batteries(delta)
 
 
 func add_building(node: Node3D, at_position: Vector3) -> void:
@@ -107,11 +115,17 @@ func _update_supply() -> void:
 	supply = fossil + solar + wind
 
 
-func _update_batteries() -> void:
+func _get_demand() -> float:
+	return _consumers\
+		.map(func(a: Consumer) -> float: return a.demand)\
+		.reduce(Utils.sumf, 0.0)
+
+
+func _update_batteries(delta: float) -> void:
 	var diff_kw: float = supply - demand
 	if diff_kw >= 0.0:
 		for battery in _batteries:
-			var stored_kw: float = battery.give(diff_kw)
+			var stored_kw: float = battery.give(diff_kw, delta)
 			supply -= stored_kw # TODO: Fix ugly side-effect
 			diff_kw -= stored_kw
 			if diff_kw <= 0.0:
@@ -119,27 +133,26 @@ func _update_batteries() -> void:
 	else:
 		diff_kw = absf(diff_kw)
 		for battery in _batteries:
-			var discharged_kw: float = battery.take(diff_kw)
+			var discharged_kw: float = battery.take(diff_kw, delta)
 			supply += discharged_kw # TODO: Fix ugly side-effect
 			diff_kw -= discharged_kw
 			if diff_kw <= 0.0:
 				break
 
 
-func _get_demand() -> float:
-	return _consumers\
-		.map(func(a: Consumer) -> float: return a.demand)\
-		.reduce(Utils.sumf, 0.0)
-
-
 func _calculate_balance(delta: float) -> float:
+	const POW: float = 2.0
+	
 	var supply_demand_ratio: float = supply / (supply + demand)
-	# This formula produces a bucket-shaped graph.
+	# This formula produces a U-shaped or V-shaped graph, depending on the value of POW.
 	# We do this so our frequency doesn't fluctuate wildly as soon as we have imbalance.
+	# By changing the POW value, we can essentially control the difficulty of the game.
+	# A POW value of 4 = U-shaped, and 2 = V-shaped.
+	# U-shaped makes the game easier, while V-shaped makes it harder.
 	# If supply=100%, demand=0%, the result is 1.0.
 	# If supply=50%, demand=50%, the result is 0.5.
 	# If supply=0%, demand=100%, the result is 1.0.
-	var target: float = 0.5 * (1.0 + pow(1.0 - 2.0 * supply_demand_ratio, 4.0))
+	var target: float = 0.5 * (1.0 + pow(1.0 - 2.0 * supply_demand_ratio, POW))
 	
 	# Because pow() only produces positive numbers, we have a special case for negative imbalance.
 	# There's probably a way to get rid of this if-statement. But I'm not good at math.
@@ -163,5 +176,7 @@ func _remove_battery(battery: Battery) -> void:
 
 func _ingest_buildings() -> void:
 	for child: Node in get_children():
+		if !(child is EnergyAsset):
+			continue
 		var at_position: Vector3 = child.global_position
 		add_building(child, at_position)
