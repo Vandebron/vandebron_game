@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcm7rp6xri4cr"]
+
+[ext_resource type="Shader" path="res://ui/frequency_gauge/bar/bar_frequency_gauge.gdshader" id="1_7qagg"]
+[ext_resource type="Script" path="res://ui/frequency_gauge/frequency_gauge.gd" id="2_hubbl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ea8l7"]
+shader = ExtResource("1_7qagg")
+shader_parameter/background_color = Color(0.14902, 0.129412, 0.180392, 1)
+shader_parameter/current_hz_line_color = Color(1, 1, 1, 1)
+shader_parameter/freq_max_deviation_bg_color = Color(0.541176, 0.690196, 0.376471, 1)
+shader_parameter/current_hz = 50.0
+shader_parameter/target_hz = 50.0
+shader_parameter/gauge_range_hz = 0.5
+shader_parameter/current_hz_line_width = 0.01
+shader_parameter/freq_max_deviation = 0.1
+shader_parameter/angle_start = 1.0
+shader_parameter/angle_end = 2.0
+shader_parameter/inner_radius = 0.5
+shader_parameter/outer_radius = 0.98
+shader_parameter/border_width = 0.02
+shader_parameter/border_color = Color(0.14902, 0.129412, 0.180392, 1)
+shader_parameter/smoothness_threshold = 0.0
+shader_parameter/full_circle = false
+
+[node name="BarFrequencyGauge" type="ColorRect"]
+material = SubResource("ShaderMaterial_ea8l7")
+offset_right = 100.0
+offset_bottom = 50.0
+script = ExtResource("2_hubbl")

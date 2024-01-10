@@ -2,12 +2,8 @@
 
 [ext_resource type="Script" path="res://ui/health_bar/health_bar.gd" id="1_jeanw"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ijrk"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.2, 0.168627, 0.25098, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yk26l"]
+bg_color = Color(0.14902, 0.129412, 0.180392, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nkxwn"]
 bg_color = Color(0.705882, 0.321569, 0.321569, 1)
@@ -17,13 +13,14 @@ offset_right = 869.0
 offset_bottom = 35.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_4ijrk")
 script = ExtResource("1_jeanw")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_yk26l")
 theme_override_styles/fill = SubResource("StyleBoxFlat_nkxwn")
 value = 50.0
+fill_mode = 3
 show_percentage = false

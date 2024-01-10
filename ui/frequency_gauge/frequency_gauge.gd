@@ -1,5 +1,10 @@
 extends ColorRect
-class_name GridBalanceGauge
+class_name FrequencyGauge
+
+@export var background_color: Color:
+	set(value):
+		background_color = value
+		(material as ShaderMaterial).set_shader_parameter("background_color", background_color)
 
 @export var current_frequency_hz: float:
 	set(value):
