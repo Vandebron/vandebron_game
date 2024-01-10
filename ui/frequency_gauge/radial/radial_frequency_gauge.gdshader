@@ -21,7 +21,7 @@ uniform float inner_radius = 0.5;
 uniform float outer_radius = 1.0;
 uniform float outline_width : hint_range(0.0, 1.0, 0.01) = 0.1;
 uniform vec3 outline_color : source_color = vec3(0.0);
-uniform float arc_smoothness : hint_range(0.0, 0.4, 0.001) = 0.0;
+uniform float arc_smoothness : hint_range(0.0, 0.4, 0.001) = 0.01;
 uniform bool full_circle;
 group_uniforms;
 
@@ -74,14 +74,15 @@ void fragment() {
 	float circle_alpha = in_angle(coords, angle_start, angle_end, arc_smoothness);
 	float arc_alpha = in_arc(coords, inner_radius, outer_radius, arc_smoothness);
 	float is_inside_arc_band = arc_alpha * circle_alpha;
-	COLOR.rgb *= is_inside_arc_band; // Basically means "only draw if inside arc band"
-	COLOR.a = is_inside_arc_band;
+	float alpha = is_inside_arc_band;
 	
 	// Add an outline
 	for (int i = 0; i < offsets.length(); i++) {
 		vec2 offset = offsets[i] * outline_width;
 		arc_alpha = 1.0 - in_arc(coords, inner_radius - offset.x, outer_radius + offset.x, arc_smoothness);
-		COLOR.rgb = mix(COLOR.rgb, outline_color, 1.0 - arc_alpha - COLOR.a);
-		COLOR.a = 1.0 - arc_alpha;
+		alpha = 1.0 - arc_alpha;
+		COLOR.rgb = mix(COLOR.rgb, outline_color, 1.0 - alpha);
 	}
+	
+	COLOR.a = alpha;
 }
