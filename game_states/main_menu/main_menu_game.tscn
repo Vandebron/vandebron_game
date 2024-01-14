@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="7_padue"]
 [ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/default_sun.tscn" id="8_lr1mk"]
 [ext_resource type="PackedScene" uid="uid://ceevy66ar1stu" path="res://object/camera/default_camera.tscn" id="9_8cjko"]
-[ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://library/default_world_environment.tres" id="10_gs782"]
+[ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://library/world_env/default_world_env.tres" id="10_gs782"]
 [ext_resource type="PackedScene" uid="uid://bcpjahrk7du1b" path="res://object/weather/forecaster.tscn" id="11_22e7i"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_43t6d"]
@@ -39,8 +39,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -1.5)
 [node name="House4" parent="EnergyGrid" instance=ExtResource("3_vj4r7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -2.5)
 
-[node name="Windmill" parent="EnergyGrid" instance=ExtResource("4_3fpm7")]
+[node name="Windmill" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("4_3fpm7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2.08165e-12, 1)
+clock = NodePath("../../Clock")
+weather = NodePath("../../Weather")
 
 [node name="Clock" type="Node" parent="."]
 script = ExtResource("5_g26tn")

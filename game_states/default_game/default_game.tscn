@@ -397,8 +397,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 [node name="House12" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
-[node name="Windmill" parent="EnergyGrid" instance=ExtResource("8_a621a")]
+[node name="Windmill" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+clock = NodePath("../../Clock")
+weather = NodePath("../../Weather")
 
 [node name="CoalPlant" parent="EnergyGrid" instance=ExtResource("9_0t1up")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
