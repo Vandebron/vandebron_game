@@ -6,11 +6,13 @@ var DEFAULT_COLOR: Color = Color.hex(0x332b40ff)
 
 @export var energy_grid: EnergyGrid
 @export var health_manager: HealthManager
+@export var score_manager: ScoreManager
 
 @onready var health_bar: HealthBar = %HealthBar
 @onready var energy_makeup_gauge: EnergyMakeupGauge = %EnergyMakeupGauge
 @onready var frequency_gauge: FrequencyGauge = %FrequencyGauge
 @onready var frequency_lbl: Label = %FrequencyLbl
+@onready var score_label: Score = %ScoreLabel
 
 
 func _ready() -> void:
@@ -40,6 +42,8 @@ func _process(_delta: float) -> void:
 		else:
 			frequency_gauge.background_color = DEFAULT_COLOR
 	else:
-			frequency_gauge.background_color = DEFAULT_COLOR
+		#TODO: Update score
+		score_label.score = score_manager.score
+		frequency_gauge.background_color = DEFAULT_COLOR
 	
 	health_bar.health = health_manager.health

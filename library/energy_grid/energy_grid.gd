@@ -1,5 +1,4 @@
-extends Node3D
-class_name EnergyGrid
+class_name EnergyGrid extends Node3D
 
 const BALANCE_CENTER: float = 0.5
 
@@ -13,7 +12,7 @@ const BALANCE_CENTER: float = 0.5
 
 # Buildings
 var _producers: Array[Producer] = []
-var _consumers: Array[Consumer] = []
+var _consumers: Array[Consumer] = [] #TODO
 var _batteries: Array[Battery] = []
 
 # Supply kW

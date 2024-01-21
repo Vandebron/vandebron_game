@@ -1,17 +1,14 @@
-class_name HealthManager extends Node
-
-signal health_zeroed
+class_name ScoreManager extends Node
 
 @export var energy_grid: EnergyGrid
-@export var heal_factor: float = 0.01
-@export var hurt_factor: float = 0.01
 @export var update_interval_ms: int = 100
 
-var health: float = 50.0
 var _done: bool
 var _update_timer: Timer
 
+var score: int = 0
 
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_update_timer = Timer.new()
 	_update_timer.wait_time = update_interval_ms / 1000.0
@@ -27,11 +24,4 @@ func update() -> void:
 	var frequency_diff_hz: float = absf(energy_grid.get_frequency_hz() - energy_grid.target_frequency_hz)
 	
 	if frequency_diff_hz < energy_grid.frequency_max_deviation_hz:
-		health += heal_factor
-	else:
-		var deviation: float = frequency_diff_hz / energy_grid.frequency_max_deviation_hz
-		health -= deviation * hurt_factor
-	
-	if health <= 0.0:
-		health_zeroed.emit()
-		_done = true
+		score += 1 #TODO: count buildings
