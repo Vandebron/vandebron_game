@@ -1,5 +1,4 @@
-extends Node3D
-class_name EnergyGrid
+class_name EnergyGrid extends Node3D
 
 const BALANCE_CENTER: float = 0.5
 
@@ -97,6 +96,8 @@ func add_battery(battery: Battery, at_position: Vector3) -> void:
 func get_frequency_hz() -> float:
 	return balance * target_frequency_hz * 2.0
 
+func get_consumer_count() -> int:
+	return _consumers.size()
 
 func _update_supply() -> void:
 	fossil = 0.0

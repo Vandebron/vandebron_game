@@ -1,5 +1,4 @@
-extends Node
-class_name HealthManager
+class_name HealthManager extends Node
 
 signal health_zeroed
 
