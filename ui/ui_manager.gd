@@ -42,7 +42,6 @@ func _process(_delta: float) -> void:
 		else:
 			frequency_gauge.background_color = DEFAULT_COLOR
 	else:
-		#TODO: Update score
 		score_label.score = score_manager.score
 		frequency_gauge.background_color = DEFAULT_COLOR
 	
