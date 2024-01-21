@@ -3,7 +3,6 @@ class_name ScoreManager extends Node
 @export var energy_grid: EnergyGrid
 @export var update_interval_ms: int = 150
 
-var _done: bool
 var _update_timer: Timer
 
 var score: int = 0
@@ -17,10 +16,7 @@ func _ready() -> void:
 	_update_timer.start()
 
 
-func update() -> void:
-	if _done:
-		return # Hack - so we don't keep spamming the signal
-	
+func update() -> void:	
 	var frequency_diff_hz: float = absf(energy_grid.get_frequency_hz() - energy_grid.target_frequency_hz)
 	
 	if frequency_diff_hz < energy_grid.frequency_max_deviation_hz:	
