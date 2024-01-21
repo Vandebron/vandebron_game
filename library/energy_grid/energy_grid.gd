@@ -12,7 +12,7 @@ const BALANCE_CENTER: float = 0.5
 
 # Buildings
 var _producers: Array[Producer] = []
-var _consumers: Array[Consumer] = [] #TODO
+var _consumers: Array[Consumer] = []
 var _batteries: Array[Battery] = []
 
 # Supply kW
