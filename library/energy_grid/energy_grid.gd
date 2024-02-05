@@ -44,6 +44,7 @@ func _update_power(delta: float) -> void:
 	_update_supply()
 	demand = _get_demand()
 	_update_batteries(delta)
+	balance = _calculate_balance(delta)
 
 
 func add_building(node: Node3D, at_position: Vector3) -> void:
@@ -58,7 +59,7 @@ func add_building(node: Node3D, at_position: Vector3) -> void:
 
 
 func add_producer(producer: Producer, at_position: Vector3) -> void:
-	if producer.owner:
+	if producer.is_inside_tree():
 		producer.reparent(self)
 	else:
 		add_child(producer)
@@ -71,7 +72,7 @@ func add_producer(producer: Producer, at_position: Vector3) -> void:
 
 
 func add_consumer(consumer: Consumer, at_position: Vector3) -> void:
-	if consumer.owner:
+	if consumer.is_inside_tree():
 		consumer.reparent(self)
 	else:
 		add_child(consumer)
@@ -84,7 +85,7 @@ func add_consumer(consumer: Consumer, at_position: Vector3) -> void:
 
 
 func add_battery(battery: Battery, at_position: Vector3) -> void:
-	if battery.owner:
+	if battery.is_inside_tree():
 		battery.reparent(self)
 	else:
 		add_child(battery)
@@ -143,7 +144,11 @@ func _update_batteries(delta: float) -> void:
 func _calculate_balance(delta: float) -> float:
 	const POW: float = 2.0
 	
+	if is_zero_approx(demand):
+		demand = 1.0
+	
 	var supply_demand_ratio: float = supply / (supply + demand)
+	
 	# This formula produces a U-shaped or V-shaped graph, depending on the value of POW.
 	# We do this so our frequency doesn't fluctuate wildly as soon as we have imbalance.
 	# By changing the POW value, we can essentially control the difficulty of the game.
