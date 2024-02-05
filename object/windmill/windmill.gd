@@ -32,7 +32,9 @@ func _process(delta: float) -> void:
 
 func _on_disabled() -> void:
 	_target_speed = 0.0
-
+	
+func on_added_to_grid() -> void:
+	clock.part_of_day_started.connect(self._on_part_of_day_started)
 
 func _update_target_speed() -> void:
 	if disabled:
@@ -44,3 +46,9 @@ func _update_target_speed() -> void:
 ## Introduces some randomness to production, so every windmill is a little bit different.
 func _update_variance() -> void:
 	_variance = randf() * production_variance
+
+func _on_part_of_day_started(part: Clock.DayPart) -> void:
+	if part == Clock.DayPart.DUSK:
+		model.animation_player.play("night")
+	else:
+		model.animation_player.play("day")

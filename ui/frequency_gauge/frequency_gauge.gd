@@ -1,5 +1,4 @@
-extends ColorRect
-class_name FrequencyGauge
+class_name FrequencyGauge extends ColorRect
 
 @export var background_color: Color:
 	set(value):

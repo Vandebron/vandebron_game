@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bxgfnp120gfmk"]
+[gd_scene load_steps=15 format=3 uid="uid://bxgfnp120gfmk"]
 
 [ext_resource type="Script" path="res://library/model/model.gd" id="1_lpmrv"]
 [ext_resource type="Material" uid="uid://r6alfl7uoo0d" path="res://object/windmill/windmill_material.tres" id="1_toorh"]
@@ -20,6 +20,23 @@ rings = 8
 [sub_resource type="PrismMesh" id="PrismMesh_ikeg0"]
 size = Vector3(0.2, 1, 0.1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_d44oi"]
+size = Vector3(0.5, 0.5, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t0ys7"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.870588, 0.913725, 0.921569, 1)
+roughness = 0.5
+emission = Color(0.854902, 0, 0, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_0h63p"]
+inner_radius = 0.136
+outer_radius = 0.193
+rings = 8
+ring_segments = 3
+
 [sub_resource type="Animation" id="Animation_lmytx"]
 length = 0.001
 tracks/0/type = "value"
@@ -33,6 +50,156 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ControlRoom/NightLight:surface_material_override/0:emission_enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ControlRoom/NightLight:surface_material_override/0:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.207843, 0.121569, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ControlRoom/NightLightRing:surface_material_override/0:albedo_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.870588, 0.913725, 0.921569, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ControlRoom/NightLightRing:surface_material_override/0:emission_enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_xxtm4"]
+resource_name = "day"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ControlRoom/NightLight:surface_material_override/0:emission_enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ControlRoom/NightLight:surface_material_override/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.870588, 0.913725, 0.921569, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ControlRoom/NightLightRing:surface_material_override/0:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.870588, 0.913725, 0.921569, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ControlRoom/NightLightRing:surface_material_override/0:emission_enabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_1x2pd"]
+resource_name = "night"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ControlRoom/NightLight:surface_material_override/0:emission_enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ControlRoom/NightLight:surface_material_override/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.207843, 0.121569, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ControlRoom/NightLightRing:surface_material_override/0:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.207843, 0.121569, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ControlRoom/NightLightRing:surface_material_override/0:emission_enabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_n6f24"]
@@ -55,6 +222,8 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xlcd3"]
 _data = {
 "RESET": SubResource("Animation_lmytx"),
+"day": SubResource("Animation_xxtm4"),
+"night": SubResource("Animation_1x2pd"),
 "spin": SubResource("Animation_n6f24")
 }
 
@@ -95,6 +264,16 @@ surface_material_override/0 = ExtResource("1_toorh")
 transform = Transform3D(-0.5, 0.866025, 3.48787e-16, -0.866025, -0.5, -3.48787e-16, -1.27665e-16, -4.76452e-16, 1, 0.5, -0.3, 2.08165e-12)
 mesh = SubResource("PrismMesh_ikeg0")
 surface_material_override/0 = ExtResource("1_toorh")
+
+[node name="NightLight" type="MeshInstance3D" parent="Windmill/ControlRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.549661)
+mesh = SubResource("BoxMesh_d44oi")
+surface_material_override/0 = SubResource("StandardMaterial3D_t0ys7")
+
+[node name="NightLightRing" type="MeshInstance3D" parent="Windmill/ControlRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002, -1, -0.001)
+mesh = SubResource("TorusMesh_0h63p")
+surface_material_override/0 = SubResource("StandardMaterial3D_t0ys7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Windmill")

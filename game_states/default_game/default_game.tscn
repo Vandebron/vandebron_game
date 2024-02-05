@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=74 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -23,6 +23,7 @@
 [ext_resource type="Resource" uid="uid://diejrlo4iciyb" path="res://object/house/house_building_def.tres" id="13_ouwj3"]
 [ext_resource type="PackedScene" uid="uid://b8k6w2r6a5vqa" path="res://ui/message/controls_message.tscn" id="14_2am8o"]
 [ext_resource type="Resource" uid="uid://b0r1cr25214g" path="res://object/windmill/windmill_building_def.tres" id="14_2mtcw"]
+[ext_resource type="Script" path="res://game_states/default_game/ScoreLabel.gd" id="15_eia4d"]
 [ext_resource type="Resource" uid="uid://bd15ndqy0tgbi" path="res://object/coal_plant/coal_plant_building_def.tres" id="15_eth4k"]
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="16_d4vit"]
 [ext_resource type="Resource" uid="uid://cavurm67np4ko" path="res://object/battery/battery_building_def.tres" id="17_4bs8w"]
@@ -40,6 +41,7 @@
 [ext_resource type="Script" path="res://object/camera_anchor.gd" id="30_jl8f5"]
 [ext_resource type="PackedScene" uid="uid://ceevy66ar1stu" path="res://object/camera/default_camera.tscn" id="31_lw6e3"]
 [ext_resource type="Script" path="res://object/crosshair.gd" id="32_i5yqs"]
+[ext_resource type="Script" path="res://game_states/default_game/ScoreManager.gd" id="32_ne8oe"]
 [ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://library/world_env/default_world_env.tres" id="33_gbyox"]
 [ext_resource type="PackedScene" uid="uid://bcpjahrk7du1b" path="res://object/weather/forecaster.tscn" id="37_ltx7w"]
 
@@ -357,6 +359,29 @@ size_flags_vertical = 4
 [node name="Message" parent="GameUI/UI/MarginContainer/MessageCtnr" instance=ExtResource("14_2am8o")]
 layout_mode = 2
 
+[node name="Score" type="Control" parent="GameUI/UI/MarginContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="ScoreLabel" type="Label" parent="GameUI/UI/MarginContainer/Score"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -44.0
+offset_bottom = 44.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 72
+text = "0"
+script = ExtResource("15_eia4d")
+
 [node name="EnergyGrid" parent="." node_paths=PackedStringArray("clock", "weather") instance=ExtResource("6_c18pg")]
 clock = NodePath("../Clock")
 weather = NodePath("../Weather")
@@ -396,8 +421,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 [node name="House12" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
-[node name="Windmill" parent="EnergyGrid" instance=ExtResource("8_a621a")]
+[node name="Windmill" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+clock = NodePath("../../Clock")
+weather = NodePath("../../Weather")
 
 [node name="CoalPlant" parent="EnergyGrid" instance=ExtResource("9_0t1up")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
@@ -426,10 +453,16 @@ unique_name_in_owner = true
 script = ExtResource("20_qve12")
 energy_grid = NodePath("../EnergyGrid")
 
-[node name="UiManager" type="Node" parent="." node_paths=PackedStringArray("energy_grid", "health_manager")]
+[node name="UiManager" type="Node" parent="." node_paths=PackedStringArray("energy_grid", "health_manager", "score_manager")]
 script = ExtResource("21_vf5eu")
 energy_grid = NodePath("../EnergyGrid")
 health_manager = NodePath("../HealthManager")
+score_manager = NodePath("../ScoreManager")
+
+[node name="ScoreManager" type="Node" parent="." node_paths=PackedStringArray("energy_grid")]
+unique_name_in_owner = true
+script = ExtResource("32_ne8oe")
+energy_grid = NodePath("../EnergyGrid")
 
 [node name="Clock" type="Node" parent="."]
 script = ExtResource("22_3yy4o")
