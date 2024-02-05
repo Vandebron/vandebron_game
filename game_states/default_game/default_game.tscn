@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=71 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -27,7 +27,6 @@
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="16_d4vit"]
 [ext_resource type="Resource" uid="uid://cavurm67np4ko" path="res://object/battery/battery_building_def.tres" id="17_4bs8w"]
 [ext_resource type="Script" path="res://object/curtailer/curtailment_manager.gd" id="18_yxou4"]
-[ext_resource type="Script" path="res://object/terrain_manager.gd" id="19_7oal0"]
 [ext_resource type="Script" path="res://ui/health_bar/health_manager.gd" id="20_qve12"]
 [ext_resource type="Script" path="res://ui/ui_manager.gd" id="21_vf5eu"]
 [ext_resource type="Script" path="res://library/clock.gd" id="22_3yy4o"]
@@ -412,23 +411,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
 [node name="SolarPlant" parent="EnergyGrid" instance=ExtResource("11_vym13")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
 
-[node name="BuildManager" type="Node3D" parent="." node_paths=PackedStringArray("energy_grid", "camera", "build_menu")]
+[node name="BuildManager" type="Node3D" parent="." node_paths=PackedStringArray("energy_grid", "build_menu")]
 script = ExtResource("12_4igyb")
 energy_grid = NodePath("../EnergyGrid")
-camera = NodePath("../CameraAnchor/Camera3D")
 build_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr/BuildMenu")
 buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("13_ouwj3"), ExtResource("14_2mtcw"), ExtResource("15_eth4k"), ExtResource("16_d4vit"), ExtResource("17_4bs8w")])
 
-[node name="CurtailmentManager" type="Node3D" parent="." node_paths=PackedStringArray("manage_menu", "camera")]
+[node name="CurtailmentManager" type="Node3D" parent="." node_paths=PackedStringArray("manage_menu")]
 script = ExtResource("18_yxou4")
 manage_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/ManageCtnr/ManageMenuCtnr/ManageMenu")
-camera = NodePath("../CameraAnchor/Camera3D")
-
-[node name="TerrainManager" type="Node3D" parent="." node_paths=PackedStringArray("terrain", "clock", "weather")]
-script = ExtResource("19_7oal0")
-terrain = NodePath("../Terrain")
-clock = NodePath("../Clock")
-weather = NodePath("../Weather")
 
 [node name="HealthManager" type="Node" parent="." node_paths=PackedStringArray("energy_grid")]
 unique_name_in_owner = true
@@ -448,12 +439,13 @@ script = ExtResource("22_ukc0y")
 clock = NodePath("../Clock")
 forecaster = NodePath("../Forecaster")
 
-[node name="Terrain" type="MeshInstance3D" parent="." node_paths=PackedStringArray("camera")]
+[node name="Terrain" type="MeshInstance3D" parent="." node_paths=PackedStringArray("clock", "weather")]
 mesh = SubResource("PlaneMesh_d1wqf")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_uhkcm")
 script = ExtResource("25_pttxh")
-camera = NodePath("../CameraAnchor/Camera3D")
+clock = NodePath("../Clock")
+weather = NodePath("../Weather")
 
 [node name="Area3D" type="Area3D" parent="Terrain"]
 collision_layer = 4
@@ -495,13 +487,12 @@ monitoring = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CameraAnchor/MouseCollider"]
 shape = SubResource("BoxShape3D_fj1y3")
 
-[node name="Crosshair" type="MeshInstance3D" parent="CameraAnchor" node_paths=PackedStringArray("camera")]
+[node name="Crosshair" type="MeshInstance3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -2.08165e-12, -5)
 cast_shadow = 0
 mesh = SubResource("SphereMesh_8cux0")
 surface_material_override/0 = SubResource("StandardMaterial3D_scrrx")
 script = ExtResource("32_i5yqs")
-camera = NodePath("../Camera3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("33_gbyox")

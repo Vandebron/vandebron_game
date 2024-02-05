@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://byeyjrm58w7tg"]
+
+[ext_resource type="Material" uid="uid://11gkcqv58xup" path="res://object/terrain/grid_material.tres" id="1_lnfb3"]
+[ext_resource type="Shader" path="res://object/terrain/terrain.gdshader" id="2_easjk"]
+[ext_resource type="Script" path="res://object/terrain/terrain.gd" id="3_3u0cw"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_d1wqf"]
+size = Vector2(31, 31)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iuyta"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2cr2i"]
+noise = SubResource("FastNoiseLite_iuyta")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uhkcm"]
+render_priority = 0
+next_pass = ExtResource("1_lnfb3")
+shader = ExtResource("2_easjk")
+shader_parameter/snow_density = 0.0
+shader_parameter/ground_color = Color(0.698039, 0.705882, 0.494118, 1)
+shader_parameter/snow_color = Color(1, 1, 1, 1)
+shader_parameter/snow_splatmap = SubResource("NoiseTexture2D_2cr2i")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bfkny"]
+size = Vector3(31, 1, 31)
+
+[node name="Terrain" type="MeshInstance3D" node_paths=PackedStringArray("clock", "weather")]
+mesh = SubResource("PlaneMesh_d1wqf")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_uhkcm")
+script = ExtResource("3_3u0cw")
+clock = NodePath("")
+weather = NodePath("")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_bfkny")
