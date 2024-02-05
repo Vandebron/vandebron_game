@@ -4,7 +4,6 @@ class_name Builder
 signal build_done(node: Node3D, building: BuildingDef, at_position: Vector3)
 
 @export var building: BuildingDef: set=set_building
-@export var camera: Camera3D
 
 # This is so we don't immediately build the building after selecting it from the list
 @onready var placement_debounce: Timer = $PlacementDebounce
@@ -17,17 +16,22 @@ var _build_confirmed: bool
 var _build_position: Vector3
 var _pointer_pos: Vector3
 var _hover_tween: Tween
+var _camera: Camera3D
 
 
 func _init() -> void:
 	add_to_group(Constants.GROUP_BUILDER)
 
 
+func _ready() -> void:
+	_camera = get_viewport().get_camera_3d()
+
+
 func _process(delta: float) -> void:
 	if _build_confirmed:
 		return
 	
-	_pointer_pos = InputUtil.get_pointer_world_position(camera).snapped(Constants.GRID_CELL_SIZE)
+	_pointer_pos = InputUtil.get_pointer_world_position(_camera).snapped(Constants.GRID_CELL_SIZE)
 	
 	_model.global_position = _model.global_position.lerp(_pointer_pos, delta * 15.0)
 	_shape.global_position = _shape.global_position.lerp(_pointer_pos, delta * 15.0)

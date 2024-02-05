@@ -2,7 +2,6 @@ extends Node3D
 class_name BuildManager
 
 @export var energy_grid: EnergyGrid
-@export var camera: Camera3D
 @export var build_menu: BuildMenu: set=_set_build_menu
 @export var buildings: Array[BuildingDef] = []: set=_set_buildings
 
@@ -26,7 +25,6 @@ func _create_builder(building: BuildingDef) -> void:
 	
 	var builder: Builder = preload("res://object/builder/builder.tscn").instantiate()
 	builder.building = building
-	builder.camera = camera
 	add_child(builder)
 	builder.build_done.connect(self._on_build_done)
 
@@ -63,7 +61,7 @@ func _set_buildings(value: Array[BuildingDef]) -> void:
 
 func _set_build_menu(value: BuildMenu) -> void:
 	build_menu = value
-	build_menu.build_initiated.connect(self._create_builder)
+	build_menu.build_initiated.connect(_create_builder)
 	
 	if buildings:
 		build_menu.buildings = buildings

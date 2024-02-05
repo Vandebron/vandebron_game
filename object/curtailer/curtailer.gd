@@ -7,16 +7,20 @@ enum Mode {DISABLE, ENABLE}
 
 @export var mode: Mode = Mode.DISABLE
 @export var radius: float = 2.0: set=_set_radius
-@export var camera: Camera3D
 
 @onready var shape_indicator: MeshInstance3D = $ShapeIndicator
 @onready var collider: Area3D = $Collider
 
 var _pointer_pos: Vector3
+var _camera: Camera3D
+
+
+func _ready() -> void:
+	_camera = get_viewport().get_camera_3d()
 
 
 func _process(delta: float) -> void:
-	_pointer_pos = InputUtil.get_pointer_world_position(camera)
+	_pointer_pos = InputUtil.get_pointer_world_position(_camera)
 	var shape_pos: Vector3 = shape_indicator.global_position.lerp(_pointer_pos, delta * 15.0)
 	
 	shape_indicator.global_position.x = shape_pos.x

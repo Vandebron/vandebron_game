@@ -1,9 +1,8 @@
-extends Node3D
+class_name CurtailmentManager extends Node3D
 
 const curtailer_scn: PackedScene = preload("res://object/curtailer/curtailer.tscn")
 
 @export var manage_menu: ItemList
-@export var camera: Camera3D
 
 
 func _ready() -> void:
@@ -17,7 +16,6 @@ func _on_action_selected(index: int) -> void:
 	_cancel_all()
 	
 	var curtailer: Curtailer = curtailer_scn.instantiate()
-	curtailer.camera = camera
 	curtailer.done.connect(_on_curtailment_done)
 	
 	var action_text: String = manage_menu.get_item_text(index)
