@@ -7,6 +7,7 @@ var forecasts: Array[Forecast] = []
 @export var clock: Clock
 @export var forecast_list_comp: WeatherForecastList
 
+
 func _init() -> void:
 	# Generate and store seven random forecasts, probably make the first 7 no clouds
 	for i in range(7):
@@ -14,15 +15,22 @@ func _init() -> void:
 		forecast.initial_forecast()
 		forecasts.append(forecast)
 
+
 func _ready() -> void:
-	forecast_timer.timeout.connect(_on_forecast_timer_timeout)
+	forecast_timer.timeout.connect(_predict_next_forecast)
+
 
 func _predict_next_forecast() -> void:
 	var new_forecast: Forecast = Forecast.generate_random_forecast()
-	forecasts.append(new_forecast)
+	
+	forecasts.pop_front()
+	forecasts.push_back(new_forecast)
+	
 	_output_forecast()
+	
 	forecast_list_comp.update_forecast(new_forecast, clock)
 	_affect_cloud_spawn_rate(new_forecast)
+
 
 func _output_forecast() -> void:
 	var num_forecasts = min(forecasts.size(), 7)
@@ -40,9 +48,6 @@ func _affect_cloud_spawn_rate(latest_forecast: Forecast) -> void:
 	else:
 		cloud_spawn_timer.stop()
 
-
-func _on_forecast_timer_timeout() -> void:
-	_predict_next_forecast()
 	
 func get_current_forecast() -> Forecast:
 	return forecasts[0]
