@@ -26,7 +26,6 @@ func calcualate_center_of_mass(positions: Array[Vector3]) -> Vector3:
 func _on_timer_timeout() -> void:
 	var builder: Builder = AUTO_BUILDER.instantiate()
 	builder.building = house
-	builder.camera = get_viewport().get_camera_3d()
 	add_child(builder)
 	builder.build_done.connect(_on_build_done)
 	var mass = calcualate_center_of_mass(energy_grid.get_consumers_positions())

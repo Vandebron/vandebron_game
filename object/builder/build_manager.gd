@@ -34,7 +34,6 @@ func auto_create_builder(building: BuildingDef) -> void:
 	
 	var builder: Builder = preload("res://object/builder/builder.tscn").instantiate()
 	builder.building = building
-	builder.camera = camera
 	add_child(builder)
 	builder.build_done.connect(self._on_build_done)
 

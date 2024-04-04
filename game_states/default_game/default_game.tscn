@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=75 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -491,7 +491,7 @@ collide_with_areas = true
 collide_with_bodies = false
 debug_shape_custom_color = Color(0, 0.929412, 1, 1)
 
-[node name="Terrain" type="MeshInstance3D" parent="." node_paths=PackedStringArray("camera")]
+[node name="Terrain" type="MeshInstance3D" parent="." node_paths=PackedStringArray("clock", "weather")]
 mesh = SubResource("PlaneMesh_d1wqf")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_uhkcm")
