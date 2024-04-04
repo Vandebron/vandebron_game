@@ -1,9 +1,11 @@
 class_name AutoBuilder extends Builder
 
+
 func _process(_delta: float) -> void:
 	pass
-	
-func find_non_excluded_position(center: Vector3, attempt: int, excluded_positions: Array) -> Vector3:
+
+
+func _find_non_excluded_position(center: Vector3, attempt: int, excluded_positions: Array) -> Vector3:
 	var position_offset: Vector3
 	var potential_position: Vector3
 	var found: bool = false
@@ -15,6 +17,7 @@ func find_non_excluded_position(center: Vector3, attempt: int, excluded_position
 			randi_range(-attempt, attempt)
 		)
 		potential_position = center + position_offset
+		potential_position = potential_position.snapped(Vector3.ONE)
 		if not excluded_positions.has(potential_position):
 			found = true
 			return potential_position
@@ -22,22 +25,24 @@ func find_non_excluded_position(center: Vector3, attempt: int, excluded_position
 	return Vector3.ZERO
 
 	
-func plot_building(center: Vector3, excluded_positions: Array[Vector3], shape_cast_3d: ShapeCast3D, attempt := 0) -> void:
-	shape_cast_3d.global_transform.origin = find_non_excluded_position(center,attempt, excluded_positions)
-	shape_cast_3d.target_position = Vector3.ZERO
-	shape_cast_3d.force_shapecast_update()
+func plot_building(center: Vector3, excluded_positions: Array[Vector3], shape_cast: ShapeCast3D, attempt := 0) -> void:
+	shape_cast.global_transform.origin = _find_non_excluded_position(center, attempt, excluded_positions)
+	shape_cast.target_position = Vector3.ZERO
+	shape_cast.force_shapecast_update()
 
-	if not shape_cast_3d.is_colliding():
-		_build_position = shape_cast_3d.global_position
-		print("Suitable position found at: ", shape_cast_3d.global_position)
+	if not shape_cast.is_colliding():
+		_build_position = shape_cast.global_position
+		print_verbose("Suitable position found at: ", shape_cast.global_position)
 		confirm()  # Implement this to handle successful placement
 	else:
-		print("No suitable position found at: ", shape_cast_3d.global_position)
+		print_verbose("No suitable position found at: ", shape_cast.global_position)
 		var next_attempt = attempt + 1
-		plot_building(center, excluded_positions, shape_cast_3d, next_attempt)
+		plot_building(center, excluded_positions, shape_cast, next_attempt)
+
 
 func _can_place() -> bool:
 	return true
+
 
 func confirm() -> void:
 	_shape.hide()
