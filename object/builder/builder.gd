@@ -46,7 +46,6 @@ func _process(delta: float) -> void:
 
 func confirm() -> void:
 	if !_can_place():
-		print("cant")
 		return
 	
 	_build_confirmed = true
@@ -57,57 +56,6 @@ func confirm() -> void:
 	_hover_tween.kill()
 	var twirl_tween: Tween = _add_twirl_animation()
 	twirl_tween.tween_callback(self._done)
-	
-func auto_confirm(house_positions: Array[Consumer], producer_positions: Array[Producer], battery_positions: Array[Battery]) -> void:
-	var all_building_positions = house_positions + producer_positions + battery_positions
-	# Start by checking if there are any houses to place near
-	if house_positions.is_empty():
-		print("No houses to place near.")
-		return
-
-	var valid_position_found = false
-	var attempts = 0
-	var max_attempts = house_positions.size()  # Avoid infinite loops
-
-	while !valid_position_found and attempts < max_attempts:
-		# Randomly select a house
-		var base_house = house_positions[randi() % house_positions.size()]
-		var base_position = base_house.global_position  # Assuming global_position holds the position
-
-		# Define potential adjacent positions
-		var adjacent_positions = [
-			base_position + Constants.GRID_CELL_SIZE * Vector3(1, 0, 0),  # East
-			base_position + Constants.GRID_CELL_SIZE * Vector3(-1, 0, 0),  # West
-			base_position + Constants.GRID_CELL_SIZE * Vector3(0, 0, 1),  # North
-			base_position + Constants.GRID_CELL_SIZE * Vector3(0, 0, -1)   # South
-		]
-
-		# Check each adjacent position for occupancy
-		for position in adjacent_positions:
-			_pointer_pos = position  # Temporarily set pointer position for _can_place check
-			if _can_place():  # Use existing logic to check if the position is buildable
-				_build_position = position
-				valid_position_found = true
-				break
-
-		attempts += 1
-
-	if not valid_position_found:
-		print("Couldn't find a valid position near a house.")
-		return
-
-	_build_confirmed = true
-	print("_build_position")
-	print(_build_position)
-
-	_shape.hide()
-
-	_hover_tween.kill()
-	var twirl_tween: Tween = _add_twirl_animation()
-	print("twirl tween")
-	#twirl_tween.tween_callback(self._done)
-	_done()  # Proceed with placement
-
 
 func cancel() -> void:
 	if _build_confirmed:

@@ -27,6 +27,17 @@ var demand: float
 # Supply / demand = balance (calculated as fraction, displayed as Hz)
 var balance: float = 0.5 # Ranges between 0-1, so 0.5 means perfectly balanced.
 
+func get_consumers_positions() -> Array[Vector3]:
+	var bla: Array[Vector3]
+	bla.assign(_consumers.map(func (c): return c.global_position))
+	return bla
+	
+func get_all_positions() -> Array[Vector3]:
+	var bla: Array[Vector3] = []
+	bla.append_array(_producers.map(func (c): return c.global_position))
+	bla.append_array(_consumers.map(func (c): return c.global_position))
+	bla.append_array(_batteries.map(func (c): return c.global_position))
+	return bla
 
 func _ready() -> void:
 	_ingest_buildings()

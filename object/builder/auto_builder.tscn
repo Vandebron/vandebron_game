@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvaddvwyr2y57"]
+
+[ext_resource type="Script" path="res://object/builder/auto_builder.gd" id="1_fo2xw"]
+
+[node name="AutoBuilder" type="Node3D"]
+script = ExtResource("1_fo2xw")

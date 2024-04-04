@@ -40,7 +40,6 @@ func auto_create_builder(building: BuildingDef) -> void:
 
 
 func _on_build_done(node: Node3D, building: BuildingDef, at_position: Vector3) -> void:
-	print("build done")
 	energy_grid.add_building(node, at_position)
 	
 	# This is to prevent a case where the user selects a new building just after finishing another,
