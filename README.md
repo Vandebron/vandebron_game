@@ -17,7 +17,7 @@ Welcome to the Energy Grid Manager Game! This is a simulation game where you tak
 
 Make sure you have the following installed before running the game:
 
-- [Godot Engine](https://godotengine.org/)
+- [Godot Engine](https://godotengine.org/) (currently using 4.2)
 
 ## Exporting
 
@@ -31,9 +31,8 @@ If you want to see the outcome before exporting, simply switch your editor to us
 - Go to `Project > Export`
 - Select `Web`
 - Click `Export Project`
-- In the file browser window, uncheck `Export With Debug`
+- In the file browser window, **un**check `Export With Debug`
 - Optionally apply binary size optimization as outlined below
-- Upload it to the web server, wherever that is
 
 #### Binary size optimization
 
@@ -45,5 +44,11 @@ Steps:
 - Open a terminal and navigate it to `./target/web`
 - Run `wasm-opt index.wasm -o index.wasm --all-features -Oz`
 
-The file index.wasm should now be smaller.
+The `index.wasm` file should now be smaller.
 If you want to compare the before/after, you can also change the output file to `-o index-optimized.wasm`.
+
+## Publishing
+
+- First, follow the **Exporting** instructions above
+- Log in to the Vandebron DockerHub account (`docker login`)
+- Run `docker buildx build --platform=linux/amd64 -t vandebron/vdb-game:latest --push .`
