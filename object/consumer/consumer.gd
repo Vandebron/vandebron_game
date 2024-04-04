@@ -1,5 +1,4 @@
-extends EnergyAsset
-class_name Consumer
+class_name Consumer extends EnergyAsset
 
 @export var demand: float
 @export var max_demand: float

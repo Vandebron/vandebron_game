@@ -1,5 +1,4 @@
-extends EnergyAsset
-class_name Producer
+class_name Producer extends EnergyAsset
 
 const disable_icon_scn: PackedScene = preload("res://object/producer/disable_icon.tscn")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=75 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -43,6 +43,7 @@
 [ext_resource type="Script" path="res://object/crosshair.gd" id="32_i5yqs"]
 [ext_resource type="Script" path="res://game_states/default_game/ScoreManager.gd" id="32_ne8oe"]
 [ext_resource type="Environment" uid="uid://bwwfej8nm4t8d" path="res://library/world_env/default_world_env.tres" id="33_gbyox"]
+[ext_resource type="Script" path="res://game_states/default_game/AutoBuildManager.gd" id="35_o513c"]
 [ext_resource type="PackedScene" uid="uid://bcpjahrk7du1b" path="res://object/weather/forecaster.tscn" id="37_ltx7w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oppax"]
@@ -88,6 +89,9 @@ colors = PackedColorArray(0.705882, 0.321569, 0.321569, 1, 0.705882, 0.321569, 0
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ufu7g"]
 gradient = SubResource("Gradient_rlvia")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tnw78"]
+size = Vector3(0.9, 0.9, 0.9)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d1wqf"]
 size = Vector2(31, 31)
@@ -472,6 +476,21 @@ script = ExtResource("22_ukc0y")
 clock = NodePath("../Clock")
 forecaster = NodePath("../Forecaster")
 
+[node name="AutoBuildManager" type="Node" parent="." node_paths=PackedStringArray("build_manager")]
+script = ExtResource("35_o513c")
+build_manager = NodePath("../BuildManager")
+house = ExtResource("13_ouwj3")
+
+[node name="Timer" type="Timer" parent="AutoBuildManager"]
+autostart = true
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="AutoBuildManager"]
+shape = SubResource("BoxShape3D_tnw78")
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+debug_shape_custom_color = Color(0, 0.929412, 1, 1)
+
 [node name="Terrain" type="MeshInstance3D" parent="." node_paths=PackedStringArray("clock", "weather")]
 mesh = SubResource("PlaneMesh_d1wqf")
 skeleton = NodePath("../..")
@@ -531,3 +550,4 @@ script = ExtResource("32_i5yqs")
 environment = ExtResource("33_gbyox")
 
 [connection signal="timeout" from="GameUI/UI/MarginContainer/WeatherForecastList/Timer" to="GameUI/UI/MarginContainer/WeatherForecastList" method="_on_timer_timeout"]
+[connection signal="timeout" from="AutoBuildManager/Timer" to="AutoBuildManager" method="_on_timer_timeout"]

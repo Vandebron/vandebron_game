@@ -5,9 +5,6 @@ signal build_done(node: Node3D, building: BuildingDef, at_position: Vector3)
 
 @export var building: BuildingDef: set=set_building
 
-# This is so we don't immediately build the building after selecting it from the list
-@onready var placement_debounce: Timer = $PlacementDebounce
-
 var _model: Model
 var _shape: BuildShapeIndicator
 var _collider: Area3D
@@ -57,7 +54,6 @@ func confirm() -> void:
 	var twirl_tween: Tween = _add_twirl_animation()
 	twirl_tween.tween_callback(self._done)
 
-
 func cancel() -> void:
 	if _build_confirmed:
 		return # Too late to cancel now, as the build placement is already confirmed
@@ -101,7 +97,8 @@ func _add_twirl_animation() -> Tween:
 
 func _can_place() -> bool:
 	return !_build_confirmed\
-		&& placement_debounce.time_left == 0\
+		# This is so we don't immediately build the building after selecting it from the list
+		&& $PlacementDebounce.time_left == 0\
 		&& !_collider.has_overlapping_areas()\
 		&& _terrain_collider.has_overlapping_areas() # i.e. don't be out-of-bounds
 

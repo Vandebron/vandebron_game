@@ -1,5 +1,4 @@
-extends Node3D
-class_name BuildManager
+class_name BuildManager extends Node3D
 
 @export var energy_grid: EnergyGrid
 @export var build_menu: BuildMenu: set=_set_build_menu
