@@ -37,4 +37,4 @@ func _cancel_all() -> void:
 
 
 func _on_curtailment_done() -> void:
-	pass
+	manage_menu.deselect_all()
