@@ -1,5 +1,4 @@
-extends Resource
-class_name BuildingDef
+class_name BuildingDef extends Resource
 
 @export var cost: int
 @export var alias: String

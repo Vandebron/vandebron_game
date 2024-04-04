@@ -46,6 +46,7 @@ func _update_power(delta: float) -> void:
 	balance = _calculate_balance(delta)
 
 
+#Here 
 func add_building(node: Node3D, at_position: Vector3) -> void:
 	if node is Producer:
 		add_producer(node, at_position)

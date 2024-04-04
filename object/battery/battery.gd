@@ -1,5 +1,4 @@
-extends EnergyAsset
-class_name Battery
+class_name Battery extends EnergyAsset
 
 @export var max_charge_kw: float = 1000.0
 @export var charge_kw_per_sec: float = 60.0
