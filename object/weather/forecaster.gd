@@ -18,7 +18,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	forecast_timer.timeout.connect(_predict_next_forecast)
-
+	
 
 func _predict_next_forecast() -> void:
 	var new_forecast: Forecast = Forecast.generate_random_forecast()

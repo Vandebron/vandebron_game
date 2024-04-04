@@ -8,7 +8,7 @@
 [node name="House" type="Node3D"]
 script = ExtResource("1_03gka")
 demand = 1.0
-max_demand = 10.0
+max_demand = 5.0
 
 [node name="Model" parent="." instance=ExtResource("2_6frin")]
 

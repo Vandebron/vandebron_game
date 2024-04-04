@@ -155,7 +155,7 @@ func _update_batteries(delta: float) -> void:
 
 
 func _calculate_balance(delta: float) -> float:
-	const POW: float = 2.0
+	const POW: float = 4.0
 	
 	if is_zero_approx(demand):
 		demand = 1.0

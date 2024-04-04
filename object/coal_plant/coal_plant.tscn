@@ -7,7 +7,7 @@
 
 [node name="CoalPlant" type="Node3D"]
 script = ExtResource("1_pdb65")
-nominal_power = 100.0
+nominal_power = 50.0
 
 [node name="Model" parent="." instance=ExtResource("1_crd40")]
 

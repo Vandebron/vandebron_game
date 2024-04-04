@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=74 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -15,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://bpevx3w1o7skl" path="res://library/ui/weather_icons/night_icon.png" id="8_acl4e"]
 [ext_resource type="PackedScene" uid="uid://fwrp8f25a4dx" path="res://object/coal_plant/coal_plant.tscn" id="9_0t1up"]
 [ext_resource type="Texture2D" uid="uid://cg2edph50ky6q" path="res://library/ui/weather_icons/cloudy_and_windy_icon.png" id="9_8140p"]
-[ext_resource type="PackedScene" uid="uid://bb3libciwo1ul" path="res://object/battery/battery.tscn" id="10_y8i4t"]
 [ext_resource type="PackedScene" uid="uid://bd8yf3cq0ju1c" path="res://object/solar/solar_plant.tscn" id="11_vym13"]
 [ext_resource type="Texture2D" uid="uid://b63dwlb4koj2o" path="res://library/ui/weather_icons/cloudy_icon.png" id="11_xls8m"]
 [ext_resource type="Script" path="res://object/builder/build_manager.gd" id="12_4igyb"]
@@ -425,6 +424,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 [node name="House12" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
+[node name="Windmill3" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.04568, -0.121175, -7.97088)
+clock = NodePath("../../Clock")
+weather = NodePath("../../Weather")
+
+[node name="Windmill2" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02047, -0.0605874, -5.9272)
+clock = NodePath("../../Clock")
+weather = NodePath("../../Weather")
+
+[node name="Windmill4" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.07829)
+clock = NodePath("../../Clock")
+weather = NodePath("../../Weather")
+
 [node name="Windmill" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 clock = NodePath("../../Clock")
@@ -433,11 +447,14 @@ weather = NodePath("../../Weather")
 [node name="CoalPlant" parent="EnergyGrid" instance=ExtResource("9_0t1up")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
 
-[node name="Battery" parent="EnergyGrid" instance=ExtResource("10_y8i4t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+[node name="SolarPlant4" parent="EnergyGrid" instance=ExtResource("11_vym13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.05229, 0, -7.79167)
 
-[node name="Battery2" parent="EnergyGrid" instance=ExtResource("10_y8i4t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
+[node name="SolarPlant3" parent="EnergyGrid" instance=ExtResource("11_vym13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8.14278)
+
+[node name="SolarPlant2" parent="EnergyGrid" instance=ExtResource("11_vym13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6.07139)
 
 [node name="SolarPlant" parent="EnergyGrid" instance=ExtResource("11_vym13")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
@@ -447,6 +464,22 @@ script = ExtResource("12_4igyb")
 energy_grid = NodePath("../EnergyGrid")
 build_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr/BuildMenu")
 buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("13_ouwj3"), ExtResource("14_2mtcw"), ExtResource("15_eth4k"), ExtResource("16_d4vit"), ExtResource("17_4bs8w")])
+
+[node name="AutoBuildManager" type="Node" parent="." node_paths=PackedStringArray("build_manager")]
+script = ExtResource("35_o513c")
+build_manager = NodePath("../BuildManager")
+house = ExtResource("13_ouwj3")
+
+[node name="Timer" type="Timer" parent="AutoBuildManager"]
+wait_time = 2.0
+autostart = true
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="AutoBuildManager"]
+shape = SubResource("BoxShape3D_tnw78")
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+debug_shape_custom_color = Color(0, 0.929412, 1, 1)
 
 [node name="CurtailmentManager" type="Node3D" parent="." node_paths=PackedStringArray("manage_menu")]
 script = ExtResource("18_yxou4")
@@ -475,21 +508,6 @@ script = ExtResource("22_3yy4o")
 script = ExtResource("22_ukc0y")
 clock = NodePath("../Clock")
 forecaster = NodePath("../Forecaster")
-
-[node name="AutoBuildManager" type="Node" parent="." node_paths=PackedStringArray("build_manager")]
-script = ExtResource("35_o513c")
-build_manager = NodePath("../BuildManager")
-house = ExtResource("13_ouwj3")
-
-[node name="Timer" type="Timer" parent="AutoBuildManager"]
-autostart = true
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="AutoBuildManager"]
-shape = SubResource("BoxShape3D_tnw78")
-collision_mask = 2
-collide_with_areas = true
-collide_with_bodies = false
-debug_shape_custom_color = Color(0, 0.929412, 1, 1)
 
 [node name="Terrain" type="MeshInstance3D" parent="." node_paths=PackedStringArray("clock", "weather")]
 mesh = SubResource("PlaneMesh_d1wqf")

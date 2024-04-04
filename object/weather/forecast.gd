@@ -10,8 +10,8 @@ enum CloudCoverage { LOW, MEDIUM, HIGH }
 static func generate_random_forecast() -> Forecast:
 	var forecast: Forecast = Forecast.new()
 	
-	match randi_range(0, WindSpeed.size()) as WindSpeed:
-		WindSpeed.LOW: forecast.wind_speed = 0
+	match randi_range(0, WindSpeed.size() -1) as WindSpeed:
+		WindSpeed.LOW: forecast.wind_speed = 0.25
 		WindSpeed.MEDIUM: forecast.wind_speed = 0.5
 		WindSpeed.HIGH: forecast.wind_speed = 1
 		
