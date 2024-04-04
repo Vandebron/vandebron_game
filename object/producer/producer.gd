@@ -10,6 +10,7 @@ enum Type {FOSSIL, WIND, SOLAR}
 @export var type: Producer.Type
 @export var clock: Clock
 @export var weather: Weather
+@export var start_disabled: bool
 
 var disable_icon: Node3D
 var current_power: float = 0.0
@@ -26,6 +27,9 @@ func _ready() -> void:
 	disable_icon = disable_icon_scn.instantiate()
 	add_child(disable_icon)
 	disable_icon.hide()
+	
+	if start_disabled:
+		disabled = true
 
 
 func enable() -> void:

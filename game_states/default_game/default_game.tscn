@@ -187,23 +187,28 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="EnergyMakeupCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer"]
+[node name="Control" type="VBoxContainer" parent="GameUI/UI/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="EnergyMakeupCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/Control"]
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_oppax")
 
-[node name="EnergyMakeupGauge" parent="GameUI/UI/MarginContainer/EnergyMakeupCtnr" instance=ExtResource("3_0i7so")]
+[node name="EnergyMakeupGauge" parent="GameUI/UI/MarginContainer/Control/EnergyMakeupCtnr" instance=ExtResource("3_0i7so")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TopPanelCtnr" type="Control" parent="GameUI/UI/MarginContainer"]
+[node name="TopPanelCtnr" type="Control" parent="GameUI/UI/MarginContainer/Control"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
 
-[node name="HealthBar" parent="GameUI/UI/MarginContainer/TopPanelCtnr" instance=ExtResource("3_ghfge")]
+[node name="HealthBar" parent="GameUI/UI/MarginContainer/Control/TopPanelCtnr" instance=ExtResource("3_ghfge")]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -213,13 +218,13 @@ anchor_bottom = 0.5
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="FrequencyGauge" parent="GameUI/UI/MarginContainer/TopPanelCtnr" instance=ExtResource("5_bl5m0")]
+[node name="FrequencyGauge" parent="GameUI/UI/MarginContainer/Control/TopPanelCtnr" instance=ExtResource("5_bl5m0")]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 100.0
 
-[node name="FrequencyLbl" type="Label" parent="GameUI/UI/MarginContainer/TopPanelCtnr"]
+[node name="FrequencyLbl" type="Label" parent="GameUI/UI/MarginContainer/Control/TopPanelCtnr"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
@@ -424,46 +429,50 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 [node name="House12" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
-[node name="Windmill3" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.04568, -0.121175, -7.97088)
-clock = NodePath("../../Clock")
-weather = NodePath("../../Weather")
-
-[node name="Windmill2" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02047, -0.0605874, -5.9272)
-clock = NodePath("../../Clock")
-weather = NodePath("../../Weather")
-
-[node name="Windmill4" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.07829)
-clock = NodePath("../../Clock")
-weather = NodePath("../../Weather")
-
 [node name="Windmill" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 clock = NodePath("../../Clock")
 weather = NodePath("../../Weather")
 
-[node name="CoalPlant" parent="EnergyGrid" instance=ExtResource("9_0t1up")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
+[node name="Windmill2" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -6)
+clock = NodePath("../../Clock")
+weather = NodePath("../../Weather")
 
-[node name="SolarPlant4" parent="EnergyGrid" instance=ExtResource("11_vym13")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.05229, 0, -7.79167)
+[node name="Windmill3" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -8)
+clock = NodePath("../../Clock")
+weather = NodePath("../../Weather")
+start_disabled = true
 
-[node name="SolarPlant3" parent="EnergyGrid" instance=ExtResource("11_vym13")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8.14278)
-
-[node name="SolarPlant2" parent="EnergyGrid" instance=ExtResource("11_vym13")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6.07139)
+[node name="Windmill4" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -8)
+clock = NodePath("../../Clock")
+weather = NodePath("../../Weather")
+start_disabled = true
 
 [node name="SolarPlant" parent="EnergyGrid" instance=ExtResource("11_vym13")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+
+[node name="SolarPlant2" parent="EnergyGrid" instance=ExtResource("11_vym13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.08165e-12, -6)
+
+[node name="SolarPlant3" parent="EnergyGrid" instance=ExtResource("11_vym13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.08165e-12, -8)
+start_disabled = true
+
+[node name="SolarPlant4" parent="EnergyGrid" instance=ExtResource("11_vym13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.052, 2.08165e-12, -8)
+start_disabled = true
+
+[node name="CoalPlant" parent="EnergyGrid" instance=ExtResource("9_0t1up")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
 
 [node name="BuildManager" type="Node3D" parent="." node_paths=PackedStringArray("energy_grid", "build_menu")]
 script = ExtResource("12_4igyb")
 energy_grid = NodePath("../EnergyGrid")
 build_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr/BuildMenu")
-buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("13_ouwj3"), ExtResource("14_2mtcw"), ExtResource("15_eth4k"), ExtResource("16_d4vit"), ExtResource("17_4bs8w")])
+buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("14_2mtcw"), ExtResource("15_eth4k"), ExtResource("16_d4vit"), ExtResource("17_4bs8w")])
 
 [node name="AutoBuildManager" type="Node" parent="." node_paths=PackedStringArray("build_manager")]
 script = ExtResource("35_o513c")
@@ -533,6 +542,18 @@ surface_material_override/0 = SubResource("ShaderMaterial_665ug")
 
 [node name="Tree" parent="Doodads" instance=ExtResource("27_fm1n8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
+
+[node name="Tree2" parent="Doodads" instance=ExtResource("27_fm1n8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
+
+[node name="Tree3" parent="Doodads" instance=ExtResource("27_fm1n8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+
+[node name="Tree4" parent="Doodads" instance=ExtResource("27_fm1n8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
+
+[node name="Tree5" parent="Doodads" instance=ExtResource("27_fm1n8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
 
 [node name="Forecaster" parent="." node_paths=PackedStringArray("clock", "forecast_list_comp") instance=ExtResource("37_ltx7w")]
 clock = NodePath("../Clock")
