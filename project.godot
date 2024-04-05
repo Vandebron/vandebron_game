@@ -44,6 +44,7 @@ movie_writer/movie_file="./target/video.avi"
 [file_customization]
 
 folder_colors={
+"res://assets/Sounds/": "yellow",
 "res://export/": "gray",
 "res://game_states/": "orange",
 "res://library/": "pink",
