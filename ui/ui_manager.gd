@@ -33,7 +33,7 @@ func _process(_delta: float) -> void:
 	energy_makeup_gauge.demand = energy_grid.demand
 	energy_makeup_gauge.supply = energy_grid.supply
 	
-	frequency_lbl.text = str(str(frequency_hz).pad_decimals(2), " Hz")
+	#frequency_lbl.text = str(str(frequency_hz).pad_decimals(2), " Hz")
 	frequency_gauge.current_frequency_hz = clampf(frequency_hz, gauge_min_hz, gauge_max_hz)
 	
 	if is_imbalanced:
@@ -41,8 +41,14 @@ func _process(_delta: float) -> void:
 			frequency_gauge.background_color = BAD_COLOR
 		else:
 			frequency_gauge.background_color = DEFAULT_COLOR
+		
+		if frequency_hz > 50:
+			frequency_lbl.text = "Oversupply"
+		else:
+			frequency_lbl.text = "Undersupply"
 	else:
 		score_label.score = score_manager.score
 		frequency_gauge.background_color = DEFAULT_COLOR
+		frequency_lbl.text = "Balanced"
 	
 	health_bar.health = health_manager.health
