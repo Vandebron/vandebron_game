@@ -7,6 +7,8 @@
 
 [node name="Battery" type="Node3D"]
 script = ExtResource("1_wuwbg")
+max_charge_kw = 2000.0
+charge_kw_per_sec = 600.0
 
 [node name="Model" parent="." instance=ExtResource("2_rboua")]
 
