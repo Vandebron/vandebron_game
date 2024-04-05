@@ -228,6 +228,26 @@ grow_horizontal = 2
 text = "Balanced"
 horizontal_alignment = 1
 
+[node name="Score" type="Control" parent="GameUI/UI/MarginContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ScoreLabel" type="Label" parent="GameUI/UI/MarginContainer/Score"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -49.5
+offset_right = 272.0
+offset_bottom = 49.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 35
+text = "Score: 0"
+script = ExtResource("15_eia4d")
+
 [node name="BottomPanelCtnr" type="HBoxContainer" parent="GameUI/UI/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -372,29 +392,6 @@ size_flags_vertical = 4
 
 [node name="Message" parent="GameUI/UI/MarginContainer/MessageCtnr" instance=ExtResource("14_2am8o")]
 layout_mode = 2
-
-[node name="Score" type="Control" parent="GameUI/UI/MarginContainer"]
-custom_minimum_size = Vector2(200, 100)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-
-[node name="ScoreLabel" type="Label" parent="GameUI/UI/MarginContainer/Score"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -44.0
-offset_bottom = 44.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_font_sizes/font_size = 72
-text = "0"
-script = ExtResource("15_eia4d")
 
 [node name="EnergyGrid" parent="." node_paths=PackedStringArray("clock", "weather") instance=ExtResource("6_c18pg")]
 clock = NodePath("../Clock")
