@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=68 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" path="res://library/ui/weather_forecast.gd" id="7_v63yt"]
 [ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/windmill/windmill.tscn" id="8_a621a"]
 [ext_resource type="Texture2D" uid="uid://bpevx3w1o7skl" path="res://library/ui/weather_icons/night_icon.png" id="8_acl4e"]
-[ext_resource type="PackedScene" uid="uid://fwrp8f25a4dx" path="res://object/coal_plant/coal_plant.tscn" id="9_0t1up"]
 [ext_resource type="Texture2D" uid="uid://cg2edph50ky6q" path="res://library/ui/weather_icons/cloudy_and_windy_icon.png" id="9_8140p"]
 [ext_resource type="PackedScene" uid="uid://bd8yf3cq0ju1c" path="res://object/solar/solar_plant.tscn" id="11_vym13"]
 [ext_resource type="Texture2D" uid="uid://b63dwlb4koj2o" path="res://library/ui/weather_icons/cloudy_icon.png" id="11_xls8m"]
@@ -23,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://b8k6w2r6a5vqa" path="res://ui/message/controls_message.tscn" id="14_2am8o"]
 [ext_resource type="Resource" uid="uid://b0r1cr25214g" path="res://object/windmill/windmill_building_def.tres" id="14_2mtcw"]
 [ext_resource type="Script" path="res://game_states/default_game/ScoreLabel.gd" id="15_eia4d"]
-[ext_resource type="Resource" uid="uid://bd15ndqy0tgbi" path="res://object/coal_plant/coal_plant_building_def.tres" id="15_eth4k"]
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="16_d4vit"]
 [ext_resource type="Resource" uid="uid://cavurm67np4ko" path="res://object/battery/battery_building_def.tres" id="17_4bs8w"]
 [ext_resource type="Script" path="res://object/curtailer/curtailment_manager.gd" id="18_yxou4"]
@@ -61,11 +59,6 @@ gradient = SubResource("Gradient_tgg4c")
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_i817q"]
 gradient = SubResource("Gradient_1m72d")
-
-[sub_resource type="Gradient" id="Gradient_niknj"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ft275"]
-gradient = SubResource("Gradient_niknj")
 
 [sub_resource type="Gradient" id="Gradient_hoym3"]
 
@@ -252,15 +245,15 @@ layout_mode = 2
 
 [node name="BuildMenu" type="ItemList" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(404, 2.08165e-12)
+custom_minimum_size = Vector2(306, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
 allow_reselect = true
 allow_search = false
 auto_height = true
-item_count = 4
-max_columns = 4
+item_count = 3
+max_columns = 3
 fixed_column_width = 90
 icon_mode = 0
 fixed_icon_size = Vector2i(40, 40)
@@ -268,10 +261,8 @@ item_0/text = "Windmill"
 item_0/icon = SubResource("GradientTexture2D_gjaah")
 item_1/text = "Solar"
 item_1/icon = SubResource("GradientTexture2D_i817q")
-item_2/text = "Generator"
-item_2/icon = SubResource("GradientTexture2D_ft275")
-item_3/text = "Battery"
-item_3/icon = SubResource("GradientTexture2D_iio37")
+item_2/text = "Battery"
+item_2/icon = SubResource("GradientTexture2D_iio37")
 script = ExtResource("5_gu83v")
 
 [node name="ManageCtnr" type="VBoxContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr"]
@@ -495,14 +486,11 @@ start_disabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.98168, 2.08165e-12, -10)
 start_disabled = true
 
-[node name="CoalPlant" parent="EnergyGrid" instance=ExtResource("9_0t1up")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
-
 [node name="BuildManager" type="Node3D" parent="." node_paths=PackedStringArray("energy_grid", "build_menu")]
 script = ExtResource("12_4igyb")
 energy_grid = NodePath("../EnergyGrid")
 build_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr/BuildMenu")
-buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("14_2mtcw"), ExtResource("15_eth4k"), ExtResource("16_d4vit"), ExtResource("17_4bs8w")])
+buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("14_2mtcw"), ExtResource("16_d4vit"), ExtResource("17_4bs8w")])
 
 [node name="AutoBuildManager" type="Node" parent="." node_paths=PackedStringArray("build_manager")]
 script = ExtResource("35_o513c")
