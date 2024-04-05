@@ -11,7 +11,7 @@ var DEFAULT_COLOR: Color = Color.hex(0x332b40ff)
 @onready var health_bar: HealthBar = %HealthBar
 @onready var energy_makeup_gauge: EnergyMakeupGauge = %EnergyMakeupGauge
 @onready var frequency_gauge: FrequencyGauge = %FrequencyGauge
-@onready var frequency_lbl: Label = %FrequencyLbl
+@onready var balance_lbl: Label = %BalanceLbl
 @onready var score_label: Score = %ScoreLabel
 
 
@@ -43,12 +43,12 @@ func _process(_delta: float) -> void:
 			frequency_gauge.background_color = DEFAULT_COLOR
 		
 		if frequency_hz > 50:
-			frequency_lbl.text = "Oversupply"
+			balance_lbl.text = "Oversupply"
 		else:
-			frequency_lbl.text = "Undersupply"
+			balance_lbl.text = "Undersupply"
 	else:
 		score_label.score = score_manager.score
 		frequency_gauge.background_color = DEFAULT_COLOR
-		frequency_lbl.text = "Balanced"
+		balance_lbl.text = "Balanced"
 	
 	health_bar.health = health_manager.health

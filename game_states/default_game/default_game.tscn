@@ -212,7 +212,7 @@ layout_mode = 0
 offset_right = 200.0
 offset_bottom = 100.0
 
-[node name="FrequencyLbl" type="Label" parent="GameUI/UI/MarginContainer/Control/TopPanelCtnr"]
+[node name="BalanceLbl" type="Label" parent="GameUI/UI/MarginContainer/Control/TopPanelCtnr"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
