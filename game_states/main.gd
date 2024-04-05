@@ -16,6 +16,8 @@ var _main_menu: MainMenu: set=_set_main_menu
 func _ready() -> void:
 	_main_menu = $MainMenuContainer/MainMenu
 	game_over_popup.quit_to_menu.connect(_quit_to_menu)
+	game_over_popup.restart.connect(_restart)
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("ui_cancel") && _game && !_game.is_game_over:
@@ -48,6 +50,11 @@ func _quit_to_menu() -> void:
 	
 	popup_canvas_layer.hide()
 	game_over_popup.hide()
+
+
+func _restart() -> void:
+	_quit_to_menu()
+	_load_default_game()
 
 
 func _on_game_over() -> void:
