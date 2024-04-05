@@ -150,3 +150,7 @@ scaling_3d/mode=1
 scaling_3d/scale=0.5
 environment/defaults/default_environment="res://library/world_env/default_world_env.tres"
 environment/defaults/default_environment.web="res://library/world_env/web_world_env.tres"
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality.web=0
+lights_and_shadows/directional_shadow/size.web=2048
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality.web=0
+lights_and_shadows/positional_shadow/atlas_size.web=2048
