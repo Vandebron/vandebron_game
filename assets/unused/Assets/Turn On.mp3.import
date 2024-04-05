@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bqxnuyi8kbi5x"
+path="res://.godot/imported/Turn On.mp3-b9776509bdbe2fd7e923de1ef56f3684.mp3str"
+
+[deps]
+
+source_file="res://assets/unused/Assets/Turn On.mp3"
+dest_files=["res://.godot/imported/Turn On.mp3-b9776509bdbe2fd7e923de1ef56f3684.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

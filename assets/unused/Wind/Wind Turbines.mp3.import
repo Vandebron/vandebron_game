@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://be7l8ubuhtwh2"
+path="res://.godot/imported/Wind Turbines.mp3-089adef820adc746fdb901a07788b47c.mp3str"
+
+[deps]
+
+source_file="res://assets/unused/Wind/Wind Turbines.mp3"
+dest_files=["res://.godot/imported/Wind Turbines.mp3-089adef820adc746fdb901a07788b47c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
