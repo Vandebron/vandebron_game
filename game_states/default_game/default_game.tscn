@@ -388,7 +388,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
+size_flags_vertical = 8
 
 [node name="TitlePanelContainer" type="PanelContainer" parent="GameUI/UI/MarginContainer/MessageCtnr"]
 layout_mode = 2
@@ -401,9 +401,10 @@ uppercase = true
 
 [node name="DisableMessagesButton" type="Button" parent="GameUI/UI/MarginContainer/MessageCtnr/TitlePanelContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(20, 2.08165e-12)
+custom_minimum_size = Vector2(80, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 8
+text = "Mute"
 icon = ExtResource("16_aeycb")
 expand_icon = true
 
