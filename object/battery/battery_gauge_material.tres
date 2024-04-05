@@ -6,6 +6,6 @@
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_skx1u")
-shader_parameter/charge_percentage = 0.5
+shader_parameter/charge_percentage = 0.0
 shader_parameter/charge_color = Color(0.541176, 0.690196, 0.376471, 1)
 shader_parameter/empty_color = Color(0.129412, 0.129412, 0.137255, 1)
