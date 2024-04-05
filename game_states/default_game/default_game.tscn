@@ -81,7 +81,7 @@ gradient = SubResource("Gradient_rlvia")
 size = Vector3(0.9, 0.9, 0.9)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d1wqf"]
-size = Vector2(31, 31)
+size = Vector2(24, 24)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_iuyta"]
 noise_type = 0
@@ -602,6 +602,8 @@ script = ExtResource("30_jl8f5")
 terrain = NodePath("../Terrain")
 
 [node name="Camera3D" parent="CameraAnchor" instance=ExtResource("31_lw6e3")]
+size = 15.0
+far = 230.0
 
 [node name="MouseCollider" type="Area3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.5, 2.08165e-12)
