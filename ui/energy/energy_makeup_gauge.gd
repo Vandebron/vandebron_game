@@ -16,6 +16,11 @@ class_name EnergyMakeupGauge
 		wind = value
 		%Gauge.material.set_shader_parameter("wind", wind)
 
+@export var battery: float:
+	set(value):
+		battery = value
+		%Gauge.material.set_shader_parameter("battery", battery)
+
 @export var demand: float:
 	set(value):
 		demand = value

@@ -19,6 +19,7 @@ var _batteries: Array[Battery] = []
 var fossil: float
 var solar: float
 var wind: float
+var battery_discharge: float
 var supply: float # Total of fossil + solar + wind
 
 # Demand kW
@@ -136,6 +137,7 @@ func _get_demand() -> float:
 
 
 func _update_batteries(delta: float) -> void:
+	battery_discharge = 0.0
 	var diff_kw: float = supply - demand
 	if diff_kw >= 0.0:
 		for battery in _batteries:
@@ -150,6 +152,7 @@ func _update_batteries(delta: float) -> void:
 			var discharged_kw: float = battery.take(diff_kw, delta)
 			supply += discharged_kw # TODO: Fix ugly side-effect
 			diff_kw -= discharged_kw
+			battery_discharge += discharged_kw / 2.0 # Division by 2 is because of supply side-effect
 			if diff_kw <= 0.0:
 				break
 

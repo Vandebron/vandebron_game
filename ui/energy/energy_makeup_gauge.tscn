@@ -10,10 +10,12 @@ shader = ExtResource("1_sc4pk")
 shader_parameter/fossil = 10.0
 shader_parameter/solar = 10.0
 shader_parameter/wind = 10.0
+shader_parameter/battery = 10.0
 shader_parameter/demand = 30.0
 shader_parameter/fossil_color = Color(0.392157, 0.388235, 0.396078, 1)
 shader_parameter/solar_color = Color(0.929412, 0.882353, 0.619608, 1)
 shader_parameter/wind_color = Color(0.407843, 0.760784, 0.827451, 1)
+shader_parameter/battery_color = Color(1, 0.541176, 0.607843, 1)
 shader_parameter/demand_color = Color(0.415686, 0.32549, 0.431373, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_10pjr"]
@@ -129,6 +131,17 @@ color = Color(0.407843, 0.760784, 0.827451, 1)
 layout_mode = 2
 theme_type_variation = &"SmallCapsLabel"
 text = "Wind"
+uppercase = true
+
+[node name="BatteryColor" type="ColorRect" parent="Legend"]
+custom_minimum_size = Vector2(20, 2.08165e-12)
+layout_mode = 2
+color = Color(1, 0.541176, 0.607843, 1)
+
+[node name="Battery" type="Label" parent="Legend"]
+layout_mode = 2
+theme_type_variation = &"SmallCapsLabel"
+text = "Battery"
 uppercase = true
 
 [node name="DemandColor" type="ColorRect" parent="Legend"]

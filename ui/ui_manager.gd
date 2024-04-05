@@ -61,5 +61,6 @@ func _update_energy_makeup_gauge() -> void:
 	energy_makeup_gauge.fossil = energy_grid.fossil
 	energy_makeup_gauge.wind = energy_grid.wind
 	energy_makeup_gauge.solar = energy_grid.solar
+	energy_makeup_gauge.battery = energy_grid.battery_discharge
 	energy_makeup_gauge.demand = energy_grid.demand
 	energy_makeup_gauge.supply = energy_grid.supply
