@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=72 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -51,11 +51,6 @@ content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
 bg_color = Color(0.176471, 0.145098, 0.219608, 1)
-
-[sub_resource type="Gradient" id="Gradient_dlugj"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ga8vt"]
-gradient = SubResource("Gradient_dlugj")
 
 [sub_resource type="Gradient" id="Gradient_tgg4c"]
 
@@ -257,28 +252,26 @@ layout_mode = 2
 
 [node name="BuildMenu" type="ItemList" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(502, 2.08165e-12)
+custom_minimum_size = Vector2(404, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
 allow_reselect = true
 allow_search = false
 auto_height = true
-item_count = 5
-max_columns = 5
+item_count = 4
+max_columns = 4
 fixed_column_width = 90
 icon_mode = 0
 fixed_icon_size = Vector2i(40, 40)
-item_0/text = "House"
-item_0/icon = SubResource("GradientTexture2D_ga8vt")
-item_1/text = "Windmill"
-item_1/icon = SubResource("GradientTexture2D_gjaah")
-item_2/text = "Solar"
-item_2/icon = SubResource("GradientTexture2D_i817q")
-item_3/text = "Generator"
-item_3/icon = SubResource("GradientTexture2D_ft275")
-item_4/text = "Battery"
-item_4/icon = SubResource("GradientTexture2D_iio37")
+item_0/text = "Windmill"
+item_0/icon = SubResource("GradientTexture2D_gjaah")
+item_1/text = "Solar"
+item_1/icon = SubResource("GradientTexture2D_i817q")
+item_2/text = "Generator"
+item_2/icon = SubResource("GradientTexture2D_ft275")
+item_3/text = "Battery"
+item_3/icon = SubResource("GradientTexture2D_iio37")
 script = ExtResource("5_gu83v")
 
 [node name="ManageCtnr" type="VBoxContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr"]
