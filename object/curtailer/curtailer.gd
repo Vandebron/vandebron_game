@@ -25,6 +25,13 @@ func _process(delta: float) -> void:
 	
 	shape_indicator.global_position.x = shape_pos.x
 	shape_indicator.global_position.z = shape_pos.z
+	
+	match mode: 
+		Curtailer.Mode.DISABLE:
+			shape_indicator.get_surface_override_material(0).albedo_color = Color.INDIAN_RED
+		Curtailer.Mode.ENABLE:
+			shape_indicator.get_surface_override_material(0).albedo_color = Color.LAWN_GREEN
+	
 	collider.global_position = _pointer_pos
 	
 	if Input.is_action_pressed("build_confirm"):
@@ -41,7 +48,7 @@ func confirm() -> void:
 		var node: Node3D = area.owner
 		if node is Producer:
 			match mode:
-				Curtailer.Mode.DISABLE:
+				Curtailer.Mode.DISABLE:	
 					if !node.disabled:
 						node.disable()
 				Curtailer.Mode.ENABLE:
@@ -58,6 +65,7 @@ func _set_radius(value: float) -> void:
 	radius = value
 	
 	$ShapeIndicator.mesh.top_radius = radius
+	$ShapeIndicator.mesh.bottom_radius = radius
 	$ShapeIndicator.mesh.bottom_radius = radius
 	
 	$Collider/CollisionShape3D.shape.radius = radius
