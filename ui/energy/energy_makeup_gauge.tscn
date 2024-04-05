@@ -97,11 +97,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="FossilColor" type="ColorRect" parent="Legend"]
+visible = false
 custom_minimum_size = Vector2(20, 2.08165e-12)
 layout_mode = 2
 color = Color(0.392157, 0.388235, 0.396078, 1)
 
 [node name="Fossil" type="Label" parent="Legend"]
+visible = false
 layout_mode = 2
 theme_type_variation = &"SmallCapsLabel"
 text = "Fossil"
