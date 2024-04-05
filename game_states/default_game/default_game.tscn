@@ -82,7 +82,7 @@ gradient = SubResource("Gradient_rlvia")
 size = Vector3(0.9, 0.9, 0.9)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d1wqf"]
-size = Vector2(24, 24)
+size = Vector2(23, 23)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_iuyta"]
 noise_type = 0
@@ -153,7 +153,7 @@ billboard_mode = 2
 process_mode = 1
 script = ExtResource("1_g35dh")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_waviu")
 autoplay = true
 bus = &"Music"
@@ -606,7 +606,6 @@ terrain = NodePath("../Terrain")
 
 [node name="Camera3D" parent="CameraAnchor" instance=ExtResource("31_lw6e3")]
 size = 15.0
-far = 230.0
 
 [node name="MouseCollider" type="Area3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.5, 2.08165e-12)
@@ -619,6 +618,7 @@ shape = SubResource("BoxShape3D_fj1y3")
 
 [node name="Crosshair" type="MeshInstance3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -2.08165e-12, -5)
+visible = false
 cast_shadow = 0
 mesh = SubResource("SphereMesh_8cux0")
 surface_material_override/0 = SubResource("StandardMaterial3D_scrrx")
