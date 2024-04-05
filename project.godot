@@ -17,6 +17,7 @@ run/max_fps=60
 boot_splash/bg_color=Color(0.2, 0.239216, 0.278431, 1)
 boot_splash/image="res://export/assets/splash.png"
 config/icon="res://icon.svg"
+driver/output_latency.web=100
 
 [autoload]
 
