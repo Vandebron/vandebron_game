@@ -8,9 +8,15 @@ class_name Cloud
 var _distance_traveled: float
 
 
+func _ready() -> void:
+	scale = Vector3.ZERO
+
+
 func _process(delta: float) -> void:
 	var move_delta: float = speed * delta
 	translate(Vector3.RIGHT * move_delta)
+	
+	scale = scale.lerp(Vector3.ONE, move_delta)
 	
 	_distance_traveled += move_delta
 	if _distance_traveled > max_distance:
