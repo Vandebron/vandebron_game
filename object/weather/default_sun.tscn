@@ -23,5 +23,6 @@ sun_light_energy_range = SubResource("Curve_j6r4g")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.300908, -0.399318, 6.98189e-08, -0.798636, 0.601815, -0.5, 0.521187, 0.691639, -5, 11, 10)
+light_bake_mode = 0
 shadow_enabled = true
 sky_mode = 1
