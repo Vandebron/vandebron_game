@@ -20,9 +20,9 @@
 [ext_resource type="Script" path="res://object/builder/build_manager.gd" id="12_4igyb"]
 [ext_resource type="Texture2D" uid="uid://ds8cxf4onm38m" path="res://library/ui/weather_icons/lightly_cloudly.png" id="12_s32nf"]
 [ext_resource type="Resource" uid="uid://diejrlo4iciyb" path="res://object/house/house_building_def.tres" id="13_ouwj3"]
-[ext_resource type="PackedScene" uid="uid://b8k6w2r6a5vqa" path="res://ui/message/controls_message.tscn" id="14_2am8o"]
 [ext_resource type="Resource" uid="uid://b0r1cr25214g" path="res://object/windmill/windmill_building_def.tres" id="14_2mtcw"]
 [ext_resource type="Script" path="res://game_states/default_game/ScoreLabel.gd" id="15_eia4d"]
+[ext_resource type="Texture2D" uid="uid://blaixeojmneu0" path="res://object/producer/disabled.svg" id="16_aeycb"]
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="16_d4vit"]
 [ext_resource type="Resource" uid="uid://cavurm67np4ko" path="res://object/battery/battery_building_def.tres" id="17_4bs8w"]
 [ext_resource type="Script" path="res://object/curtailer/curtailment_manager.gd" id="18_yxou4"]
@@ -390,8 +390,22 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="Message" parent="GameUI/UI/MarginContainer/MessageCtnr" instance=ExtResource("14_2am8o")]
+[node name="TitlePanelContainer" type="PanelContainer" parent="GameUI/UI/MarginContainer/MessageCtnr"]
 layout_mode = 2
+
+[node name="MessagesLbl" type="Label" parent="GameUI/UI/MarginContainer/MessageCtnr/TitlePanelContainer"]
+layout_mode = 2
+theme_type_variation = &"SmallCapsLabel"
+text = "Messages"
+uppercase = true
+
+[node name="DisableMessagesButton" type="Button" parent="GameUI/UI/MarginContainer/MessageCtnr/TitlePanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 8
+icon = ExtResource("16_aeycb")
+expand_icon = true
 
 [node name="EnergyGrid" parent="." node_paths=PackedStringArray("clock", "weather") instance=ExtResource("6_c18pg")]
 clock = NodePath("../Clock")

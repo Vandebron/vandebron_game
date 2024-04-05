@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://g2xc6fpc7y4g"]
+
+[ext_resource type="PackedScene" uid="uid://b06xrkgbe8rdv" path="res://ui/message/message.tscn" id="1_qgtqk"]
+
+[node name="Message" instance=ExtResource("1_qgtqk")]
+
+[node name="Title" parent="VBoxContainer/TitlePanelCtnr/HBoxContainer" index="1"]
+text = "Disable assets"
+
+[node name="Description" parent="VBoxContainer" index="1"]
+text = "If you are producing too much energy, turn off windmills or solar panels. Use the [b]Disable assets[/b] action."

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0512t11fwht2"]
+
+[ext_resource type="PackedScene" uid="uid://b06xrkgbe8rdv" path="res://ui/message/message.tscn" id="1_6eyax"]
+
+[node name="Message" instance=ExtResource("1_6eyax")]
+
+[node name="Title" parent="VBoxContainer/TitlePanelCtnr/HBoxContainer" index="1"]
+text = "Batteries"
+
+[node name="Description" parent="VBoxContainer" index="1"]
+text = "Use [b]Batteries[/b] to protect against sudden energy spikes. They will charge if you're overproducing, and discharge when you're underproducing."

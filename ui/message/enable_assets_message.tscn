@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://snmu063dsiap"]
+
+[ext_resource type="PackedScene" uid="uid://b06xrkgbe8rdv" path="res://ui/message/message.tscn" id="1_aamt1"]
+
+[node name="Message" instance=ExtResource("1_aamt1")]
+
+[node name="Title" parent="VBoxContainer/TitlePanelCtnr/HBoxContainer" index="1"]
+text = "Enable assets"
+
+[node name="Description" parent="VBoxContainer" index="1"]
+text = "Your windmills and solar panels are disabled. Use the [b]Enable Assets[/b] action to turn them back on."
