@@ -40,8 +40,9 @@ func get_all_positions() -> Array[Vector3]:
 	bla.append_array(_batteries.map(func (c): return c.global_position))
 	return bla
 
+
 func _ready() -> void:
-	_ingest_buildings()
+	call_deferred_thread_group("_ingest_buildings")
 	_update_power(power_update_timer.wait_time)
 	
 	power_update_timer.timeout.connect(_update_power.bind(power_update_timer.wait_time))
@@ -197,6 +198,8 @@ func _remove_battery(battery: Battery) -> void:
 
 func _ingest_buildings() -> void:
 	for child: Node in get_children():
+		if child.get_scene_instance_load_placeholder():
+			child = (child as InstancePlaceholder).create_instance(true)
 		if !(child is EnergyAsset):
 			continue
 		var at_position: Vector3 = child.global_position

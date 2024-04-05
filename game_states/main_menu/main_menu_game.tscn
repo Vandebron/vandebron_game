@@ -1,9 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://dsuaueqo8705f"]
+[gd_scene load_steps=12 format=3 uid="uid://dsuaueqo8705f"]
 
 [ext_resource type="Script" path="res://library/game/game.gd" id="1_3tth7"]
 [ext_resource type="PackedScene" uid="uid://dcrcskfsjrybq" path="res://object/energy_grid/energy_grid.tscn" id="2_yqwxt"]
-[ext_resource type="PackedScene" uid="uid://vjdf3kwb88ov" path="res://object/house/house.tscn" id="3_vj4r7"]
-[ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/windmill/windmill.tscn" id="4_3fpm7"]
 [ext_resource type="Script" path="res://library/clock.gd" id="5_g26tn"]
 [ext_resource type="Script" path="res://library/weather.gd" id="6_swx6p"]
 [ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="7_padue"]
@@ -27,19 +25,19 @@ script = ExtResource("1_3tth7")
 clock = NodePath("../Clock")
 weather = NodePath("../Weather")
 
-[node name="House" parent="EnergyGrid" instance=ExtResource("3_vj4r7")]
+[node name="House" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -1.5)
 
-[node name="House2" parent="EnergyGrid" instance=ExtResource("3_vj4r7")]
+[node name="House2" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -2.5)
 
-[node name="House3" parent="EnergyGrid" instance=ExtResource("3_vj4r7")]
+[node name="House3" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -1.5)
 
-[node name="House4" parent="EnergyGrid" instance=ExtResource("3_vj4r7")]
+[node name="House4" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -2.5)
 
-[node name="Windmill" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("4_3fpm7")]
+[node name="Windmill" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2.08165e-12, 1)
 clock = NodePath("../../Clock")
 weather = NodePath("../../Weather")

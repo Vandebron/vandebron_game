@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=66 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -10,12 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://cks46ttbegfj3" path="res://library/ui/weather_icons/sunny_icon.png" id="6_ajilk"]
 [ext_resource type="PackedScene" uid="uid://dcrcskfsjrybq" path="res://object/energy_grid/energy_grid.tscn" id="6_c18pg"]
 [ext_resource type="Texture2D" uid="uid://ds5s1id25nxg3" path="res://library/ui/weather_icons/windy_icon.png" id="7_digia"]
-[ext_resource type="PackedScene" uid="uid://vjdf3kwb88ov" path="res://object/house/house.tscn" id="7_l6f6m"]
 [ext_resource type="Script" path="res://library/ui/weather_forecast.gd" id="7_v63yt"]
-[ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/windmill/windmill.tscn" id="8_a621a"]
 [ext_resource type="Texture2D" uid="uid://bpevx3w1o7skl" path="res://library/ui/weather_icons/night_icon.png" id="8_acl4e"]
 [ext_resource type="Texture2D" uid="uid://cg2edph50ky6q" path="res://library/ui/weather_icons/cloudy_and_windy_icon.png" id="9_8140p"]
-[ext_resource type="PackedScene" uid="uid://bd8yf3cq0ju1c" path="res://object/solar/solar_plant.tscn" id="11_vym13"]
 [ext_resource type="Texture2D" uid="uid://b63dwlb4koj2o" path="res://library/ui/weather_icons/cloudy_icon.png" id="11_xls8m"]
 [ext_resource type="Script" path="res://object/builder/build_manager.gd" id="12_4igyb"]
 [ext_resource type="Texture2D" uid="uid://ds8cxf4onm38m" path="res://library/ui/weather_icons/lightly_cloudly.png" id="12_s32nf"]
@@ -109,13 +106,14 @@ size = Vector2(64, 64)
 offsets = PackedFloat32Array(0.0204918, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wjs8k"]
-noise_type = 3
-frequency = 0.03
+noise_type = 4
+frequency = 0.35
 fractal_type = 3
 fractal_gain = 2.08165e-12
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wye3w"]
-seamless = true
+width = 128
+height = 128
 color_ramp = SubResource("Gradient_hjwa4")
 noise = SubResource("FastNoiseLite_wjs8k")
 
@@ -412,111 +410,111 @@ expand_icon = true
 clock = NodePath("../Clock")
 weather = NodePath("../Weather")
 
-[node name="House" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
+[node name="House" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 
-[node name="House2" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
+[node name="House2" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="House3" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
+[node name="House3" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
-[node name="House4" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
+[node name="House4" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
 
-[node name="House5" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
+[node name="House5" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
 
-[node name="House6" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
+[node name="House6" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
 
-[node name="House7" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
+[node name="House7" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 
-[node name="House8" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
+[node name="House8" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
-[node name="House9" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
+[node name="House9" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
 
-[node name="House10" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
+[node name="House10" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 
-[node name="House11" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
+[node name="House11" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 
-[node name="House12" parent="EnergyGrid" instance=ExtResource("7_l6f6m")]
+[node name="House12" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
-[node name="Windmill" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+[node name="Windmill" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 clock = NodePath("../../Clock")
 weather = NodePath("../../Weather")
 
-[node name="Windmill2" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+[node name="Windmill2" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -6)
 clock = NodePath("../../Clock")
 weather = NodePath("../../Weather")
 
-[node name="Windmill3" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+[node name="Windmill3" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -8)
 clock = NodePath("../../Clock")
 weather = NodePath("../../Weather")
 start_disabled = true
 
-[node name="Windmill5" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+[node name="Windmill5" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -10)
 clock = NodePath("../../Clock")
 weather = NodePath("../../Weather")
 start_disabled = true
 
-[node name="Windmill7" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+[node name="Windmill7" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.08165e-12, -10)
 clock = NodePath("../../Clock")
 weather = NodePath("../../Weather")
 start_disabled = true
 
-[node name="Windmill8" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+[node name="Windmill8" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.08165e-12, -8)
 clock = NodePath("../../Clock")
 weather = NodePath("../../Weather")
 start_disabled = true
 
-[node name="Windmill9" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+[node name="Windmill9" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.08165e-12, -6)
 clock = NodePath("../../Clock")
 weather = NodePath("../../Weather")
 
-[node name="Windmill6" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+[node name="Windmill6" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014194, 2.08165e-12, -10)
 clock = NodePath("../../Clock")
 weather = NodePath("../../Weather")
 start_disabled = true
 
-[node name="Windmill4" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance=ExtResource("8_a621a")]
+[node name="Windmill4" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -8)
 clock = NodePath("../../Clock")
 weather = NodePath("../../Weather")
 start_disabled = true
 
-[node name="SolarPlant" parent="EnergyGrid" instance=ExtResource("11_vym13")]
+[node name="SolarPlant" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
 
-[node name="SolarPlant2" parent="EnergyGrid" instance=ExtResource("11_vym13")]
+[node name="SolarPlant2" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.08165e-12, -6)
 
-[node name="SolarPlant3" parent="EnergyGrid" instance=ExtResource("11_vym13")]
+[node name="SolarPlant3" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.08165e-12, -8)
 start_disabled = true
 
-[node name="SolarPlant4" parent="EnergyGrid" instance=ExtResource("11_vym13")]
+[node name="SolarPlant4" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.052, 2.08165e-12, -8)
 start_disabled = true
 
-[node name="SolarPlant5" parent="EnergyGrid" instance=ExtResource("11_vym13")]
+[node name="SolarPlant5" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.052, 2.08165e-12, -10)
 start_disabled = true
 
-[node name="SolarPlant6" parent="EnergyGrid" instance=ExtResource("11_vym13")]
+[node name="SolarPlant6" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.98168, 2.08165e-12, -10)
 start_disabled = true
 
