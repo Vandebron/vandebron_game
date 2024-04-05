@@ -1,6 +1,7 @@
-[gd_scene load_steps=68 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=69 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
+[ext_resource type="AudioStream" uid="uid://ba8cuqfd0so5f" path="res://assets/Sounds/acoustic-motivation-11290.mp3" id="2_2lohk"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
 [ext_resource type="PackedScene" uid="uid://c6dbxx5a11eu5" path="res://ui/energy/energy_makeup_gauge.tscn" id="3_0i7so"]
 [ext_resource type="PackedScene" uid="uid://4el7epeujqmf" path="res://ui/health_bar/health_bar.tscn" id="3_ghfge"]
@@ -151,6 +152,11 @@ billboard_mode = 2
 [node name="DefaultGame" type="Node3D"]
 process_mode = 1
 script = ExtResource("1_g35dh")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_2lohk")
+autoplay = true
+bus = &"Music"
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 
