@@ -16,6 +16,10 @@ func _process(delta: float) -> void:
 	model.charge_percentage = state_of_charge_kw / max_charge_kw
 
 
+func get_model() -> Model:
+	return model
+
+
 ## Tries to store the given amount of kW in the battery, i.e. charging it.
 ## Returns the amount it succesfully stored.
 func give(requested_kw: float, delta: float) -> float:

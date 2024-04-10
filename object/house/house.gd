@@ -25,6 +25,10 @@ func on_added_to_grid() -> void:
 	clock.part_of_day_ended.connect(self._on_part_of_day_ended)
 
 
+func get_model() -> Model:
+	return model
+
+
 ## Introduces some randomness to consumption, so every house is a little bit different.
 func _update_variance() -> void:
 	_variance = randf() * consumption_variance

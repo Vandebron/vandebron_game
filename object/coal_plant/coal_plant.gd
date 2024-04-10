@@ -16,6 +16,10 @@ func _process(delta: float) -> void:
 	current_power = lerpf(current_power, _target_power, delta * 0.1)
 
 
+func get_model() -> Model:
+	return model
+
+
 func _on_disabled() -> void:
 	_target_power = 0.0
 

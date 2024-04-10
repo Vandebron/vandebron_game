@@ -1,5 +1,7 @@
 extends Producer
 
+@onready var model: Model = $Model
+
 
 func _ready() -> void:
 	super()
@@ -12,6 +14,10 @@ func _physics_process(_delta: float) -> void:
 	else:
 		active_capability_out = _calculate_power_output(weather.sun_strength)
 		current_power = clampf(active_capability_out, dmol, nominal_power)
+
+
+func get_model() -> Model:
+	return model
 
 
 func _calculate_power_output(sun_strength: float) -> float:

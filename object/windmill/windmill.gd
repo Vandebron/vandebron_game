@@ -27,6 +27,10 @@ func _process(delta: float) -> void:
 	current_power = clampf(_speed * active_capability_out, dmol, nominal_power)
 
 
+func get_model() -> Model:
+	return model
+
+
 func _on_disabled() -> void:
 	_target_speed = 0.0
 

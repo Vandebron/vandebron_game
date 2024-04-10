@@ -10,7 +10,7 @@ script = ExtResource("1_wvyjk")
 nominal_power = 50.0
 type = 2
 
-[node name="SolarPanel" parent="." instance=ExtResource("1_c5bq2")]
+[node name="Model" parent="." instance=ExtResource("1_c5bq2")]
 
 [node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider") instance=ExtResource("3_51dca")]
 visible = false

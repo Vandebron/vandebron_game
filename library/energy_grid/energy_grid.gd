@@ -28,24 +28,10 @@ var demand: float
 # Supply / demand = balance (calculated as fraction, displayed as Hz)
 var balance: float = 0.5 # Ranges between 0-1, so 0.5 means perfectly balanced.
 
-func get_consumers_positions() -> Array[Vector3]:
-	var bla: Array[Vector3]
-	bla.assign(_consumers.map(func (c): return c.global_position))
-	return bla
-	
-func get_all_positions() -> Array[Vector3]:
-	var bla: Array[Vector3] = []
-	bla.append_array(_producers.map(func (c): return c.global_position))
-	bla.append_array(_consumers.map(func (c): return c.global_position))
-	bla.append_array(_batteries.map(func (c): return c.global_position))
-	return bla
-
 
 func _ready() -> void:
 	call_deferred_thread_group("_ingest_buildings")
-	_update_power(power_update_timer.wait_time)
-	
-	power_update_timer.timeout.connect(_update_power.bind(power_update_timer.wait_time))
+	set_process(false) # Don't update grid balance while we wait for buildings to load in
 
 
 func _process(delta: float) -> void:
@@ -59,7 +45,6 @@ func _update_power(delta: float) -> void:
 	balance = _calculate_balance(delta)
 
 
-#Here 
 func add_building(node: Node3D, at_position: Vector3) -> void:
 	if node is Producer:
 		add_producer(node, at_position)
@@ -106,6 +91,20 @@ func add_battery(battery: Battery, at_position: Vector3) -> void:
 	battery.on_added_to_grid()
 	battery.removed.connect(_remove_battery)
 	_batteries.append(battery)
+
+
+func get_consumers_positions() -> Array[Vector3]:
+	var result: Array[Vector3]
+	result.assign(_consumers.map(func (x): return x.global_position))
+	return result
+
+
+func get_all_positions() -> Array[Vector3]:
+	var result: Array[Vector3] = []
+	result.append_array(_producers.map(func (x): return x.global_position))
+	result.append_array(_consumers.map(func (x): return x.global_position))
+	result.append_array(_batteries.map(func (x): return x.global_position))
+	return result
 
 
 func get_frequency_hz() -> float:
@@ -196,11 +195,42 @@ func _remove_battery(battery: Battery) -> void:
 	_batteries.erase(battery)
 
 
+## Iterates all children of the EnergyGrid and adds them to the grid if they're buildings.
 func _ingest_buildings() -> void:
 	for child: Node in get_children():
+		# Placeholders are nodes you can see in the editor that aren't actually loaded in at
+		# runtime. That makes the game load slightly faster. But that also means we'll have to
+		# manually load them here
 		if child.get_scene_instance_load_placeholder():
 			child = (child as InstancePlaceholder).create_instance(true)
+		# There might be some other nodes like timers, so skip those
 		if !(child is EnergyAsset):
 			continue
+		
 		var at_position: Vector3 = child.global_position
 		add_building(child, at_position)
+		_add_twirl_animation(child)
+		await get_tree().create_timer(0.05).timeout
+	
+	# We can finally start the game, now that all the buildings have loaded in
+	_update_power(power_update_timer.wait_time)
+	set_process(true)
+	power_update_timer.timeout.connect(_update_power.bind(power_update_timer.wait_time))
+
+
+func _add_twirl_animation(building: EnergyAsset) -> Tween:
+	var model: Model = building.get_model()
+	var tween: Tween = create_tween()
+	# Rise and twirl
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.tween_property(model, "global_rotation:y", TAU, 0.4)
+	tween.parallel().tween_property(model, "global_position:x", building.global_position.x, 0.4)
+	tween.parallel().tween_property(model, "global_position:z", building.global_position.z, 0.4)
+	tween.parallel().tween_property(model, "global_position:y", 0.8, 0.4)
+	# Fall and bounce
+	tween.chain()\
+		.set_ease(Tween.EASE_OUT)\
+		.set_trans(Tween.TRANS_BOUNCE)\
+		.tween_property(model, "global_position:y", 0.0, 0.35)
+	return tween
