@@ -8,9 +8,9 @@ signal season_ended(season: Clock.Season)
 enum Season {SUMMER, AUTUMN, WINTER, SPRING}
 enum DayPart {DAWN, NOON, DUSK, NIGHT}
 
-@export var days_per_season: int = 2
+@export var days_per_season: int = 7
 # Cycle of 30 seconds means day=15s, night=15s
-@export var day_night_cycle_ms: int = 15_000
+@export var day_night_cycle_ms: int = 60_000
 # Start the game at 6 'o clock
 @export var game_start_offset_ms: int = floori((6.0 / 24.0) * float(day_night_cycle_ms))
 
