@@ -4,6 +4,8 @@ enum DeviceType {MOUSE_KEYBOARD, CONTROLLER}
 
 var _device_type: DeviceType # TODO: Detect input device
 var _mouse_physics_layer: int
+var _pointer_world_pos: Vector3
+var _pointer_world_pos_last_updated: int
 var _physics_space_state: PhysicsDirectSpaceState3D
 
 
@@ -25,11 +27,17 @@ func _input(event: InputEvent) -> void:
 
 
 func get_pointer_world_position(camera: Camera3D) -> Vector3:
+	if _pointer_world_pos_last_updated == Time.get_ticks_msec():
+		return _pointer_world_pos
+	
 	match _device_type:
 		DeviceType.MOUSE_KEYBOARD:
-			return get_mouse_world_position(camera)
+			_pointer_world_pos = get_mouse_world_position(camera)
 		_:
-			return get_cursor_world_position(camera)
+			_pointer_world_pos = get_cursor_world_position(camera)
+	
+	_pointer_world_pos_last_updated = Time.get_ticks_msec()
+	return _pointer_world_pos
 
 
 func get_mouse_world_position(camera: Camera3D) -> Vector3:
