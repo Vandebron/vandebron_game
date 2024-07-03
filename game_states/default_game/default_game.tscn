@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=67 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -23,6 +23,7 @@
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="16_d4vit"]
 [ext_resource type="Resource" uid="uid://cavurm67np4ko" path="res://object/battery/battery_building_def.tres" id="17_4bs8w"]
 [ext_resource type="Script" path="res://object/curtailer/curtailment_manager.gd" id="18_yxou4"]
+[ext_resource type="Script" path="res://library/building/building_def.gd" id="19_o8s5q"]
 [ext_resource type="Script" path="res://ui/health_bar/health_manager.gd" id="20_qve12"]
 [ext_resource type="Script" path="res://ui/ui_manager.gd" id="21_vf5eu"]
 [ext_resource type="Script" path="res://library/clock.gd" id="22_3yy4o"]
@@ -333,25 +334,18 @@ item_count = 7
 max_columns = 7
 icon_mode = 0
 icon_scale = 0.08
-item_0/text = ""
 item_0/icon = ExtResource("6_ajilk")
 item_0/selectable = false
-item_1/text = ""
 item_1/icon = ExtResource("7_digia")
 item_1/selectable = false
-item_2/text = ""
 item_2/icon = ExtResource("8_acl4e")
 item_2/selectable = false
-item_3/text = ""
 item_3/icon = ExtResource("6_ajilk")
 item_3/selectable = false
-item_4/text = ""
 item_4/icon = ExtResource("9_8140p")
 item_4/selectable = false
-item_5/text = ""
 item_5/icon = ExtResource("7_digia")
 item_5/selectable = false
-item_6/text = ""
 item_6/icon = ExtResource("7_digia")
 script = ExtResource("7_v63yt")
 sunny_icon = ExtResource("6_ajilk")
@@ -504,7 +498,7 @@ start_disabled = true
 script = ExtResource("12_4igyb")
 energy_grid = NodePath("../EnergyGrid")
 build_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr/BuildMenu")
-buildings = Array[Resource("res://library/building/building_def.gd")]([ExtResource("14_2mtcw"), ExtResource("16_d4vit"), ExtResource("17_4bs8w")])
+buildings = Array[ExtResource("19_o8s5q")]([ExtResource("14_2mtcw"), ExtResource("16_d4vit"), ExtResource("17_4bs8w")])
 
 [node name="AutoBuildManager" type="Node" parent="." node_paths=PackedStringArray("build_manager")]
 script = ExtResource("35_o513c")

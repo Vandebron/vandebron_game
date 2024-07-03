@@ -16,7 +16,7 @@ void fragment() {
 	float x = 1.0 - (2.0 * float(current_time % full_cycle)) / float(full_cycle);
 	float edge = 0.5 * sin(x * PI) + 0.5;
 	edge = edge_min + edge * (edge_max - edge_min);
-	
+
 	vec2 uv = uv_scale * UV + ((TIME * wave_direction) * wave_speed);
 	vec3 tex = texture(albedo, uv).rgb;
 	ALBEDO = mix(color_a, color_b, step(edge, tex));
