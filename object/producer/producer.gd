@@ -1,19 +1,15 @@
 class_name Producer extends EnergyAsset
 
-const disable_icon_scn: PackedScene = preload("res://object/producer/disable_icon.tscn")
+const DISABLE_ICON_SCN: PackedScene = preload("res://object/producer/disable_icon.tscn")
 
 enum Type {FOSSIL, WIND, SOLAR}
 
 @export var nominal_power: float = 10.0
-@export var active_capability_out: float
-@export var dmol: float = 0.0
 @export var type: Producer.Type
-@export var clock: Clock
-@export var weather: Weather
 @export var start_disabled: bool
 
 var disable_icon: Node3D
-var current_power: float = 0.0
+var current_power: float
 var disabled: bool: set=_set_disabled
 
 
@@ -22,14 +18,15 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	current_power = nominal_power
-	
-	disable_icon = disable_icon_scn.instantiate()
+	disable_icon = DISABLE_ICON_SCN.instantiate()
 	add_child(disable_icon)
 	disable_icon.hide()
 	
 	if start_disabled:
 		disabled = true
+		current_power = 0.0
+	else:
+		current_power = nominal_power
 
 
 func enable() -> void:
@@ -38,14 +35,6 @@ func enable() -> void:
 
 func disable() -> void:
 	disabled = true
-
-
-func _on_enabled() -> void:
-	pass
-
-
-func _on_disabled() -> void:
-	pass
 
 
 func _set_disabled(value: bool) -> void:
@@ -59,5 +48,13 @@ func _set_disabled(value: bool) -> void:
 		_on_enabled()
 
 
-func on_added_to_grid() -> void:
+func on_added_to_grid(_clock: Clock, _weather: Weather) -> void:
+	pass
+
+
+func _on_enabled() -> void:
+	pass
+
+
+func _on_disabled() -> void:
 	pass

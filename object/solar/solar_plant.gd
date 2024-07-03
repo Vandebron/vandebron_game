@@ -2,18 +2,20 @@ extends Producer
 
 @onready var model: Model = $Model
 
+var _target_power: float
+
 
 func _ready() -> void:
 	super()
 
 
-func _physics_process(_delta: float) -> void:
+func update_power(clock: Clock, weather: Weather) -> void:
 	if clock.is_night():
-		active_capability_out = 0.0
+		_target_power = 0.0
 		current_power = 0.0
 	else:
-		active_capability_out = _calculate_power_output(weather.sun_strength)
-		current_power = clampf(active_capability_out, dmol, nominal_power)
+		_target_power = _calculate_power_output(weather.sun_strength)
+		current_power = clampf(_target_power, 0.0, nominal_power)
 
 
 func get_model() -> Model:

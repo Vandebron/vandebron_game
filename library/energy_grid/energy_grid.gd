@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 
 func _update_power(delta: float) -> void:
 	_update_supply()
-	demand = _get_demand()
+	_update_demand()
 	_update_batteries(delta)
 	balance = _calculate_balance(delta)
 
@@ -62,9 +62,7 @@ func add_producer(producer: Producer, at_position: Vector3) -> void:
 	else:
 		add_child(producer)
 	producer.global_position = at_position
-	producer.clock = clock
-	producer.weather = weather
-	producer.on_added_to_grid()
+	producer.on_added_to_grid(clock, weather)
 	producer.removed.connect(_remove_producer)
 	_producers.append(producer)
 
@@ -75,9 +73,7 @@ func add_consumer(consumer: Consumer, at_position: Vector3) -> void:
 	else:
 		add_child(consumer)
 	consumer.global_position = at_position
-	consumer.clock = clock
-	consumer.weather = weather
-	consumer.on_added_to_grid()
+	consumer.on_added_to_grid(clock, weather)
 	consumer.removed.connect(_remove_consumer)
 	_consumers.append(consumer)
 
@@ -110,8 +106,10 @@ func get_all_positions() -> Array[Vector3]:
 func get_frequency_hz() -> float:
 	return balance * target_frequency_hz * 2.0
 
+
 func get_consumer_count() -> int:
 	return _consumers.size()
+
 
 func _update_supply() -> void:
 	fossil = 0.0
@@ -119,6 +117,7 @@ func _update_supply() -> void:
 	wind = 0.0
 	
 	for producer in _producers:
+		producer.update_power(clock, weather)
 		match producer.type:
 			Producer.Type.FOSSIL:
 				fossil += producer.current_power
@@ -130,10 +129,12 @@ func _update_supply() -> void:
 	supply = fossil + solar + wind
 
 
-func _get_demand() -> float:
-	return _consumers\
-		.map(func(a: Consumer) -> float: return a.demand)\
-		.reduce(Utils.sumf, 0.0)
+func _update_demand() -> void:
+	demand = 0.0
+	
+	for consumer in _consumers:
+		consumer.update_power(clock, weather)
+		demand += consumer.demand
 
 
 func _update_batteries(delta: float) -> void:

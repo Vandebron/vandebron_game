@@ -445,55 +445,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 [node name="House12" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
-[node name="Windmill" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
+[node name="Windmill" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
-clock = NodePath("../../Clock")
-weather = NodePath("../../Weather")
 
-[node name="Windmill2" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
+[node name="Windmill2" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -6)
-clock = NodePath("../../Clock")
-weather = NodePath("../../Weather")
 
-[node name="Windmill3" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
+[node name="Windmill3" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -8)
-clock = NodePath("../../Clock")
-weather = NodePath("../../Weather")
 start_disabled = true
 
-[node name="Windmill5" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
+[node name="Windmill5" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -10)
-clock = NodePath("../../Clock")
-weather = NodePath("../../Weather")
 start_disabled = true
 
-[node name="Windmill7" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
+[node name="Windmill7" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.08165e-12, -10)
-clock = NodePath("../../Clock")
-weather = NodePath("../../Weather")
 start_disabled = true
 
-[node name="Windmill8" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
+[node name="Windmill8" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.08165e-12, -8)
-clock = NodePath("../../Clock")
-weather = NodePath("../../Weather")
 start_disabled = true
 
-[node name="Windmill9" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
+[node name="Windmill9" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.08165e-12, -6)
-clock = NodePath("../../Clock")
-weather = NodePath("../../Weather")
 
-[node name="Windmill6" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
+[node name="Windmill6" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014194, 2.08165e-12, -10)
-clock = NodePath("../../Clock")
-weather = NodePath("../../Weather")
 start_disabled = true
 
-[node name="Windmill4" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
+[node name="Windmill4" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -8)
-clock = NodePath("../../Clock")
-weather = NodePath("../../Weather")
 start_disabled = true
 
 [node name="SolarPlant" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]

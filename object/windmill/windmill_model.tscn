@@ -267,8 +267,9 @@ _data = {
 "spin": SubResource("Animation_n6f24")
 }
 
-[node name="WindmillModel" type="Node3D"]
+[node name="WindmillModel" type="Node3D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_w52kd")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Windmill" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 2.08165e-12)

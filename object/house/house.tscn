@@ -17,6 +17,3 @@ visible = false
 collider = NodePath("../Collider")
 
 [node name="Collider" parent="." instance=ExtResource("3_pyalc")]
-
-[node name="VarianceTimer" type="Timer" parent="."]
-autostart = true
