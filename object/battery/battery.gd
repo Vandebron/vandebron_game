@@ -12,7 +12,7 @@ func _init() -> void:
 	add_to_group(Constants.GROUP_BATTERY)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	model.charge_percentage = state_of_charge_kw / max_charge_kw
 
 
@@ -48,7 +48,3 @@ func take(requested_kw: float, delta: float) -> float:
 	else:
 		state_of_charge_kw -= discharged_kw
 		return discharged_kw
-
-
-func on_added_to_grid() -> void:
-	pass

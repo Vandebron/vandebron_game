@@ -1,6 +1,6 @@
 class_name EnergyGrid extends Node3D
 
-const BALANCE_CENTER: float = 0.5
+const BALANCE_CENTER: float = 0.5 # So, 0=undersupply, 1=oversupply
 
 @export var target_frequency_hz: float = 50.0
 @export var frequency_max_deviation_hz: float = 0.1
@@ -45,48 +45,37 @@ func _update_power(delta: float) -> void:
 	balance = _calculate_balance(delta)
 
 
-func add_building(node: Node3D, at_position: Vector3) -> void:
+func add_building(asset: EnergyAsset, at_position: Vector3) -> void:
+	if asset.is_inside_tree():
+		asset.reparent(self)
+	else:
+		add_child(asset)
+	asset.global_position = at_position
+	asset.on_added_to_grid(clock, weather)
+	asset.removed.connect(_deregister_building)
+	_register_building(asset)
+
+
+func _register_building(asset: EnergyAsset) -> void:
+	if asset is Producer:
+		_producers.append(asset)
+	elif asset is Consumer:
+		_consumers.append(asset)
+	elif asset is Battery:
+		_batteries.append(asset)
+	else:
+		printerr("Trying to register unknown building type to EnergyGrid")
+
+
+func _deregister_building(node: Node3D) -> void:
 	if node is Producer:
-		add_producer(node, at_position)
+		_producers.erase(node)
 	elif node is Consumer:
-		add_consumer(node, at_position)
+		_consumers.erase(node)
 	elif node is Battery:
-		add_battery(node, at_position)
+		_batteries.erase(node)
 	else:
-		printerr("Trying to add unknown building type to world")
-
-
-func add_producer(producer: Producer, at_position: Vector3) -> void:
-	if producer.is_inside_tree():
-		producer.reparent(self)
-	else:
-		add_child(producer)
-	producer.global_position = at_position
-	producer.on_added_to_grid(clock, weather)
-	producer.removed.connect(_remove_producer)
-	_producers.append(producer)
-
-
-func add_consumer(consumer: Consumer, at_position: Vector3) -> void:
-	if consumer.is_inside_tree():
-		consumer.reparent(self)
-	else:
-		add_child(consumer)
-	consumer.global_position = at_position
-	consumer.on_added_to_grid(clock, weather)
-	consumer.removed.connect(_remove_consumer)
-	_consumers.append(consumer)
-
-
-func add_battery(battery: Battery, at_position: Vector3) -> void:
-	if battery.is_inside_tree():
-		battery.reparent(self)
-	else:
-		add_child(battery)
-	battery.global_position = at_position
-	battery.on_added_to_grid()
-	battery.removed.connect(_remove_battery)
-	_batteries.append(battery)
+		printerr("Trying to de-register unknown building type from EnergyGrid")
 
 
 func get_consumers_positions() -> Array[Vector3]:
@@ -184,19 +173,8 @@ func _calculate_balance(delta: float) -> float:
 	return clampf(lerpf(balance, target, delta * balance_adj_rate), 0.0, 1.0)
 
 
-func _remove_producer(producer: Producer) -> void:
-	_producers.erase(producer)
-
-
-func _remove_consumer(consumer: Consumer) -> void:
-	_consumers.erase(consumer)
-
-
-func _remove_battery(battery: Battery) -> void:
-	_batteries.erase(battery)
-
-
-## Iterates all children of the EnergyGrid and adds them to the grid if they're buildings.
+## Iterates all children of the EnergyGrid node and adds them to the grid if they're buildings.
+## Why? Because that way you can pre-place some buildings in the editor.
 func _ingest_buildings() -> void:
 	for child: Node in get_children():
 		# Placeholders are nodes you can see in the editor that aren't actually loaded in at
@@ -210,7 +188,7 @@ func _ingest_buildings() -> void:
 		
 		var at_position: Vector3 = child.global_position
 		add_building(child, at_position)
-		_add_twirl_animation(child)
+		_start_twirl_animation(child)
 		await get_tree().create_timer(0.05).timeout
 	
 	# We can finally start the game, now that all the buildings have loaded in
@@ -219,7 +197,7 @@ func _ingest_buildings() -> void:
 	power_update_timer.timeout.connect(_update_power.bind(power_update_timer.wait_time))
 
 
-func _add_twirl_animation(building: EnergyAsset) -> Tween:
+func _start_twirl_animation(building: EnergyAsset) -> Tween:
 	var model: Model = building.get_model()
 	var tween: Tween = create_tween()
 	# Rise and twirl

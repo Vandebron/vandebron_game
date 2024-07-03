@@ -48,10 +48,6 @@ func _set_disabled(value: bool) -> void:
 		_on_enabled()
 
 
-func on_added_to_grid(_clock: Clock, _weather: Weather) -> void:
-	pass
-
-
 func _on_enabled() -> void:
 	pass
 
