@@ -5,7 +5,7 @@ extends Producer
 
 @onready var update_timer: Timer = $UpdateTimer
 @onready var variance_timer: Timer = $VarianceTimer
-@onready var model: Model = $Model
+@onready var model: WindmillModel = $Model
 @onready var blades: Node3D = $Model.get_node("Windmill/ControlRoom/Blades")
 
 var _speed: float = 0.0
@@ -25,6 +25,12 @@ func _process(delta: float) -> void:
 	_speed = lerpf(_speed, _target_speed, delta * acceleration)
 	active_capability_out = _target_speed * nominal_power
 	current_power = clampf(_speed * active_capability_out, dmol, nominal_power)
+	
+	if current_power / nominal_power > 0.2:
+		model.start_energy_particles()
+	else:
+		model.stop_energy_particles()
+	#model.set_energy_particles_speed(1.0 if current_power / nominal_power > 0.2 else 0.0)
 
 
 func get_model() -> Model:
