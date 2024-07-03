@@ -33,7 +33,7 @@
 [ext_resource type="Script" path="res://object/terrain/terrain.gd" id="25_pttxh"]
 [ext_resource type="Shader" path="res://object/water/water.gdshader" id="26_f84nc"]
 [ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="27_fm1n8"]
-[ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/default_sun.tscn" id="29_0mita"]
+[ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/sun_manager.tscn" id="29_0mita"]
 [ext_resource type="Script" path="res://object/camera_anchor.gd" id="30_jl8f5"]
 [ext_resource type="PackedScene" uid="uid://ceevy66ar1stu" path="res://object/camera/default_camera.tscn" id="31_lw6e3"]
 [ext_resource type="Script" path="res://object/crosshair.gd" id="32_i5yqs"]
@@ -585,8 +585,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
 clock = NodePath("../Clock")
 forecast_list_comp = NodePath("../GameUI/UI/MarginContainer/WeatherForecastList")
 
-[node name="DefaultSun" parent="." node_paths=PackedStringArray("clock") instance=ExtResource("29_0mita")]
-clock = NodePath("../Clock")
+[node name="SunManager" parent="." instance=ExtResource("29_0mita")]
 
 [node name="CameraAnchor" type="Node3D" parent="." node_paths=PackedStringArray("terrain")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)

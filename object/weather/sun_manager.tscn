@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dtrba08av4qi0"]
 
-[ext_resource type="Script" path="res://object/sun_anchor.gd" id="1_f06c3"]
+[ext_resource type="Script" path="res://object/weather/sun_manager.gd" id="1_f06c3"]
 
 [sub_resource type="Gradient" id="Gradient_tg6a4"]
 interpolation_mode = 2
@@ -13,7 +13,7 @@ gradient = SubResource("Gradient_tg6a4")
 [sub_resource type="Curve" id="Curve_j6r4g"]
 min_value = 0.4
 max_value = 0.9
-_data = [Vector2(0, 0.4), 0.0, 0.0, 0, 0, Vector2(0.5, 0.9), 2.52989e-07, 2.52989e-07, 0, 0, Vector2(1, 0.4), 0.0, 0.0, 0, 0]
+_data = [Vector2(2.08165e-12, 0.4), 0.0, 0.0, 0, 0, Vector2(0.5, 0.9), 2.52989e-07, 2.52989e-07, 0, 0, Vector2(1, 0.4), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [node name="SunAnchor" type="Node3D"]
@@ -23,6 +23,4 @@ sun_light_energy_range = SubResource("Curve_j6r4g")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.300908, -0.399318, 6.98189e-08, -0.798636, 0.601815, -0.5, 0.521187, 0.691639, -5, 11, 10)
-light_bake_mode = 0
 shadow_enabled = true
-sky_mode = 1

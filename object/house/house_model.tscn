@@ -31,7 +31,7 @@ specular_mode = 1
 albedo_color = Color(0.635294, 0.862745, 0.780392, 1)
 roughness = 0.5
 emission = Color(1, 1, 0, 1)
-emission_energy_multiplier = 4.0
+emission_energy_multiplier = 2.0
 disable_receive_shadows = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_5ebfq"]
