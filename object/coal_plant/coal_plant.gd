@@ -2,7 +2,6 @@ extends Producer
 
 @onready var model: Model = $Model
 
-
 func _ready() -> void:
 	super()
 	model.animation_player.play("produce")

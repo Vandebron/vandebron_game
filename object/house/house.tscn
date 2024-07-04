@@ -10,10 +10,12 @@ script = ExtResource("1_03gka")
 demand = 1.0
 max_demand = 5.0
 
-[node name="Model" parent="." instance=ExtResource("2_6frin")]
+[node name="Model" parent="." node_paths=PackedStringArray("mesh_nodes") instance=ExtResource("2_6frin")]
+mesh_nodes = [NodePath("House"), NodePath("House/Roof"), NodePath("House/Chimney")]
 
-[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider") instance=ExtResource("4_26ej8")]
+[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider", "mesh_nodes") instance=ExtResource("4_26ej8")]
 visible = false
 collider = NodePath("../Collider")
+mesh_nodes = [NodePath("MeshInstance3D")]
 
 [node name="Collider" parent="." instance=ExtResource("3_pyalc")]

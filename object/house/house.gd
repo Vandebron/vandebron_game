@@ -2,12 +2,8 @@ extends Consumer
 
 @onready var model: Model = $Model
 
-
-func update_power(_clock: Clock, weather: Weather) -> void:
-	# TODO: Maybe houses turn down heating during the night to save power?
-	var heating: float = clampf(1.0 - weather.temperature, 0.0, 1.0) * max_demand
-	demand = heating # TODO: Should be "_target_demand = heating + appliances + car + etc"
-
+func _ready() -> void:
+	demand = max_demand
 
 func on_added_to_grid(clock: Clock, _weather: Weather) -> void:
 	clock.part_of_day_started.connect(self._on_part_of_day_started)
