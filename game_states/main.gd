@@ -3,6 +3,8 @@ extends Node3D
 const DEFAULT_GAME_PATH: String = "res://game_states/default_game/default_game.tscn"
 const MAIN_MENU_PATH: String = "res://game_states/main_menu/main_menu.tscn"
 
+const PHYSICS_TICKS_ACCEPTABLE_DEVIATION: float = 0.002
+
 @onready var popup_canvas_layer: CanvasLayer = $PopupCanvasLayer
 @onready var game_over_popup: PanelContainer = %GameOverPopup
 @onready var pause_popup: PanelContainer = %PausePopup
@@ -15,6 +17,11 @@ var _main_menu: MainMenu: set=_set_main_menu
 var _main_menu_scn: PackedScene
 var _game_scn: PackedScene
 
+# Physics tick counting, to determine performance stability
+var _ticks_per_second: int
+var _tick_deltas: PackedFloat32Array
+var _tick_delta_target: float
+
 
 func _ready() -> void:
 	game_over_popup.quit_to_menu.connect(_quit_to_menu)
@@ -22,6 +29,18 @@ func _ready() -> void:
 	_start_loading_main_menu(func(): 
 		_main_menu_scn = (ResourceLoader.load_threaded_get(MAIN_MENU_PATH) as PackedScene)
 		_reload_main_menu())
+	
+	_ticks_per_second = ProjectSettings.get_setting("physics/common/physics_ticks_per_second")
+	_tick_delta_target = (1.0 / _ticks_per_second) + PHYSICS_TICKS_ACCEPTABLE_DEVIATION
+	
+	_tick_deltas = PackedFloat32Array()
+	_tick_deltas.resize(_ticks_per_second)
+	_tick_deltas.fill(1000.0)
+
+
+func _physics_process(delta: float) -> void:
+	var tick: int = wrapi(Engine.get_physics_frames(), 0, _ticks_per_second)
+	_tick_deltas.set(tick, delta)
 
 
 func _input(event: InputEvent) -> void:
@@ -80,13 +99,12 @@ func _start_game() -> void:
 	_game.game_over.connect(_on_game_over)
 	add_child(_game)
 	popup_canvas_layer.hide()
-	_game.get_tree().paused = false
 
 	loading_screen.hide()
 	_spinner_tween.kill()
 	print_verbose("%d - loading finished" % [Time.get_ticks_msec()])
 	
-	#call_deferred_thread_group("_wait_for_stable_frame_rate", func(): _game.get_tree().paused = false)
+	call_deferred_thread_group("_wait_for_stable_frame_rate", func(): _game.get_tree().paused = false)
 
 
 func _start_loading_default_game(callback: Callable) -> void:
@@ -130,3 +148,23 @@ func _wait_for_async_loads(paths: Array[String], callback: Callable) -> void:
 			print_verbose("%d - %4.2f%% status=%d %s" % [Time.get_ticks_msec(), progress[0], status, path])
 	print_verbose("%d - all resources loaded (regardless of error)" % [Time.get_ticks_msec()])
 	callback.call()
+
+
+func _wait_for_stable_frame_rate(callback: Callable) -> void:
+	print_verbose(Time.get_ticks_msec(), " waiting for stable frame rate")
+	while true:
+		await get_tree().create_timer(1.0).timeout
+		
+		# TODO: Calculate standard deviation (stdev) or mean instead of average for better accuracy
+		var average_frame_time: float = 0.0
+		for delta: float in _tick_deltas:
+			average_frame_time += delta
+		
+		average_frame_time = average_frame_time / _tick_deltas.size()
+		
+		if average_frame_time < _tick_delta_target:
+			print_verbose(Time.get_ticks_msec(), " average_frame_time ", average_frame_time, " is ok")
+			callback.call()
+			break
+		else:
+			print_verbose(Time.get_ticks_msec(), " average_frame_time ", average_frame_time, " is not stable")
