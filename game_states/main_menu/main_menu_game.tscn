@@ -37,10 +37,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -1.5)
 [node name="House4" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -2.5)
 
-[node name="Windmill" parent="EnergyGrid" node_paths=PackedStringArray("clock", "weather") instance_placeholder="res://object/windmill/windmill.tscn"]
+[node name="Windmill" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2.08165e-12, 1)
-clock = NodePath("../../Clock")
-weather = NodePath("../../Weather")
 
 [node name="Clock" type="Node" parent="."]
 script = ExtResource("5_g26tn")
@@ -64,8 +62,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.08165e-12, -1)
 [node name="Tree3" parent="Doodads" instance=ExtResource("7_padue")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.08165e-12, -3)
 
-[node name="SunAnchor" parent="." node_paths=PackedStringArray("clock") instance=ExtResource("8_lr1mk")]
-clock = NodePath("../Clock")
+[node name="SunManager" parent="." instance=ExtResource("8_lr1mk")]
 
 [node name="CameraAnchor" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)

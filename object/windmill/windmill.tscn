@@ -12,9 +12,10 @@ type = 1
 
 [node name="Model" parent="." instance=ExtResource("2_4fv1r")]
 
-[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider") instance=ExtResource("3_myyvd")]
+[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider", "mesh_nodes") instance=ExtResource("3_myyvd")]
 visible = false
 collider = NodePath("../Collider")
+mesh_nodes = [NodePath("MeshInstance3D")]
 
 [node name="Collider" parent="." instance=ExtResource("3_ckbnn")]
 collision_layer = 8194
