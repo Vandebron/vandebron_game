@@ -31,9 +31,10 @@ func get_model() -> Model:
 func _on_disabled() -> void:
 	_target_speed = 0.0
 	current_power = 0.0
+	model.stop_energy_particles()
 
 
-func on_added_to_grid(clock: Clock, weather: Weather) -> void:
+func on_added_to_grid(clock: Clock, _weather: Weather) -> void:
 	clock.part_of_day_started.connect(self._on_part_of_day_started)
 
 
