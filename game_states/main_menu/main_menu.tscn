@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bx87ivqvxe2t8"]
+[gd_scene load_steps=8 format=3 uid="uid://bx87ivqvxe2t8"]
 
 [ext_resource type="Script" path="res://game_states/main_menu/main_menu.gd" id="1_lgriw"]
 [ext_resource type="PackedScene" uid="uid://dsuaueqo8705f" path="res://game_states/main_menu/main_menu_game.tscn" id="2_orw71"]
+[ext_resource type="FontFile" uid="uid://baf01v0bxlrg2" path="res://ui/fonts/proxima-nova-semibold.ttf" id="3_p8g8r"]
 
 [sub_resource type="Gradient" id="Gradient_m0ds5"]
 colors = PackedColorArray(1, 1, 1, 0.784314, 1, 1, 1, 0)
@@ -10,6 +11,7 @@ colors = PackedColorArray(1, 1, 1, 0.784314, 1, 1, 1, 0)
 gradient = SubResource("Gradient_m0ds5")
 
 [sub_resource type="FontVariation" id="FontVariation_qk7ai"]
+base_font = ExtResource("3_p8g8r")
 variation_embolden = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wt2l"]
@@ -74,6 +76,12 @@ theme_override_fonts/font = SubResource("FontVariation_qk7ai")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_7wt2l")
 text = "Start Game"
+
+[node name="MenuButton" type="MenuButton" parent="MainMenuCanvasLayer/UI/HBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_p8g8r")
+text = "Settings"
+flat = false
 
 [node name="Spacer" type="Control" parent="MainMenuCanvasLayer/UI/HBoxContainer"]
 layout_mode = 2
