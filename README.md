@@ -17,7 +17,7 @@ Welcome to the Energy Grid Manager Game! This is a simulation game where you tak
 
 Make sure you have the following installed before running the game:
 
-- [Godot Engine](https://godotengine.org/) (currently using 4.2)
+- [Godot Engine](https://godotengine.org/) (currently using 4.3)
 
 ## Exporting
 
