@@ -11,8 +11,9 @@ nominal_power = 50.0
 
 [node name="Model" parent="." instance=ExtResource("1_crd40")]
 
-[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider") instance=ExtResource("3_ss3u1")]
+[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider", "mesh_nodes") instance=ExtResource("3_ss3u1")]
 visible = false
 collider = NodePath("../Collider")
+mesh_nodes = [NodePath("MeshInstance3D")]
 
 [node name="Collider" parent="." instance=ExtResource("4_tnxg0")]
