@@ -7,11 +7,8 @@
 process_mode = 3
 script = ExtResource("1_8dagw")
 
-[node name="GameContainer" type="Node3D" parent="."]
-
-[node name="MainMenuContainer" type="Node3D" parent="."]
-
 [node name="LoadingScreen" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,6 +60,8 @@ text = "Loading"
 
 [node name="PopupCanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 2
+layer = 3
+visible = false
 
 [node name="UI" type="Control" parent="PopupCanvasLayer"]
 layout_mode = 3

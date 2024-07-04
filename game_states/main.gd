@@ -3,8 +3,6 @@ extends Node3D
 const DEFAULT_GAME_PATH: String = "res://game_states/default_game/default_game.tscn"
 const MAIN_MENU_PATH: String = "res://game_states/main_menu/main_menu.tscn"
 
-@onready var game_container: Node3D = $GameContainer
-@onready var main_menu_container: Node3D = $MainMenuContainer
 @onready var popup_canvas_layer: CanvasLayer = $PopupCanvasLayer
 @onready var game_over_popup: PanelContainer = %GameOverPopup
 @onready var pause_popup: PanelContainer = %PausePopup
@@ -38,8 +36,7 @@ func _quit_to_menu() -> void:
 		_game.queue_free()
 		_game = null
 	
-	_main_menu = _main_menu_scn.instantiate()
-	main_menu_container.add_child(_main_menu)
+	_reload_main_menu()
 	
 	popup_canvas_layer.hide()
 	game_over_popup.hide()
@@ -59,9 +56,9 @@ func _on_game_over() -> void:
 
 func _reload_main_menu() -> void:
 	_main_menu = _main_menu_scn.instantiate()
-	main_menu_container.add_child(_main_menu)
 	_main_menu.show()
-	_end_load_screen()
+	add_child(_main_menu)
+	loading_screen.hide()
 
 
 func _set_main_menu(value: MainMenu) -> void:
@@ -81,11 +78,11 @@ func _start_game() -> void:
 	
 	_game = _game_scn.instantiate()
 	_game.game_over.connect(_on_game_over)
-	game_container.add_child(_game)
+	add_child(_game)
 	popup_canvas_layer.hide()
 	_game.get_tree().paused = false
 
-	_end_load_screen()
+	loading_screen.hide()
 	_spinner_tween.kill()
 	print_verbose("%d - loading finished" % [Time.get_ticks_msec()])
 	
@@ -110,7 +107,7 @@ func _start_async_loading(path_to_load: String, callback: Callable) -> void:
 	_spinner_tween.tween_property(spinner, "rotation", PI, 1.0).from(0.0)
 	_spinner_tween.tween_property(spinner, "rotation", PI, 0.0)
 	
-	_start_load_screen()
+	loading_screen.show()
 	_wait_for_async_loads([path_to_load], callback)
 
 
@@ -133,11 +130,3 @@ func _wait_for_async_loads(paths: Array[String], callback: Callable) -> void:
 			print_verbose("%d - %4.2f%% status=%d %s" % [Time.get_ticks_msec(), progress[0], status, path])
 	print_verbose("%d - all resources loaded (regardless of error)" % [Time.get_ticks_msec()])
 	callback.call()
-
-
-func _start_load_screen() -> void:
-	loading_screen.show()
-
-
-func _end_load_screen() -> void:
-	loading_screen.hide()
