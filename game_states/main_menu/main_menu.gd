@@ -27,7 +27,7 @@ func _quit() -> void:
 	# (android -> NOTIFICATION_WM_GO_BACK_REQUEST)
 	# nothing for iOS
 	# later add a popup that confirms the closing with Yes/No
-	print("Closing game....")
+	print_debug("Sending out close request")
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 
 # not sure where to put this...
