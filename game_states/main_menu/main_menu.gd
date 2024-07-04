@@ -4,7 +4,7 @@ class_name MainMenu
 signal game_started
 
 @onready var start_game_btn: Button = %StartGameBtn
-@onready var settings_btn: MenuButton = %SettingsBtn
+@onready var settings_btn: Button = %SettingsBtn
 @onready var quit_game_btn: Button = %QuitBtn
 
 
