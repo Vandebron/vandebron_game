@@ -10,9 +10,10 @@ class_name SunManager extends Node3D
 func set_point_of_day(value: float) -> void:
 	point_of_day = value
 	
-	# TODO: Fix sun rotation. It should not "jump" to a new orientation at break of dawn
-	rotation.z = -(PI * 0.5 * point_of_day)
-	rotation.y = (PI * 0.5 * point_of_day)
+	if !OS.has_feature("web"):
+		# TODO: Fix sun rotation. It should not "jump" to a new orientation at break of dawn
+		rotation.z = -(PI * 0.5 * point_of_day)
+		rotation.y = (PI * 0.5 * point_of_day)
 	
 	sun.look_at(Vector3.ZERO)
 	
