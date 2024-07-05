@@ -1,10 +1,58 @@
-[gd_scene load_steps=2 format=3 uid="uid://doqxph15fthus"]
+[gd_scene load_steps=3 format=3 uid="uid://doqxph15fthus"]
+
+[ext_resource type="Script" path="res://ui/volume_percentage.gd" id="1_5c7ol"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oncc1"]
 
 [node name="SettingsMenuCanvasLayer" type="CanvasLayer"]
 
+[node name="GeneralTab" type="TabContainer" parent="."]
+offset_left = 428.0
+offset_top = 77.0
+offset_right = 924.0
+offset_bottom = 614.0
+current_tab = 1
+
+[node name="General" type="TabBar" parent="GeneralTab"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Audio" type="TabBar" parent="GeneralTab"]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="GridContainer" type="GridContainer" parent="GeneralTab/Audio"]
+layout_mode = 2
+offset_top = 1.0
+offset_right = 493.0
+offset_bottom = 533.0
+columns = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GeneralTab/Audio"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 42.0
+offset_right = 495.0
+offset_bottom = 82.0
+alignment = 1
+
+[node name="Label" type="Label" parent="GeneralTab/Audio/HBoxContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="HSlider" type="HSlider" parent="GeneralTab/Audio/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+value = 100.0
+
+[node name="Volume Percentage" type="Label" parent="GeneralTab/Audio/HBoxContainer"]
+layout_mode = 2
+text = "100%"
+script = ExtResource("1_5c7ol")
+
 [node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
@@ -17,19 +65,4 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_oncc1")
 
-[node name="GeneralTab" type="TabContainer" parent="PanelContainer"]
-layout_mode = 2
-current_tab = 0
-
-[node name="General" type="TabBar" parent="PanelContainer/GeneralTab"]
-layout_mode = 2
-tab_count = 1
-tab_0/title = "General Settings"
-tab_0/tooltip = "general settings"
-metadata/_tab_index = 0
-
-[node name="Audio" type="TabBar" parent="PanelContainer/GeneralTab"]
-visible = false
-layout_mode = 2
-tab_count = 1
-metadata/_tab_index = 1
+[connection signal="value_changed" from="GeneralTab/Audio/HBoxContainer/HSlider" to="GeneralTab/Audio/HBoxContainer/Volume Percentage" method="_on_h_slider_value_changed"]
