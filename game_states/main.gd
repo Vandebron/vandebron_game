@@ -175,7 +175,7 @@ func _wait_for_stable_frame_rate(callback: Callable) -> void:
 			break
 		else:
 			print_verbose(Time.get_ticks_msec(), " average_frame_time ", average_frame_time, " is not stable")
-
+	callback.call()
 
 ## CAUTION: Always call this using call_deferred_thread_group(), since it uses a blocking while loop.
 func _do_dynamic_resolution_scaling() -> void:
