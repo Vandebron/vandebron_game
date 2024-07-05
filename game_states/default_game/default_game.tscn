@@ -156,6 +156,7 @@ script = ExtResource("1_g35dh")
 stream = ExtResource("2_waviu")
 autoplay = true
 bus = &"Music"
+parameters/looping = true
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 
