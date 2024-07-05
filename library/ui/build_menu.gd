@@ -2,7 +2,7 @@ extends ItemList
 class_name BuildMenu
 
 signal build_initiated(building: BuildingDef)
-
+@export var budget_manager: BudgetManager
 @export var buildings: Array[BuildingDef] = []: set=_set_buildings
 
 

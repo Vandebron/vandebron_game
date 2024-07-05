@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("4_b2oqg")
-cost = 10
+cost = 100
 alias = "solarplant"
 display_name = "Solar Plant"
 image = ExtResource("2_mun33")

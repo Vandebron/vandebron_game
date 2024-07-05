@@ -155,6 +155,7 @@ script = ExtResource("1_g35dh")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_waviu")
+autoplay = true
 bus = &"Music"
 
 [node name="GameUI" type="CanvasLayer" parent="."]
@@ -268,7 +269,7 @@ uppercase = true
 [node name="BuildMenuCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr"]
 layout_mode = 2
 
-[node name="BuildMenu" type="ItemList" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr"]
+[node name="BuildMenu" type="ItemList" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr" node_paths=PackedStringArray("budget_manager")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(306, 2.08165e-12)
 layout_mode = 2
@@ -289,6 +290,7 @@ item_1/icon = SubResource("GradientTexture2D_i817q")
 item_2/text = "Battery"
 item_2/icon = SubResource("GradientTexture2D_iio37")
 script = ExtResource("5_gu83v")
+budget_manager = NodePath("../../../../../../../BudgetManager")
 
 [node name="ManageCtnr" type="VBoxContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr"]
 layout_mode = 2

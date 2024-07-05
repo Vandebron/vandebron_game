@@ -18,9 +18,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _create_builder(building: BuildingDef) -> void:
-	if budgetmanager.budget < 100:
+	if budgetmanager.budget < building.cost:
 		return
-		
 	
 	Events.builder_initiated.emit()
 	
@@ -35,13 +34,8 @@ func _create_builder(building: BuildingDef) -> void:
 
 func _on_build_done(node: Node3D, building: BuildingDef, at_position: Vector3) -> void:
 	energy_grid.add_building(node, at_position)
-	var cost: int
+	budgetmanager.budget -= building.cost
 	
-	if building.alias == "battery":
-		cost = 1000
-	else:
-		cost = 100
-	budgetmanager.budget -= cost
 	# This is to prevent a case where the user selects a new building just after finishing another,
 	# which causes two builders to be present simultaneously.
 	if get_child_count() == 1:

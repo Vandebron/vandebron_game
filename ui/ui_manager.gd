@@ -15,6 +15,7 @@ var DEFAULT_COLOR: Color = Color.hex(0x332b40ff)
 @onready var balance_lbl: Label = %BalanceLbl
 @onready var budget_label: Budget = %BudgetLabel
 
+
 var _update_timer: Timer
 
 
@@ -38,6 +39,7 @@ func _process(_delta: float) -> void:
 	
 	#frequency_lbl.text = str(str(frequency_hz).pad_decimals(2), " Hz")
 	frequency_gauge.current_frequency_hz = clampf(frequency_hz, gauge_min_hz, gauge_max_hz)
+	budget_label.budget = budget_manager.budget
 	
 	if is_imbalanced:
 		if Time.get_ticks_msec() % 1000 > 500:
@@ -50,7 +52,6 @@ func _process(_delta: float) -> void:
 		else:
 			balance_lbl.text = "Undersupply"
 	else:
-		budget_label.budget = budget_manager.budget
 		frequency_gauge.background_color = DEFAULT_COLOR
 		balance_lbl.text = "Balanced"
 	

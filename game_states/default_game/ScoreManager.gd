@@ -20,6 +20,7 @@ func update() -> void:
 	var frequency_diff_hz: float = absf(energy_grid.get_frequency_hz() - energy_grid.target_frequency_hz)
 	
 	if frequency_diff_hz < energy_grid.frequency_max_deviation_hz:	
-		budget += energy_grid.get_consumer_count() / 2
+		budget += energy_grid.get_consumer_count() / 4
 	else:
-		budget = max(budget - energy_grid.get_consumer_count() / 2, 0)
+		budget = max(budget - energy_grid.get_consumer_count() / 8, 0)
+	print("updated pudget")
