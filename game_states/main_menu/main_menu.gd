@@ -17,9 +17,6 @@ func _ready() -> void:
 func _on_game_started() -> void:
 	game_started.emit()
 
-func _open_settings_popup() -> void:
-	print("JFKLDJSKL")
-
 
 func _quit() -> void:
 	# ideally we need to create a different check for mobile games, 

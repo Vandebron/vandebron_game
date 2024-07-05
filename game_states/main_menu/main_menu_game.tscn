@@ -78,7 +78,4 @@ clock = NodePath("../Clock")
 [node name="ForecastTimer" parent="Forecaster" index="1"]
 autostart = false
 
-[node name="SpawnLocation" parent="Forecaster/CloudGenerator/SpawnPath" index="0"]
-transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -12, 5.5, -15)
-
 [editable path="Forecaster"]

@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bx87ivqvxe2t8"]
+[gd_scene load_steps=12 format=3 uid="uid://bx87ivqvxe2t8"]
 
 [ext_resource type="Script" path="res://game_states/main_menu/main_menu.gd" id="1_lgriw"]
 [ext_resource type="PackedScene" uid="uid://dsuaueqo8705f" path="res://game_states/main_menu/main_menu_game.tscn" id="2_orw71"]
 [ext_resource type="FontFile" uid="uid://baf01v0bxlrg2" path="res://ui/fonts/proxima-nova-semibold.ttf" id="3_p8g8r"]
+[ext_resource type="Script" path="res://ui/settings_menu.gd" id="4_7f3kj"]
+[ext_resource type="Script" path="res://game_states/main_menu/settings_btn.gd" id="4_jrade"]
+[ext_resource type="PackedScene" uid="uid://doqxph15fthus" path="res://ui/settings_menu.tscn" id="5_mvsi7"]
 
 [sub_resource type="Gradient" id="Gradient_m0ds5"]
 colors = PackedColorArray(1, 1, 1, 0.784314, 1, 1, 1, 0)
@@ -42,6 +45,10 @@ Button/styles/normal = SubResource("StyleBoxFlat_pvehv")
 script = ExtResource("1_lgriw")
 
 [node name="MainMenuGame" parent="." instance=ExtResource("2_orw71")]
+
+[node name="SettingsMenuCanvasLayer" parent="." instance=ExtResource("5_mvsi7")]
+visible = false
+script = ExtResource("4_7f3kj")
 
 [node name="MainMenuCanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -96,6 +103,7 @@ text = "Start Game"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Settings"
+script = ExtResource("4_jrade")
 
 [node name="QuitBtn" type="Button" parent="MainMenuCanvasLayer/UI/HBoxContainer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -105,3 +113,5 @@ text = "Exit"
 [node name="Spacer" type="Control" parent="MainMenuCanvasLayer/UI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[connection signal="pressed" from="MainMenuCanvasLayer/UI/HBoxContainer/CenterContainer/VBoxContainer/SettingsBtn" to="SettingsMenuCanvasLayer" method="_on_settings_btn_pressed"]
