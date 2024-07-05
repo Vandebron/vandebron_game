@@ -1,7 +1,7 @@
-class_name Score extends Label
+class_name Budget extends Label
 
 
-@export var score: int = 0:
+@export var budget: int = 0:
 	set(value):
-		score = value
-		text = "Score: " + str(value)
+		budget = value
+		text = "Budget: " + str(value)

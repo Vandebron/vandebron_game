@@ -7,13 +7,13 @@ var DEFAULT_COLOR: Color = Color.hex(0x332b40ff)
 
 @export var energy_grid: EnergyGrid
 @export var health_manager: HealthManager
-@export var score_manager: ScoreManager
+@export var budget_manager: BudgetManager
 
 @onready var health_bar: HealthBar = %HealthBar
 @onready var energy_makeup_gauge: EnergyMakeupGauge = %EnergyMakeupGauge
 @onready var frequency_gauge: FrequencyGauge = %FrequencyGauge
 @onready var balance_lbl: Label = %BalanceLbl
-@onready var score_label: Score = %ScoreLabel
+@onready var budget_label: Budget = %BudgetLabel
 
 var _update_timer: Timer
 
@@ -50,7 +50,7 @@ func _process(_delta: float) -> void:
 		else:
 			balance_lbl.text = "Undersupply"
 	else:
-		score_label.score = score_manager.score
+		budget_label.budget = budget_manager.budget
 		frequency_gauge.background_color = DEFAULT_COLOR
 		balance_lbl.text = "Balanced"
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=68 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://blaixeojmneu0" path="res://object/producer/disabled.svg" id="16_aeycb"]
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="16_d4vit"]
 [ext_resource type="Resource" uid="uid://cavurm67np4ko" path="res://object/battery/battery_building_def.tres" id="17_4bs8w"]
+[ext_resource type="PackedScene" uid="uid://bb3libciwo1ul" path="res://object/battery/battery.tscn" id="18_ahndk"]
 [ext_resource type="Script" path="res://object/curtailer/curtailment_manager.gd" id="18_yxou4"]
 [ext_resource type="Script" path="res://library/building/building_def.gd" id="19_o8s5q"]
 [ext_resource type="Script" path="res://ui/health_bar/health_manager.gd" id="20_qve12"]
@@ -154,7 +155,6 @@ script = ExtResource("1_g35dh")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_waviu")
-autoplay = true
 bus = &"Music"
 
 [node name="GameUI" type="CanvasLayer" parent="."]
@@ -227,13 +227,13 @@ grow_horizontal = 2
 text = "Balanced"
 horizontal_alignment = 1
 
-[node name="Score" type="Control" parent="GameUI/UI/MarginContainer"]
+[node name="Budget" type="Control" parent="GameUI/UI/MarginContainer"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="ScoreLabel" type="Label" parent="GameUI/UI/MarginContainer/Score"]
+[node name="BudgetLabel" type="Label" parent="GameUI/UI/MarginContainer/Budget"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 4
@@ -413,31 +413,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
 [node name="House4" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.08165e-12, 2.08165e-12)
 
 [node name="House5" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.08165e-12, -1)
 
 [node name="House6" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
-
-[node name="House7" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
-
-[node name="House8" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-
-[node name="House9" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
-
-[node name="House10" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
-
-[node name="House11" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
-
-[node name="House12" parent="EnergyGrid" instance_placeholder="res://object/house/house.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="Windmill" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
@@ -445,60 +427,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 [node name="Windmill2" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -6)
 
-[node name="Windmill3" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -8)
-start_disabled = true
-
-[node name="Windmill5" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -10)
-start_disabled = true
-
-[node name="Windmill7" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.08165e-12, -10)
-start_disabled = true
-
-[node name="Windmill8" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.08165e-12, -8)
-start_disabled = true
-
-[node name="Windmill9" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.08165e-12, -6)
-
-[node name="Windmill6" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014194, 2.08165e-12, -10)
-start_disabled = true
-
-[node name="Windmill4" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -8)
-start_disabled = true
-
 [node name="SolarPlant" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
 
-[node name="SolarPlant2" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.08165e-12, -6)
+[node name="Battery" parent="EnergyGrid" instance=ExtResource("18_ahndk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.08165e-12, -8)
 
-[node name="SolarPlant3" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.08165e-12, -8)
-start_disabled = true
-
-[node name="SolarPlant4" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.052, 2.08165e-12, -8)
-start_disabled = true
-
-[node name="SolarPlant5" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.052, 2.08165e-12, -10)
-start_disabled = true
-
-[node name="SolarPlant6" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.98168, 2.08165e-12, -10)
-start_disabled = true
-
-[node name="BuildManager" type="Node3D" parent="." node_paths=PackedStringArray("energy_grid", "build_menu")]
+[node name="BuildManager" type="Node3D" parent="." node_paths=PackedStringArray("energy_grid", "build_menu", "budgetmanager")]
 script = ExtResource("12_4igyb")
 energy_grid = NodePath("../EnergyGrid")
 build_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr/BuildMenu")
 buildings = Array[ExtResource("19_o8s5q")]([ExtResource("14_2mtcw"), ExtResource("16_d4vit"), ExtResource("17_4bs8w")])
+budgetmanager = NodePath("../BudgetManager")
 
 [node name="AutoBuildManager" type="Node" parent="." node_paths=PackedStringArray("build_manager")]
 script = ExtResource("35_o513c")
@@ -506,7 +446,7 @@ build_manager = NodePath("../BuildManager")
 house = ExtResource("13_ouwj3")
 
 [node name="Timer" type="Timer" parent="AutoBuildManager"]
-wait_time = 2.0
+wait_time = 10.0
 autostart = true
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="AutoBuildManager"]
@@ -524,14 +464,16 @@ manage_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/ManageCtnr/
 unique_name_in_owner = true
 script = ExtResource("20_qve12")
 energy_grid = NodePath("../EnergyGrid")
+heal_factor = 3.0
+hurt_factor = 1.0
 
-[node name="UiManager" type="Node" parent="." node_paths=PackedStringArray("energy_grid", "health_manager", "score_manager")]
+[node name="UiManager" type="Node" parent="." node_paths=PackedStringArray("energy_grid", "health_manager", "budget_manager")]
 script = ExtResource("21_vf5eu")
 energy_grid = NodePath("../EnergyGrid")
 health_manager = NodePath("../HealthManager")
-score_manager = NodePath("../ScoreManager")
+budget_manager = NodePath("../BudgetManager")
 
-[node name="ScoreManager" type="Node" parent="." node_paths=PackedStringArray("energy_grid")]
+[node name="BudgetManager" type="Node" parent="." node_paths=PackedStringArray("energy_grid")]
 unique_name_in_owner = true
 script = ExtResource("32_ne8oe")
 energy_grid = NodePath("../EnergyGrid")

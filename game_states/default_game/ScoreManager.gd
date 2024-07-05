@@ -1,11 +1,11 @@
-class_name ScoreManager extends Node
+class_name BudgetManager extends Node
 
 @export var energy_grid: EnergyGrid
 @export var update_interval_ms: int = 150
 
 var _update_timer: Timer
 
-var score: int = 0
+var budget: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,4 +20,6 @@ func update() -> void:
 	var frequency_diff_hz: float = absf(energy_grid.get_frequency_hz() - energy_grid.target_frequency_hz)
 	
 	if frequency_diff_hz < energy_grid.frequency_max_deviation_hz:	
-		score += energy_grid.get_consumer_count() / 2
+		budget += energy_grid.get_consumer_count() / 2
+	else:
+		budget = max(budget - energy_grid.get_consumer_count() / 2, 0)

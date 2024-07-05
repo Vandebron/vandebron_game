@@ -6,7 +6,7 @@ signal health_zeroed
 @export var heal_factor: float = 0.01
 @export var hurt_factor: float = 0.01
 @export var update_interval_ms: int = 100
-
+const maxHealth = 100
 var health: float = 50.0
 var _done: bool
 var _update_timer: Timer
@@ -27,11 +27,13 @@ func update() -> void:
 	var frequency_diff_hz: float = absf(energy_grid.get_frequency_hz() - energy_grid.target_frequency_hz)
 	
 	if frequency_diff_hz < energy_grid.frequency_max_deviation_hz:
-		health += heal_factor
+		health = min(health + heal_factor, maxHealth)
+
 	else:
-		var deviation: float = frequency_diff_hz / energy_grid.frequency_max_deviation_hz
-		health -= deviation * hurt_factor
-	
+		#var deviation: float = frequency_diff_hz / energy_grid.frequency_max_deviation_hz
+		# health -= deviation * hurt_factor
+		health -= hurt_factor
+		
 	if health <= 0.0:
 		health_zeroed.emit()
 		_done = true
