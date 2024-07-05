@@ -38,8 +38,6 @@ func _on_game_over() -> void:
 	game_over.emit()
 
 func _coal_change_on() -> void:
-	
-	
 	print("failed_attempt " + str(failed_attempt))
 	if (failed_attempt):
 		failed_attempt = false

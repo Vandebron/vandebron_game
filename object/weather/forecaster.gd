@@ -7,7 +7,6 @@ var forecasts: Array[Forecast] = []
 @export var clock: Clock
 @export var forecast_list_comp: WeatherForecastList
 
-
 func _init() -> void:
 	# Generate and store seven random forecasts, probably make the first 7 no clouds
 	for i in range(7):

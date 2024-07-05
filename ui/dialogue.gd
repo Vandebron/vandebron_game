@@ -25,6 +25,31 @@ var dialogue_items: Array[Dictionary] = [
 	{
 		"expression": expressions["happy"],
 		"text": "Lets save the world!!!",
+		"event": 2
+	},
+	{
+		"expression": expressions["regular"],
+		"text": "Select here to choose an new asset to place",
+		"event": 3
+	},
+	{
+		"expression": expressions["regular"],
+		"text": "Select here to be able to turn off an asset",
+		"event": 4
+	},
+		{
+		"expression": expressions["regular"],
+		"text": "We do this when there is too much energy on the grid",
+		"event": 5
+	},
+	{
+		"expression": expressions["regular"],
+		"text": "Too help stabilize it",
+		"event": 0
+	},
+	{
+		"expression": expressions["happy"],
+		"text": "Let's begin!",
 		"event": 0
 	}
 ]
@@ -71,6 +96,9 @@ var current_story_situation := STORY_SITUATION.INTRODUCTION
 @onready var water: MeshInstance3D = %Water
 @onready var ui: Control = %UI
 
+@onready var manage_arrow: TextureRect = %ManageArrow
+@onready var building_arrow: TextureRect = %BuildingArrow
+
 
 func _ready() -> void:
 	show_text(STORY_SITUATION.INTRODUCTION)
@@ -91,6 +119,17 @@ func show_text(situation: STORY_SITUATION) -> void:
 			if (current_item["event"] == 1):
 				var tween := create_tween()
 				tween.tween_property(water, "position:y", 2.0, 3)
+			if (current_item["event"] == 2):
+				var tween := create_tween()
+				tween.tween_property(water, "position:y", -0.2, 1)
+			if (current_item["event"] == 3):
+				building_arrow.visible = true
+			if (current_item["event"] == 4):
+				building_arrow.visible = false
+				manage_arrow.visible = true
+			if (current_item["event"] == 5):
+				building_arrow.visible = false
+				manage_arrow.visible = false
 		STORY_SITUATION.FAILURE:
 			var current_item := failure_items[current_item_index]
 			rich_text_label.text = current_item["text"]
@@ -117,6 +156,8 @@ func advance() -> void:
 		var tween := create_tween()
 		tween.tween_property(water, "position:y", -0.2, 1)
 		ui.visible = true
+		manage_arrow.visible = false
+		building_arrow.visible = false
 		self.visible = false
 	else:
 		show_text(current_story_situation)
