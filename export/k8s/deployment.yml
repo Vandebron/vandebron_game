@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vdbgame-deployment
+  namespace: vdbgame
+spec:
+  selector:
+    matchLabels:
+      app: vdbgame
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vdbgame
+    spec:
+      containers:
+      - name: vdbgame
+        image: vandebron/vdb-game:latest
+        ports:
+        - containerPort: 80
+          name: vdbgame-http
+      imagePullSecrets:
+      - name: dockerhub

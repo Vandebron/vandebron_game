@@ -1,0 +1,22 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingress-http
+  namespace: vdbgame
+  labels:
+    name: vdbgame
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    # - match: Host(`vdbgame.{{ cluster }}-backend.{{ cluster_domain }}`)
+    - match: Host(`vdbgame.test-leaf-backend.vdbinfra.nl`)
+      kind: Rule
+      services:
+        - name: vdbgame-service
+          kind: Service
+          port: 80
+      middlewares:
+        - name: traefik-https-redirect@kubernetescrd
+        - name: traefik-office-whitelist@kubernetescrd

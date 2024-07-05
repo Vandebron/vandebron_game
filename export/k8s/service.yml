@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vdbgame-service
+  namespace: vdbgame
+  labels:
+    name: vdbgame
+spec:
+  selector:
+    app: vdbgame
+  ports:
+  - name: vdbgame-http-port
+    protocol: TCP
+    port: 80
+    targetPort: vdbgame-http
