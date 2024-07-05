@@ -27,7 +27,7 @@ var _tick_delta_target: float
 
 func _ready() -> void:
 	game_over_popup.quit_to_menu.connect(_quit_to_menu)
-	game_over_popup.restart.connect(_restart)
+	game_over_popup.restart.connect(_start_game)
 	_start_loading_main_menu(func(): 
 		_main_menu_scn = (ResourceLoader.load_threaded_get(MAIN_MENU_PATH) as PackedScene)
 		_reload_main_menu())
@@ -65,11 +65,6 @@ func _quit_to_menu() -> void:
 	game_over_popup.hide()
 
 
-func _restart() -> void:
-	_quit_to_menu()
-	_start_game()
-
-
 func _on_game_over() -> void:
 	_game.is_game_over = true
 	_game.get_tree().paused = true
@@ -95,6 +90,8 @@ func _set_main_menu(value: MainMenu) -> void:
 
 
 func _start_game() -> void:
+	if _game:
+		_game.queue_free()
 	if _main_menu:
 		_main_menu.queue_free()
 		_main_menu = null
