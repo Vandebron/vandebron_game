@@ -17,6 +17,8 @@ var _main_menu: MainMenu: set=_set_main_menu
 var _main_menu_scn: PackedScene
 var _game_scn: PackedScene
 
+var _dynamic_resolution_scaling: bool
+
 # Physics tick counting, to determine performance stability
 var _ticks_per_second: int
 var _tick_deltas: PackedFloat32Array
@@ -36,6 +38,8 @@ func _ready() -> void:
 	_tick_deltas = PackedFloat32Array()
 	_tick_deltas.resize(_ticks_per_second)
 	_tick_deltas.fill(1000.0)
+	
+	ProjectSettings.settings_changed.connect(_on_settings_changed)
 
 
 func _physics_process(delta: float) -> void:
@@ -150,10 +154,14 @@ func _wait_for_async_loads(paths: Array[String], callback: Callable) -> void:
 	callback.call()
 
 
+## CAUTION: Always call this using call_deferred_thread_group(), since it uses a blocking while loop.
 func _wait_for_stable_frame_rate(callback: Callable) -> void:
 	print_verbose(Time.get_ticks_msec(), " waiting for stable frame rate")
-	while true:
-		await get_tree().create_timer(1.0).timeout
+	
+	const max_wait_msec: int = 5000
+	var start_time_msec: int = Time.get_ticks_msec()
+	while Time.get_ticks_msec() - start_time_msec < max_wait_msec:
+		await get_tree().create_timer(0.1).timeout
 		
 		# TODO: Calculate standard deviation (stdev) or mean instead of average for better accuracy
 		var average_frame_time: float = 0.0
@@ -161,10 +169,35 @@ func _wait_for_stable_frame_rate(callback: Callable) -> void:
 			average_frame_time += delta
 		
 		average_frame_time = average_frame_time / _tick_deltas.size()
-		
 		if average_frame_time < _tick_delta_target:
 			print_verbose(Time.get_ticks_msec(), " average_frame_time ", average_frame_time, " is ok")
 			callback.call()
 			break
 		else:
 			print_verbose(Time.get_ticks_msec(), " average_frame_time ", average_frame_time, " is not stable")
+
+
+## CAUTION: Always call this using call_deferred_thread_group(), since it uses a blocking while loop.
+func _do_dynamic_resolution_scaling() -> void:
+	print_verbose("Starting dynamic resolution scaling")
+	while _dynamic_resolution_scaling:
+		await get_tree().create_timer(0.1).timeout
+		
+		# TODO: Calculate standard deviation (stdev) or mean instead of average for better accuracy
+		var average_frame_time: float = 0.0
+		for delta: float in _tick_deltas:
+			average_frame_time += delta
+		
+		average_frame_time = average_frame_time / _tick_deltas.size()
+		if average_frame_time < _tick_delta_target:
+			#print_verbose(Time.get_ticks_msec(), " average_frame_time ", average_frame_time, " is ok")
+			get_viewport().scaling_3d_scale = 1.0
+		else:
+			#print_verbose(Time.get_ticks_msec(), " average_frame_time ", average_frame_time, " is not stable")
+			get_viewport().scaling_3d_scale = 0.1
+
+
+func _on_settings_changed() -> void:
+	_dynamic_resolution_scaling = ProjectSettings.get_setting("rendering/scaling_3d/dynamic_scaling", false)
+	if _dynamic_resolution_scaling:
+		call_deferred_thread_group("_do_dynamic_resolution_scaling")
