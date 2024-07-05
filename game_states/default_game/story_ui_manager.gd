@@ -1,5 +1,5 @@
 extends Node
-class_name UiManager
+class_name StoryUiManager
 
 const update_interval_ms: float = 100.0
 var BAD_COLOR: Color = Color.hex(0xb45252ff)
@@ -14,10 +14,10 @@ var DEFAULT_COLOR: Color = Color.hex(0x332b40ff)
 @onready var frequency_gauge: FrequencyGauge = %FrequencyGauge
 @onready var balance_lbl: Label = %BalanceLbl
 @onready var score_label: Score = %ScoreLabel
-
+@onready var win_label: Win = %WinLabel
+@onready var win_timer: Timer = %WinTimer
 
 var _update_timer: Timer
-
 
 func _ready() -> void:
 	_update_timer = Timer.new()
@@ -54,7 +54,12 @@ func _process(_delta: float) -> void:
 		score_label.score = score_manager.score
 		frequency_gauge.background_color = DEFAULT_COLOR
 		balance_lbl.text = "Balanced"
-	
+		
+	if (win_timer.is_stopped()):
+		win_label.visible = false
+	else:
+		win_label.visible = true
+		win_label.time = win_timer.time_left
 	health_bar.health = health_manager.health
 
 

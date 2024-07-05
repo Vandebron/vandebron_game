@@ -6,6 +6,8 @@ signal health_zeroed
 @export var heal_factor: float = 0.01
 @export var hurt_factor: float = 0.01
 @export var update_interval_ms: int = 100
+@onready var win_timer: Timer = %WinTimer
+@onready var coal_plant: Node3D = %CoalPlant
 
 var health: float = 50.0
 var _done: bool
@@ -29,8 +31,9 @@ func update() -> void:
 	if frequency_diff_hz < energy_grid.frequency_max_deviation_hz:
 		health += heal_factor
 	else:
-		var deviation: float = frequency_diff_hz / energy_grid.frequency_max_deviation_hz
-		health -= deviation * hurt_factor
+		win_timer.stop()
+		coal_plant._on_enabled()
+		
 	
 	if health <= 0.0:
 		health_zeroed.emit()

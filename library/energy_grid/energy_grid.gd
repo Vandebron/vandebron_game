@@ -110,14 +110,12 @@ func _update_supply() -> void:
 		match producer.type:
 			Producer.Type.FOSSIL:
 				fossil += producer.current_power
-				print("fossil + " + str(fossil))
 			Producer.Type.SOLAR:
 				solar += producer.current_power
 			Producer.Type.WIND:
 				wind += producer.current_power
 	
 	supply = fossil + solar + wind
-	print("supply + " + str(supply))
 
 
 func _update_demand() -> void:
@@ -126,7 +124,6 @@ func _update_demand() -> void:
 	for consumer in _consumers:
 		consumer.update_power(clock, weather)
 		demand += consumer.demand
-		print("demand + " + str(demand))
 
 
 func _update_batteries(delta: float) -> void:

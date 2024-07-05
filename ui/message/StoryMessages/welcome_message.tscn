@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyc1t41vpjmks"]
+
+[ext_resource type="PackedScene" uid="uid://b06xrkgbe8rdv" path="res://ui/message/message.tscn" id="1_s00sk"]
+
+[node name="Message" instance=ExtResource("1_s00sk")]
+
+[node name="Title" parent="VBoxContainer/TitlePanelCtnr/HBoxContainer" index="1"]
+text = "Batteries"
+
+[node name="Description" parent="VBoxContainer" index="1"]
+text = "Howdy! Lets try and save the world and get that coal plant off ASAP!"

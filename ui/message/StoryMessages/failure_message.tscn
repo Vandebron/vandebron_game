@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cucy3y0w8fync"]
+
+[ext_resource type="PackedScene" uid="uid://b06xrkgbe8rdv" path="res://ui/message/message.tscn" id="1_kk4oa"]
+
+[node name="Message" instance=ExtResource("1_kk4oa")]
+
+[node name="Title" parent="VBoxContainer/TitlePanelCtnr/HBoxContainer" index="1"]
+text = "Batteries"
+
+[node name="Description" parent="VBoxContainer" index="1"]
+text = "Woah there partner! Looks like you were not ready to shut down that power plant. Try placing some more renewable assets!"

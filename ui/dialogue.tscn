@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://1pjpoxoxtpm1"]
+
+[ext_resource type="Theme" uid="uid://8vi8dl1ic4av" path="res://ui/main.theme" id="1_mheuw"]
+[ext_resource type="Script" path="res://ui/dialogue.gd" id="2_l3vc2"]
+[ext_resource type="Texture2D" uid="uid://baxtuhrejj47n" path="res://ui/art/pink.png" id="3_jx6ym"]
+[ext_resource type="Texture2D" uid="uid://da1qmv2hek73n" path="res://ui/art/emotion_regular.png" id="4_26bw1"]
+
+[node name="Dialogue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mheuw")
+script = ExtResource("2_l3vc2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.662
+anchor_top = 0.03
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -13.3601
+offset_top = 222.4
+offset_right = -22.0
+offset_bottom = -330.0
+text = "Hellllo"
+fit_content = true
+
+[node name="NextButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -116.0
+offset_top = -52.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Next"
+
+[node name="Body" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 68.0
+offset_top = 86.0
+offset_right = -60.0
+offset_bottom = 6.0
+texture = ExtResource("3_jx6ym")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Expression" type="TextureRect" parent="Body"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.118
+anchor_top = -0.124
+anchor_right = 1.116
+anchor_bottom = 1.0
+offset_left = 48.416
+offset_top = 130.36
+offset_right = -51.392
+offset_bottom = -37.0
+texture = ExtResource("4_26bw1")
+expand_mode = 1
+stretch_mode = 5

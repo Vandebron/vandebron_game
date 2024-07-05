@@ -12,7 +12,6 @@ const BATTERIES_MESSAGE = preload("res://ui/message/batteries_message.tscn")
 @onready var sun_manager: SunManager = $SunManager
 @onready var clock: Clock = $Clock
 
-
 func _ready() -> void:
 	health_manager.health_zeroed.connect(_on_game_over)
 	disable_messages_button.pressed.connect(func(): message_ctnr.queue_free())
@@ -22,10 +21,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	sun_manager.set_point_of_day(clock.point_of_day)
 
-
 func _on_game_over() -> void:
 	game_over.emit()
-
 
 func _plan_info_messages() -> void:
 	await get_tree().create_timer(3.0).timeout
