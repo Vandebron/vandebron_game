@@ -39,7 +39,6 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/stretch/mode.web="viewport"
 
 [editor]
 
@@ -146,10 +145,9 @@ common/physics_ticks_per_second=20
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
-scaling_3d/mode=1
-scaling_3d/scale=0.5
 environment/defaults/default_environment="res://library/world_env/default_world_env.tres"
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality.web=0
 lights_and_shadows/directional_shadow/size.web=2048
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality.web=0
 lights_and_shadows/positional_shadow/atlas_size.web=2048
+scaling_3d/dynamic_scaling=true
