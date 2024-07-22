@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bd8yf3cq0ju1c"]
 
-[ext_resource type="PackedScene" uid="uid://bl8ya00goeixh" path="res://object/solar/solar_plant_model.tscn" id="1_c5bq2"]
+[ext_resource type="PackedScene" uid="uid://kwkp5q4ihcgt" path="res://object/solar/solar_plant_model.tscn" id="1_c5bq2"]
 [ext_resource type="Script" path="res://object/solar/solar_plant.gd" id="1_wvyjk"]
 [ext_resource type="PackedScene" uid="uid://bgswlht5i417u" path="res://object/solar/solar_plant_collidor.tscn" id="3_0y2vm"]
 [ext_resource type="PackedScene" uid="uid://cys8li1dnu0qi" path="res://object/solar/solar_plant_shape.tscn" id="3_51dca"]
@@ -12,8 +12,9 @@ type = 2
 
 [node name="Model" parent="." instance=ExtResource("1_c5bq2")]
 
-[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider") instance=ExtResource("3_51dca")]
+[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider", "mesh_nodes") instance=ExtResource("3_51dca")]
 visible = false
 collider = NodePath("../Collidor")
+mesh_nodes = [NodePath("MeshInstance3D")]
 
 [node name="Collidor" parent="." instance=ExtResource("3_0y2vm")]

@@ -4,7 +4,7 @@ extends Producer
 @export var turn_rate: float = 0.01 ## (Cosmetic) Speed at which the windmill turns toward new wind direction
 
 @onready var model: WindmillModel = $Model
-@onready var blades: Node3D = $Model.get_node("Windmill/ControlRoom/Blades")
+@onready var blades: Node3D = $Model.get_blades_node()
 
 var _current_speed: float # Between 0-1; cosmetic spin rate of the blades; lerps toward _target_speed
 var _target_speed: float # Between 0-1; actual spin rate of the blades

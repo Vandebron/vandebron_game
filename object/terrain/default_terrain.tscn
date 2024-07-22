@@ -25,13 +25,11 @@ shader_parameter/snow_splatmap = SubResource("NoiseTexture2D_2cr2i")
 [sub_resource type="BoxShape3D" id="BoxShape3D_bfkny"]
 size = Vector3(31, 1, 31)
 
-[node name="Terrain" type="MeshInstance3D" node_paths=PackedStringArray("clock", "weather")]
+[node name="Terrain" type="MeshInstance3D"]
 mesh = SubResource("PlaneMesh_d1wqf")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_uhkcm")
 script = ExtResource("3_3u0cw")
-clock = NodePath("")
-weather = NodePath("")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 4

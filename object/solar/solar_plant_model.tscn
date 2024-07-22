@@ -1,60 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://bl8ya00goeixh"]
+[gd_scene load_steps=5 format=3 uid="uid://kwkp5q4ihcgt"]
 
 [ext_resource type="Script" path="res://library/model/model.gd" id="1_7vvfm"]
+[ext_resource type="PackedScene" uid="uid://c1js6y0xywupa" path="res://assets/solar_plant.glb" id="1_qnt30"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5rwc"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_up0nv"]
 diffuse_mode = 3
+specular_mode = 1
 albedo_color = Color(0.52549, 0.505882, 0.533333, 1)
 roughness = 0.5
 
-[sub_resource type="PrismMesh" id="PrismMesh_a0ilq"]
-material = SubResource("StandardMaterial3D_u5rwc")
-left_to_right = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_78l70"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kj7ky"]
 diffuse_mode = 3
-albedo_color = Color(0.262745, 0.262745, 0.415686, 1)
+albedo_color = Color(0.332402, 0.576038, 0.798192, 1)
 roughness = 0.5
 
-[sub_resource type="BoxMesh" id="BoxMesh_6hsai"]
-material = SubResource("StandardMaterial3D_78l70")
-
-[node name="SolarPanel" type="Node3D"]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0, 0, 0)
+[node name="SolarPlant" instance=ExtResource("1_qnt30")]
 script = ExtResource("1_7vvfm")
 
-[node name="BaseShape" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 2.08165e-12, 0.5, 2.08165e-12)
-mesh = SubResource("PrismMesh_a0ilq")
+[node name="Base" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_up0nv")
 
-[node name="Panel1" type="MeshInstance3D" parent="BaseShape"]
-transform = Transform3D(0.282843, -0.0707107, 0, 0.282843, 0.0707107, -1.39515e-16, -2.04181e-16, 1.10326e-16, 0.4, 0.320653, 0.324549, 0.235171)
-mesh = SubResource("BoxMesh_6hsai")
-skeleton = NodePath("../..")
-
-[node name="Panel2" type="MeshInstance3D" parent="BaseShape"]
-transform = Transform3D(0.282843, -0.0707107, 0, 0.282843, 0.0707107, -1.39515e-16, -2.04181e-16, 1.10326e-16, 0.4, 0.320653, 0.324549, -0.2388)
-mesh = SubResource("BoxMesh_6hsai")
-skeleton = NodePath("../..")
-
-[node name="Panel3" type="MeshInstance3D" parent="BaseShape"]
-transform = Transform3D(0.282843, -0.282843, 0, 0.282843, 0.282843, -1.39515e-16, -2.04181e-16, 2.04181e-16, 0.4, 0.0966894, -0.107835, -0.227873)
-mesh = SubResource("BoxMesh_6hsai")
-skeleton = NodePath("../..")
-
-[node name="Panel4" type="MeshInstance3D" parent="BaseShape"]
-transform = Transform3D(0.282843, -0.282843, 0, 0.282843, 0.282843, -1.39515e-16, -2.04181e-16, 2.04181e-16, 0.4, 0.0966894, -0.107835, 0.23629)
-mesh = SubResource("BoxMesh_6hsai")
-skeleton = NodePath("../..")
-
-[node name="Panel5" type="MeshInstance3D" parent="BaseShape"]
-transform = Transform3D(0.289837, -0.0689177, 0, 0.275671, 0.0724593, -1.42965e-16, -4.03262e-16, 1.04758e-16, 0.4, -0.322682, -0.325002, 0.23644)
-mesh = SubResource("BoxMesh_6hsai")
-skeleton = NodePath("../..")
-
-[node name="Panel6" type="MeshInstance3D" parent="BaseShape"]
-transform = Transform3D(0.289837, -0.0689177, 0, 0.275671, 0.0724593, -1.42965e-16, -4.03262e-16, 1.04758e-16, 0.4, -0.322682, -0.325002, -0.223121)
-mesh = SubResource("BoxMesh_6hsai")
-skeleton = NodePath("../..")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Panels" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_kj7ky")
