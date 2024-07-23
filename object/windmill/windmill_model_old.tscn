@@ -1,0 +1,328 @@
+[gd_scene load_steps=23 format=3 uid="uid://bxgfnp120gfmk"]
+
+[ext_resource type="Script" path="res://object/windmill/windmill_model.gd" id="1_mu0ln"]
+[ext_resource type="Material" uid="uid://r6alfl7uoo0d" path="res://object/windmill/windmill_material.tres" id="2_nkwhl"]
+[ext_resource type="Texture2D" uid="uid://b7lsvxgx50m1e" path="res://assets/electricity.png" id="3_deh8g"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1sxy1"]
+top_radius = 0.1
+bottom_radius = 0.2
+radial_segments = 8
+
+[sub_resource type="BoxMesh" id="BoxMesh_vhqev"]
+size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_md14m"]
+radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 8
+
+[sub_resource type="PrismMesh" id="PrismMesh_ikeg0"]
+size = Vector3(0.2, 1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d44oi"]
+size = Vector3(0.5, 0.5, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t0ys7"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.870588, 0.913725, 0.921569, 1)
+roughness = 0.5
+emission = Color(0.854902, 0, 0, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_0h63p"]
+inner_radius = 0.136
+outer_radius = 0.193
+rings = 8
+ring_segments = 3
+
+[sub_resource type="Curve" id="Curve_p4qjq"]
+max_value = 4.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 4), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vljvt"]
+width = 32
+curve = SubResource("Curve_p4qjq")
+
+[sub_resource type="Curve" id="Curve_3p4h5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0.509317), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gj7bg"]
+width = 32
+curve = SubResource("Curve_3p4h5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c8sol"]
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 30.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(2.08165e-12, 5, 2.08165e-12)
+damping_curve = SubResource("CurveTexture_vljvt")
+scale_curve = SubResource("CurveTexture_gj7bg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qdi3j"]
+transparency = 1
+albedo_texture = ExtResource("3_deh8g")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_f3s8i"]
+material = SubResource("StandardMaterial3D_qdi3j")
+size = Vector2(0.5, 1)
+
+[sub_resource type="Animation" id="Animation_lmytx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ControlRoom/Blades:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ControlRoom/NightLight:surface_material_override/0:emission_enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ControlRoom/NightLight:surface_material_override/0:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.207843, 0.121569, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ControlRoom/NightLightRing:surface_material_override/0:albedo_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.870588, 0.913725, 0.921569, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ControlRoom/NightLightRing:surface_material_override/0:emission_enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_xxtm4"]
+resource_name = "day"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ControlRoom/NightLight:surface_material_override/0:emission_enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ControlRoom/NightLight:surface_material_override/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.870588, 0.913725, 0.921569, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ControlRoom/NightLightRing:surface_material_override/0:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.870588, 0.913725, 0.921569, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ControlRoom/NightLightRing:surface_material_override/0:emission_enabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_1x2pd"]
+resource_name = "night"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ControlRoom/NightLight:surface_material_override/0:emission_enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ControlRoom/NightLight:surface_material_override/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.207843, 0.121569, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ControlRoom/NightLightRing:surface_material_override/0:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.207843, 0.121569, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ControlRoom/NightLightRing:surface_material_override/0:emission_enabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_n6f24"]
+resource_name = "spin"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ControlRoom/Blades:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16), Vector3(3.48787e-16, 3.48787e-16, 6.28319)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xlcd3"]
+_data = {
+"RESET": SubResource("Animation_lmytx"),
+"day": SubResource("Animation_xxtm4"),
+"night": SubResource("Animation_1x2pd"),
+"spin": SubResource("Animation_n6f24")
+}
+
+[node name="WindmillModel" type="Node3D" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_mu0ln")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="Windmill" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 2.08165e-12)
+mesh = SubResource("CylinderMesh_1sxy1")
+surface_material_override/0 = ExtResource("2_nkwhl")
+
+[node name="ControlRoom" type="MeshInstance3D" parent="Windmill"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 2.08165e-12)
+mesh = SubResource("BoxMesh_vhqev")
+surface_material_override/0 = ExtResource("2_nkwhl")
+
+[node name="Blades" type="Node3D" parent="Windmill/ControlRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0, 0.6)
+
+[node name="Knob" type="MeshInstance3D" parent="Windmill/ControlRoom/Blades"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_md14m")
+surface_material_override/0 = ExtResource("2_nkwhl")
+
+[node name="Blade1" type="MeshInstance3D" parent="Windmill/ControlRoom/Blades"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.6, 2.08165e-12)
+mesh = SubResource("PrismMesh_ikeg0")
+surface_material_override/0 = ExtResource("2_nkwhl")
+
+[node name="Blade2" type="MeshInstance3D" parent="Windmill/ControlRoom/Blades"]
+transform = Transform3D(-0.5, -0.866025, 3.48787e-16, 0.866025, -0.5, -3.48787e-16, 4.76452e-16, 1.27665e-16, 1, -0.5, -0.3, 2.08165e-12)
+mesh = SubResource("PrismMesh_ikeg0")
+surface_material_override/0 = ExtResource("2_nkwhl")
+
+[node name="Blade3" type="MeshInstance3D" parent="Windmill/ControlRoom/Blades"]
+transform = Transform3D(-0.5, 0.866025, 3.48787e-16, -0.866025, -0.5, -3.48787e-16, -1.27665e-16, -4.76452e-16, 1, 0.5, -0.3, 2.08165e-12)
+mesh = SubResource("PrismMesh_ikeg0")
+surface_material_override/0 = ExtResource("2_nkwhl")
+
+[node name="NightLight" type="MeshInstance3D" parent="Windmill/ControlRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.549661)
+mesh = SubResource("BoxMesh_d44oi")
+surface_material_override/0 = SubResource("StandardMaterial3D_t0ys7")
+
+[node name="NightLightRing" type="MeshInstance3D" parent="Windmill/ControlRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002, -1, -0.001)
+mesh = SubResource("TorusMesh_0h63p")
+surface_material_override/0 = SubResource("StandardMaterial3D_t0ys7")
+
+[node name="EnergyParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+amount = 1
+lifetime = 0.8
+process_material = SubResource("ParticleProcessMaterial_c8sol")
+draw_pass_1 = SubResource("QuadMesh_f3s8i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Windmill")
+libraries = {
+"": SubResource("AnimationLibrary_xlcd3")
+}

@@ -73,12 +73,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)
 environment = ExtResource("10_gs782")
 
 [node name="Forecaster" parent="." node_paths=PackedStringArray("clock") instance=ExtResource("11_22e7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4, 2.08165e-12)
 clock = NodePath("../Clock")
 
-[node name="ForecastTimer" parent="Forecaster" index="1"]
+[node name="ForecastTimer" parent="Forecaster" index="0"]
 autostart = false
-
-[node name="SpawnLocation" parent="Forecaster/CloudGenerator/SpawnPath" index="0"]
-transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -12, 5.5, -15)
 
 [editable path="Forecaster"]

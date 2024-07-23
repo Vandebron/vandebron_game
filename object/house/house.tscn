@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://vjdf3kwb88ov"]
 
 [ext_resource type="Script" path="res://object/house/house.gd" id="1_03gka"]
-[ext_resource type="PackedScene" uid="uid://5yby1xliao2j" path="res://object/house/house_model.tscn" id="2_6frin"]
+[ext_resource type="PackedScene" uid="uid://6kl0uhqwcyqw" path="res://object/house/house_model.tscn" id="2_qihea"]
 [ext_resource type="PackedScene" uid="uid://b3bbpo64jnd2l" path="res://object/house/house_collider.tscn" id="3_pyalc"]
 [ext_resource type="PackedScene" uid="uid://5pmepuisqp78" path="res://object/house/house_shape.tscn" id="4_26ej8"]
 
@@ -10,10 +10,12 @@ script = ExtResource("1_03gka")
 demand = 1.0
 max_demand = 5.0
 
-[node name="Model" parent="." instance=ExtResource("2_6frin")]
+[node name="Model" parent="." node_paths=PackedStringArray("mesh_nodes") instance=ExtResource("2_qihea")]
+mesh_nodes = [NodePath("House")]
 
-[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider") instance=ExtResource("4_26ej8")]
+[node name="BuildShapeIndicator" parent="." node_paths=PackedStringArray("collider", "mesh_nodes") instance=ExtResource("4_26ej8")]
 visible = false
 collider = NodePath("../Collider")
+mesh_nodes = [NodePath("MeshInstance3D")]
 
 [node name="Collider" parent="." instance=ExtResource("3_pyalc")]

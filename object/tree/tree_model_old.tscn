@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://q7t5l8qe2bho"]
+
+[ext_resource type="Material" uid="uid://cbgawfsj2stto" path="res://object/tree/tree_wood_material.tres" id="1_7wwvw"]
+[ext_resource type="Material" uid="uid://o82bfo2qq4r2" path="res://object/tree/tree_leaves_material.tres" id="1_urymv"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ucnur"]
+top_radius = 0.05
+bottom_radius = 0.15
+height = 1.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p4xbh"]
+top_radius = 0.02
+bottom_radius = 0.05
+height = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pa07s"]
+top_radius = 0.03
+bottom_radius = 0.08
+height = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_5op3g"]
+radius = 0.2
+height = 0.4
+radial_segments = 8
+rings = 4
+
+[sub_resource type="SphereMesh" id="SphereMesh_viih6"]
+radial_segments = 8
+rings = 4
+
+[node name="TreeModel" type="Node3D"]
+
+[node name="Trunk" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("CylinderMesh_ucnur")
+surface_material_override/0 = ExtResource("1_7wwvw")
+
+[node name="Branch1" type="MeshInstance3D" parent="Trunk"]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, 0.15, 0.5, 2.08165e-12)
+mesh = SubResource("CylinderMesh_p4xbh")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_7wwvw")
+
+[node name="Branch2" type="MeshInstance3D" parent="Trunk"]
+transform = Transform3D(0.5, -0.612373, -0.612372, -1.82486e-09, 0.707107, -0.707107, 0.866026, 0.353553, 0.353553, -0.15, 0, 0.1)
+mesh = SubResource("CylinderMesh_pa07s")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_7wwvw")
+
+[node name="Leaves" type="MeshInstance3D" parent="Trunk/Branch2"]
+transform = Transform3D(1, -1.63988e-08, -1.63988e-08, -1.02772e-08, 1, 2.11593e-08, -1.02772e-08, 1.37087e-08, 1, 0.092, 0.418, 0)
+mesh = SubResource("SphereMesh_5op3g")
+surface_material_override/0 = ExtResource("1_urymv")
+
+[node name="Leaves" type="MeshInstance3D" parent="Trunk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("SphereMesh_viih6")
+skeleton = NodePath("../Branch1")
+surface_material_override/0 = ExtResource("1_urymv")

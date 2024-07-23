@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BuildingDef" load_steps=7 format=3 uid="uid://b0r1cr25214g"]
 
-[ext_resource type="PackedScene" uid="uid://bxgfnp120gfmk" path="res://object/windmill/windmill_model.tscn" id="1_2sd7r"]
+[ext_resource type="PackedScene" uid="uid://gedrndbyvbl7" path="res://object/windmill/windmill_model.tscn" id="1_2sd7r"]
 [ext_resource type="Script" path="res://library/building/building_def.gd" id="1_747nt"]
 [ext_resource type="PackedScene" uid="uid://dlwoabgf66r5s" path="res://object/windmill/windmill_collider.tscn" id="1_mp4yy"]
 [ext_resource type="Texture2D" uid="uid://bqp874ly2g6j6" path="res://object/windmill/wind.svg" id="2_di6me"]

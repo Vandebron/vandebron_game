@@ -1,12 +1,14 @@
 class_name Forecaster extends Node3D
 
+const CLOUD_MATERIAL = preload("res://object/weather/cloud_material.tres")
+
 var forecasts: Array[Forecast] = []
 
-@onready var cloud_spawn_timer: Timer = $SpawnCloud
-@onready var forecast_timer: Timer = $ForecastTimer
 @export var clock: Clock
 @export var forecast_list_comp: WeatherForecastList
 
+@onready var forecast_timer: Timer = $ForecastTimer
+@onready var cloud_particles: GPUParticles3D = $CloudParticles
 
 func _init() -> void:
 	# Generate and store seven random forecasts, probably make the first 7 no clouds
@@ -18,6 +20,9 @@ func _init() -> void:
 
 func _ready() -> void:
 	forecast_timer.timeout.connect(_predict_next_forecast)
+	cloud_particles.amount_ratio = 0.25
+	
+	cloud_particles.draw_pass_1.surface_set_material(0, CLOUD_MATERIAL)
 	
 
 func _predict_next_forecast() -> void:
@@ -41,12 +46,7 @@ func _output_forecast() -> void:
 
 
 func _affect_cloud_spawn_rate(latest_forecast: Forecast) -> void:
-	if latest_forecast.cloud_coverage > 0:
-		cloud_spawn_timer.wait_time = lerpf(0.1, 5.0, 1 - latest_forecast.cloud_coverage)
-		cloud_spawn_timer.start()
-		print_verbose("cloud_spawn_timer.wait_time: ", cloud_spawn_timer.wait_time)
-	else:
-		cloud_spawn_timer.stop()
+	cloud_particles.amount_ratio = latest_forecast.cloud_coverage
 
 	
 func get_current_forecast() -> Forecast:

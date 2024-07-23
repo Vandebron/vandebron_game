@@ -1,57 +1,140 @@
-[gd_scene load_steps=17 format=3 uid="uid://5yby1xliao2j"]
+[gd_scene load_steps=16 format=4 uid="uid://6kl0uhqwcyqw"]
 
+[ext_resource type="PackedScene" uid="uid://cycsg4vm44yhh" path="res://assets/house.glb" id="1_6t5yp"]
 [ext_resource type="Script" path="res://library/model/model.gd" id="1_bq0kq"]
-[ext_resource type="Material" uid="uid://d087n56l1itnp" path="res://object/smoke_particles/smoke_particles.tres" id="2_5qdn5"]
-[ext_resource type="Material" uid="uid://cnehc1pyvlwh2" path="res://object/smoke_particles/smoke_mat.tres" id="3_q2gif"]
+[ext_resource type="Material" uid="uid://ddhkgvjcaiu28" path="res://object/house/house_base_material.tres" id="3_gqe4c"]
+[ext_resource type="Material" uid="uid://0p2ow0700ly" path="res://object/house/house_window_material.tres" id="4_6rbxl"]
+[ext_resource type="Material" uid="uid://cahtonl2l0avy" path="res://object/house/house_roof_material.tres" id="5_ofqop"]
+[ext_resource type="Material" uid="uid://xxjpmcsby4hb" path="res://object/house/house_chimney_material.tres" id="6_owwoe"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_psdtc"]
-size = Vector3(0.8, 0.8, 0.8)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6yiwg"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(1, 0.854902, 0.690196, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbgjw"]
+resource_name = "Base"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
 roughness = 0.5
 
-[sub_resource type="PrismMesh" id="PrismMesh_sb8vf"]
-size = Vector3(0.8, 0.4, 0.8)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3nfc7"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(1, 0.470588, 0.470588, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lorwg"]
+resource_name = "Window"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
 roughness = 0.5
 
-[sub_resource type="BoxMesh" id="BoxMesh_rv7fx"]
-size = Vector3(0.1, 0.4, 0.4)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qf2q"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.635294, 0.862745, 0.780392, 1)
-roughness = 0.5
-emission = Color(1, 1, 0, 1)
-emission_energy_multiplier = 2.0
-disable_receive_shadows = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_5ebfq"]
-size = Vector3(0.2, 1, 0.2)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ojcif"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.721569, 0.709804, 0.72549, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shfrb"]
+resource_name = "Roof"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
 roughness = 0.5
 
-[sub_resource type="QuadMesh" id="QuadMesh_j8tjv"]
-material = ExtResource("3_q2gif")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j0n0e"]
+resource_name = "Chimney"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.5
 
-[sub_resource type="Animation" id="Animation_eaci6"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_yf6he"]
+_surfaces = [{
+"aabb": AABB(-0.4, -0.00453436, -0.4, 0.8, 0.8, 0.80001),
+"format": 34896613377,
+"index_count": 48,
+"index_data": PackedByteArray("AAAKAAEAAAAIAAoACQAFAAsACQAEAAUABAABAAUABAAAAAEACAAEAAkACAAAAAQAAwAIAAIAAwAKAAgAAgAJAAYAAgAIAAkABwAKAAMABwALAAoABgALAAcABgAJAAsA"),
+"name": "Base",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAAAAP7/AAAAAP///v8AANFE0UQAAAAA0UQtuwAAAAD//wAA/v8AAP/////+/wAALbvRRAAAAAAtuy27AAAAAAAAAAAAAAAA//8AAAAAAAAAAP//AAAAAP////8AAAAA")
+}, {
+"aabb": AABB(-0.184941, 0.210524, -0.4, 0.369883, 0.369883, 1.00136e-05),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAADAAEAAAACAAMA"),
+"name": "Window",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAP//AAAAAP//AAAAAAAA/////wAAAAA=")
+}, {
+"aabb": AABB(-0.4, 0.795466, -0.4, 0.8, 0.449985, 0.80001),
+"format": 34359742465,
+"index_count": 48,
+"index_data": PackedByteArray("AQALAAkAAQAFAAsACwACAAoACwAFAAIACAACAAAACAAKAAIAAAAFAAEAAAACAAUABgAJAAcABgAIAAkABAAKAAMABAALAAoABwALAAQABwAJAAsAAwAIAAYAAwAKAAgA"),
+"name": "Roof",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("zczMvqOjSz/NzMw+zczMPqOjSz/NzMw+zczMvu1qnz9wTo88whd/vubCkD/IKeu9sq6dvebCkD/IKeu9zczMPu1qnz9wTo88whd/vrLzaD9C95q+sq6dvbLzaD9C95q+zczMvqOjSz/NzMy+zczMPqOjSz/NzMy+zczMvu1qnz9wTo+8zczMPu1qnz9wTo+8")
+}, {
+"aabb": AABB(-0.249114, 0.909968, -0.302668, 0.172121, 0.485497, 0.187852),
+"format": 34359742465,
+"index_count": 30,
+"index_data": PackedByteArray("AgAGAAAAAgAEAAYABQAGAAQABQAHAAYAAAAHAAEAAAAGAAcAAQAFAAMAAQAHAAUAAwAEAAIAAwAFAAQA"),
+"name": "Chimney",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("whd/vubCkD/IKeu9sq6dvebCkD/IKeu9whd/vrLzaD9C95q+sq6dvbLzaD9C95q+whd/vp6esj9C95q+sq6dvZ6esj9C95q+whd/vp6esj/IKeu9sq6dvZ6esj/IKeu9")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bbar5"]
+resource_name = "house_House"
+_surfaces = [{
+"aabb": AABB(-0.4, -0.00453436, -0.4, 0.8, 0.8, 0.80001),
+"attribute_data": PackedByteArray("/18AAP8f/z//X////58AAP+f//8zccquy47Krv9f/z//X/8//1//P/+f/z//n/8/M3EzkcuOM5H/X/+//x//f/9f/7//X/9//1//f/9f/3//n/+//5//v/+f/3//n/9/"),
+"format": 34896613399,
+"index_count": 48,
+"index_data": PackedByteArray("AgAVAAQAAgAQABUAEwALABcAEwAJAAsABwADAAoABwAAAAMADwAIABIADwABAAgABgAOAAUABgAUAA4ABQARAAwABQAOABEADQAUAAYADQAWABQADAAWAA0ADAARABYA"),
+"material": SubResource("StandardMaterial3D_tbgjw"),
+"name": "Base",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP7//78AAAAA/v//vwAAAAD+/1TVAAD///7//78AAP///v9U1dFE0UQAAP//0UQtuwAA/////wAA/v//v///AAD+//+///8AAP7/VNX//////v//v//////+/1TVLbvRRAAA//8tuy27AAD//wAAAAAAAP//AAAAAAAA/78AAAAAAABU1f//AAAAAP////8AAAAA/7///wAAAABU1QAA//8AAP//AAD//wAAVNX/////AAD///////8AAFTV/////wAA/39U1VTV/////1TVVNX/v/+//7//v/////8AAP9/qiqqKv////+qKqoq/7//v/+//7//v/+/AAD/f1TVVNX/v/+/AAD/f6oqqir/v/+/VNVU1f+//7+qKqoq")
+}, {
+"aabb": AABB(-0.184941, 0.210524, -0.4, 0.369883, 0.369883, 1.00136e-05),
+"attribute_data": PackedByteArray("M3HKrsuOyq4zcTORy44zkQ=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAADAAEAAAACAAMA"),
+"material": SubResource("StandardMaterial3D_lorwg"),
+"name": "Window",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAAAA//8AAP//AAD/////AAAAAP///////wAA////v/+//7//v/+//7//v/+/")
+}, {
+"aabb": AABB(-0.4, 0.795466, -0.4, 0.8, 0.449985, 0.80001),
+"attribute_data": PackedByteArray("AAAgPwAAAAAAACA/AACAPwAAID8AAIA+AAAgPwAAgD4AACA/AAAAAAAAYD8AAIA+AAAgPwAAgD8AACA/PfozPwAAID/EBQw/AAAgPwAAgD4AACA/AACAPgAAID8AAIA+AAAgPzz6Mz8AACA/wwUMPwAAID8AAEA/AAAgPwAAQD8AACA/AAAAPwAAID8AAAA/AAAgPwAAQD8AAGA/AAAAPwAAID8AAEA/AAAgPwAAAD8AACA/AAAAPwAAID8AAAA/"),
+"format": 34359742487,
+"index_count": 48,
+"index_data": PackedByteArray("AwAXABEAAwALABcAFgAFABMAFgAKAAUADwAGAAEADwAUAAYAAAAJAAIAAAAEAAkADAAQAA0ADAAOABAACAASAAcACAAVABIADQAVAAgADQAQABUABwAOAAwABwASAA4A"),
+"material": SubResource("StandardMaterial3D_shfrb"),
+"name": "Roof",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("zczMvqOjSz/NzMw+zczMvqOjSz/NzMw+zczMPqOjSz/NzMw+zczMPqOjSz/NzMw+zczMvu1qnz9wTo88zczMvu1qnz9wTo88zczMvu1qnz9wTo88whd/vubCkD/IKeu9sq6dvebCkD/IKeu9zczMPu1qnz9wTo88zczMPu1qnz9wTo88zczMPu1qnz9wTo88whd/vrLzaD9C95q+sq6dvbLzaD9C95q+zczMvqOjSz/NzMy+zczMvqOjSz/NzMy+zczMPqOjSz/NzMy+zczMPqOjSz/NzMy+zczMvu1qnz9wTo+8zczMvu1qnz9wTo+8zczMvu1qnz9wTo+8zczMPu1qnz9wTo+8zczMPu1qnz9wTo+8zczMPu1qnz9wTo+8/3/Puv///z8AAP9/////v/9/z7r///8/////f////7//f8+6////P/9///8AAP+/AAD/f////78uxf//////vy7F//////+//3/Puv///z//f///AAD/v////3////+/LsX//////78uxf//////vy7F//////+/AAD/f////78uxf//////v////3////+/LsX//////7//f///AAD/vwAA/3////+/LsX//////7//f///AAD/v////3////+/")
+}, {
+"aabb": AABB(-0.249114, 0.909968, -0.302668, 0.172121, 0.485497, 0.187852),
+"attribute_data": PackedByteArray("AAAgPz36Mz8AACA/PfozPwAAID/EBQw/AAAgP8QFDD8AACA/PPozPwAAID88+jM/AAAgP8MFDD8AACA/wwUMPwAAID88+jM/AAAgPzz6Mz8AACA/PPozPwAAID/DBQw/AAAgP8MFDD8AACA/wwUMPwAAID89+jM/AAAgPz36Mz8AACA/PfozPwAAID/EBQw/AAAgP8QFDD8AACA/xAUMPw=="),
+"format": 34359742487,
+"index_count": 30,
+"index_data": PackedByteArray("BQAQAAEABQAKABAADAAPAAkADAASAA8AAAARAAIAAAAOABEAAwANAAcAAwATAA0ABgAIAAQABgALAAgA"),
+"material": SubResource("StandardMaterial3D_j0n0e"),
+"name": "Chimney",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("whd/vubCkD/IKeu9whd/vubCkD/IKeu9sq6dvebCkD/IKeu9sq6dvebCkD/IKeu9whd/vrLzaD9C95q+whd/vrLzaD9C95q+sq6dvbLzaD9C95q+sq6dvbLzaD9C95q+whd/vp6esj9C95q+whd/vp6esj9C95q+whd/vp6esj9C95q+sq6dvZ6esj9C95q+sq6dvZ6esj9C95q+sq6dvZ6esj9C95q+whd/vp6esj/IKeu9whd/vp6esj/IKeu9whd/vp6esj/IKeu9sq6dvZ6esj/IKeu9sq6dvZ6esj/IKeu9sq6dvZ6esj/IKeu9/3//f////z8AAP9/////v/9//3////8/////f////7//////////vwAA/3////+//////////7////9/////v/////////+//3///////78AAP9/////v/////////+//3///////7////9/////v/9//3////8//3///////78AAP9/////v/9//3////8//3///////7////9/////vw==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_yf6he")
+
+[sub_resource type="Animation" id="Animation_smrto"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("House/Chimney/SmokeParticles:emitting")
+tracks/0/path = NodePath("House:surface_material_override/1:emission_enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -60,78 +143,13 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("House/Window:surface_material_override/0:emission_enabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("House/Window:surface_material_override/0:albedo_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.635294, 0.862745, 0.780392, 1)]
-}
 
-[sub_resource type="Animation" id="Animation_ypnf4"]
-resource_name = "consume"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("House/Chimney/SmokeParticles:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("House/Window:surface_material_override/0:albedo_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.635294, 0.862745, 0.780392, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("House/Window:surface_material_override/0:emission_enabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_crbq1"]
+[sub_resource type="Animation" id="Animation_m32wr"]
 resource_name = "night"
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("House/Window:surface_material_override/0:emission_enabled")
+tracks/0/path = NodePath("House:surface_material_override/1:emission_enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -140,73 +158,26 @@ tracks/0/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("House/Chimney/SmokeParticles:emitting")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("House/Window:surface_material_override/0:albedo_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 0, 1)]
-}
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hdayl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iatq1"]
 _data = {
-"RESET": SubResource("Animation_eaci6"),
-"consume": SubResource("Animation_ypnf4"),
-"night": SubResource("Animation_crbq1")
+"RESET": SubResource("Animation_smrto"),
+"night": SubResource("Animation_m32wr")
 }
 
-[node name="HouseModel" type="Node3D" node_paths=PackedStringArray("mesh_nodes", "animation_player")]
+[node name="HouseModel" node_paths=PackedStringArray("mesh_nodes", "animation_player") instance=ExtResource("1_6t5yp")]
 script = ExtResource("1_bq0kq")
-mesh_nodes = [NodePath("House"), NodePath("House/Roof"), NodePath("House/Chimney")]
+mesh_nodes = [null]
 animation_player = NodePath("AnimationPlayer")
 
-[node name="House" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.4, 2.08165e-12)
-mesh = SubResource("BoxMesh_psdtc")
-surface_material_override/0 = SubResource("StandardMaterial3D_6yiwg")
+[node name="House" parent="." index="0"]
+mesh = SubResource("ArrayMesh_bbar5")
+surface_material_override/0 = ExtResource("3_gqe4c")
+surface_material_override/1 = ExtResource("4_6rbxl")
+surface_material_override/2 = ExtResource("5_ofqop")
+surface_material_override/3 = ExtResource("6_owwoe")
 
-[node name="Roof" type="MeshInstance3D" parent="House"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.6, 2.08165e-12)
-mesh = SubResource("PrismMesh_sb8vf")
-surface_material_override/0 = SubResource("StandardMaterial3D_3nfc7")
-
-[node name="Window" type="MeshInstance3D" parent="House"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 2.08165e-12, 2.08165e-12)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_rv7fx")
-surface_material_override/0 = SubResource("StandardMaterial3D_0qf2q")
-
-[node name="Chimney" type="MeshInstance3D" parent="House"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.4, -0.2)
-mesh = SubResource("BoxMesh_5ebfq")
-surface_material_override/0 = SubResource("StandardMaterial3D_ojcif")
-
-[node name="SmokeParticles" type="GPUParticles3D" parent="House/Chimney"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.5, 2.08165e-12)
-visible = false
-emitting = false
-lifetime = 2.0
-process_material = ExtResource("2_5qdn5")
-draw_pass_1 = SubResource("QuadMesh_j8tjv")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 libraries = {
-"": SubResource("AnimationLibrary_hdayl")
+"": SubResource("AnimationLibrary_iatq1")
 }

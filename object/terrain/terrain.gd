@@ -16,7 +16,7 @@ var _camera: Camera3D
 func _ready() -> void:
 	_camera = get_viewport().get_camera_3d()
 	
-	grid_material.set_shader_parameter("cell_size", Constants.GRID_CELL_SIZE.x)
+	#grid_material.set_shader_parameter("cell_size", Constants.GRID_CELL_SIZE.x)
 	
 	clock.season_started.connect(_on_season_started)
 	clock.season_ended.connect(_on_season_ended)
@@ -27,7 +27,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	var pointer_world_pos: Vector3 = InputUtil.get_pointer_world_position(_camera)
-	grid_material.set_shader_parameter("pointer_world_pos", pointer_world_pos)
+	#grid_material.set_shader_parameter("pointer_world_pos", pointer_world_pos)
 
 
 func _on_season_started(season: Clock.Season) -> void:
