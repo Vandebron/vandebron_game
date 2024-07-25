@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=63 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -28,13 +28,12 @@
 [ext_resource type="Script" path="res://ui/ui_manager.gd" id="21_vf5eu"]
 [ext_resource type="Script" path="res://library/clock.gd" id="22_3yy4o"]
 [ext_resource type="Script" path="res://library/weather.gd" id="22_ukc0y"]
-[ext_resource type="Shader" path="res://object/terrain/terrain.gdshader" id="24_3e43e"]
 [ext_resource type="Script" path="res://object/terrain/terrain.gd" id="25_pttxh"]
 [ext_resource type="Shader" path="res://object/water/water.gdshader" id="26_f84nc"]
 [ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="27_fm1n8"]
 [ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/sun_manager.tscn" id="29_0mita"]
 [ext_resource type="Script" path="res://object/camera_anchor.gd" id="30_jl8f5"]
-[ext_resource type="Texture2D" uid="uid://b5jgq3f14wj05" path="res://assets/grid.png" id="31_gxb5a"]
+[ext_resource type="Material" uid="uid://brpwc6knfi74l" path="res://game_states/default_game/terrain_material.tres" id="31_8kipu"]
 [ext_resource type="PackedScene" uid="uid://ceevy66ar1stu" path="res://object/camera/default_camera.tscn" id="31_lw6e3"]
 [ext_resource type="Script" path="res://object/crosshair.gd" id="32_i5yqs"]
 [ext_resource type="Script" path="res://game_states/default_game/ScoreManager.gd" id="32_ne8oe"]
@@ -81,30 +80,6 @@ size = Vector3(0.9, 0.9, 0.9)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d1wqf"]
 size = Vector2(23, 23)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5pln"]
-transparency = 1
-shading_mode = 0
-albedo_color = Color(0.340339, 0.340339, 0.340339, 1)
-albedo_texture = ExtResource("31_gxb5a")
-uv1_scale = Vector3(23, 23, 23)
-uv1_offset = Vector3(0.5, 0.5, 2.08165e-12)
-texture_filter = 0
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_iuyta"]
-noise_type = 0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2cr2i"]
-noise = SubResource("FastNoiseLite_iuyta")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uhkcm"]
-render_priority = 0
-next_pass = SubResource("StandardMaterial3D_l5pln")
-shader = ExtResource("24_3e43e")
-shader_parameter/snow_density = 0.0
-shader_parameter/ground_color = Color(0.698039, 0.705882, 0.494118, 1)
-shader_parameter/snow_color = Color(1, 1, 1, 1)
-shader_parameter/snow_splatmap = SubResource("NoiseTexture2D_2cr2i")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bfkny"]
 size = Vector3(31, 1, 31)
@@ -557,16 +532,17 @@ forecaster = NodePath("../Forecaster")
 [node name="Terrain" type="MeshInstance3D" parent="." node_paths=PackedStringArray("clock", "weather")]
 mesh = SubResource("PlaneMesh_d1wqf")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_uhkcm")
+surface_material_override/0 = ExtResource("31_8kipu")
 script = ExtResource("25_pttxh")
 clock = NodePath("../Clock")
 weather = NodePath("../Weather")
 
-[node name="Area3D" type="Area3D" parent="Terrain"]
+[node name="TerrainCollider" type="Area3D" parent="Terrain"]
 collision_layer = 4
 collision_mask = 0
+monitoring = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/TerrainCollider"]
 shape = SubResource("BoxShape3D_bfkny")
 
 [node name="Water" type="MeshInstance3D" parent="."]
