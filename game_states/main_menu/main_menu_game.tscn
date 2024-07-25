@@ -62,7 +62,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.08165e-12, -1)
 [node name="Tree3" parent="Doodads" instance=ExtResource("7_padue")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.08165e-12, -3)
 
-[node name="SunManager" parent="." instance=ExtResource("8_lr1mk")]
+[node name="SunManager" parent="." node_paths=PackedStringArray("clock") instance=ExtResource("8_lr1mk")]
+clock = NodePath("../Clock")
 
 [node name="CameraAnchor" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)

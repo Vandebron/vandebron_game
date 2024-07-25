@@ -572,7 +572,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.25, 5, 0)
 clock = NodePath("../Clock")
 forecast_list_comp = NodePath("../GameUI/UI/MarginContainer/WeatherForecastList")
 
-[node name="SunManager" parent="." instance=ExtResource("29_0mita")]
+[node name="SunManager" parent="." node_paths=PackedStringArray("clock") instance=ExtResource("29_0mita")]
+clock = NodePath("../Clock")
 
 [node name="CameraAnchor" type="Node3D" parent="." node_paths=PackedStringArray("terrain")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)

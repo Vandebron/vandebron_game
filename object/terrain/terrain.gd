@@ -33,23 +33,26 @@ func _process(_delta: float) -> void:
 func _on_season_started(season: Clock.Season) -> void:
 	match season:
 		Clock.Season.AUTUMN:
-			_set_main_color(Color.hex(0xd3a068ff))
-			_set_secondary_color(Color.hex(0xc08e56ff))
+			var color := Color.hex(0xd3a068ff)
+			_set_main_color(color)
+			_set_secondary_color(color.darkened(0.1))
 			_set_splatmap_edge(0.3)
 			TREE_LEAVES_MAT.set_shader_parameter("albedo", Color.hex(0xa77b5bff))
 		Clock.Season.WINTER:
 			_set_main_color(Color.hex(0xa77b5bff))
-			_set_secondary_color(Color.hex(0xffffffff))
+			_set_secondary_color(Color.WHITE)
 			_set_splatmap_edge(0.65)
 			_set_tree_leaves_transparency(1.0)
 		Clock.Season.SPRING:
+			var color := Color.hex(0xc2d368ff)
 			_set_main_color(Color.hex(0xc2d368ff))
-			_set_secondary_color(Color.hex(0x94b250ff))
+			_set_secondary_color(color.darkened(0.1))
 			_set_splatmap_edge(0.75)
 			TREE_LEAVES_MAT.set_shader_parameter("albedo", Color.hex(0x8ab060ff))
 		Clock.Season.SUMMER:
-			_set_main_color(Color.hex(0x8ab060ff))
-			_set_secondary_color(Color.hex(0x779a50ff))
+			var color := Color.hex(0xc2d368ff)
+			_set_main_color(color)
+			_set_secondary_color(color.darkened(0.1))
 			_set_splatmap_edge(0.5)
 
 

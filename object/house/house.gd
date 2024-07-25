@@ -24,5 +24,5 @@ func _on_part_of_day_started(part: Clock.DayPart) -> void:
 
 
 func _on_part_of_day_ended(part: Clock.DayPart) -> void:
-	if part == Clock.DayPart.DUSK:
+	if part == Clock.DayPart.NIGHT:
 		model.animation_player.play("RESET")
