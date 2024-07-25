@@ -7,7 +7,7 @@ const TREE_UPDATE_INTERVAL_SEC: float = 0.5
 @export var clock: Clock
 @export var weather: Weather
 
-@onready var grid_material: ShaderMaterial = get_surface_override_material(0).next_pass as ShaderMaterial
+@onready var grid_material: ShaderMaterial = get_surface_override_material(0) as ShaderMaterial
 @onready var terrain_material: ShaderMaterial = get_surface_override_material(0) as ShaderMaterial
 
 var _camera: Camera3D
@@ -16,7 +16,7 @@ var _camera: Camera3D
 func _ready() -> void:
 	_camera = get_viewport().get_camera_3d()
 	
-	#grid_material.set_shader_parameter("cell_size", Constants.GRID_CELL_SIZE.x)
+	grid_material.set_shader_parameter("cell_size", Constants.GRID_CELL_SIZE.x)
 	
 	clock.season_started.connect(_on_season_started)
 	clock.season_ended.connect(_on_season_ended)
@@ -27,7 +27,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	var pointer_world_pos: Vector3 = InputUtil.get_pointer_world_position(_camera)
-	#grid_material.set_shader_parameter("pointer_world_pos", pointer_world_pos)
+	grid_material.set_shader_parameter("pointer_world_pos", pointer_world_pos)
 
 
 func _on_season_started(season: Clock.Season) -> void:
@@ -45,7 +45,7 @@ func _on_season_started(season: Clock.Season) -> void:
 			_set_tree_leaves_transparency(1.0)
 		Clock.Season.SPRING:
 			var color := Color.hex(0xc2d368ff)
-			_set_main_color(Color.hex(0xc2d368ff))
+			_set_main_color(color)
 			_set_secondary_color(color.darkened(0.1))
 			_set_splatmap_edge(0.75)
 			TREE_LEAVES_MAT.set_shader_parameter("albedo", Color.hex(0x8ab060ff))

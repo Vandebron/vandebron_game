@@ -1,23 +1,22 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://brpwc6knfi74l"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://brpwc6knfi74l"]
 
-[ext_resource type="Texture2D" uid="uid://b5jgq3f14wj05" path="res://assets/grid.png" id="1_udd3n"]
 [ext_resource type="Shader" path="res://object/terrain/terrain.gdshader" id="2_nqq8q"]
 [ext_resource type="Texture2D" uid="uid://colkwfxdsl4yr" path="res://object/terrain/splatmap_texture.tres" id="3_7kx0t"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5pln"]
-transparency = 1
-shading_mode = 0
-albedo_color = Color(0.340339, 0.340339, 0.340339, 1)
-albedo_texture = ExtResource("1_udd3n")
-uv1_scale = Vector3(23, 23, 23)
-uv1_offset = Vector3(0.5, 0.5, 2.08165e-12)
-texture_filter = 0
-
 [resource]
 render_priority = 0
-next_pass = SubResource("StandardMaterial3D_l5pln")
 shader = ExtResource("2_nqq8q")
-shader_parameter/main_color = Color(0.827451, 0.627451, 0.407843, 1)
-shader_parameter/second_color = Color(0.752511, 0.555605, 0.335991, 1)
+shader_parameter/main_color = Color(0.760784, 0.827451, 0.407843, 1)
+shader_parameter/second_color = Color(0.685, 0.745, 0.367, 1)
 shader_parameter/edge = 0.5
 shader_parameter/splatmap_texture = ExtResource("3_7kx0t")
+shader_parameter/cell_size = 1.0
+shader_parameter/offset = Vector2(0.5, 0.5)
+shader_parameter/line_width = 0.03
+shader_parameter/line_color = Color(0.791999, 0.791999, 0.791999, 1)
+shader_parameter/pointer_world_pos = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+shader_parameter/pointer_circle_size = 1.5
+shader_parameter/pointer_circle_color = Color(1, 1, 0, 1)
+shader_parameter/ripple_ampl = 10.0
+shader_parameter/ripple_freq = 5.0
+shader_parameter/ripple_factor = 10.0
