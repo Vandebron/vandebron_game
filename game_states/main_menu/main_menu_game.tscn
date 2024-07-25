@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://library/game/game.gd" id="1_3tth7"]
 [ext_resource type="PackedScene" uid="uid://dcrcskfsjrybq" path="res://object/energy_grid/energy_grid.tscn" id="2_yqwxt"]
 [ext_resource type="Script" path="res://library/clock.gd" id="5_g26tn"]
+[ext_resource type="Material" uid="uid://brpwc6knfi74l" path="res://game_states/default_game/terrain_material.tres" id="5_vy88r"]
 [ext_resource type="Script" path="res://library/weather.gd" id="6_swx6p"]
 [ext_resource type="PackedScene" uid="uid://cy1urxsffiqbg" path="res://object/tree/tree.tscn" id="7_padue"]
 [ext_resource type="PackedScene" uid="uid://dtrba08av4qi0" path="res://object/weather/sun_manager.tscn" id="8_lr1mk"]
@@ -12,11 +13,6 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_43t6d"]
 size = Vector2(32, 32)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvaal"]
-diffuse_mode = 3
-albedo_color = Color(0.760784, 0.827451, 0.407843, 1)
-roughness = 0.5
 
 [node name="MainMenuGame" type="Node3D"]
 script = ExtResource("1_3tth7")
@@ -50,7 +46,7 @@ forecaster = NodePath("../Forecaster")
 
 [node name="Terrain" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_43t6d")
-surface_material_override/0 = SubResource("StandardMaterial3D_jvaal")
+surface_material_override/0 = ExtResource("5_vy88r")
 
 [node name="Doodads" type="Node3D" parent="."]
 
@@ -69,6 +65,7 @@ clock = NodePath("../Clock")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.08165e-12, 5)
 
 [node name="Camera3D" parent="CameraAnchor" instance=ExtResource("9_8cjko")]
+size = 5.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("10_gs782")
