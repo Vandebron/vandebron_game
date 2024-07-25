@@ -8,17 +8,17 @@ signal season_ended(season: Clock.Season)
 enum Season {SUMMER, AUTUMN, WINTER, SPRING}
 enum DayPart {DAWN, NOON, DUSK, NIGHT}
 
-@export var days_per_season: int = 1
+@export var days_per_season: int = 7
 # Cycle of 30 seconds means day=15s, night=15s
-@export var day_night_cycle_ms: int = 5_000
-# Start the game at 6 'o clock
-@export var game_start_offset_ms: int = floori((6.0 / 24.0) * float(day_night_cycle_ms))
+@export var day_night_cycle_ms: int = 60_000
+# Start the game at 12 'o clock
+@export var game_start_offset_ms: int = floori((12.0 / 24.0) * float(day_night_cycle_ms))
 
 # Ranges from 0-1; 0=night, 0.25=dawn, 0.5=noon, 0.75=dusk
 var point_of_day: float = 1.0
 # Ranges from 0-24
 var time_of_day: float = 0.0: get=_get_time_of_day
-var part_of_day: DayPart = DayPart.NOON: get=_get_part_of_day
+var part_of_day: DayPart = DayPart.DAWN: get=_get_part_of_day
 var season: Season
 
 var _days_passed: int
