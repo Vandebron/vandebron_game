@@ -33,6 +33,21 @@ func sine_y(x: float) -> float:
 	return .5 * cos(x * PI) + .5
 
 
+func decimal_with_separators(number: int) -> String:
+	var raw: String = str(number)
+	var result: String = ""
+	var buffer: String = ""
+	for i in range(raw.length() - 1, -1, -1):
+		buffer += raw[i]
+		if buffer.length() == 3:
+			result += str(buffer, ",")
+			buffer = ""
+	result += buffer
+	if result[-1] == ",":
+		result = result.substr(0, result.length() - 1)
+	return result.reverse()
+
+
 func _get_layers_by_name(type: String) -> Dictionary:
 	var layers: Dictionary = {}
 	for i in range(1, 33):
