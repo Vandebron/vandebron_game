@@ -27,6 +27,7 @@ script = ExtResource("2_rkyeh")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="SupplyCtnr" type="PanelContainer" parent="HBoxContainer"]
 visible = false
@@ -97,6 +98,7 @@ theme_type_variation = &"SmallCapsLabel"
 text = "50 kW"
 
 [node name="Legend" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 

@@ -203,6 +203,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_50ak1")
 
 [node name="EnergyMakeupGauge" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/HBoxContainer/EnergyMakeupCtnr" instance=ExtResource("3_0i7so")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(2.08165e-12, 24)
 layout_mode = 2
 
 [node name="HealthBar" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/HBoxContainer" instance=ExtResource("3_ghfge")]
@@ -283,7 +284,7 @@ stretch_mode = 5
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("17_6fa84")
 ignore_texture_size = true
@@ -296,6 +297,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 2
 
 [node name="GridBalancePanel" type="PanelContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/GridBalanceCtnr"]
+custom_minimum_size = Vector2(2.08165e-12, 24)
 layout_mode = 2
 
 [node name="BalanceLbl" type="Label" parent="GameUI/UI/MarginContainer/VBoxContainer/GridBalanceCtnr/GridBalancePanel"]
