@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbgk1537m5sog"]
+[gd_scene load_steps=4 format=3 uid="uid://cbgk1537m5sog"]
 
 [ext_resource type="Script" path="res://game_states/main.gd" id="1_8dagw"]
+[ext_resource type="StyleBox" uid="uid://b2d07chvnojnq" path="res://ui/transparent_drawer_box.tres" id="3_rmoxu"]
 [ext_resource type="PackedScene" uid="uid://wmfdl01v1vgo" path="res://ui/game_over_popup/game_over_popup.tscn" id="27_ygsao"]
 
 [node name="Main" type="Node3D"]
@@ -88,8 +89,18 @@ unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme_override_styles/panel = ExtResource("3_rmoxu")
 
-[node name="Label" type="Label" parent="PopupCanvasLayer/UI/CenterContainer/PausePopup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupCanvasLayer/UI/CenterContainer/PausePopup"]
 layout_mode = 2
-text = "Paused"
+
+[node name="Label" type="Label" parent="PopupCanvasLayer/UI/CenterContainer/PausePopup/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Game is paused"
 horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PopupCanvasLayer/UI/CenterContainer/PausePopup/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"

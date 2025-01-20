@@ -12,7 +12,6 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("build_cancel"):
 		_cancel_all()
-		build_menu.deselect_all()
 	elif event.is_action_released("build_confirm"):
 		_confirm()
 

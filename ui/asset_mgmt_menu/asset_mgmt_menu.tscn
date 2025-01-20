@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://da4vqfmin456n"]
+
+[ext_resource type="StyleBox" uid="uid://b2d07chvnojnq" path="res://ui/transparent_drawer_box.tres" id="1_0v5b2"]
+[ext_resource type="Script" path="res://ui/asset_mgmt_menu/asset_mgmt_menu.gd" id="2_bplxn"]
+[ext_resource type="PackedScene" uid="uid://tsi645jqxmg2" path="res://ui/drawer_box/drawer_box_button.tscn" id="3_hu8cv"]
+[ext_resource type="Texture2D" uid="uid://b1eet0rqljxpj" path="res://assets/asset-on.png" id="4_oofrn"]
+[ext_resource type="Texture2D" uid="uid://be5412pype5pk" path="res://assets/asset-off.png" id="5_vch6x"]
+
+[node name="AssetMgmtMenu" type="PanelContainer"]
+theme_override_styles/panel = ExtResource("1_0v5b2")
+script = ExtResource("2_bplxn")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+columns = 2
+
+[node name="EnableButton" parent="GridContainer" instance=ExtResource("3_hu8cv")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("4_oofrn")
+
+[node name="DisableButton" parent="GridContainer" instance=ExtResource("3_hu8cv")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("5_vch6x")

@@ -10,6 +10,7 @@ const PHYSICS_TICKS_ACCEPTABLE_DEVIATION: float = 0.002
 @onready var pause_popup: PanelContainer = %PausePopup
 @onready var spinner: ColorRect = %Spinner
 @onready var loading_screen: Control = $LoadingScreen
+@onready var resume_button: Button = %ResumeButton
 
 var _spinner_tween: Tween
 var _game: Game
@@ -32,6 +33,8 @@ func _ready() -> void:
 		_main_menu_scn = (ResourceLoader.load_threaded_get(MAIN_MENU_PATH) as PackedScene)
 		_reload_main_menu())
 	
+	resume_button.pressed.connect(_toggle_pause)
+	
 	_ticks_per_second = ProjectSettings.get_setting("physics/common/physics_ticks_per_second")
 	_tick_delta_target = (1.0 / _ticks_per_second) + PHYSICS_TICKS_ACCEPTABLE_DEVIATION
 	
@@ -49,9 +52,13 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("ui_cancel") && _game && !_game.is_game_over:
-		_game.get_tree().paused = !_game.get_tree().paused
-		popup_canvas_layer.visible = !popup_canvas_layer.visible
-		pause_popup.visible = !pause_popup.visible
+		_toggle_pause()
+
+
+func _toggle_pause() -> void:
+	_game.get_tree().paused = !_game.get_tree().paused
+	popup_canvas_layer.visible = !popup_canvas_layer.visible
+	pause_popup.visible = !pause_popup.visible
 
 
 func _quit_to_menu() -> void:
@@ -98,6 +105,7 @@ func _start_game() -> void:
 	
 	_game = _game_scn.instantiate()
 	_game.game_over.connect(_on_game_over)
+	_game.pause_please.connect(_toggle_pause)
 	add_child(_game)
 	popup_canvas_layer.hide()
 
@@ -173,6 +181,7 @@ func _wait_for_stable_frame_rate(callback: Callable) -> void:
 		else:
 			print_verbose(Time.get_ticks_msec(), " average_frame_time ", average_frame_time, " is not stable")
 	callback.call()
+
 
 ## CAUTION: Always call this using call_deferred_thread_group(), since it uses a blocking while loop.
 func _do_dynamic_resolution_scaling() -> void:
