@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://4el7epeujqmf"]
+[gd_scene load_steps=6 format=3 uid="uid://4el7epeujqmf"]
 
 [ext_resource type="Script" path="res://ui/health_bar/health_bar.gd" id="1_jeanw"]
+[ext_resource type="Texture2D" uid="uid://bcioeficd1pdj" path="res://assets/heart.png" id="2_gkckj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yp2g"]
 border_width_left = 2
@@ -31,3 +32,15 @@ theme_override_styles/background = SubResource("StyleBoxFlat_yk26l")
 theme_override_styles/fill = SubResource("StyleBoxFlat_nkxwn")
 value = 50.0
 show_percentage = false
+
+[node name="TextureRect" type="TextureRect" parent="HealthBar"]
+custom_minimum_size = Vector2(2.08165e-12, 20)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 5.0
+offset_top = 2.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_gkckj")
+expand_mode = 3
+stretch_mode = 5
