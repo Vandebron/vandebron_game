@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://gedrndbyvbl7" path="res://object/windmill/windmill_model.tscn" id="1_2sd7r"]
 [ext_resource type="Script" path="res://library/building/building_def.gd" id="1_747nt"]
 [ext_resource type="PackedScene" uid="uid://dlwoabgf66r5s" path="res://object/windmill/windmill_collider.tscn" id="1_mp4yy"]
-[ext_resource type="Texture2D" uid="uid://bqp874ly2g6j6" path="res://object/windmill/wind.svg" id="2_di6me"]
+[ext_resource type="Texture2D" uid="uid://cuj6yiro63ms" path="res://assets/windmill.png" id="2_ecfdj"]
 [ext_resource type="PackedScene" uid="uid://kplamygjx6ob" path="res://object/windmill/windmill.tscn" id="2_y0x35"]
 [ext_resource type="PackedScene" uid="uid://dxqwmcbyqnwls" path="res://object/windmill/windmill_shape.tscn" id="4_oy3p0"]
 
@@ -12,7 +12,7 @@ script = ExtResource("1_747nt")
 cost = 10
 alias = "windmill"
 display_name = "Windmill"
-image = ExtResource("2_di6me")
+image = ExtResource("2_ecfdj")
 model = ExtResource("1_2sd7r")
 scene = ExtResource("2_y0x35")
 shape = ExtResource("4_oy3p0")

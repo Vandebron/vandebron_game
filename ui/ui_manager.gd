@@ -2,8 +2,8 @@ extends Node
 class_name UiManager
 
 const update_interval_ms: float = 100.0
-var BAD_COLOR: Color = Color.hex(0xb45252ff)
-var DEFAULT_COLOR: Color = Color.hex(0x332b40ff)
+var BAD_COLOR: Color = Color.hex(0xfc806fff)
+var DEFAULT_COLOR: Color = Color.hex(0x333d47ff)
 
 @export var energy_grid: EnergyGrid
 @export var health_manager: HealthManager

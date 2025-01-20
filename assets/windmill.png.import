@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqp874ly2g6j6"
-path="res://.godot/imported/wind.svg-f13820440cb42c79bed20503fec006e8.ctex"
+uid="uid://cuj6yiro63ms"
+path="res://.godot/imported/windmill.png-043d1263ba7f91c6fb2cb675a80c1761.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://object/windmill/wind.svg"
-dest_files=["res://.godot/imported/wind.svg-f13820440cb42c79bed20503fec006e8.ctex"]
+source_file="res://assets/windmill.png"
+dest_files=["res://.godot/imported/windmill.png-043d1263ba7f91c6fb2cb675a80c1761.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

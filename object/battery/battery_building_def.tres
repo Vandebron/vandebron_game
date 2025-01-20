@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://c7jqevtf0ia5d" path="res://object/battery/battery_collider.tscn" id="1_7j330"]
 [ext_resource type="Script" path="res://library/building/building_def.gd" id="1_bhurv"]
+[ext_resource type="Texture2D" uid="uid://bheere7w78665" path="res://assets/battery.png" id="2_itpji"]
 [ext_resource type="PackedScene" uid="uid://c40nvy1ajl4b7" path="res://object/battery/battery_model.tscn" id="2_kc15i"]
-[ext_resource type="Texture2D" uid="uid://uhlriag2m15l" path="res://object/battery/battery.svg" id="2_sj7vb"]
 [ext_resource type="PackedScene" uid="uid://bb3libciwo1ul" path="res://object/battery/battery.tscn" id="3_g15ek"]
 [ext_resource type="PackedScene" uid="uid://bm71gqce1cqwb" path="res://object/battery/battery_shape.tscn" id="5_pfg48"]
 
@@ -12,7 +12,7 @@ script = ExtResource("1_bhurv")
 cost = 10
 alias = "battery"
 display_name = "Battery"
-image = ExtResource("2_sj7vb")
+image = ExtResource("2_itpji")
 model = ExtResource("2_kc15i")
 scene = ExtResource("3_g15ek")
 shape = ExtResource("5_pfg48")
