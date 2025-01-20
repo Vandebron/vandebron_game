@@ -3,10 +3,11 @@ class_name HealthManager extends Node
 signal health_zeroed
 
 @export var energy_grid: EnergyGrid
-@export var heal_factor: float = 0.01
-@export var hurt_factor: float = 0.01
+@export var heal_factor: float = 0.1
+@export var hurt_factor: float = .25
 @export var update_interval_ms: int = 100
 
+const max_health: float = 100.0
 var health: float = 50.0
 var _done: bool
 var _update_timer: Timer
@@ -27,10 +28,9 @@ func update() -> void:
 	var frequency_diff_hz: float = absf(energy_grid.get_frequency_hz() - energy_grid.target_frequency_hz)
 	
 	if frequency_diff_hz < energy_grid.frequency_max_deviation_hz:
-		health += heal_factor
+		health = min(health + heal_factor, max_health)
 	else:
-		var deviation: float = frequency_diff_hz / energy_grid.frequency_max_deviation_hz
-		health -= deviation * hurt_factor
+		health -= hurt_factor
 	
 	if health <= 0.0:
 		health_zeroed.emit()

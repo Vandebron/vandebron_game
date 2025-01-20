@@ -7,7 +7,7 @@
 
 [node name="Windmill" type="Node3D"]
 script = ExtResource("1_65461")
-nominal_power = 50.0
+nominal_power = 25.0
 type = 1
 
 [node name="Model" parent="." instance=ExtResource("2_4fv1r")]

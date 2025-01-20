@@ -121,6 +121,7 @@ func _update_supply() -> void:
 func _update_demand() -> void:
 	demand = 0.0
 	
+	#Maybe drop?
 	for consumer in _consumers:
 		consumer.update_power(clock, weather)
 		demand += consumer.demand
