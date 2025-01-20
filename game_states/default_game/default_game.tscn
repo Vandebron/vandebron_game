@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=61 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c6dbxx5a11eu5" path="res://ui/energy/energy_makeup_gauge.tscn" id="3_0i7so"]
 [ext_resource type="PackedScene" uid="uid://4el7epeujqmf" path="res://ui/health_bar/health_bar.tscn" id="3_ghfge"]
 [ext_resource type="PackedScene" uid="uid://d0nll8mlhr6it" path="res://ui/frequency_gauge/radial/radial_frequency_gauge.tscn" id="5_bl5m0"]
+[ext_resource type="Texture2D" uid="uid://d1lcqxjai1yta" path="res://assets/star.png" id="5_t3bwp"]
 [ext_resource type="Texture2D" uid="uid://cks46ttbegfj3" path="res://library/ui/weather_icons/sunny_icon.png" id="6_ajilk"]
 [ext_resource type="PackedScene" uid="uid://dcrcskfsjrybq" path="res://object/energy_grid/energy_grid.tscn" id="6_c18pg"]
 [ext_resource type="Texture2D" uid="uid://ds5s1id25nxg3" path="res://library/ui/weather_icons/windy_icon.png" id="7_digia"]
@@ -18,11 +19,14 @@
 [ext_resource type="Resource" uid="uid://diejrlo4iciyb" path="res://object/house/house_building_def.tres" id="13_ouwj3"]
 [ext_resource type="Resource" uid="uid://b0r1cr25214g" path="res://object/windmill/windmill_building_def.tres" id="14_2mtcw"]
 [ext_resource type="Script" path="res://game_states/default_game/ScoreLabel.gd" id="15_eia4d"]
+[ext_resource type="Texture2D" uid="uid://drdp2qw1a3cue" path="res://assets/audio_on.png" id="15_hqdxv"]
 [ext_resource type="StyleBox" uid="uid://co50kv3b3e6je" path="res://ui/panel_title_box.tres" id="15_p0s8n"]
 [ext_resource type="PackedScene" uid="uid://cnbeoyhkgye1n" path="res://ui/build_menu/build_menu.tscn" id="16_5lo32"]
 [ext_resource type="Texture2D" uid="uid://blaixeojmneu0" path="res://object/producer/disabled.svg" id="16_aeycb"]
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="16_d4vit"]
+[ext_resource type="Texture2D" uid="uid://cxnp2i65sibby" path="res://assets/audio_off.png" id="16_gyppp"]
 [ext_resource type="Resource" uid="uid://cavurm67np4ko" path="res://object/battery/battery_building_def.tres" id="17_4bs8w"]
+[ext_resource type="Texture2D" uid="uid://c5bm30s6wudk0" path="res://assets/menu_burger.png" id="17_6fa84"]
 [ext_resource type="PackedScene" uid="uid://da4vqfmin456n" path="res://ui/asset_mgmt_menu/asset_mgmt_menu.tscn" id="17_8ofau"]
 [ext_resource type="Script" path="res://object/curtailer/curtailment_manager.gd" id="18_yxou4"]
 [ext_resource type="Script" path="res://library/building/building_def.gd" id="19_o8s5q"]
@@ -155,48 +159,60 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 
 [node name="TopBarPanel" type="PanelContainer" parent="GameUI/UI/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(800, 50)
+custom_minimum_size = Vector2(800, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_xcsyr")
 
-[node name="Score" type="VBoxContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel"]
+layout_mode = 2
+
+[node name="Score" type="HBoxContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/Score"]
+[node name="Label" type="Label" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/Score"]
+layout_mode = 2
+text = "Score"
+
+[node name="TextureRect" type="TextureRect" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/Score"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_t3bwp")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ScoreLabel" type="Label" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/Score"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "71.231"
 vertical_alignment = 1
 script = ExtResource("15_eia4d")
 
-[node name="Label" type="Label" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/Score"]
-layout_mode = 2
-text = "Score"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="EnergyMakeupCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer"]
+[node name="EnergyMakeupCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_50ak1")
 
-[node name="EnergyMakeupGauge" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/EnergyMakeupCtnr" instance=ExtResource("3_0i7so")]
+[node name="EnergyMakeupGauge" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/HBoxContainer/EnergyMakeupCtnr" instance=ExtResource("3_0i7so")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HealthBar" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer" instance=ExtResource("3_ghfge")]
+[node name="HealthBar" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/HBoxContainer" instance=ExtResource("3_ghfge")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 24)
+custom_minimum_size = Vector2(100, 28)
 layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 4
 
-[node name="WeatherForecastList" type="ItemList" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel"]
+[node name="WeatherForecastList" type="ItemList" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer"]
 custom_minimum_size = Vector2(220, 40)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -229,11 +245,11 @@ light_cloud_icon = ExtResource("12_s32nf")
 windy_icon = ExtResource("7_digia")
 cloudy_windy_icon = ExtResource("9_8140p")
 
-[node name="Timer" type="Timer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/WeatherForecastList"]
+[node name="Timer" type="Timer" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/WeatherForecastList"]
 wait_time = 2.0
 autostart = true
 
-[node name="CurrentTimeIndicator1" type="ColorRect" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/WeatherForecastList"]
+[node name="CurrentTimeIndicator1" type="ColorRect" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/WeatherForecastList"]
 layout_mode = 0
 offset_left = 15.0
 offset_top = 35.0
@@ -242,7 +258,7 @@ offset_bottom = 74.9999
 rotation = 0.785398
 color = Color(0.2, 0.239216, 0.278431, 1)
 
-[node name="CurrentTimeIndicator2" type="ColorRect" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/WeatherForecastList"]
+[node name="CurrentTimeIndicator2" type="ColorRect" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/WeatherForecastList"]
 layout_mode = 0
 offset_left = 15.0
 offset_top = -52.0
@@ -250,6 +266,28 @@ offset_right = 55.0
 offset_bottom = -12.0
 rotation = 0.785398
 color = Color(0.2, 0.239216, 0.278431, 1)
+
+[node name="AudioToggleBtn" type="TextureButton" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+texture_normal = ExtResource("15_hqdxv")
+texture_pressed = ExtResource("16_gyppp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MenuButton" type="TextureButton" parent="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture_normal = ExtResource("17_6fa84")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="GridBalanceCtnr" type="VBoxContainer" parent="GameUI/UI/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 100)
@@ -522,7 +560,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
 [node name="Forecaster" parent="." node_paths=PackedStringArray("clock", "forecast_list_comp") instance=ExtResource("37_ltx7w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.25, 5, 0)
 clock = NodePath("../Clock")
-forecast_list_comp = NodePath("../GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/WeatherForecastList")
+forecast_list_comp = NodePath("../GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/WeatherForecastList")
 
 [node name="SunManager" parent="." node_paths=PackedStringArray("clock") instance=ExtResource("29_0mita")]
 clock = NodePath("../Clock")
@@ -555,5 +593,5 @@ script = ExtResource("32_i5yqs")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("33_gbyox")
 
-[connection signal="timeout" from="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/WeatherForecastList/Timer" to="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/WeatherForecastList" method="_on_timer_timeout"]
+[connection signal="timeout" from="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/WeatherForecastList/Timer" to="GameUI/UI/MarginContainer/VBoxContainer/TopBarPanel/HBoxContainer/WeatherForecastList" method="_on_timer_timeout"]
 [connection signal="timeout" from="AutoBuildManager/Timer" to="AutoBuildManager" method="_on_timer_timeout"]
