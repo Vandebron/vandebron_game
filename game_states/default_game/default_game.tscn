@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://ddaamq2qj5ewp"]
+[gd_scene load_steps=57 format=3 uid="uid://ddaamq2qj5ewp"]
 
 [ext_resource type="Script" path="res://game_states/default_game/default_game.gd" id="1_g35dh"]
 [ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="2_tnfys"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://c6dbxx5a11eu5" path="res://ui/energy/energy_makeup_gauge.tscn" id="3_0i7so"]
 [ext_resource type="PackedScene" uid="uid://4el7epeujqmf" path="res://ui/health_bar/health_bar.tscn" id="3_ghfge"]
 [ext_resource type="PackedScene" uid="uid://d0nll8mlhr6it" path="res://ui/frequency_gauge/radial/radial_frequency_gauge.tscn" id="5_bl5m0"]
-[ext_resource type="Script" path="res://library/ui/build_menu.gd" id="5_gu83v"]
 [ext_resource type="Texture2D" uid="uid://cks46ttbegfj3" path="res://library/ui/weather_icons/sunny_icon.png" id="6_ajilk"]
 [ext_resource type="PackedScene" uid="uid://dcrcskfsjrybq" path="res://object/energy_grid/energy_grid.tscn" id="6_c18pg"]
 [ext_resource type="Texture2D" uid="uid://ds5s1id25nxg3" path="res://library/ui/weather_icons/windy_icon.png" id="7_digia"]
@@ -20,12 +19,11 @@
 [ext_resource type="Resource" uid="uid://b0r1cr25214g" path="res://object/windmill/windmill_building_def.tres" id="14_2mtcw"]
 [ext_resource type="Script" path="res://game_states/default_game/ScoreLabel.gd" id="15_eia4d"]
 [ext_resource type="StyleBox" uid="uid://co50kv3b3e6je" path="res://ui/panel_title_box.tres" id="15_p0s8n"]
-[ext_resource type="Texture2D" uid="uid://b1eet0rqljxpj" path="res://assets/asset-on.png" id="16_3avn8"]
+[ext_resource type="PackedScene" uid="uid://cnbeoyhkgye1n" path="res://ui/build_menu/build_menu.tscn" id="16_5lo32"]
 [ext_resource type="Texture2D" uid="uid://blaixeojmneu0" path="res://object/producer/disabled.svg" id="16_aeycb"]
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="16_d4vit"]
-[ext_resource type="StyleBox" uid="uid://b2d07chvnojnq" path="res://ui/transparent_drawer_box.tres" id="16_waynp"]
-[ext_resource type="Texture2D" uid="uid://be5412pype5pk" path="res://assets/asset-off.png" id="17_3px07"]
 [ext_resource type="Resource" uid="uid://cavurm67np4ko" path="res://object/battery/battery_building_def.tres" id="17_4bs8w"]
+[ext_resource type="PackedScene" uid="uid://da4vqfmin456n" path="res://ui/asset_mgmt_menu/asset_mgmt_menu.tscn" id="17_8ofau"]
 [ext_resource type="Script" path="res://object/curtailer/curtailment_manager.gd" id="18_yxou4"]
 [ext_resource type="Script" path="res://library/building/building_def.gd" id="19_o8s5q"]
 [ext_resource type="Script" path="res://ui/health_bar/health_manager.gd" id="20_qve12"]
@@ -62,25 +60,6 @@ border_width_bottom = 2
 border_color = Color(0.2, 0.239216, 0.278431, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kqei8"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1g7fr"]
-
-[sub_resource type="Gradient" id="Gradient_tgg4c"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gjaah"]
-gradient = SubResource("Gradient_tgg4c")
-
-[sub_resource type="Gradient" id="Gradient_1m72d"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_i817q"]
-gradient = SubResource("Gradient_1m72d")
-
-[sub_resource type="Gradient" id="Gradient_hoym3"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_iio37"]
-gradient = SubResource("Gradient_hoym3")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_55apr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tnw78"]
 size = Vector3(0.9, 0.9, 0.9)
@@ -312,33 +291,9 @@ theme_override_styles/panel = ExtResource("15_p0s8n")
 layout_mode = 2
 text = "Build"
 
-[node name="BuildMenuCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr"]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("16_waynp")
-
-[node name="BuildMenu" type="ItemList" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr"]
+[node name="BuildMenu" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr" instance=ExtResource("16_5lo32")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(306, 2.08165e-12)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.2, 0.239216, 0.278431, 1)
-theme_override_font_sizes/font_size = 12
-theme_override_styles/panel = SubResource("StyleBoxEmpty_1g7fr")
-allow_reselect = true
-allow_search = false
-auto_height = true
-item_count = 3
-max_columns = 3
-fixed_column_width = 90
-icon_mode = 0
-fixed_icon_size = Vector2i(40, 40)
-item_0/text = "Windmill"
-item_0/icon = SubResource("GradientTexture2D_gjaah")
-item_1/text = "Solar"
-item_1/icon = SubResource("GradientTexture2D_i817q")
-item_2/text = "Battery"
-item_2/icon = SubResource("GradientTexture2D_iio37")
-script = ExtResource("5_gu83v")
 
 [node name="ManageCtnr" type="VBoxContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr"]
 layout_mode = 2
@@ -354,29 +309,9 @@ theme_override_styles/panel = ExtResource("15_p0s8n")
 layout_mode = 2
 text = "Manage"
 
-[node name="ManageMenuCtnr" type="PanelContainer" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/ManageCtnr"]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("16_waynp")
-
-[node name="ManageMenu" type="ItemList" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/ManageCtnr/ManageMenuCtnr"]
+[node name="AssetMgmtMenu" parent="GameUI/UI/MarginContainer/BottomPanelCtnr/ManageCtnr" instance=ExtResource("17_8ofau")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(208, 2.08165e-12)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.239216, 0.278431, 1)
-theme_override_font_sizes/font_size = 12
-theme_override_styles/panel = SubResource("StyleBoxEmpty_55apr")
-allow_reselect = true
-allow_search = false
-auto_height = true
-item_count = 2
-max_columns = 2
-fixed_column_width = 90
-icon_mode = 0
-fixed_icon_size = Vector2i(40, 40)
-item_0/text = "Enable Assets"
-item_0/icon = ExtResource("16_3avn8")
-item_1/text = "Disable Assets"
-item_1/icon = ExtResource("17_3px07")
 
 [node name="MessageCtnr" type="VBoxContainer" parent="GameUI/UI/MarginContainer"]
 unique_name_in_owner = true
@@ -398,7 +333,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 8
-text = "Mute"
+text = "Hide"
 icon = ExtResource("16_aeycb")
 expand_icon = true
 
@@ -499,7 +434,7 @@ start_disabled = true
 [node name="BuildManager" type="Node3D" parent="." node_paths=PackedStringArray("energy_grid", "build_menu")]
 script = ExtResource("12_4igyb")
 energy_grid = NodePath("../EnergyGrid")
-build_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenuCtnr/BuildMenu")
+build_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/BuildCtnr/BuildMenu")
 buildings = Array[ExtResource("19_o8s5q")]([ExtResource("14_2mtcw"), ExtResource("16_d4vit"), ExtResource("17_4bs8w")])
 
 [node name="AutoBuildManager" type="Node" parent="." node_paths=PackedStringArray("build_manager")]
@@ -518,9 +453,9 @@ collide_with_areas = true
 collide_with_bodies = false
 debug_shape_custom_color = Color(0, 0.929412, 1, 1)
 
-[node name="CurtailmentManager" type="Node3D" parent="." node_paths=PackedStringArray("manage_menu")]
+[node name="CurtailmentManager" type="Node3D" parent="." node_paths=PackedStringArray("menu")]
 script = ExtResource("18_yxou4")
-manage_menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/ManageCtnr/ManageMenuCtnr/ManageMenu")
+menu = NodePath("../GameUI/UI/MarginContainer/BottomPanelCtnr/ManageCtnr/AssetMgmtMenu")
 
 [node name="HealthManager" type="Node" parent="." node_paths=PackedStringArray("energy_grid")]
 unique_name_in_owner = true

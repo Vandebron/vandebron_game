@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnbeoyhkgye1n"]
+
+[ext_resource type="StyleBox" uid="uid://b2d07chvnojnq" path="res://ui/transparent_drawer_box.tres" id="1_vw7fv"]
+[ext_resource type="Script" path="res://library/ui/build_menu.gd" id="2_hebjl"]
+[ext_resource type="PackedScene" uid="uid://tsi645jqxmg2" path="res://ui/drawer_box/drawer_box_button.tscn" id="3_i8vka"]
+
+[node name="BuildMenu" type="PanelContainer"]
+offset_right = 124.0
+offset_bottom = 80.0
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_vw7fv")
+script = ExtResource("2_hebjl")
+
+[node name="List" type="GridContainer" parent="."]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+columns = 3
+
+[node name="BuildMenuButton" parent="List" instance=ExtResource("3_i8vka")]
+layout_mode = 2
+
+[node name="BuildMenuButton2" parent="List" instance=ExtResource("3_i8vka")]
+layout_mode = 2
+
+[node name="BuildMenuButton3" parent="List" instance=ExtResource("3_i8vka")]
+layout_mode = 2
