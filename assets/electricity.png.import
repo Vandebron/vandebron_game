@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b7lsvxgx50m1e"
 path.s3tc="res://.godot/imported/electricity.png-24bc0ebccc9cfcf4c3214b151cb8536c.s3tc.ctex"
+path.etc2="res://.godot/imported/electricity.png-24bc0ebccc9cfcf4c3214b151cb8536c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/electricity.png"
-dest_files=["res://.godot/imported/electricity.png-24bc0ebccc9cfcf4c3214b151cb8536c.s3tc.ctex"]
+dest_files=["res://.godot/imported/electricity.png-24bc0ebccc9cfcf4c3214b151cb8536c.s3tc.ctex", "res://.godot/imported/electricity.png-24bc0ebccc9cfcf4c3214b151cb8536c.etc2.ctex"]
 
 [params]
 
