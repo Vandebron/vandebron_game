@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("1_747nt")
-cost = 10
+cost = 100
 alias = "windmill"
 display_name = "Windmill"
 image = ExtResource("2_ecfdj")

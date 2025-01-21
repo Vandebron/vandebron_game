@@ -417,26 +417,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="Windmill" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0102015, 0, -6)
+start_disabled = true
 
 [node name="Windmill2" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -6)
 
 [node name="Windmill3" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -8)
-start_disabled = true
 
 [node name="Windmill5" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.08165e-12, -10)
-start_disabled = true
 
 [node name="Windmill7" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.08165e-12, -10)
-start_disabled = true
 
 [node name="Windmill8" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.08165e-12, -8)
-start_disabled = true
 
 [node name="Windmill9" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.08165e-12, -6)
@@ -446,7 +443,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014194, 2.08165e-12, -10)
 start_disabled = true
 
 [node name="Windmill4" parent="EnergyGrid" instance_placeholder="res://object/windmill/windmill.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -8)
+transform = Transform3D(1, 0, 0, 0, 0.999995, -0.00310668, 0, 0.00310668, 0.999995, 2.08165e-12, 2.08165e-12, -8)
 start_disabled = true
 
 [node name="SolarPlant" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
@@ -454,6 +451,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
 
 [node name="SolarPlant2" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.08165e-12, -6)
+start_disabled = true
 
 [node name="SolarPlant3" parent="EnergyGrid" instance_placeholder="res://object/solar/solar_plant.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.08165e-12, -8)
