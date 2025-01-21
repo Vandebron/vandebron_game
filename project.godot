@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Vandebron"
+config/name="Grid City"
 run/main_scene="res://game_states/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=60
@@ -145,6 +145,7 @@ common/physics_ticks_per_second=20
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_environment="res://library/world_env/default_world_env.tres"
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality.web=0
 lights_and_shadows/directional_shadow/size.web=2048

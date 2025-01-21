@@ -1,4 +1,18 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bgm6bulhf3ca1"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bgm6bulhf3ca1"]
+
+[ext_resource type="FontFile" uid="uid://tntydg1ocnl5" path="res://ui/fonts/proxima-nova-regular.ttf" id="1_8ii5d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7tl6c"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.2, 0.239216, 0.278431, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xycxk"]
 bg_color = Color(1, 1, 1, 1)
@@ -11,6 +25,11 @@ content_margin_bottom = 8.0
 bg_color = Color(1, 1, 1, 1)
 
 [resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/fonts/font = ExtResource("1_8ii5d")
+Button/styles/normal = SubResource("StyleBoxFlat_7tl6c")
 Label/colors/font_color = Color(0.2, 0.239216, 0.278431, 1)
 Label/font_sizes/font_size = 12
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_xycxk")

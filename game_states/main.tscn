@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbgk1537m5sog"]
+[gd_scene load_steps=5 format=3 uid="uid://cbgk1537m5sog"]
 
 [ext_resource type="Script" path="res://game_states/main.gd" id="1_8dagw"]
+[ext_resource type="Texture2D" uid="uid://dsaf8fwtx46r5" path="res://export/assets/splash.png" id="2_3qu6p"]
 [ext_resource type="StyleBox" uid="uid://b2d07chvnojnq" path="res://ui/transparent_drawer_box.tres" id="3_rmoxu"]
 [ext_resource type="PackedScene" uid="uid://wmfdl01v1vgo" path="res://ui/game_over_popup/game_over_popup.tscn" id="27_ygsao"]
 
@@ -16,47 +17,51 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="ColorRect" parent="LoadingScreen"]
+[node name="Background" type="TextureRect" parent="LoadingScreen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.252173, 0.433054, 0.678684, 1)
+texture = ExtResource("2_3qu6p")
+expand_mode = 5
+stretch_mode = 6
 
 [node name="Spinner" type="ColorRect" parent="LoadingScreen"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchors_preset = -1
+anchor_left = 0.499
+anchor_top = 0.747
+anchor_right = 0.499
+anchor_bottom = 0.747
+offset_left = -19.72
+offset_top = -19.84
+offset_right = 20.28
+offset_bottom = 20.16
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(20, 20)
-color = Color(1, 0, 1, 1)
+color = Color(0.2, 0.239216, 0.278431, 1)
 
 [node name="Label" type="Label" parent="LoadingScreen"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.802
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -31.0
-offset_top = -70.59
-offset_right = 31.0
-offset_bottom = -47.59
+anchor_bottom = 0.802
+offset_left = -33.0
+offset_top = -11.44
+offset_right = 29.0
+offset_bottom = 11.56
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 24
 text = "Loading"
+horizontal_alignment = 1
 
 [node name="PopupCanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 2

@@ -1,5 +1,4 @@
-extends Node3D
-class_name MainMenu
+class_name MainMenu extends Node3D
 
 signal game_started
 
@@ -10,15 +9,20 @@ signal game_started
 
 func _ready() -> void:
 	start_game_btn.pressed.connect(_on_game_started)
-	#settings_btn.pressed.connect(_open_settings_popup)
+	settings_btn.pressed.connect(_open_settings_popup)
 	quit_game_btn.pressed.connect(_quit)
+
+
+func hide_ui() -> void:
+	$MainMenuCanvasLayer.hide()
 
 
 func _on_game_started() -> void:
 	game_started.emit()
 
+
 func _open_settings_popup() -> void:
-	print("JFKLDJSKL")
+	pass
 
 
 func _quit() -> void:
@@ -30,8 +34,9 @@ func _quit() -> void:
 	print_debug("Sending out close request")
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 
+
 # not sure where to put this...
 # https://docs.godotengine.org/en/stable/tutorials/inputs/handling_quit_requests.html#sending-your-own-quit-notification
-func _notification(what):
+func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		get_tree().quit() # default behavior

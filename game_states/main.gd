@@ -90,6 +90,7 @@ func _set_main_menu(value: MainMenu) -> void:
 	_main_menu = value
 	if _main_menu:
 		_main_menu.game_started.connect(func():
+			_main_menu.hide_ui()
 			_start_loading_default_game(func():
 				_game_scn = (ResourceLoader.load_threaded_get(DEFAULT_GAME_PATH) as PackedScene)
 				_start_game()

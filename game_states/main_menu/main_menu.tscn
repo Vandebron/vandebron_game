@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bx87ivqvxe2t8"]
+[gd_scene load_steps=8 format=3 uid="uid://bx87ivqvxe2t8"]
 
 [ext_resource type="Script" path="res://game_states/main_menu/main_menu.gd" id="1_lgriw"]
 [ext_resource type="PackedScene" uid="uid://dsuaueqo8705f" path="res://game_states/main_menu/main_menu_game.tscn" id="2_orw71"]
-[ext_resource type="FontFile" uid="uid://baf01v0bxlrg2" path="res://ui/fonts/proxima-nova-semibold.ttf" id="3_p8g8r"]
+[ext_resource type="Texture2D" uid="uid://xpvt7rexmmgy" path="res://assets/banner.png" id="4_ae4vn"]
+[ext_resource type="Theme" uid="uid://bgm6bulhf3ca1" path="res://library/ui/default_theme.tres" id="5_lla0j"]
 
 [sub_resource type="Gradient" id="Gradient_m0ds5"]
 colors = PackedColorArray(1, 1, 1, 0.784314, 1, 1, 1, 0)
@@ -10,33 +11,7 @@ colors = PackedColorArray(1, 1, 1, 0.784314, 1, 1, 1, 0)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_885ko"]
 gradient = SubResource("Gradient_m0ds5")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cm3eg"]
-bg_color = Color(0.2, 0.239216, 0.278431, 1)
-border_width_left = 12
-border_width_top = 12
-border_width_right = 12
-border_width_bottom = 12
-border_color = Color(0.2, 0.239216, 0.278431, 1)
-border_blend = true
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvehv"]
-bg_color = Color(0.313726, 0.376471, 0.435294, 1)
-border_color = Color(0.466667, 0.556863, 0.65098, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="Theme" id="Theme_lcqjo"]
-resource_name = "Proxima Nova Font"
-default_font = ExtResource("3_p8g8r")
-default_font_size = 24
-Button/styles/hover = SubResource("StyleBoxFlat_cm3eg")
-Button/styles/normal = SubResource("StyleBoxFlat_pvehv")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yvuux"]
 
 [node name="MainMenu" type="Node3D"]
 script = ExtResource("1_lgriw")
@@ -53,6 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("5_lla0j")
 
 [node name="TransparentOverlay" type="TextureRect" parent="MainMenuCanvasLayer/UI"]
 layout_mode = 1
@@ -79,16 +55,22 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenuCanvasLayer/UI/HBoxContainer/CenterContainer"]
 layout_mode = 2
-theme = SubResource("Theme_lcqjo")
 
-[node name="GameTitle" type="Label" parent="MainMenuCanvasLayer/UI/HBoxContainer/CenterContainer/VBoxContainer"]
+[node name="TitleBanner" type="TextureRect" parent="MainMenuCanvasLayer/UI/HBoxContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.262745, 0.262745, 0.415686, 1)
-theme_override_font_sizes/font_size = 64
-text = "Vandebron"
+texture = ExtResource("4_ae4vn")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="MainMenuCanvasLayer/UI/HBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+theme_override_styles/separator = SubResource("StyleBoxEmpty_yvuux")
 
 [node name="StartGameBtn" type="Button" parent="MainMenuCanvasLayer/UI/HBoxContainer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(2.08165e-12, 60)
 layout_mode = 2
 text = "Start Game"
 
