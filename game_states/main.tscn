@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game_states/main.gd" id="1_8dagw"]
 [ext_resource type="Texture2D" uid="uid://dsaf8fwtx46r5" path="res://export/assets/splash.png" id="2_3qu6p"]
-[ext_resource type="StyleBox" uid="uid://b2d07chvnojnq" path="res://ui/transparent_drawer_box.tres" id="3_rmoxu"]
+[ext_resource type="StyleBox" path="res://ui/transparent_drawer_box.tres" id="3_rmoxu"]
 [ext_resource type="PackedScene" uid="uid://wmfdl01v1vgo" path="res://ui/game_over_popup/game_over_popup.tscn" id="27_ygsao"]
 
 [node name="Main" type="Node3D"]

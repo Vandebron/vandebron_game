@@ -20,7 +20,7 @@
 [ext_resource type="Resource" uid="uid://b0r1cr25214g" path="res://object/windmill/windmill_building_def.tres" id="14_2mtcw"]
 [ext_resource type="Script" path="res://game_states/default_game/ScoreLabel.gd" id="15_eia4d"]
 [ext_resource type="Texture2D" uid="uid://drdp2qw1a3cue" path="res://assets/audio_on.png" id="15_hqdxv"]
-[ext_resource type="StyleBox" uid="uid://co50kv3b3e6je" path="res://ui/panel_title_box.tres" id="15_p0s8n"]
+[ext_resource type="StyleBox" path="res://ui/panel_title_box.tres" id="15_p0s8n"]
 [ext_resource type="PackedScene" uid="uid://cnbeoyhkgye1n" path="res://ui/build_menu/build_menu.tscn" id="16_5lo32"]
 [ext_resource type="Texture2D" uid="uid://blaixeojmneu0" path="res://object/producer/disabled.svg" id="16_aeycb"]
 [ext_resource type="Resource" uid="uid://dqq54jpgujq4j" path="res://object/solar/solar_plant_def.tres" id="16_d4vit"]
@@ -72,7 +72,7 @@ size = Vector3(0.9, 0.9, 0.9)
 size = Vector2(23, 23)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bfkny"]
-size = Vector3(31, 1, 31)
+size = Vector3(22, 1, 22)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_n0fdt"]
 size = Vector2(64, 64)
